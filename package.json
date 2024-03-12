@@ -1,0 +1,28 @@
+{
+  "name": "ducen",
+  "version": "0.0.0",
+  "description": "This mono repository contains all of source code related to Ducen org",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "workspaces": [
+    "src/apps/**/*",
+    "src/contexts/**/*",
+    "src/packages/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Duccem/ducen.git"
+  },
+  "keywords": [
+    "monorepo",
+    "typescript",
+    "health"
+  ],
+  "author": "Jose Veliz (Duccem)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Duccem/ducen/issues"
+  },
+  "homepage": "https://github.com/Duccem/ducen#readme"
+}
