@@ -1,0 +1,35 @@
+{
+  "name": "@shared/adapters-server",
+  "version": "0.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/*/**.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "test": "jest --coverage",
+    "lint": "eslint \"{src,test}/**/*.ts\" --fix"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.10.5",
+    "@types/nodemailer": "^6.4.14",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "@shared/core": "^0.0.0",
+    "amqplib": "^0.10.3",
+    "cloudinary": "^2.0.3",
+    "express": "^4.18.3",
+    "firebase-admin": "^12.0.0",
+    "handlebars": "^4.7.8",
+    "mongodb": "^6.5.0",
+    "nodemailer": "^6.9.12",
+    "redis": "^4.6.13",
+    "stripe": "^14.20.0",
+    "winston": "^3.12.0",
+    "winston-loki": "^6.0.8"
+  }
+}

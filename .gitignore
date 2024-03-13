@@ -40,3 +40,5 @@ yarn-error.log*
 **/dist
 **/.expo
 **/.vscode
+
+*storybook.log
