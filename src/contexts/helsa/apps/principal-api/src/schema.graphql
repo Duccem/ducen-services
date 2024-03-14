@@ -1,0 +1,28 @@
+scalar Upload
+type Mutation {
+  userRegister(user: UserRegister): Boolean
+  recoveryPassword(email: String): Boolean
+  changePassword(userId: String, newPassword: String, oldPassword: String): Boolean
+  uploadImage(file: Upload): String
+}
+
+type Query {
+  login(identifier: String, password: String): LoginUser
+}
+input QueryFilter {
+  value: String
+  operator: String
+  field: String
+}
+
+input QueryParameters {
+  orderBy: String
+  order: String
+  limit: String
+  offset: String
+  filters: [QueryFilter]
+}
+
+input CountParameters {
+  filters: [QueryFilter]
+}

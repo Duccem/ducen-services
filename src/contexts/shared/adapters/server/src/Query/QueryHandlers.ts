@@ -17,4 +17,10 @@ export class QueryHandlers extends Map<Query, QueryHandler<Query>> {
 
     return queryHandler;
   }
+
+  public addQueryHandlers(queryHandlers: Array<QueryHandler<Query>>): void {
+    queryHandlers.forEach((queryHandler) => {
+      this.set(queryHandler.subscribedTo(), queryHandler);
+    });
+  }
 }

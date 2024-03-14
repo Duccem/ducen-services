@@ -100,11 +100,11 @@ export class MongoCriteriaConverter {
 
       return transformer(filter);
     });
-    const embeddings = filters.embeds.reduce((acc, filters) => ({ ...acc, ...this.filter(filters) }), {});
-    if (filters instanceof AndFilters) return { $and: [...filter], ...embeddings };
-    if (filters instanceof OrFilters) return { $or: [...filter], ...embeddings };
-    if (filters instanceof NotFilters) return { $not: Object.assign({}, ...{ ...filter, ...embeddings }) };
-    return Object.assign({}, ...{ ...filter, ...embeddings });
+    //const embeddings = filters.embeds.reduce((acc, filters) => ({ ...acc, ...this.filter(filters) }), {});
+    if (filters instanceof AndFilters) return { $and: [...filter] };
+    if (filters instanceof OrFilters) return { $or: [...filter] };
+    if (filters instanceof NotFilters) return { $not: Object.assign({}, ...filter) };
+    return Object.assign({}, ...filter);
   }
 
   private sort(order: Order): MongoSort {

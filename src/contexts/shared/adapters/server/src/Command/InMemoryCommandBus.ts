@@ -1,4 +1,4 @@
-import { Command, CommandBus } from '@shared/core';
+import { Command, CommandBus, CommandHandler } from '@shared/core';
 import { CommandHandlers } from './CommandHandlers';
 
 export class InMemoryCommandBus implements CommandBus {
@@ -8,5 +8,9 @@ export class InMemoryCommandBus implements CommandBus {
     const handler = this.commandHandlers.get(command);
 
     await handler.handle(command);
+  }
+
+  addHandlers(commandHandlers: Array<CommandHandler<Command>>): void {
+    this.commandHandlers.addCommands(commandHandlers);
   }
 }

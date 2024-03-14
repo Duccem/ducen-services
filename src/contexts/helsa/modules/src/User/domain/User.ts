@@ -123,7 +123,7 @@ export class User extends Aggregate {
 
   public generateToken(): any {
     const payload = {
-      memberId: this.id.value,
+      userId: this.id.value,
       role: this.role.value,
       email: this.email.value,
       configuration: this.configuration.toPrimitives(),
