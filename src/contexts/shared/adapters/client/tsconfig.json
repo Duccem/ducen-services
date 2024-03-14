@@ -2,16 +2,12 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "module": "commonjs",
+    "module": "ESNext",
     "skipDefaultLibCheck": true,
-    "allowSyntheticDefaultImports": true,
     "outDir": "./dist",
-    "lib": [
-      "es6"
-    ],
     "declaration": true,
     "declarationMap": true,
-    "target": "ES2021",
+    "target": "ESNext",
     "sourceMap": true,
     "skipLibCheck": true,
     "noImplicitOverride": false,
@@ -20,10 +16,15 @@
     "noFallthroughCasesInSwitch": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "strict": false,
     "types": [
       "node",
       "jest"
     ],
   },
-  "exclude": ["node_modules", "dist", "tests"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "tests"
+  ]
 }
