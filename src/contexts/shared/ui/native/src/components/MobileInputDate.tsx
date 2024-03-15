@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import DateTimePicker from 'react-native-ui-datepicker';
 
@@ -8,11 +8,10 @@ export interface MobileInputDateProps {
   onBlur?: (...args: any) => void;
   error?: string;
   name?: string;
-  mode: 'date' | 'time' | 'datetime';
   required?: boolean;
 }
 
-export function MobileInputDate({ placeholder, onChange, mode, onBlur, error, required }: MobileInputDateProps) {
+export function MobileInputDate({ placeholder, onChange, onBlur, error, required }: MobileInputDateProps) {
   const [date, setDate] = useState<Date | null>(null);
   const [open, setOpen] = useState(false);
   return (
@@ -75,9 +74,10 @@ export function MobileInputDate({ placeholder, onChange, mode, onBlur, error, re
             }}
           >
             <DateTimePicker
-              value={date}
-              mode={mode}
-              onValueChange={(selectedDate) => {
+
+              date={date}
+              mode={'single'}
+              onChange={(selectedDate) => {
                 setDate(new Date(selectedDate?.toString() || new Date()));
                 setTimeout(() => setOpen(false), 800);
                 onChange && onChange(selectedDate);

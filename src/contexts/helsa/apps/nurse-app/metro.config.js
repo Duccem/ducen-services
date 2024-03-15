@@ -6,7 +6,7 @@ const projectRoot = __dirname;
 
 const defaultConfig = getDefaultConfig(projectRoot);
 // This can be replaced with `find-yarn-workspace-root`
-const workspaceRoot = path.resolve(projectRoot, '../../../../');
+const workspaceRoot = path.resolve(projectRoot, '../../../../../');
 
 // 1. Watch all files within the monorepo
 defaultConfig.watchFolders = [workspaceRoot];

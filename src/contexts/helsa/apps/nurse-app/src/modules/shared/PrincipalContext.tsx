@@ -1,0 +1,25 @@
+import React, { PropsWithChildren, createContext, useContext } from 'react';
+import { ApolloClientProvider } from './ApolloProvider';
+import { DatabaseConnectionProvider } from './DatabaseContext';
+import { TranslateContextProvider } from './TranslateContext';
+import { SharedProvider } from './state/SharedProvider';
+
+
+export interface PrincipalContextState {
+}
+export const PrincipalContext = createContext<PrincipalContextState>({} as PrincipalContextState);
+
+export function PrincipalContextProvider({ children }: PropsWithChildren<PrincipalContextState>) {
+  return (
+    <PrincipalContext.Provider value={{ }}>
+      <TranslateContextProvider>
+        <DatabaseConnectionProvider>
+          <ApolloClientProvider>
+            <SharedProvider>{children}</SharedProvider>
+          </ApolloClientProvider>
+        </DatabaseConnectionProvider>
+      </TranslateContextProvider>
+    </PrincipalContext.Provider>
+  );
+}
+export const usePrincipalContext = () => useContext(PrincipalContext);
