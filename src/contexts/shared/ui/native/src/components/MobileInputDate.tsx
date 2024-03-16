@@ -74,13 +74,11 @@ export function MobileInputDate({ placeholder, onChange, onBlur, error, required
             }}
           >
             <DateTimePicker
-
-              date={date}
               mode={'single'}
               onChange={(selectedDate) => {
-                setDate(new Date(selectedDate?.toString() || new Date()));
+                setDate(new Date(selectedDate.date?.toString() || new Date()));
                 setTimeout(() => setOpen(false), 800);
-                onChange && onChange(selectedDate);
+                onChange && onChange(selectedDate.date);
               }}
               selectedItemColor="#9747FF"
               selectedTextStyle={{

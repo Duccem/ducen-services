@@ -1,14 +1,23 @@
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { useNavigation } from "@react-navigation/native"
-import { MobileButton, MobileInputText, useMobileForm } from "@shared/ui-native"
+import { MobileButton, MobileInputPhone, MobileInputSelect, MobileInputText, useMobileForm } from "@shared/ui-native"
+import { useState } from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { Back } from "../../../modules/shared/components/Back"
+import { useCities } from "../../../modules/shared/hooks/useCities"
+import { useConfData } from "../../../modules/shared/hooks/useConfData"
+import { useCountries } from "../../../modules/shared/hooks/useCountries"
 import { useUserContext } from "../../../modules/user/state/UserContext"
 import { formRegisterContact } from "../forms/register-contact"
 
 export function RegisterContact() {
   const navigation = useNavigation();
+  const { countries, phoneCodes } = useCountries();
+  const { latitude, longitude, lang, theme, timezone } = useConfData()
+  const [selectedCity, setSelectedCity] = useState('');
+  const [selectedPhoneCode, setSelectedPhoneCode] = useState('');
+  const { cities } = useCities(selectedCity);
   const { setPartialUser } = useUserContext();
   const { registerMobile, handleSubmit } = useMobileForm({
     fields: formRegisterContact
@@ -24,18 +33,24 @@ export function RegisterContact() {
           street: values.street,
           zipCode: values.zipCode,
           coordinates: {
-            latitude: 0,
-            longitude: 0
+            latitude,
+            longitude
           }
         },
         configuration: {
-          lang: 'es',
-          timezone: 'America/Caracas',
-          theme: 'light'
+          lang,
+          timezone,
+          theme
         }
       })
       navigation.navigate('register-credentials' as never)
     }, errors => console.log(errors))
+  }
+
+  const selectCountry = (country: string) => {
+    setSelectedCity(country);
+    const phoneCode = phoneCodes.find((value) => value.country === country);
+    setSelectedPhoneCode(phoneCode?.value || '');
   }
   return (
     <View style={styles.container}>
@@ -56,9 +71,9 @@ export function RegisterContact() {
           <Text style={{ fontFamily: 'Nunito_500Medium' }}>Datos usados para tu contacto</Text>
         </View>
         <View style={{ width: '100%', gap: 25 }}>
-          <MobileInputText placeholder={'Phone'} {...registerMobile('phoneNumber')}/>
-          <MobileInputText placeholder={'Country'} {...registerMobile('country')}/>
-          <MobileInputText placeholder={'City'} {...registerMobile('city')}/>
+          <MobileInputSelect placeholder="Country" search options={countries.map((value) => value.label)} {...registerMobile('country')} onSelect={selectCountry}/>
+          <MobileInputSelect placeholder="City" search options={cities.map((value) => value.label)} {...registerMobile('city')}/>
+          <MobileInputPhone placeholder={'Phone'} {...registerMobile('phoneNumber')} prefix={selectedPhoneCode || '+1'}/>
           <MobileInputText placeholder={'Street'} {...registerMobile('street')}/>
           <MobileInputText placeholder={'Zip Code'} {...registerMobile('zipCode')}/>
           <MobileButton text='Siguiente' icon={<FontAwesomeIcon icon={faAngleRight} color={'#000'} size={30}/>} onPress={send}></MobileButton>

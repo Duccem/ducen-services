@@ -1,6 +1,7 @@
 export * from './components/MobileButton';
 export * from './components/MobileFloatingButton';
 export * from './components/MobileInputDate';
+export * from './components/MobileInputPhone';
 export * from './components/MobileInputSelect';
 export * from './components/MobileInputText';
 export * from './components/MobileSocialButton';

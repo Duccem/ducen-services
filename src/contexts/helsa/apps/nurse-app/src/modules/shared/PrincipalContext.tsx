@@ -4,14 +4,19 @@ import { DatabaseConnectionProvider } from './DatabaseContext';
 import { TranslateContextProvider } from './TranslateContext';
 import { SharedProvider } from './state/SharedProvider';
 
-
+export interface Configurations {
+  baseUrl: string;
+  citiesUrl: string;
+  countriesUrl: string;
+}
 export interface PrincipalContextState {
+  configurations?: Configurations;
 }
 export const PrincipalContext = createContext<PrincipalContextState>({} as PrincipalContextState);
 
-export function PrincipalContextProvider({ children }: PropsWithChildren<PrincipalContextState>) {
+export function PrincipalContextProvider({ children, configurations }: PropsWithChildren<PrincipalContextState>) {
   return (
-    <PrincipalContext.Provider value={{ }}>
+    <PrincipalContext.Provider value={{ configurations }}>
       <TranslateContextProvider>
         <DatabaseConnectionProvider>
           <ApolloClientProvider>

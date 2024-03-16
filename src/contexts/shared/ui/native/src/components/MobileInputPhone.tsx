@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
-import { Animated, Easing, StyleSheet, Text, TextInput } from 'react-native';
-export type MobileInputTextProps = {
+import { Animated, Easing, StyleSheet } from 'react-native';
+import MaskInput from 'react-native-mask-input';
+export type MobileInputPhoneProps = {
   placeholder: string,
   secureTextEntry?: boolean,
   onChange?: (text: string) => void,
@@ -10,7 +11,7 @@ export type MobileInputTextProps = {
   required?: boolean
   prefix?: string
 }
-export function MobileInputText({ placeholder, secureTextEntry, onChange, onBlur, error, value, required, prefix }: MobileInputTextProps) {
+export function MobileInputPhone({ placeholder, secureTextEntry, onChange, onBlur, error, value, required, prefix }: MobileInputPhoneProps) {
   const animatedValue = useRef(new Animated.Value(0));
   const [text, onChangeText] = useState('');
   const returnAnimatedTitleStyles = {
@@ -24,6 +25,17 @@ export function MobileInputText({ placeholder, secureTextEntry, onChange, onBlur
       },
     ],
   };
+  const returnAnimatedPrefixStyles = {
+    transform: [
+      {
+        translateX: animatedValue?.current?.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, -55],
+          extrapolate: 'clamp',
+        }),
+      },
+    ],
+  }
   const onFocusAnimation = () => {
     Animated.timing(animatedValue?.current, {
       toValue: 1,
@@ -44,16 +56,16 @@ export function MobileInputText({ placeholder, secureTextEntry, onChange, onBlur
   };
   return (
     <Animated.View style={styles.inputBox}>
-      <Animated.Text style={[styles.label, returnAnimatedTitleStyles, { left: prefix ? 40: -10 }]}>{placeholder} <Animated.Text style={{color: '#DE2AC3'}}>{required ? '*' : ''}</Animated.Text></Animated.Text>
-      { prefix && <Text style={styles.prefix}>{prefix}</Text>}
-      <TextInput
-        onChangeText={(text) => {
-          onChangeText(text);
+      <Animated.Text style={[styles.label, returnAnimatedTitleStyles]}>{placeholder} <Animated.Text style={{color: '#DE2AC3'}}>{required ? '*' : ''}</Animated.Text></Animated.Text>
+      { prefix && <Animated.Text style={[styles.prefix, returnAnimatedPrefixStyles]}>{prefix}</Animated.Text>}
+      <MaskInput
+        onChangeText={(_masked, unmasked) => {
+          onChangeText(unmasked);
           if(onChange) {
-            onChange(text);
+            onChange(unmasked);
           }
         }}
-        style={[styles.input, error ? {borderColor: '#DE2AC3'} : {}, prefix ? { paddingLeft: 65 } : {}]}
+        style={[styles.input, error ? {borderColor: '#DE2AC3'} : {}, prefix ? { paddingLeft: 75 } : {}]}
         cursorColor={'#000'}
         secureTextEntry={secureTextEntry}
         onBlur={() => {
@@ -64,8 +76,10 @@ export function MobileInputText({ placeholder, secureTextEntry, onChange, onBlur
         }}
         onFocus={onFocusAnimation}
         value={value}
+        mask={[/\d/, /\d/,/\d/, ' ', /\d/, /\d/, /\d/,'-', /\d/,/\d/, '-',  /\d/, /\d/]}
+        placeholder=''
       >
-      </TextInput>
+      </MaskInput>
 
     </Animated.View>
   );
@@ -109,13 +123,15 @@ const styles = StyleSheet.create({
   prefix: {
     position: 'absolute',
     top:6,
-    left: 5,
+    left: 65,
     zIndex: 1,
     fontFamily: 'Nunito_700Bold',
     fontSize: 16,
     backgroundColor: '#fff',
     borderRightWidth: 1,
-    borderRightColor: '#000',
-    width: 50,
+    borderRightColor: '#969696',
+    borderLeftColor: '#969696',
+    borderLeftWidth: 1,
+    paddingHorizontal: 5,
   }
 });

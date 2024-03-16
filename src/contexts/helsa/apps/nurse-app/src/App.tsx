@@ -17,6 +17,7 @@ import {
   Nunito_900Black_Italic,
 } from '@expo-google-fonts/nunito';
 import { useFonts } from 'expo-font';
+import * as Location from 'expo-location';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback } from 'react';
@@ -26,6 +27,8 @@ import { PrincipalContextProvider } from './modules/shared/PrincipalContext';
 import { GlobalNavigator } from './sections/global-navigator';
 SplashScreen.preventAutoHideAsync();
 LogBox.ignoreLogs(['new NativeEventEmitter']);
+Location.requestBackgroundPermissionsAsync();
+Location.requestForegroundPermissionsAsync();
 export default function App() {
   const [fontsLoaded, fontsError] = useFonts({
     Nunito_200ExtraLight,
@@ -56,11 +59,17 @@ export default function App() {
   }
   return (
     <>
-      <PrincipalContextProvider>
+      <PrincipalContextProvider
+        configurations={{
+          baseUrl: 'http://localhost:3001',
+          citiesUrl: 'https://countriesnow.space/api/v0.1/countries/cities',
+          countriesUrl: 'https://restcountries.com/v3.1/all',
+        }}
+      >
         <GlobalNavigator></GlobalNavigator>
       </PrincipalContextProvider>
       <View style={{ backgroundColor: 'transparent' }} onLayout={onLayoutRootView}></View>
-      <StatusBar style="light" translucent />
+      <StatusBar style="dark" translucent />
     </>
   );
 }
