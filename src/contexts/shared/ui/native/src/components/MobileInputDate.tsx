@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Keyboard, Pressable, StyleSheet, Text, View } from 'react-native';
 import DateTimePicker from 'react-native-ui-datepicker';
 
 export interface MobileInputDateProps {
@@ -17,6 +17,7 @@ export function MobileInputDate({ placeholder, onChange, onBlur, error, required
   return (
     <View style={styles.buttonBox}>
       <Pressable
+
         style={({ pressed }) => [
           styles.button,
           error ? {borderColor: '#DE2AC3'} : {},
@@ -26,74 +27,50 @@ export function MobileInputDate({ placeholder, onChange, onBlur, error, required
           },
         ]}
         onPress={() => {
+          Keyboard.dismiss();
+          if(open && onBlur) onBlur();
           setOpen(!open);
-
         }}
       >
         <Text style={styles.buttonText}>{date ? date?.toDateString() : placeholder} <Text style={{color: '#DE2AC3'}}>{required ? '*' : ''}</Text></Text>
       </Pressable>
-      {/* <Text
+      {open && (
+        <View
         style={{
-          color: '#DE2AC3',
-          fontFamily: 'Nunito_700Bold',
-          fontSize: 14,
           position: 'absolute',
-          top: 5,
-          right: 10,
-          textAlign: 'center',
+          top: 45,
+          left: -3,
+          width: '100%',
+          zIndex: 4,
+          backgroundColor: '#fff',
+          borderColor: '#000',
+          borderStyle: 'solid',
+          borderWidth: 2,
+          borderRadius: 5,
         }}
       >
-        {error}
-      </Text> */}
-      {open && (
-        <TouchableWithoutFeedback
-        style={{
-          backgroundColor: '#fff',
-          width: '100%',
-          height: '100%',
-          zIndex: 1,
-          position: 'absolute',
-          top: 0,
-        }}
-        onPress={() => {
-          setOpen(false);
-          onBlur && onBlur();
-        }}>
-          <View
-            style={{
-              position: 'relative',
-              top: 45,
-              left: -3,
-              width: '100%',
-              zIndex: 2,
-              backgroundColor: '#fff',
-              borderColor: '#000',
-              borderStyle: 'solid',
-              borderWidth: 2,
-              borderRadius: 5,
-            }}
-          >
-            <DateTimePicker
-              mode={'single'}
-              onChange={(selectedDate) => {
-                setDate(new Date(selectedDate.date?.toString() || new Date()));
-                setTimeout(() => setOpen(false), 800);
-                onChange && onChange(selectedDate.date);
-              }}
-              selectedItemColor="#9747FF"
-              selectedTextStyle={{
-                color: '#fff',
-                fontFamily: 'Nunito_700Bold',
-                fontSize: 16,
-              }}
-              calendarTextStyle={{
-                color: '#000',
-                fontFamily: 'Nunito_700Bold',
-                fontSize: 16,
-              }}
-            />
-          </View>
-        </TouchableWithoutFeedback>
+        <DateTimePicker
+          mode={'single'}
+
+          onChange={(selectedDate) => {
+            setDate(new Date(selectedDate.date?.toString() || new Date()));
+            onChange && onChange(selectedDate.date);
+            setOpen(false);
+          }}
+
+          selectedItemColor="#9747FF"
+          selectedTextStyle={{
+            color: '#fff',
+            fontFamily: 'Nunito_700Bold',
+            fontSize: 16,
+          }}
+          calendarTextStyle={{
+            color: '#000',
+            fontFamily: 'Nunito_700Bold',
+            fontSize: 16,
+          }}
+        />
+      </View>
       )}
     </View>
   );

@@ -43,7 +43,7 @@ export type Fields = {
   [x: string]: Field;
 };
 
-export type Validator = (v: string) => null | string;
+export type Validator = (v: string, v2?: any) => null | string;
 
 export type Validators = { [x: string]: Validator };
 
@@ -167,7 +167,7 @@ export const useForm = (initialForm: InitialFormState = {}) => {
     const validators = formState.fields[name].validators;
 
     for (const validator of Object.keys(validators)) {
-      error = validators[validator](value);
+      error = validators[validator](value, formState.fields);
       if (error) {
         break;
       }
@@ -262,7 +262,11 @@ export const useForm = (initialForm: InitialFormState = {}) => {
     });
   };
 
-  const handleSubmit = async (e: any, onSubmit: (values: Values) => void | Promise<void>, onError?: (values: Values) => void) => {
+  const handleSubmit = async (
+    e: any,
+    onSubmit: (values: Values) => void | Promise<void>,
+    onError?: (values: Values) => void,
+  ) => {
     e.preventDefault();
     setSubmitting(true);
     const hasErrors = await validateForm();

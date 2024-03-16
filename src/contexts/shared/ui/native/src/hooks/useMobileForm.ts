@@ -43,7 +43,7 @@ type Fields = {
   [x: string]: Field;
 };
 
-type Validator = (v: string) => null | string;
+type Validator = (v: string, v2?: any) => null | string;
 
 type Validators = { [x: string]: Validator };
 
@@ -174,7 +174,7 @@ export const useMobileForm = (initialForm: InitialFormState = {}) => {
     const validators = formState.fields[name].validators;
 
     for (const validator of Object.keys(validators)) {
-      error = validators[validator](value);
+      error = validators[validator](value, formState.fields);
       if (error) {
         break;
       }

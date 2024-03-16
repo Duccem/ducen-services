@@ -1,4 +1,4 @@
-import { password, required } from '@shared/ui-native';
+import { match, password, required } from '@shared/ui-native';
 
 export const formRegisterCredentials = {
   password: {
@@ -12,6 +12,7 @@ export const formRegisterCredentials = {
     value: '',
     validators: {
       required: (v: string) => required(v),
+      match: (v: string, form: any) => match(v, form, 'password'),
     },
   },
 };

@@ -1,4 +1,4 @@
-import { password, required } from '@shared/ui-web';
+import { match, password, required } from '@shared/ui-web';
 
 export const NewPasswordForm = {
   oldPassword: {
@@ -19,6 +19,7 @@ export const NewPasswordForm = {
     value: '',
     validators: {
       required: (v: string) => required(v),
+      match: (v: string, v2) => match(v, v2, 'password'),
     },
   },
 };

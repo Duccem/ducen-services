@@ -1,5 +1,5 @@
 import { User, UserClientRepository } from '@helsa/modules';
-import { Uuid } from '@shared/core';
+import uuid from 'react-native-uuid';
 import { useSharedContext } from '../../shared/state/SharedProvider';
 import { UserStoreActions } from './UserStore';
 
@@ -17,7 +17,7 @@ export function useUserService(
       }
     },
     register: async () => {
-      const saveUser = { ...userState.user, id: Uuid.random().toString(), photo: 'image.jpg' };
+      const saveUser = { ...userState.user, id: uuid.v4().toString(), photo: 'image.jpg' };
       await userRepository.create(User.fromPrimitives(saveUser));
       setPartialUser({ ...saveUser, password: '' });
     },

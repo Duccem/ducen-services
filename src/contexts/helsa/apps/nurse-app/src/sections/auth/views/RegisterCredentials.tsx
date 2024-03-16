@@ -9,7 +9,7 @@ import { formRegisterCredentials } from "../forms/register-credentials"
 
 export function RegisterCredentials() {
   const { setPartialUser, userState: { user }, register } = useUserContext();
-  const { registerMobile, handleSubmit, setError } = useMobileForm({
+  const { registerMobile, handleSubmit, getError } = useMobileForm({
     fields: formRegisterCredentials
   })
 
@@ -19,14 +19,13 @@ export function RegisterCredentials() {
 
   const send = () => {
     handleSubmit((values) => {
-      if(values.password === values.confirmPassword) {
-        setPartialUser({
-          password: values.password
-        })
-      } else {
-        setError('confirmPassword', 'Passwords do not match');
-      }
-    }, errors => console.log(errors))
+      setPartialUser({
+        password: values.password
+      })
+    }, errors => {
+      console.log(getError('confirmPassword'))
+
+    })
   }
 
   return (
