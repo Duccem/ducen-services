@@ -1,20 +1,17 @@
-import styled from 'styled-components';
-import { theme } from '../../utils/theme/theme';
-
-export const StyledSocialButton = styled.div`
+.social__social {
   height: 35px;
   width: 35px;
-  border-radius: 50%;
-  border: 2px solid #282825;
-  background-color: ${theme.colors.white};
+  border-radius: var(--border-radius-full);
+  border: var(--border-bold);
+  border-color: var(--color-typo-primary-black);
+  background-color: var(--color-background-secondary-white);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 2px 2px #282825;
-  .image,
-  svg {
-    height: 20px;
-    width: 20px;
+  box-shadow: var(--elevation-normal);
+  .image, svg {
+    height: var(--size-fixed-tiny);
+    width: var(--size-fixed-tiny);
   }
   &:hover {
     cursor: pointer;
@@ -24,4 +21,4 @@ export const StyledSocialButton = styled.div`
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 0.15s;
-`;
+}

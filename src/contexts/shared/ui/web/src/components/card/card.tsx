@@ -1,18 +1,43 @@
 
-import styled from "styled-components";
-import { SpaceProps, LayoutProps, layout, space } from "styled-system";
+import { HTMLAttributes, PropsWithChildren } from "react";
+import styles from './card.module.css';
 
-export const Card = styled.div<LayoutProps & SpaceProps>`
-  border: 2px solid ${props => props.theme.colors.black};
-  padding: ${props => props.theme.space[2]}px;
-  min-height: ${props => props.theme.sizes.fixed.small};
-  min-width: ${props => props.theme.sizes.fixed.small};
-  box-shadow: 3px 3px ${props => props.theme.colors.dark_gray};
-  border-radius:  ${props => props.theme.radii.medium};
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  gap: 10px;
-  ${layout}
-  ${space}
-`
+export const Card = ({ children, className}: PropsWithChildren & HTMLAttributes<HTMLDivElement>) => {
+  return (
+    <div className={styles.card__card + ' ' + className}>
+      {children}
+    </div>
+  )
+}
+
+Card.Header = ({ children, className }: PropsWithChildren & HTMLAttributes<HTMLDivElement>) => {
+  return (
+    <div className={styles.card__header + ' ' + className}>
+      {children}
+    </div>
+  )
+}
+
+Card.Content = ({ children, className }: PropsWithChildren & HTMLAttributes<HTMLDivElement>) => {
+  return (
+    <div className={styles.card__content + ' ' + className}>
+      {children}
+    </div>
+  )
+}
+
+Card.Footer = ({ children, className }: PropsWithChildren & HTMLAttributes<HTMLDivElement>) => {
+  return (
+    <div className={styles.card__footer + ' ' + className}>
+      {children}
+    </div>
+  )
+}
+
+Card.Image = ({ children, className }: PropsWithChildren & HTMLAttributes<HTMLDivElement>) => {
+  return (
+    <div className={styles.card__image + ' ' + className}>
+      {children}
+    </div>
+  )
+}

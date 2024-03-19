@@ -1,5 +1,5 @@
 import { useUserContext } from '@/modules/user/state/UserContext';
-import { Button, Form, TextInput, useForm } from '@shared/ui-web';
+import { Button, Form, Input, useForm } from '@shared/ui-web';
 import { useNavigate } from 'react-router-dom';
 import { EmailForm } from '../forms/EmailForm';
 
@@ -21,8 +21,8 @@ export function RecoveryPassword() {
         <div className="w-3/4 mb-4">
           <p className="text-2xl font-semibold">Introduce your email</p>
         </div>
-        <Form onSubmit={submitEmail} width={'75%'}>
-          <TextInput placeholder="Your email" {...register('email')} />
+        <Form onSubmit={submitEmail} className='W-[75%]'>
+          <Input placeholder="Your email" {...register('email')} />
           <Button type="submit" submitting={submitting}>Identify</Button>
         </Form>
       </div>

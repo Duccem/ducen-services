@@ -1,11 +1,9 @@
-import { colors } from '../../utils/theme/colors';
+import styles from './SocialButton.module.css';
 import { SocialButtonProps } from "./SocialButton.props";
-import { StyledSocialButton } from "./SocialButton.style";
-
-export function SocialButton({ image, color= colors.white, children }: SocialButtonProps) {
+export function SocialButton({ image, children }: SocialButtonProps) {
   return (
-    <StyledSocialButton color={color}>
+    <div className={ styles.social__social }>
       { children ? children : (<img src={image} alt="" className="image"/>) }
-    </StyledSocialButton>
+    </div>
   )
 }

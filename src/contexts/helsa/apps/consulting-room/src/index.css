@@ -1,17 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root {
-  --main-color: #9747FF;
-  --secondary-color: #DFDFDF;
-  --secondary-typo: #747474;
-  --third-color: #F5F5F5;
-  --warning-color: #DE2AC3;
-  --white-color: #ffffff;
-  --black-color: #000000;
-  --disabled-color: #998CA9;
-  --dark-gray: #282825;
-}
 
 body, #root {
   font-family: Nunito, Roboto, Arial;
@@ -22,6 +11,7 @@ body, #root {
   height: 100vh;
   min-width: 100%;
   box-sizing: border-box;
+  background-color: var(--color-background-primary-gray);
   ::-webkit-scrollbar {
     display: none;
   }

@@ -1,5 +1,5 @@
 import { useUserContext } from '@/modules/user/state/UserContext';
-import { Button, Form, PasswordInput, useForm } from '@shared/ui-web';
+import { Button, Form, Input, useForm } from '@shared/ui-web';
 import { useSearchParams } from 'react-router-dom';
 import { NewPasswordForm } from '../forms/NewPassword';
 
@@ -8,18 +8,14 @@ export function NewPassword() {
   const userId = searchParams.get('userId');
   const { changePassword } = useUserContext();
 
-  const { register, handleSubmit, setError } = useForm({
+  const { register, handleSubmit } = useForm({
     validateOn: 'all',
     fields: NewPasswordForm,
   });
   async function handleCredentialsSubmit(e) {
     handleSubmit(
       e,
-      async ({ oldPassword, password, newPassword }) => {
-        if (password !== newPassword) {
-          setError('newPassword', 'Passwords do not match');
-          return;
-        }
+      async ({ oldPassword, password }) => {
         await changePassword(userId, password, oldPassword);
       },
       (values) => console.log(values),
@@ -33,11 +29,11 @@ export function NewPassword() {
             <p className="text-3xl font-bold mb-1">New password access</p>
             <p className="text-base text-[#747474]">Validate the new password</p>
           </div>
-          <Form onSubmit={handleCredentialsSubmit} width={'75%'} className="mt-[1.25rem]">
-            <PasswordInput placeholder="Old Password" {...register('oldPassword')} />
-            <PasswordInput placeholder="New Password" {...register('password')} />
-            <PasswordInput placeholder="Repeat Password" {...register('newPassword')} />
-            <Button className="mt-5" width={'percent.larger'} type="submit">
+          <Form onSubmit={handleCredentialsSubmit} className="mt-[1.25rem] w-[75%]">
+            <Input.Password placeholder="Old Password" {...register('oldPassword')} />
+            <Input.Password placeholder="New Password" {...register('password')} />
+            <Input.Password placeholder="Repeat Password" {...register('newPassword')} />
+            <Button className="mt-5" type="submit">
               Change password
             </Button>
           </Form>

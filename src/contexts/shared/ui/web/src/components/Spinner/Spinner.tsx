@@ -1,12 +1,11 @@
-import { SpinnerWrapper } from "./Spinner.style";
-
+import styles from './spinner.module.css';
 export function Spinner() {
   return (
-    <SpinnerWrapper className="lds-ring">
+    <div className={styles.spinner_spinner}>
       <div></div>
       <div></div>
       <div></div>
       <div></div>
-    </SpinnerWrapper>
+    </div>
   )
 }

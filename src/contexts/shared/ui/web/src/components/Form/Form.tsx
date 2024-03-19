@@ -1,16 +1,15 @@
 import { FormHTMLAttributes, PropsWithChildren, forwardRef } from "react";
-import { LayoutProps, SpaceProps } from "styled-system";
-import { StyledForm } from "./form.style";
+import styles from './form.module.css';
 
 export type FormProps = {
   onSubmit: any;
   onReset?: any;
 }
 
-export const Form = forwardRef<HTMLFormElement, PropsWithChildren<FormProps & SpaceProps & LayoutProps & FormHTMLAttributes<HTMLFormElement>>>(({ children, onSubmit, onReset, ...props }, ref) => {
+export const Form = forwardRef<HTMLFormElement, PropsWithChildren<FormProps & FormHTMLAttributes<HTMLFormElement>>>(({ children, onSubmit, onReset, className, ...props }, ref) => {
   return(
-    <StyledForm ref={ref} onSubmit={onSubmit} onReset={onReset} {...props}>
+    <form ref={ref} className={styles.form__form + ' ' + className} onSubmit={onSubmit} onReset={onReset} {...props}>
       {children}
-    </StyledForm>
+    </form>
   )
 })

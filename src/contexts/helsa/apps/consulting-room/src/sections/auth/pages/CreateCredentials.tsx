@@ -1,5 +1,5 @@
 import { useUserContext } from '@/modules/user/state/UserContext';
-import { Button, Form, PasswordInput, useForm } from '@shared/ui-web';
+import { Button, Form, Input, useForm } from '@shared/ui-web';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CredentialsForm } from '../forms/CredentialsForm';
@@ -7,7 +7,7 @@ import { CredentialsForm } from '../forms/CredentialsForm';
 export function CreateCredentials() {
   const location = useNavigate();
   const { userState, register: registerUser, setPartialUser } = useUserContext();
-  const { register, handleSubmit, setError, submitting, setSubmitting } = useForm({
+  const { register, handleSubmit, submitting, setSubmitting } = useForm({
     validateOn: 'all',
     fields: CredentialsForm,
   });
@@ -24,15 +24,10 @@ export function CreateCredentials() {
   async function handleCredentialsSubmit(e) {
     handleSubmit(
       e,
-      async ({ newPassword, password }) => {
-        if (newPassword === password) {
-          setPartialUser({
-            password: password,
-          });
-          console.log(userState.user);
-        } else {
-          setError('newPassword', 'Passwords do not match');
-        }
+      async ({ password }) => {
+        setPartialUser({
+          password: password,
+        });
       },
       (values) => console.log(values),
     );
@@ -45,10 +40,10 @@ export function CreateCredentials() {
             <p className="text-3xl font-bold mb-1">Access Credentials</p>
             <p className="text-base text-[#747474]">Username and password to login</p>
           </div>
-          <Form onSubmit={handleCredentialsSubmit} width={'75%'} className="mt-[1.25rem]">
-            <PasswordInput placeholder="Password" {...register('password')} />
-            <PasswordInput placeholder="Confirm Password" {...register('newPassword')} />
-            <Button className="mt-5" width={'percent.larger'} type="submit" submitting={submitting}>
+          <Form onSubmit={handleCredentialsSubmit} className="mt-[1.25rem] w-[75%]">
+            <Input.Password placeholder="Password" {...register('password')} />
+            <Input.Password placeholder="Confirm Password" {...register('newPassword')} />
+            <Button className="mt-5" type="submit" submitting={submitting}>
               Finish
             </Button>
           </Form>

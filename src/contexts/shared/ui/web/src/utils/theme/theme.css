@@ -1,0 +1,35 @@
+@import './tokens.css';
+:root {
+  /* COLORS */
+  /* Colors main theme */
+  --color-core-primary-violet: #9747ff;
+  --color-core-secondary-purple: #e5d5fb;
+  /* Colors to background and empty space use */
+  --color-background-primary-gray: #f5f5f5;
+  --color-background-secondary-white: #ffffff;
+  /* Colors to typo and content */
+  --color-typo-primary-black: #000000;
+  --color-typo-secondary-gray: #3e3e3e;
+  --color-typo-tertiary-dark-gray: #282825;
+  /* Colors to badges, toasts and alerts */
+  --color-alert-error-red: #ea3a3d;
+  --color-alert-success-gree: #22a094;
+  --color-alert-warn-yellow: #f7cb45;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --color-core-primary-violet: #9747ff;
+    --color-core-secondary-purple: #2f3135;
+    /* Colors to background and empty space use
+    --color-background-primary-gray: #1f2125;
+    --color-background-secondary-white: #1a1c20;
+    /* Colors to typo and content
+    --color-typo-primary-black: #ffffff;
+    --color-typo-secondary-gray: #e1d1d1;
+    /* Colors to badges, toasts and alerts
+    --color-alert-error-red: #ea3a3d;
+    --color-alert-success-gree: #22a094;
+    --color-alert-warn-yellow: #f7cb45;
+  }
+} */

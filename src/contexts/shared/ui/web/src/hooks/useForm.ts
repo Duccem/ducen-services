@@ -275,10 +275,12 @@ export const useForm = (initialForm: InitialFormState = {}) => {
 
     if (hasErrors) {
       if (onError) {
-        onError(values);
+        await onError(values);
+        setSubmitting(false);
       }
     } else {
       await onSubmit(values);
+      setSubmitting(false);
     }
   };
 

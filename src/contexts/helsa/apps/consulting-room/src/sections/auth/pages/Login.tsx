@@ -1,6 +1,6 @@
 import { useUserContext } from "@/modules/user/state/UserContext";
 import { LoginForm } from "@/sections/auth/forms/LoginForm";
-import { Button, Facebook, Form, Google, PasswordInput, SocialButton, TextInput, XIcon, useForm } from "@shared/ui-web";
+import { Button, Facebook, Form, Google, Input, SocialButton, XIcon, useForm } from "@shared/ui-web";
 import { Link, useNavigate } from "react-router-dom";
 
 export function Login() {
@@ -32,10 +32,10 @@ export function Login() {
             <p className="text-lg font-normal">Welcome to Helsa, your mobile hospital!</p>
           </div>
           <div className="my-5 w-3/4">
-          <Form className='mt-[1.25rem]' onSubmit={() => console.log('submit')}>
-            <TextInput placeholder="Username" id="username" {...register('email')}/>
-            <PasswordInput placeholder="Password"  {...register('password')} onKeyDown={enterHandler} />
-            <Button width={'percent.larger'} type="submit" submitting={submitting}>
+          <Form className='mt-[1.25rem]' onSubmit={dispatchLogin}>
+            <Input.Text placeholder="Username" id="username" {...register('email')}/>
+            <Input.Password placeholder="Password"  {...register('password')} onKeyDown={enterHandler} />
+            <Button type="submit" submitting={submitting}>
               Log In
             </Button>
           </Form>

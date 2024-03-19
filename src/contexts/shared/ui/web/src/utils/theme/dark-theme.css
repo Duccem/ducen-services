@@ -1,0 +1,17 @@
+@import './tokens.css';
+:root {
+  /* COLORS */
+  /* Colors main theme */
+  --color-core-primary-violet: #9747FF;
+  --color-core-secondary-purple: #2F3135;
+  /* Colors to background and empty space use */
+  --color-background-primary-gray: #1F2125;
+  --color-background-secondary-white: #1A1C20;
+  /* Colors to typo and content */
+  --color-typo-primary-black: #FFFFFF;
+  --color-typo-secondary-gray: #E1D1D1;
+  /* Colors to badges, toasts and alerts */
+  --color-alert-error-red: #EA3A3D;
+  --color-alert-success-gree: #22A094;
+  --color-alert-warn-yellow: #F7CB45;
+}

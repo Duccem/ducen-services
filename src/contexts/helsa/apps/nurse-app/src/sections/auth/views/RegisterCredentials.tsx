@@ -9,7 +9,7 @@ import { formRegisterCredentials } from "../forms/register-credentials"
 
 export function RegisterCredentials() {
   const { setPartialUser, userState: { user }, register } = useUserContext();
-  const { registerMobile, handleSubmit, getError } = useMobileForm({
+  const { registerMobile, handleSubmit } = useMobileForm({
     fields: formRegisterCredentials
   })
 
@@ -22,10 +22,7 @@ export function RegisterCredentials() {
       setPartialUser({
         password: values.password
       })
-    }, errors => {
-      console.log(getError('confirmPassword'))
-
-    })
+    }, errors => console.log(errors))
   }
 
   return (
