@@ -58,7 +58,7 @@
 
 .auth_layout__banner {
   display: none;
-  background-color: theme('colors.main');
+  background-color: var(--color-core-primary-violet);
   height: 100%;
   width: 100%;
   justify-content: center;
@@ -66,4 +66,7 @@
   @media (min-width: 768px) {
     display: flex;
   }
+}
+.auth_layout__image {
+  height: 70%;
 }

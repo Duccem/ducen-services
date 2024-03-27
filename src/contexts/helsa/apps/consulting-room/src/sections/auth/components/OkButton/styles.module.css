@@ -1,0 +1,4 @@
+.ok__button {
+  margin-top: var(--spacing-vertical-medium);
+  width: var(--size-relative-small);
+}

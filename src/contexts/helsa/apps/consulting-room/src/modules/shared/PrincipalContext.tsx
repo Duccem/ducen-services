@@ -1,9 +1,8 @@
-import { theme } from '@shared/ui-web';
 import { PropsWithChildren, createContext, useContext } from 'react';
-import { ThemeProvider } from 'styled-components';
 import { ApolloClientProvider } from './ApolloProvider';
 import { TranslateContextProvider } from './TranslateProvider';
 import { SharedProvider } from './state/SharedProvider';
+import { ErrorProvider } from './ErrorContext';
 
 export interface Configurations {
   baseUrl: string;
@@ -16,18 +15,16 @@ export interface PrincipalContextState {
 }
 export const PrincipalContext = createContext<PrincipalContextState>({} as PrincipalContextState);
 
-export function PrincipalContextProvider({ children, configurations  }: PropsWithChildren<PrincipalContextState>) {
+export function PrincipalContextProvider({ children, configurations }: PropsWithChildren<PrincipalContextState>) {
   return (
-    <PrincipalContext.Provider value={{configurations}}>
-      <ThemeProvider theme={theme}>
+    <PrincipalContext.Provider value={{ configurations }}>
+      <ErrorProvider>
         <TranslateContextProvider>
           <ApolloClientProvider>
-            <SharedProvider>
-              {children}
-            </SharedProvider>
+            <SharedProvider>{children}</SharedProvider>
           </ApolloClientProvider>
         </TranslateContextProvider>
-      </ThemeProvider>
+      </ErrorProvider>
     </PrincipalContext.Provider>
   );
 }

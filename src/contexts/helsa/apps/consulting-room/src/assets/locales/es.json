@@ -31,5 +31,7 @@
 	"auth.identify-guild.title": "Introduce the ID of the Guild",
 	"auth.identify-guild.button": "Identify",
 	"emails.recovery-password.title": "emails.recovery-password.title",
-	"emails.recovery-password.message": "emails.recovery-password.message"
+	"emails.recovery-password.message": "emails.recovery-password.message",
+  "errors.generic-network.title": "Error al conectarnos con el servidor",
+  "errors.generic-network.content": "Datos enviados, pero no pudimos validarlos debido a un error de conexion. Por favor intentalo de nuevo. Si sigue ocurriendo un error, contacta con el equipo de Soporte."
 }

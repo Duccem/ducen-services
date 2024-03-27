@@ -15,8 +15,10 @@ export function useCountries() {
       );
       setPhoneCodes(
         sorted.map((country) => ({
-          label: (country.idd.root?.toString() || country.name.common) + country.idd.suffixes?.at(0).toString(),
-          value: (country.idd.root?.toString() || '') + country.idd.suffixes?.at(0).toString(),
+          label:
+            (country.idd.root?.toString() || country.name.common) +
+            (country.idd.suffixes && country.idd.suffixes?.length == 1 ? country.idd.suffixes?.at(0).toString() : ''),
+          value: country.name.common,
           icon: country.flags.png,
         })),
       );

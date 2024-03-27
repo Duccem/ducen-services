@@ -5,33 +5,26 @@
   padding: var(--spacing-vertical-small) var(--spacing-horizontal-small);
   font-size: var(--font-size-text-medium);
   font-weight: var(--font-weight-bold);
+  border-radius: var(--border-radius-small);
   border: var(--border-bold);
-  border-color: var(--color-typo-primary-black);
-  border-radius: var(--border-radius-full);
-  box-shadow: var(--elevation-normal);
+  border-color:  var(--color-core-primary-violet);
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
 
   /*Hover animation*/
-  transition-property: all;
+  transition-property: background-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 0.15s;
+  transition-duration: 0.3s;
 
   &:hover {
     cursor: pointer;
-    transform: translateX(-4px) translateY(-4px);
-    box-shadow: var(--elevation-high);
+    background-color: var(--color-background-secondary-white);
   }
 
   &:disabled {
     opacity: 0.8;
-    &:hover {
-      cursor: auto;
-      transform: translateX(0px) translateY(0px);
-      box-shadow: var(--elevation-normal);
-    }
   }
 }
 

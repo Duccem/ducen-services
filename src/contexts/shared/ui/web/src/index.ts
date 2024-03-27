@@ -1,6 +1,7 @@
 export * from './components/Backdrop/Backdrop';
 export * from './components/Form/Form';
 export * from './components/Input/input';
+export * from './components/Notification/Notification';
 export * from './components/SocialButton/SocialButton';
 export * from './components/Spinner/Spinner';
 export * from './components/animated-view/animated-view';
@@ -16,10 +17,6 @@ export * from './hooks/useFile';
 export * from './hooks/useForm';
 export * from './hooks/useKeyboardShortcut';
 
-export * from './utils/theme/colors';
-export * from './utils/theme/darkPalette';
-export * from './utils/theme/lightPalette';
-export * from './utils/theme/theme';
 export * from './utils/validators/email';
 export * from './utils/validators/match';
 export * from './utils/validators/max';

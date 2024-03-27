@@ -7,15 +7,15 @@ import { useKeyboardShortcut } from "../../../hooks/useKeyboardShortcut";
 import { InputContainer } from "../components/Container";
 import styles from '../input.module.css';
 export type SelectProps = { onChange?: (value: string) => void; options?: { icon: any; label: string; value: string }[]; autocomplete?: boolean };
-export const Select = ({ placeholder, value, options, onChange , autocomplete, ...props }: InputHTMLAttributes<HTMLInputElement> & SelectProps) => {
+export const Select = ({ placeholder, options, onChange , autocomplete, ...props }: InputHTMLAttributes<HTMLInputElement> & SelectProps) => {
+  const [innerValue, setInnerValue] = useState('');
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState(0);
   const wrapperRef = useRef(null);
-  const { filtered } = useAutocomplete(options, value, autocomplete)
+  const { filtered } = useAutocomplete(options, innerValue, autocomplete)
   useKeyboardShortcut(
     ["arrowdown"],
     () => {
-      console.log('FIRE ARROW DOWN')
       setActive((pa) => (pa === filtered.length - 1 ? 0 : pa + 1));
     },
     open
@@ -34,6 +34,7 @@ export const Select = ({ placeholder, value, options, onChange , autocomplete, .
       const value = options[active]?.value;
 
       if (value !== undefined) {
+        setInnerValue(value);
         onChange && onChange(value);
         setOpen(false);
         setActive(-1);
@@ -55,6 +56,7 @@ export const Select = ({ placeholder, value, options, onChange , autocomplete, .
   });
   const handleClick = (newValue: string) => {
     setOpen(!open)
+    setInnerValue(newValue)
     onChange && onChange(newValue)
   }
   return (
@@ -64,8 +66,8 @@ export const Select = ({ placeholder, value, options, onChange , autocomplete, .
         type="text"
         autoComplete="off"
         placeholder="&nbsp;"
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
+        value={innerValue}
+        onChange={(event) => setInnerValue(event.target.value)}
         onClick={() => setOpen(!open)}
         data-autocomplete-disabled={!autocomplete}
       />

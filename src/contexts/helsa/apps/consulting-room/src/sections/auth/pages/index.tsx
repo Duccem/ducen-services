@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import banner from '../../../assets/images/banner2-removebg.png';
 import { UserProvider } from '../../../modules/user/state/UserContext';
-import { BackButton } from '../components/BackButton';
+import { BackButton } from '../components/BackButton/BackButton';
 import styles from './index.module.css';
 export function AuthIndex() {
   return (

@@ -5,6 +5,7 @@ import { Check } from "./variants/Check";
 import { Date } from "./variants/Date";
 import { File } from "./variants/File";
 import { Password } from "./variants/Password";
+import { Phone } from "./variants/Phone";
 import { Select } from "./variants/Select";
 import { Text } from "./variants/Text";
 
@@ -22,3 +23,4 @@ Input.Date = Date;
 Input.Password = Password;
 Input.Check = Check;
 Input.Select = Select;
+Input.Phone = Phone;

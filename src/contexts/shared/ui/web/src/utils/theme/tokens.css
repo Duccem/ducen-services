@@ -4,6 +4,7 @@
   --spacing-vertical-none: 0px;
   --spacing-vertical-tiny: 4px;
   --spacing-vertical-small: 8px;
+  --spacing-vertical-light: 12px;
   --spacing-vertical-medium: 16px;
   --spacing-vertical-large: 32px;
   --spacing-vertical-x-large: 64px;
@@ -11,6 +12,7 @@
   --spacing-horizontal-none: 0px;
   --spacing-horizontal-tiny: 4px;
   --spacing-horizontal-small: 8px;
+  --spacing-horizontal-light: 12px;
   --spacing-horizontal-medium: 16px;
   --spacing-horizontal-large: 32px;
   --spacing-horizontal-x-large: 64px;
@@ -42,7 +44,8 @@
   /* Relative percentage sizes */
   --size-relative-small: 20%;
   --size-relative-medium: 50%;
-  --size-relative-large: 100%;
+  --size-relative-large: 75%;
+  --size-relative-full: 100%;
 
   /*SPECIFIC COMPONENTS SIZES*/
   --size-height-input: 40px;

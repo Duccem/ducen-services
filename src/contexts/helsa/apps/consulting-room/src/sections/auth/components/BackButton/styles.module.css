@@ -1,0 +1,10 @@
+.back__button {
+  display: flex;
+  align-items: center;
+  color: var(--color-typo-primary-black);
+  text-decoration-line: none;
+}
+
+.back__button__span {
+  margin-left: var(--spacing-horizontal-light);
+}

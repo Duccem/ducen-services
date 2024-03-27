@@ -8,5 +8,9 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': ['off'],
     'react-hooks/exhaustive-deps': ['off'],
+    '@typescript-eslint/no-explicit-any': ['off'],
+    'react-hooks/rules-of-hooks': 'off',
+    'eslintreact-hooks/rules-of-hooks': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
   },
 };

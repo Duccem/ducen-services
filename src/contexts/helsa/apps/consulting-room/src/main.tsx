@@ -1,5 +1,4 @@
 import '@fontsource/nunito';
-import '@shared/ui-web/src/utils/theme/theme.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';

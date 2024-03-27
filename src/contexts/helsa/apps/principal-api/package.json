@@ -32,6 +32,7 @@
     "@shared/adapters-server": "^0.0.0",
     "@shared/core": "^0.0.0",
     "cross-env": "^7.0.3",
+    "cross-inspect": "^1.0.0",
     "graphql-upload-ts": "^2.1.2",
     "jsonwebtoken": "^9.0.2",
     "on-headers": "^1.0.2",

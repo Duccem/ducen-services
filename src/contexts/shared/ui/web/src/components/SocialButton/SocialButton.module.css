@@ -2,21 +2,19 @@
   height: 35px;
   width: 35px;
   border-radius: var(--border-radius-full);
-  border: var(--border-bold);
+  border: var(--border-simple);
   border-color: var(--color-typo-primary-black);
   background-color: var(--color-background-secondary-white);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--elevation-normal);
   .image, svg {
     height: var(--size-fixed-tiny);
     width: var(--size-fixed-tiny);
   }
   &:hover {
     cursor: pointer;
-    box-shadow: 4px 4px #282825;
-    transform: translateX(-2px) translateY(-2px);
+    transform: scale(1.2);
   }
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
