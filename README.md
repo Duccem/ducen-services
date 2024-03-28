@@ -1,13 +1,16 @@
-[![Core CI](https://github.com/Duccem/ducen-health/actions/workflows/core.yml/badge.svg)](https://github.com/Duccem/ducen-health/actions/workflows/core.yml)
-[![Hospital - API CI](https://github.com/Duccem/ducen-health/actions/workflows/backend.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/backend.yml)
-[![Hospital - Web CI](https://github.com/Duccem/ducen-health/actions/workflows/frontend.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/backend.yml)
-# Helsa
+[![Core CI](https://github.com/Duccem/ducen/actions/workflows/shared-core.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/shared-core.yml)
+[![Adapters Server CI](https://github.com/Duccem/ducen/actions/workflows/shared-adapters-server.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/shared-adapters-server.yml)
+[![Helsa CI](https://github.com/Duccem/ducen/actions/workflows/helsa-modules.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/helsa-modules.yml)
+[![Helsa - API CI](https://github.com/Duccem/ducen/actions/workflows/helsa-principal-api.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/helsa-principal-api.yml)
+[![Helsa - Consulting room CI](https://github.com/Duccem/ducen/actions/workflows/helsa-consulting-room.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/helsa-consulting-room.yml)
+[![Sonarqube Quality Gate](https://github.com/Duccem/ducen/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/sonarcloud.yml)
+# Ducen
 
 Version: 1.1.0
 
 Author: José Véliz [(Duccem)](https://github.com/Duccem)
 
-- [Helsa](#helsa)
+- [Ducen](#ducen)
   - [About](#about)
   - [Installation](#installation)
   - [Commands](#commands)
@@ -64,28 +67,30 @@ this architectures allow to some apps share code important to the domain of Duce
 The structure folder follow the DDD and Hexagonal architecture philosophy (Domain, Services/Application, Infrastructure/Adaptors).
 
 - [apps/]() Apps of the different teams
-  - [hospital/]() core team
-    - [web/]() NextJS app
-    - [api/]() NestJS app
-    - [mobile/]() Expo app
+  - [helsa/]() core team
+    - [consulting-room/]() React app to doctors
+    - [principal-api/]() Principal WEB API, NestJS app
+    - [nurse-app/]() Expo app of mobile to the patients
 - [contexts/]() 
-  - [hospital/]() The hospital base code
+  - [helsa/]() The hospital base code
   - [shared/]() Shared code between teams
     - [core/]() Core entities and modules code
     - [ui/]() UI library of all products of the management
+      - [web/]() React web library
+      - [mobile/]() React native components library
   - [packages/]()
-    - [eslint-config-duccem/]()
-    - [tsconfig]()
+    - [eslint-config-duccem/]() Common eslint config files
+    - [tsconfig-ducen]() Common ts config files
 
 ## Other links
 
-- [Changelog](https://github.com/Duccem/ducen-health/blob/main/CHANGELOG.md)
+- [Changelog](https://github.com/Duccem/ducen/blob/main/CHANGELOG.md)
 
 ## Contributing
 
 - [José Véliz (Duccem)](https://github.com/Duccem)
 
-<a href="https://github.com/duccem/ducen-backend/graphs/contributors">
+<a href="https://github.com/duccem/ducen/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=duccem/ducen" />
 </a>
 

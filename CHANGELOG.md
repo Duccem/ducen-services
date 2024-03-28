@@ -1,7 +1,15 @@
 # Changelog Ducen
 
-- Actual version: 0.1.0
+- Actual version: 0.2.0 
 - Author: José Véliz [(Duccem)](https://github.com/Duccem)
+
+## [0.2.0] New structure and CI/CD new confs 2024-03-27
+
+- Restructure the folders and packages to manage better the dependencies
+- Restart the config of e2e and unit testing
+- Rewrite the Github workflows
+- Rewrite the UI web react components to native css
+- Rewrite some logic to fit with better practice
 
 ## [0.1.1] Refactor all things
 
