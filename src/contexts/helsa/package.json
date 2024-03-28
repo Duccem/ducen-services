@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/*/**.d.ts",
   "scripts": {
-    "build": "rimraf dist && tsc --project tsconfig.json",
-    "build:back": "rimraf dist && tsc --project tsconfig.back.json",
+    "build": "tsc --project tsconfig.json",
+    "build:back": "tsc --project tsconfig.back.json",
     "build:watch:back": "tsc -w --project tsconfig.back.json",
     "build:watch:front": "tsc -w --project tsconfig.json",
     "lint": "eslint \"{src,test}/**/*.ts\" --fix",
