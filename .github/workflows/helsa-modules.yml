@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "src/contexts/hospital/**"
+      - "src/contexts/helsa/**"
   pull_request:
     branches: [main]
     types: [opened,synchronize,reopened]
@@ -35,9 +35,9 @@ jobs:
       - name: Install dependencies 📦
         run: npm ci --loglevel=error
       - name: Lint 🖌️
-        run: npm run lint -w hospital
+        run: npm run lint -w @helsa/modules
       - name: Build 🏗️
-        run: npm run build -w hospital
+        run: npm run build -w @helsa/modules
       - name: Test 🧪
         run: docker-compose run --rm test-helsa-modules
 

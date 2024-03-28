@@ -6,12 +6,12 @@ on:
   push:
     branches: [main]
     paths:
-      - "src/apps/hospital/web/**"
+      - "src/apps/helsa/consulting-room/**"
   pull_request:
     branches: [main]
     types: [opened,synchronize,reopened]
     paths:
-      - "src/apps/hospital/web/**"
+      - "src/apps/helsa/consulting-room/**"
   workflow_dispatch:
 jobs:
   avoid_reduncy:

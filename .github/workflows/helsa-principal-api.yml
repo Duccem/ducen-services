@@ -4,12 +4,12 @@ on:
   push:
     branches: [main]
     paths:
-      - "src/apps/hospital/api/**"
+      - "src/apps/helsa/principal-api/**"
   pull_request:
     branches: [main]
     types: [opened,synchronize,reopened]
     paths:
-      - "src/apps/hospital/api/**"
+      - "src/apps/helsa/principal-api/**"
   workflow_dispatch:
 jobs:
   avoid_reduncy:
@@ -45,7 +45,7 @@ jobs:
         run: |
             cd ./src/apps/helsa/principal-api/src/environments
             touch test.env
-            echo "${{ secrets.DEV_ENV }}" | base64 --decode > test.env
+            echo "${{ secrets.DEV_PRINCIPAL_API_ENV }}" | base64 --decode > test.env
       - name: Start Docker Compose 🐳
         run: docker-compose run --rm -d --service-ports helsa-principal-api
       - name: Wait for API to start

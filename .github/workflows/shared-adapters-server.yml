@@ -4,12 +4,12 @@ on:
   push:
     branches: [main]
     paths:
-      - "src/contexts/shared/adapters-server/**"
+      - "src/contexts/shared/adapters/server/**"
   pull_request:
     branches: [main]
     types: [opened,synchronize,reopened]
     paths:
-      - "src/contexts/shared/adapters-server/**"
+      - "src/contexts/shared/adapters/server/**"
   workflow_dispatch:
 jobs:
   avoid_reduncy:
@@ -35,9 +35,9 @@ jobs:
       - name: Install dependencies 📦
         run: npm ci --loglevel=error
       - name: Lint 🖌️
-        run: npm run lint -w core
+        run: npm run lint -w @shared/adapters-server
       - name: Build 🏗️
-        run: npm run build -w core
+        run: npm run build -w @shared/adapters-server
       - name: Test 🧪
         run: docker-compose run --rm test-shared-adapters-server
 
