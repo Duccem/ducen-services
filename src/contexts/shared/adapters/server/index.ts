@@ -15,7 +15,6 @@ export * from './src/Events/RabbitMQ/RabbitMQFormatter';
 export * from './src/FirebaseSender';
 export * from './src/Logging/ConsoleLogger';
 export * from './src/Logging/FileLogger';
-export * from './src/Logging/LokiLogger';
 export * from './src/MailSender';
 export * from './src/NetTracer';
 export * from './src/Persistence/Mongo/MongoConnection';
@@ -23,3 +22,4 @@ export * from './src/Persistence/Mongo/MongoCriteriaConverter';
 export * from './src/Persistence/Mongo/MongoRepository';
 export * from './src/Query/InMemoryQueryBus';
 export * from './src/Query/QueryHandlers';
+

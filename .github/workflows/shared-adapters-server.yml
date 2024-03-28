@@ -1,0 +1,43 @@
+name: Adapters Server CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/contexts/shared/adapters-server/**"
+  pull_request:
+    branches: [main]
+    types: [opened,synchronize,reopened]
+    paths:
+      - "src/contexts/shared/adapters-server/**"
+  workflow_dispatch:
+jobs:
+  avoid_reduncy:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Cancel Previous Redundant Builds
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+  build:
+    needs:  [avoid_reduncy]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js 📦
+        uses: actions/setup-node@v2
+        with:
+          cache: 'npm'
+          node-version: '20.10.0'
+      - name: Install dependencies 📦
+        run: npm ci --loglevel=error
+      - name: Lint 🖌️
+        run: npm run lint -w core
+      - name: Build 🏗️
+        run: npm run build -w core
+      - name: Test 🧪
+        run: docker-compose run --rm test-shared-adapters-server
+

@@ -62,6 +62,12 @@ export class MongoCriteriaConverter {
   }
 
   public criteria(criteria: Criteria): MongoQuery {
+    if(!criteria) return {
+      filter: {},
+      sort: { _id: -1 },
+      skip: 0,
+      limit: 50
+    }
     return {
       filter: criteria.hasFilter() ? this.filter(criteria.filters) : {},
       sort: criteria.hasOrder() ? this.sort(criteria.order) : { _id: -1 },

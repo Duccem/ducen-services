@@ -1,0 +1,15 @@
+name: Sonarcloud Cuality Gate
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened,synchronize,reopened]
+jobs:
+  analysis:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: SonarCloud Scan 📊
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ github.token }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_CORE }}

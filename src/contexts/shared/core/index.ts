@@ -62,3 +62,10 @@ export * from './src/ValueObjects/primitives/BooleanValueObject';
 export * from './src/ValueObjects/primitives/DateValueObject';
 export * from './src/ValueObjects/primitives/NumberValueObject';
 export * from './src/ValueObjects/primitives/StringValueObject';
+export * from './test/domain/Arranger';
+export * from './test/domain/EmailMother';
+export * from './test/domain/IntegerMother';
+export * from './test/domain/MotherCreator';
+export * from './test/domain/UuidMother';
+export * from './test/domain/WordMother';
+
