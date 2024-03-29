@@ -1,5 +1,4 @@
 @import '@shared/ui-web/src/utils/theme/theme.css';
-@import '@shared/ui-web/dist/style.css';
 body, #root {
   font-family: Nunito, Roboto, Arial;
   color: var(--color-typo-primary-black);
