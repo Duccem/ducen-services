@@ -6,8 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
-    "start": "nest start",
+    "build": "npm run build:back -w @shared/core && npm run build -w @shared/adapters-server && npm run build:back -w @helsa/modules && nest build",
+    "start": "cross-env NODE_ENV=dev SERVICE=hospital nest start",
     "start:dev": "cross-env NODE_ENV=dev SERVICE=hospital nest start --watch",
     "start:local": "cross-env NODE_ENV=local SERVICE=hospital nest start --watch",
     "start:test": "cross-env NODE_ENV=test SERVICE=hospital nest start --watch",
