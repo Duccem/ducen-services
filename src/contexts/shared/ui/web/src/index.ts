@@ -1,6 +1,5 @@
 export * from './components/Backdrop/Backdrop';
 export * from './components/Form/Form';
-export * from './components/Input/input';
 export * from './components/Notification/Notification';
 export * from './components/SocialButton/SocialButton';
 export * from './components/Spinner/Spinner';
@@ -8,6 +7,7 @@ export * from './components/animated-view/animated-view';
 export * from './components/button/button';
 export * from './components/card/card';
 export * from './components/icons';
+export * from './components/input';
 export * from './components/switch/switch';
 export * from './hooks/useAutocomplete';
 export * from './hooks/useClickOutside';
