@@ -1,8 +1,5 @@
 version: "3.8"
 
-include:
-  - path: ./docker-compose.service.yml
-
 services:
   test-shared-adapters-server:
     build:
@@ -44,3 +41,109 @@ services:
     ports:
       - "3002:3002"
     command: npm run dev -w @helsa/consulting-room
+  mongodb:
+    image: mongo
+    ports:
+      - "27018:27017"
+  redis:
+    image: redis
+    logging:
+      driver: none
+    ports:
+      - "6378:6379"
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    logging:
+      driver: none
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - loki
+      - tempo
+      - prometheus
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - '3100:3100'
+    volumes:
+      - loki-data:/tmp/loki
+  tempo:
+    image: grafana/tempo:latest
+    ports:
+      - "14268:14268" # jaeger ingest
+      - "3200:3200"  # tempo
+      - "4317:4317"  # otlp grpc
+      - "4318:4318"  # otlp http
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - tempo-data:/tmp/tempo
+      - ./etc/tempo.yaml:/etc/tempo.yaml
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./etc/prometheus.yaml:/etc/prometheus.yaml
+    command:
+      - --config.file=/etc/prometheus.yaml
+      - --web.enable-remote-write-receiver
+      - --enable-feature=exemplar-storage
+    ports:
+      - "9090:9090"
+  jenkins:
+    image: jenkins/jenkins:latest
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    container_name: jenkins
+    volumes:
+      - jenkins-data:/var/jenkins_home
+  sonarqube:
+    image: sonarqube
+    ports:
+      - "9000:9000"
+    depends_on:
+      - postgresql
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://postgresql:5432/sonar
+      - SONARQUBE_JDBC_USERNAME=sonar
+      - SONARQUBE_JDBC_PASSWORD=sonar
+    volumes:
+      - sonarqube_conf:/opt/sonarqube/conf
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+  postgresql:
+    image: postgres
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+  kafka:
+    image: spotify/kafka
+    ports:
+      - "2181:2181"
+      - "9092:9092"
+    environment:
+      - ADVERTISED_HOST=localhost
+      - ADVERTISED_PORT=9092
+networks:
+  monitoring:
+volumes:
+  grafana-data:
+  loki-data:
+  tempo-data:
+  jenkins-data:
+  sonarqube_conf:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_bundled-plugins:
+  postgresql:
+  postgresql_data:
