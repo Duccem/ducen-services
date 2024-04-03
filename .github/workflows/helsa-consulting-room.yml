@@ -1,7 +1,7 @@
 name: Helsa consulting room CI
-# env:
-#   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-#   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID_CONSULTING_ROOM }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_CONSULTING_ROOM }}
 on:
   push:
     branches: [main]
@@ -57,24 +57,17 @@ jobs:
         run: npm run test:e2e -w @helsa/consulting-room
   deploy:
     needs: [build]
-    runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main'}}
+    runs-on: ubuntu-22.04
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     steps:
-      - name: Deploiy
-        run: echo "Deploying..."
-#   deploy:
-#     needs: [test, e2e]
-#     runs-on: ubuntu-22.04
-#     if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-#     steps:
-#       - uses: actions/checkout@v2
-#         with:
-#           fetch-depth: 0
-#       - name: Install Vercel CLI
-#         run: npm install --global vercel@latest
-#       - name: Pull vercel
-#         run: vercel  pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-#       - name: Build Vercel Artifact
-#         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-#       - name: Deploy Project Artifacts to Vercel
-#         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull vercel
+        run: vercel  pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN_CONSULTING_ROOM }}
+      - name: Build Vercel Artifact
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN_CONSULTING_ROOM }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN_CONSULTING_ROOM }}
