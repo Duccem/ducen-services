@@ -17,6 +17,8 @@ export * from './hooks/useFile';
 export * from './hooks/useForm';
 export * from './hooks/useKeyboardShortcut';
 
+export * from './utils/theme/theme.css';
+export * from './utils/theme/tokens.css';
 export * from './utils/validators/email';
 export * from './utils/validators/match';
 export * from './utils/validators/max';
