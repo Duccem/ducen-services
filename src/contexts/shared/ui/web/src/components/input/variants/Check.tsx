@@ -3,7 +3,7 @@ import { InputContainer } from "../components/Container";
 import styles from '../input.module.css';
 type CheckProps = InputHTMLAttributes<HTMLInputElement> & { onChange?: (value: boolean) => void };
 
-export const Check = ({ placeholder, name, ...props }: CheckProps) => {
+export const CheckInput = ({ placeholder, name, ...props }: CheckProps) => {
   return (
     <InputContainer placeholder={null}  {...props} id={name}>
       <label htmlFor={name} className={styles.input__check__label}>

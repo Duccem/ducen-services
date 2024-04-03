@@ -1,7 +1,7 @@
 import { useErrorContext } from '@/modules/shared/ErrorContext';
 import { useUserContext } from '@/modules/user/state/UserContext';
 import { LoginForm } from '@/sections/auth/forms/LoginForm';
-import { Button, Facebook, Form, Google, Input, LinkedinIcon, SocialButton, useForm } from '@shared/ui-web';
+import { Button, Facebook, Form, Google, LinkedinIcon, PasswordInput, SocialButton, TextInput, useForm } from '@shared/ui-web';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './styles.module.css';
 export function Login() {
@@ -35,8 +35,8 @@ export function Login() {
           </div>
           <div className={styles.login__login}>
             <Form className={styles.login__login__form} onSubmit={dispatchLogin}>
-              <Input.Text placeholder="Username" id="username" {...register('email')} />
-              <Input.Password placeholder="Password" {...register('password')} onKeyDown={enterHandler} />
+              <TextInput placeholder="Username" id="username" {...register('email')} />
+              <PasswordInput placeholder="Password" {...register('password')} onKeyDown={enterHandler} />
               <Button type="submit" submitting={submitting}>
                 Log In
               </Button>

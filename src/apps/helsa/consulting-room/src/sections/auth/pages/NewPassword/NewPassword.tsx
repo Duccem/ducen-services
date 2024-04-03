@@ -1,5 +1,5 @@
 import { useUserContext } from '@/modules/user/state/UserContext';
-import { Button, Form, Input, useForm } from '@shared/ui-web';
+import { Button, Form, PasswordInput, useForm } from '@shared/ui-web';
 import { useSearchParams } from 'react-router-dom';
 import { NewPasswordForm } from '../../forms/NewPassword';
 import styles from './styles.module.css';
@@ -31,9 +31,9 @@ export function NewPassword() {
             <p className={styles.new__header__subtitle}>Validate the new password</p>
           </div>
           <Form onSubmit={handleCredentialsSubmit} className={styles.new__form}>
-            <Input.Password placeholder="Old Password" {...register('oldPassword')} />
-            <Input.Password placeholder="New Password" {...register('password')} />
-            <Input.Password placeholder="Repeat Password" {...register('newPassword')} />
+            <PasswordInput placeholder="Old Password" {...register('oldPassword')} />
+            <PasswordInput placeholder="New Password" {...register('password')} />
+            <PasswordInput placeholder="Repeat Password" {...register('newPassword')} />
             <Button className={styles.new__form__button} type="submit">
               Change password
             </Button>

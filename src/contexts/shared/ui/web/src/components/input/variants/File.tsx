@@ -11,7 +11,7 @@ const FileIcon = ()=> (
   <FontAwesomeIcon icon={faImage}/>
 )
 
-export const File = ({ placeholder, onChange, accept, ...props }: FileProps) => {
+export const FileInput = ({ placeholder, onChange, accept, ...props }: FileProps) => {
   const { handleChange } = useFile(onChange)
   return (
     <InputContainer placeholder={placeholder} icon={<FileIcon/>} {...props}>

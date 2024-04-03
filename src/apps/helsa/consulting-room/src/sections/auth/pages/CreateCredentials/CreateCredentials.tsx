@@ -1,5 +1,5 @@
 import { useUserContext } from '@/modules/user/state/UserContext';
-import { Button, Form, Input, useForm } from '@shared/ui-web';
+import { Button, Form, TextInput, useForm } from '@shared/ui-web';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CredentialsForm } from '../../forms/CredentialsForm';
@@ -42,8 +42,8 @@ export function CreateCredentials() {
             <p className={styles.credentials__header__subtitle}>Username and password to login</p>
           </div>
           <Form onSubmit={handleCredentialsSubmit} className={styles.credentials__form}>
-            <Input.Password placeholder="Password" {...register('password')} />
-            <Input.Password placeholder="Confirm Password" {...register('newPassword')} />
+            <TextInput placeholder="Password" {...register('password')} />
+            <TextInput placeholder="Confirm Password" {...register('newPassword')} />
             <Button className={styles.credentials__form__button} type="submit" submitting={submitting}>
               Finish
             </Button>

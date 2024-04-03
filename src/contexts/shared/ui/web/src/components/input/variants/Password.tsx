@@ -8,7 +8,7 @@ const PasswordIcon = ({ visible })=> (
   <FontAwesomeIcon icon={visible ? faEye : faEyeLowVision}/>
 )
 
-export const Password = ({ placeholder, ...props }: InputHTMLAttributes<HTMLInputElement>) => {
+export const PasswordInput = ({ placeholder, ...props }: InputHTMLAttributes<HTMLInputElement>) => {
   const [visible, setVisible] = useState(false);
   return (
     <InputContainer placeholder={placeholder} {...props} icon={<PasswordIcon visible={visible}/>} iconAction={() => setVisible(!visible)}>

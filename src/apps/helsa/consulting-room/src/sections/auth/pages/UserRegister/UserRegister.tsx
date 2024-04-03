@@ -4,7 +4,7 @@ import { useCountries } from '@/modules/shared/hooks/useCountries';
 import { useUserContext } from '@/modules/user/state/UserContext';
 import { User } from '@helsa/modules';
 import { Primitives } from '@shared/core';
-import { Button, Form, Input, useForm } from '@shared/ui-web';
+import { Button, CheckInput, DateInput, Form, PhoneInput, SelectInput, TextInput, useForm } from '@shared/ui-web';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RegisterForm } from '../../forms/RegisterForm';
@@ -71,12 +71,12 @@ export function UserRegister() {
             <p className={styles.register__header__subtitle}>Register the essential information</p>
           </div>
           <Form onSubmit={handleClickRegister} className={styles.register__form}>
-            <Input placeholder="First Name" {...register('firstName')} />
-            <Input placeholder="Last Name" {...register('lastName')} />
-            <Input placeholder="Email" {...register('email')} />
-            <Input.Date placeholder="Birth date" {...register('birthDate')} />
+            <TextInput placeholder="First Name" {...register('firstName')} />
+            <TextInput placeholder="Last Name" {...register('lastName')} />
+            <TextInput placeholder="Email" {...register('email')} />
+            <DateInput placeholder="Birth date" {...register('birthDate')} />
             <div className={styles.register__form__address}>
-              <Input.Select
+              <SelectInput
                 autocomplete
                 options={countries}
                 {...register('country')}
@@ -86,13 +86,13 @@ export function UserRegister() {
                 }}
                 placeholder="Country"
               />
-              <Input.Select autocomplete options={cities} {...register('city')} placeholder="City" />
-              <Input placeholder="Zip Code" {...register('zipCode')} />
-              <Input placeholder="Street" {...register('street')} />
+              <SelectInput autocomplete options={cities} {...register('city')} placeholder="City" />
+              <TextInput placeholder="Zip Code" {...register('zipCode')} />
+              <TextInput placeholder="Street" {...register('street')} />
             </div>
             <div className={styles.register__form__other}>
-              <Input.Phone placeholder="Phone" code={phoneCode} {...register('phoneNumber')} />
-              <Input.Select
+              <PhoneInput placeholder="Phone" code={phoneCode} {...register('phoneNumber')} />
+              <SelectInput
                 options={[
                   { label: 'Male', value: 'MALE' },
                   { label: 'Female', value: 'FEMALE' },
@@ -102,7 +102,7 @@ export function UserRegister() {
                 placeholder="Gender"
               />
             </div>
-            <Input.Check {...register('terms')} placeholder="Ok with our terms of service" />
+            <CheckInput {...register('terms')} placeholder="Ok with our terms of service" />
             <Button type="submit" className={styles.register__form__button} submitting={submitting}>
               Sign Up
             </Button>

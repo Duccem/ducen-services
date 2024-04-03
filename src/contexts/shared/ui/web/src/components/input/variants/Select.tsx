@@ -7,7 +7,7 @@ import { useKeyboardShortcut } from "../../../hooks/useKeyboardShortcut";
 import { InputContainer } from "../components/Container";
 import styles from '../input.module.css';
 export type SelectProps = { onChange?: (value: string) => void; options?: { icon: any; label: string; value: string }[]; autocomplete?: boolean };
-export const Select = ({ placeholder, options, onChange , autocomplete, ...props }: InputHTMLAttributes<HTMLInputElement> & SelectProps) => {
+export const SelectInput = ({ placeholder, options, onChange , autocomplete, ...props }: InputHTMLAttributes<HTMLInputElement> & SelectProps) => {
   const [innerValue, setInnerValue] = useState('');
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState(0);

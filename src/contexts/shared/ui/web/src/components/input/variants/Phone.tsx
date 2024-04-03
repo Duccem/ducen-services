@@ -3,7 +3,7 @@ import { InputHTMLAttributes } from "react";
 import { InputContainer } from "../components/Container";
 import styles from '../input.module.css';
 
-export const Phone = ({ placeholder, code , ...props }: InputHTMLAttributes<HTMLInputElement> & { code: string }) => {
+export const PhoneInput = ({ placeholder, code , ...props }: InputHTMLAttributes<HTMLInputElement> & { code: string }) => {
   const inputRef = useMask({ mask: '(___) ___-__-__', replacement: { _: /\d/ } });
   return (
     <InputContainer placeholder={placeholder} {...props}>
