@@ -1,9 +1,4 @@
 {
-  "git": {
-    "deploymentEnabled": {
-      "main": false
-    }
-  },
   "builds": [
     {
       "src": "dist/main.js",
