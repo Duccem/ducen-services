@@ -18,17 +18,11 @@ services:
     build:
       context: .
       dockerfile: ./src/contexts/helsa/Dockerfile
-    environment:
-      - MONGO_DB_URL=mongodb://mongodb:27017/test
-    depends_on:
-      - mongodb
     command: npm run test -w @helsa/modules
   test-helsa-principal-api:
     build:
       context: .
       dockerfile: ./src/apps/helsa/principal-api/Dockerfile
-    ports:
-      - "3001:3001"
     environment:
       - MONGO_DB_URL=mongodb://mongodb:27017/test
     depends_on:
