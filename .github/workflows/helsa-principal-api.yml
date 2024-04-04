@@ -40,7 +40,7 @@ jobs:
             npm run build -w @helsa/modules
             npm run build -w @helsa/principal-api
       - name: Unit tests 🧪
-        run: npm run test -w @helsa/principal-api
+        run: docker-compose run --rm test-helsa-principal-api
       - name: Create env file for E2E tests 🧪
         run: |
             cd ./src/apps/helsa/principal-api/src/environments
