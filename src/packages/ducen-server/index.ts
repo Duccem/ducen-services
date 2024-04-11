@@ -1,6 +1,3 @@
-export * from './src/Cache/RedisCacheStore';
-export * from './src/Cache/RedisConnection';
-export * from './src/CloudinaryUploader';
 export * from './src/Command/CommandHandlers';
 export * from './src/Command/InMemoryCommandBus';
 export * from './src/Events/DomainEventDeserializer';
@@ -12,14 +9,13 @@ export * from './src/Events/RabbitMQ/RabbitMQConnection';
 export * from './src/Events/RabbitMQ/RabbitMQConsumer';
 export * from './src/Events/RabbitMQ/RabbitMQEventBus';
 export * from './src/Events/RabbitMQ/RabbitMQFormatter';
-export * from './src/FirebaseSender';
 export * from './src/Logging/ConsoleLogger';
-export * from './src/Logging/FileLogger';
-export * from './src/MailSender';
-export * from './src/NetTracer';
+export * from './src/Logging/Format';
+export * from './src/Logging/NetTracer';
 export * from './src/Persistence/Mongo/MongoConnection';
 export * from './src/Persistence/Mongo/MongoCriteriaConverter';
 export * from './src/Persistence/Mongo/MongoRepository';
+export * from './src/Persistence/Redis/RedisConnection';
+export * from './src/Persistence/Redis/RedisRepository';
 export * from './src/Query/InMemoryQueryBus';
 export * from './src/Query/QueryHandlers';
-

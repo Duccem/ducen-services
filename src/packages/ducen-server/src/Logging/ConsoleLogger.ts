@@ -10,6 +10,9 @@ export class ConsoleLogger implements Logger {
       format,
     });
   }
+  addTransport(transport: winston.transport): void {
+    this.winstonLogger.add(transport);
+  }
   log(message: any): void {
     this.winstonLogger.log('info', message);
   }
