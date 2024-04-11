@@ -1,4 +1,4 @@
-import { DateValueObject, Entity, NumberValueObject, Primitives, StringValueObject, Uuid } from '@shared/core';
+import { DateValueObject, Entity, NumberValueObject, Primitives, StringValueObject, Uuid } from '@ducen/core';
 
 export class Rating extends Entity {
   constructor(
@@ -7,7 +7,7 @@ export class Rating extends Entity {
     public rate: NumberValueObject,
     public comment: StringValueObject,
     createdAt?: DateValueObject,
-    updatedAt?: DateValueObject,
+    updatedAt?: DateValueObject
   ) {
     super(id, createdAt, updatedAt);
   }
@@ -30,7 +30,7 @@ export class Rating extends Entity {
       new NumberValueObject(data.rate),
       new StringValueObject(data.comment),
       new DateValueObject(data.createdAt),
-      new DateValueObject(data.updatedAt),
+      new DateValueObject(data.updatedAt)
     );
   }
 
@@ -41,7 +41,7 @@ export class Rating extends Entity {
       new NumberValueObject(rate),
       new StringValueObject(comment),
       new DateValueObject(createdAt || new Date()),
-      new DateValueObject(updatedAt || new Date()),
+      new DateValueObject(updatedAt || new Date())
     );
   }
 }

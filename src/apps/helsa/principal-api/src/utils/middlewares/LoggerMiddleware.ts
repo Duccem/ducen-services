@@ -1,6 +1,6 @@
 import { Inject, Injectable, NestMiddleware } from '@nestjs/common';
-import { NetTracer } from '@shared/adapters-server';
-import { Logger } from '@shared/core';
+import { NetTracer } from '@ducen/server';
+import { Logger } from '@ducen/core';
 import { NextFunction, Request, Response } from 'express';
 import onHeaders from 'on-headers';
 @Injectable()

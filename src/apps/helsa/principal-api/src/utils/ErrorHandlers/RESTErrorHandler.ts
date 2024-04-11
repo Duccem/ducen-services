@@ -1,5 +1,5 @@
 import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
-import { DomainError } from '@shared/core';
+import { DomainError } from '@ducen/core';
 import { Response } from 'express';
 
 @Catch(Error)

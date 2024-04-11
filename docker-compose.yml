@@ -13,7 +13,7 @@ services:
       - mongodb
       - redis
       - rabbitmq
-    command: npm run test -w @shared/adapters-server
+    command: npm run test -w @ducen/server
   test-helsa-modules:
     build:
       context: .

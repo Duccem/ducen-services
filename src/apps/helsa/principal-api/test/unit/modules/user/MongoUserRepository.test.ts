@@ -1,6 +1,6 @@
 import { IdentifyBy, UserRepository } from '@helsa/modules';
-import { ConsoleLogger, MongoConnection } from '@shared/adapters-server';
-import { UuidMother } from '@shared/core';
+import { ConsoleLogger, MongoConnection } from '@ducen/server';
+import { UuidMother } from '@ducen/core';
 import { MongoUserRepository } from '../../../../src/modules/user/adapters/persistance/MongoDB/MongoUserRepository';
 import { MongoArranger } from './mothers/MongoArranger';
 import { MongoConnectionMother } from './mothers/MongoConnectionMother';

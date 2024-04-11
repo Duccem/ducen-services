@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { Logger } from '@shared/core';
+import { Logger } from '@ducen/core';
 import { graphqlUploadExpress } from 'graphql-upload-ts';
 import { AppModule } from './app.module';
 

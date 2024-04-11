@@ -1,7 +1,7 @@
 import { ApolloClient, NormalizedCacheObject, gql } from '@apollo/client';
+import { ApolloRepository } from '@ducen/client';
+import { Nullable } from '@ducen/core';
 import { User, UserClientRepository } from '@helsa/modules';
-import { ApolloRepository } from '@shared/adapters-client';
-import { Nullable } from '@shared/core';
 import { LOGIN } from './login';
 import { REGISTER } from './register';
 

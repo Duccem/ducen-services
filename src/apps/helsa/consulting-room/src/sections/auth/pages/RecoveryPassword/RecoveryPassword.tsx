@@ -1,5 +1,5 @@
 import { useUserContext } from '@/modules/user/state/UserContext';
-import { Button, Form, TextInput, useForm } from '@shared/ui-web';
+import { Button, Form, TextInput, useForm } from '@ducen/ui-web';
 import { useNavigate } from 'react-router-dom';
 import { EmailForm } from '../../forms/EmailForm';
 import styles from './styles.module.css';

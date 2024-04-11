@@ -1,5 +1,5 @@
-import { MongoConnection } from '@shared/adapters-server';
-import { Arranger } from '@shared/core';
+import { MongoConnection } from '@ducen/server';
+import { Arranger } from '@ducen/core';
 import { MongoClient } from 'mongodb';
 export class MongoArranger extends Arranger {
   constructor(private _client: MongoConnection) {

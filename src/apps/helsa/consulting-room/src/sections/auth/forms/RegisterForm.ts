@@ -1,4 +1,4 @@
-import { required } from '@shared/ui-web';
+import { required } from '@ducen/ui-web';
 
 export const RegisterForm = {
   firstName: {

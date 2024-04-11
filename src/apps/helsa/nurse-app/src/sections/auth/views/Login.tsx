@@ -1,5 +1,5 @@
+import { MobileButton, MobileInputText, MobileSocialButton } from '@ducen/ui-native';
 import { useNavigation } from '@react-navigation/native';
-import { MobileButton, MobileInputText, MobileSocialButton } from '@shared/ui-native';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Facebook } from '../../../modules/shared/components/icons/facebook';

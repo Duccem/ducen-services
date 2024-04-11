@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { MongoConnection } from '@shared/adapters-server';
-import { Command, CommandBus, CommandHandler, Logger, Query, QueryBus, QueryHandler } from '@shared/core';
+import { MongoConnection } from '@ducen/server';
+import { Command, CommandBus, CommandHandler, Logger, Query, QueryBus, QueryHandler } from '@ducen/core';
 import { SharedModule } from '../shared/shared.module';
 import { MongoUserRepository } from './adapters/persistance/MongoDB/MongoUserRepository';
 import { JWTAuthService } from './adapters/service/JWTAuthService';

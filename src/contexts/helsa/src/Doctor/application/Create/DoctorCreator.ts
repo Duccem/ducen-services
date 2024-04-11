@@ -1,13 +1,10 @@
-import { Criteria, EventBus, Operator, Primitives } from '@shared/core';
+import { Criteria, EventBus, Operator, Primitives } from '@ducen/core';
 import { Doctor } from '../../domain/Doctor';
 import { DoctorExistError } from '../../domain/DoctorExistError';
 import { DoctorRepository } from '../../domain/DoctorRepository';
 
 export class DoctorCreator {
-  constructor(
-    private repository: DoctorRepository,
-    private eventBus: EventBus,
-  ) {}
+  constructor(private repository: DoctorRepository, private eventBus: EventBus) {}
 
   async run(doctorBase: Primitives<Doctor>): Promise<void> {
     const verify = await this.repository.findDoctorByCriteria(
@@ -17,7 +14,7 @@ export class DoctorCreator {
           operator: Operator.EQUAL,
           value: doctorBase.id,
         },
-      ]),
+      ])
     );
     if (verify) throw new DoctorExistError();
 
@@ -33,7 +30,7 @@ export class DoctorCreator {
       doctorBase.experiences,
       doctorBase.associations,
       doctorBase.schedule,
-      doctorBase.ratings,
+      doctorBase.ratings
     );
     await this.repository.save(doctor);
     await this.eventBus.publish(doctor.pullDomainEvents());

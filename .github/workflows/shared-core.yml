@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies 📦
         run: npm ci --loglevel=error
       - name: Lint 🖌️
-        run: npm run lint -w @shared/core
+        run: npm run lint -w @ducen/core
       - name: Build 🏗️
-        run: npm run build -w @shared/core
+        run: npm run build -w @ducen/core
 

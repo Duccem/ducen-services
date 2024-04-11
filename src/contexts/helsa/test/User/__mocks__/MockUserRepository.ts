@@ -1,4 +1,4 @@
-import { Criteria, Nullable, Uuid } from '@shared/core';
+import { Criteria, Nullable, Uuid } from '@ducen/core';
 import { User } from '../../../src/User/domain/User';
 import { UserRepository } from '../../../src/User/domain/UserRepository';
 

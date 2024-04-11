@@ -1,4 +1,4 @@
-import { DomainError, InternalError } from '@shared/core';
+import { DomainError, InternalError } from '@ducen/core';
 
 export function GraphQLErrorHandling(gqlError: any, e: any) {
   let error: DomainError;

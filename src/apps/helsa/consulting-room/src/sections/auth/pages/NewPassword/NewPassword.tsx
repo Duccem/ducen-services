@@ -1,5 +1,5 @@
 import { useUserContext } from '@/modules/user/state/UserContext';
-import { Button, Form, PasswordInput, useForm } from '@shared/ui-web';
+import { Button, Form, PasswordInput, useForm } from '@ducen/ui-web';
 import { useSearchParams } from 'react-router-dom';
 import { NewPasswordForm } from '../../forms/NewPassword';
 import styles from './styles.module.css';

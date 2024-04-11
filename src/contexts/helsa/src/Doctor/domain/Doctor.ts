@@ -1,4 +1,4 @@
-import { Aggregate, DateValueObject, NumberValueObject, Primitives, StringValueObject, Uuid } from '@shared/core';
+import { Aggregate, DateValueObject, NumberValueObject, Primitives, StringValueObject, Uuid } from '@ducen/core';
 import { Association } from './Association';
 import { ConsultingRoomAddress } from './ConsultingRoomAddress';
 import { DoctorCreated } from './DoctorCreated';
@@ -22,7 +22,7 @@ export class Doctor extends Aggregate {
     public schedule: Schedule,
     public ratings: Rating[],
     createdAt?: DateValueObject,
-    updatedAt?: DateValueObject,
+    updatedAt?: DateValueObject
   ) {
     super(id, createdAt, updatedAt);
   }
@@ -60,7 +60,7 @@ export class Doctor extends Aggregate {
       Schedule.fromPrimitives(data.schedule),
       data.ratings.map((rating: Primitives<Rating>) => Rating.fromPrimitives(rating)),
       new DateValueObject(data.createdAt),
-      new DateValueObject(data.updatedAt),
+      new DateValueObject(data.updatedAt)
     );
   }
 
@@ -78,7 +78,7 @@ export class Doctor extends Aggregate {
     schedule: Primitives<Schedule>,
     ratings: Primitives<Rating>[],
     createdAt?: Date,
-    updatedAt?: Date,
+    updatedAt?: Date
   ): Doctor {
     const doctor = new Doctor(
       new Uuid(id),
@@ -94,13 +94,13 @@ export class Doctor extends Aggregate {
       Schedule.fromPrimitives(schedule),
       ratings.map((rating) => Rating.fromPrimitives(rating)),
       new DateValueObject(createdAt || new Date()),
-      new DateValueObject(updatedAt || new Date()),
+      new DateValueObject(updatedAt || new Date())
     );
     doctor.record(
       new DoctorCreated({
         aggregateId: doctor.id.value,
         params: doctor.toPrimitives(),
-      }),
+      })
     );
     return doctor;
   }

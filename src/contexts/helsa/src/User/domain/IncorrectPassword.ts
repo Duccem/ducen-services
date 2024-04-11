@@ -1,4 +1,4 @@
-import { AuthorizationError } from '@shared/core';
+import { AuthorizationError } from '@ducen/core';
 
 export class IncorrectPassword extends AuthorizationError {
   constructor() {

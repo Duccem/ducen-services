@@ -1,5 +1,5 @@
 import { User, UserGenders, UserRoles } from '@helsa/modules';
-import { Primitives } from '@shared/core';
+import { Primitives } from '@ducen/core';
 import { useReducer } from 'react';
 
 export type UserState = {

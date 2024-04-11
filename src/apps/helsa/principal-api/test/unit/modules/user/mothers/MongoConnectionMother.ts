@@ -1,4 +1,4 @@
-import { MongoConnection } from '@shared/adapters-server';
+import { MongoConnection } from '@ducen/server';
 import { MongoClient } from 'mongodb';
 
 export class MongoConnectionMother {

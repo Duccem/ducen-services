@@ -1,7 +1,7 @@
 import { SendWelcomeEmailSubscriber } from '@helsa/modules';
 import { Provider } from '@nestjs/common';
-import { DomainEventRegisterObservers } from '@shared/adapters-server';
-import { DomainEventSubscriber } from '@shared/core';
+import { DomainEventRegisterObservers } from '@ducen/server';
+import { DomainEventSubscriber } from '@ducen/core';
 
 export const eventHandlers: Provider[] = [SendWelcomeEmailSubscriber];
 

@@ -1,4 +1,4 @@
-import { EventBus, Primitives } from '@shared/core';
+import { EventBus, Primitives } from '@ducen/core';
 import { IdentifyBy } from '../../domain/IdentifyBy';
 
 import { User } from '../../domain/User';
@@ -6,10 +6,7 @@ import { UserAlreadyExistError } from '../../domain/UserAlreadyExist';
 import { UserRepository } from '../../domain/UserRepository';
 
 export class UserRegistrar {
-  constructor(
-    private readonly repository: UserRepository,
-    private readonly eventBus: EventBus,
-  ) {}
+  constructor(private readonly repository: UserRepository, private readonly eventBus: EventBus) {}
 
   async register(user: Primitives<User>) {
     const existUser = await this.repository.getUserByCriteria(new IdentifyBy('email', user.email));
@@ -28,7 +25,7 @@ export class UserRegistrar {
       user.photo,
       user.configuration,
       user.createdAt,
-      user.updatedAt,
+      user.updatedAt
     );
 
     await this.repository.save(newUser.id, newUser);

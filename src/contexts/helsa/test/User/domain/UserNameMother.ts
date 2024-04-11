@@ -1,4 +1,4 @@
-import { MotherCreator } from '@shared/core';
+import { MotherCreator } from '@ducen/core';
 
 export class UserNameMother {
   static firstName(): string {

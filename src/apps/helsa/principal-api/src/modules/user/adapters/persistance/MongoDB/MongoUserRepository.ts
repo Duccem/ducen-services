@@ -1,6 +1,6 @@
 import { User, UserRepository } from "@helsa/modules";
-import { MongoConnection, MongoRepository } from "@shared/adapters-server";
-import { Criteria, Logger, Primitives, Uuid } from "@shared/core";
+import { MongoConnection, MongoRepository } from "@ducen/server";
+import { Criteria, Logger, Primitives, Uuid } from "@ducen/core";
 
 
 export class MongoUserRepository extends MongoRepository<User> implements UserRepository {

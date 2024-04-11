@@ -1,8 +1,8 @@
 import { ChangePasswordCommand, LoginQuery, RecoveryPasswordCommand, UserRegisterCommand } from '@helsa/modules';
 import { Inject, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CloudinaryUploader } from '@shared/adapters-server';
-import { CommandBus, QueryBus } from '@shared/core';
+import { CloudinaryUploader } from '@ducen/server';
+import { CommandBus, QueryBus } from '@ducen/core';
 import { GraphQLUpload, Upload } from 'graphql-upload-ts';
 import { JwtAuthGuard } from '../../../utils/Guards/JWTGuard';
 

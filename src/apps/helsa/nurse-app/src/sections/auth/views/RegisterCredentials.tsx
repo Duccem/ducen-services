@@ -1,6 +1,6 @@
+import { MobileButton, MobileInputText, useMobileForm } from "@ducen/ui-native"
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
-import { MobileButton, MobileInputText, useMobileForm } from "@shared/ui-native"
 import { useEffect } from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { Back } from "../../../modules/shared/components/Back"

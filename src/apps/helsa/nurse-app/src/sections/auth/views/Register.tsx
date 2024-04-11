@@ -1,7 +1,7 @@
+import { MobileButton, MobileInputDate, MobileInputSelect, MobileInputText, useMobileForm } from "@ducen/ui-native"
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { useNavigation } from "@react-navigation/native"
-import { MobileButton, MobileInputDate, MobileInputSelect, MobileInputText, useMobileForm } from "@shared/ui-native"
 import { StyleSheet, Text, View } from "react-native"
 import { Back } from "../../../modules/shared/components/Back"
 import { useUserContext } from "../../../modules/user/state/UserContext"

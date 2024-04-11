@@ -1,4 +1,4 @@
-import { EmailSender } from '@shared/core';
+import { EmailSender } from '@ducen/core';
 import { IdentifyBy } from '../../domain/IdentifyBy';
 import { UserNotExist } from '../../domain/UserNotExist';
 import { UserRepository } from '../../domain/UserRepository';
@@ -7,7 +7,7 @@ export class RecoveryPassword {
   constructor(
     private readonly userRepository: UserRepository,
     private mailSender: EmailSender,
-    private baseUrl: string,
+    private baseUrl: string
   ) {}
 
   async run(email: string): Promise<void> {

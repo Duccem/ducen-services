@@ -1,4 +1,4 @@
-import { Command, CommandHandler, EventBus } from '@shared/core';
+import { Command, CommandHandler, EventBus } from '@ducen/core';
 import { UserRepository } from '../../domain/UserRepository';
 import { UserRegisterCommand } from './UserRegisterCommand';
 import { UserRegistrar } from './UserRegistrar';

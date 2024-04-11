@@ -1,5 +1,5 @@
 import { User, UserGender, UserRole } from '@helsa/modules';
-import { DateValueObject, EmailMother, MotherCreator, Primitives, UuidMother, WordMother } from '@shared/core';
+import { DateValueObject, EmailMother, MotherCreator, Primitives, UuidMother, WordMother } from '@ducen/core';
 
 export class UserMother {
   static create(data?: Partial<Primitives<User>>): User {

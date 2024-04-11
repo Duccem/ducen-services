@@ -1,4 +1,4 @@
-import { FormatError } from '@shared/core';
+import { FormatError } from '@ducen/core';
 
 export class PasswordFormatError extends FormatError {
   constructor(error: string) {

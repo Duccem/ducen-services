@@ -1,4 +1,4 @@
-import { DomainEventClass, DomainEventSubscriber } from '@shared/core';
+import { DomainEventClass, DomainEventSubscriber } from '@ducen/core';
 import { UserCreated } from '../../domain/UserCreated';
 
 export class SendWelcomeEmailSubscriber implements DomainEventSubscriber {

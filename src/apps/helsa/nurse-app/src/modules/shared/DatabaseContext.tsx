@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { SQLiteConnection } from '@shared/adapters-client';
+import { SQLiteConnection } from '@ducen/client';
 import { Asset } from 'expo-asset';
 import * as FileSystem from 'expo-file-system';
 import * as SQLite from 'expo-sqlite';

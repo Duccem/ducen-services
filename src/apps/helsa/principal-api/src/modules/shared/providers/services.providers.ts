@@ -5,7 +5,7 @@ import {
   FirebaseSender,
   MailSender,
   RedisCacheStore,
-} from '@shared/adapters-server';
+} from '@ducen/server';
 
 export const services: Provider[] = [
   {

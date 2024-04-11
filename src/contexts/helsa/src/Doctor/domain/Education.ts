@@ -1,4 +1,4 @@
-import { BaseObject, DateValueObject, Primitives, StringValueObject } from '@shared/core';
+import { BaseObject, DateValueObject, Primitives, StringValueObject } from '@ducen/core';
 
 export class Education extends BaseObject {
   constructor(
@@ -6,7 +6,7 @@ export class Education extends BaseObject {
     public institution: StringValueObject,
     public startDate: DateValueObject,
     public endDate: DateValueObject,
-    public type: StringValueObject,
+    public type: StringValueObject
   ) {
     super();
   }
@@ -27,7 +27,7 @@ export class Education extends BaseObject {
       new StringValueObject(data.institution),
       new DateValueObject(data.startDate),
       new DateValueObject(data.endDate),
-      new StringValueObject(data.type),
+      new StringValueObject(data.type)
     );
   }
 }

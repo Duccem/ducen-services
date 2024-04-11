@@ -1,4 +1,4 @@
-import { DomainEvent, Primitives } from '@shared/core';
+import { DomainEvent, Primitives } from '@ducen/core';
 import { User } from './User';
 
 export class UserCreated extends DomainEvent {

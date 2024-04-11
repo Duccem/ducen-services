@@ -1,4 +1,4 @@
-import { EmailMother } from '@shared/core';
+import { EmailMother } from '@ducen/core';
 import { RecoveryPasswordCommand } from '../../../../src/User/application/RecoveryPassword/RecoveryPasswordCommand';
 
 export class RecoveryPasswordCommandMother {

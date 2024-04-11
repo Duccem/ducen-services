@@ -10,8 +10,8 @@ COPY src/packages/eslint-config-ducen/package.json ./src/packages/eslint-config-
 COPY src/packages/tsconfig-ducen/package.json ./src/packages/tsconfig-ducen/package.json
 RUN npm ci
 COPY . .
-RUN npm run build:back -w @shared/core
-RUN npm run build -w @shared/adapters-server
+RUN npm run build:back -w @ducen/core
+RUN npm run build -w @ducen/server
 RUN npm run build:back -w @helsa/modules
 EXPOSE 3001/tcp
 CMD ["npm", "run", "build", "-w", "@helsa/principal-api"]

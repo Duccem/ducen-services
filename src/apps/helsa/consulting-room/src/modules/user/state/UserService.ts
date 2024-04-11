@@ -1,11 +1,11 @@
 import { User, UserClientRepository } from '@helsa/modules';
-import { Uuid } from '@shared/core';
+import { Uuid } from '@ducen/core';
 import { useSharedContext } from '../../shared/state/SharedProvider';
 import { UserStoreActions } from './UserStore';
 
 export function useUserService(
   { setUser, userState, setPartialUser }: UserStoreActions,
-  userRepository: UserClientRepository,
+  userRepository: UserClientRepository
 ) {
   const { setToken } = useSharedContext();
   return {

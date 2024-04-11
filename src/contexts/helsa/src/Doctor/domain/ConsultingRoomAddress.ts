@@ -1,4 +1,4 @@
-import { BaseObject, Primitives, StringValueObject } from '@shared/core';
+import { BaseObject, Primitives, StringValueObject } from '@ducen/core';
 import { ConsultingRoomCoordinates } from './ConsultingRoomCoordinates';
 
 export class ConsultingRoomAddress extends BaseObject {
@@ -7,7 +7,7 @@ export class ConsultingRoomAddress extends BaseObject {
     public city: StringValueObject,
     public street: StringValueObject,
     public zipCode: StringValueObject,
-    public coordinates: ConsultingRoomCoordinates,
+    public coordinates: ConsultingRoomCoordinates
   ) {
     super();
   }
@@ -28,7 +28,7 @@ export class ConsultingRoomAddress extends BaseObject {
       new StringValueObject(data.city),
       new StringValueObject(data.street),
       new StringValueObject(data.zipCode),
-      ConsultingRoomCoordinates.fromPrimitives(data.coordinates),
+      ConsultingRoomCoordinates.fromPrimitives(data.coordinates)
     );
   }
 }

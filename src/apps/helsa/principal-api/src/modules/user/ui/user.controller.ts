@@ -1,6 +1,6 @@
 import { LoginQuery } from '@helsa/modules';
 import { Body, Controller, Inject, Post } from '@nestjs/common';
-import { QueryBus } from '@shared/core';
+import { QueryBus } from '@ducen/core';
 
 class LoginDTO {
   email: string;

@@ -1,4 +1,4 @@
-import { Criteria, Nullable } from '@shared/core';
+import { Criteria, Nullable } from '@ducen/core';
 import { Doctor } from './Doctor';
 
 export interface DoctorRepository {

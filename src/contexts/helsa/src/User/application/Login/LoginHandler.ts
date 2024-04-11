@@ -1,4 +1,4 @@
-import { Query, QueryHandler } from '@shared/core';
+import { Query, QueryHandler } from '@ducen/core';
 import { AuthService } from '../../domain/AuthService';
 import { UserRepository } from '../../domain/UserRepository';
 import { Login } from './Login';

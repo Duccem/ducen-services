@@ -1,4 +1,4 @@
-import { FormatError } from '@shared/core';
+import { FormatError } from '@ducen/core';
 
 export class DoctorExistError extends FormatError {
   constructor() {

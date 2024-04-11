@@ -8,8 +8,8 @@ import {
   QueryHandlers,
   RabbitMQConnection,
   RabbitMQEventBus,
-} from '@shared/adapters-server';
-import { Logger } from '@shared/core';
+} from '@ducen/server';
+import { Logger } from '@ducen/core';
 
 export const busesProvider: Provider[] = [
   {

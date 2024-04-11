@@ -1,4 +1,4 @@
-import { Criteria, Nullable, Uuid } from '@shared/core';
+import { Criteria, Nullable, Uuid } from '@ducen/core';
 import { User } from './User';
 
 export interface UserRepository {

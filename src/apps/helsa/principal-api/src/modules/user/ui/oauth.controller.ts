@@ -2,7 +2,7 @@
 import { UserRegisterCommand } from '@helsa/modules';
 import { Controller, Get, HttpStatus, Inject, Req, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { QueryBus } from '@shared/core';
+import { QueryBus } from '@ducen/core';
 import { ResponseModeler } from 'src/utils/Responses/ResponseInterceptor';
 
 @Controller('oauth')

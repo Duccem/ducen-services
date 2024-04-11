@@ -1,4 +1,4 @@
-import { Primitives } from '@shared/core';
+import { Primitives } from '@ducen/core';
 import { UserRegisterCommand } from '../../../src/User/application/RegisterUser/UserRegisterCommand';
 import { User } from '../../../src/User/domain/User';
 import { UserMother } from './UserMother';

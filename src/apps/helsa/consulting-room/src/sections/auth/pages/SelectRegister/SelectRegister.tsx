@@ -1,6 +1,6 @@
 import { useUserContext } from "@/modules/user/state/UserContext";
+import { Button } from "@ducen/ui-web";
 import { UserRoles } from "@helsa/modules";
-import { Button } from "@shared/ui-web";
 import { useNavigate } from "react-router-dom";
 import doctorImage from '../../../../assets/images/nutritionist.png';
 import patientImage from '../../../../assets/images/ophthalmology.png';

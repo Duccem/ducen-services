@@ -1,4 +1,4 @@
-import { UuidMother } from '@shared/core';
+import { UuidMother } from '@ducen/core';
 import { JWTAuthService } from '../../../../src/modules/user/adapters/service/JWTAuthService';
 import { UserMother } from './mothers/UserMother';
 
