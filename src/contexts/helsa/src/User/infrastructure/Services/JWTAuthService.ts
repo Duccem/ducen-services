@@ -1,5 +1,6 @@
-import { AuthService, User } from '@helsa/modules';
 import { sign, verify } from 'jsonwebtoken';
+import { AuthService } from '../../domain/AuthService';
+import { User } from '../../domain/User';
 
 export class JWTAuthService implements AuthService {
   constructor(private readonly secretKey: string) {}

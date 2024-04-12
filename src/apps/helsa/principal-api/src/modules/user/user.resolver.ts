@@ -3,8 +3,8 @@ import { ChangePasswordCommand, LoginQuery, RecoveryPasswordCommand, UserRegiste
 import { Inject, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GraphQLUpload, Upload } from 'graphql-upload-ts';
-import { JwtAuthGuard } from '../../../utils/Guards/JWTGuard';
 import { CloudinaryUploader } from 'src/modules/shared/services/CloudinaryUploader';
+import { JwtAuthGuard } from '../../utils/Guards/JWTGuard';
 
 @Resolver('User')
 export class UserResolver {

@@ -1,13 +1,12 @@
-import { Module } from '@nestjs/common';
-import { MongoConnection } from '@ducen/server';
 import { Command, CommandBus, CommandHandler, Logger, Query, QueryBus, QueryHandler } from '@ducen/core';
+import { MongoConnection } from '@ducen/server';
+import { JWTAuthService, MongoUserRepository } from '@helsa/modules';
+import { Module } from '@nestjs/common';
 import { SharedModule } from '../shared/shared.module';
-import { MongoUserRepository } from './adapters/persistance/MongoDB/MongoUserRepository';
-import { JWTAuthService } from './adapters/service/JWTAuthService';
-import { commandHandlers, userCommandHandlers } from './providers/user.command.providers';
-import { queryHandlers, userQueryHandlers } from './providers/user.query.providers';
-import { UserController } from './ui/user.controller';
-import { UserResolver } from './ui/user.resolver';
+import { commandHandlers, userCommandHandlers } from './user.command.providers';
+import { UserController } from './user.controller';
+import { queryHandlers, userQueryHandlers } from './user.query.providers';
+import { UserResolver } from './user.resolver';
 
 @Module({
   imports: [SharedModule],

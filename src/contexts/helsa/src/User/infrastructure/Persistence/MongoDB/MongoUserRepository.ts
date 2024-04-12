@@ -1,7 +1,7 @@
-import { User, UserRepository } from "@helsa/modules";
-import { MongoConnection, MongoRepository } from "@ducen/server";
-import { Criteria, Logger, Primitives, Uuid } from "@ducen/core";
-
+import { Criteria, Logger, Primitives, Uuid } from '@ducen/core';
+import { MongoConnection, MongoRepository } from '@ducen/server';
+import { User } from '../../../domain/User';
+import { UserRepository } from '../../../domain/UserRepository';
 
 export class MongoUserRepository extends MongoRepository<User> implements UserRepository {
   constructor(connection: MongoConnection, logger: Logger) {

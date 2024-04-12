@@ -1,15 +1,21 @@
-//import { ExternalSignQuery } from '@ducen/hospital';
-import { UserRegisterCommand } from '@helsa/modules';
-import { Controller, Get, HttpStatus, Inject, Req, UseGuards, UseInterceptors } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { QueryBus } from '@ducen/core';
-import { ResponseModeler } from 'src/utils/Responses/ResponseInterceptor';
+import { LoginQuery, UserRegisterCommand } from '@helsa/modules';
+import { Body, Controller, Get, HttpStatus, Inject, Post, Req, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
-@Controller('oauth')
-@UseInterceptors(ResponseModeler)
-export class OAuthController {
+class LoginDTO {
+  email: string;
+  password: string;
+}
+
+@Controller('user')
+export class UserController {
   constructor(@Inject('QUERY_BUS') private queryBus: QueryBus) {}
-
+  @Post()
+  async login(@Body() { email, password }: LoginDTO) {
+    const query = new LoginQuery(email, password);
+    return await this.queryBus.ask(query);
+  }
   @Get('/facebook')
   @UseGuards(AuthGuard('facebook'))
   async facebookLogin(): Promise<any> {

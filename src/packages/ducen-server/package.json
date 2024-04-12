@@ -6,6 +6,7 @@
   "types": "dist/*/**.d.ts",
   "scripts": {
     "build": "tsc",
+    "build:client": "tsc -p tsconfig.client.json",
     "build:watch": "tsc -w",
     "test": "jest --coverage",
     "lint": "eslint \"{src,test}/**/*.ts\" --fix"

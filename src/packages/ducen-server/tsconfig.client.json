@@ -16,18 +16,15 @@
     "noFallthroughCasesInSwitch": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
     "strict": false,
     "types": [
       "node",
       "jest"
-    ]
+    ],
   },
   "exclude": [
     "node_modules",
     "dist",
-    "test",
-    "jest.config.ts",
+    "tests",
   ]
 }
