@@ -1,4 +1,4 @@
-name: Adapters Server CI
+name: Ducen Adapters CI
 
 on:
   push:
@@ -35,9 +35,9 @@ jobs:
       - name: Install dependencies 📦
         run: npm ci --loglevel=error
       - name: Lint 🖌️
-        run: npm run lint -w @ducen/server
+        run: npm run lint -w @ducen/adapters
       - name: Build 🏗️
-        run: npm run build -w @ducen/server
+        run: npm run build -w @ducen/adapters
       - name: Test 🧪
-        run: docker-compose run --rm test-shared-adapters-server
+        run: docker-compose run --rm test-ducen-adapters
 

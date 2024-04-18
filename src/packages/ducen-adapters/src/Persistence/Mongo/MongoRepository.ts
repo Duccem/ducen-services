@@ -7,7 +7,7 @@ export abstract class MongoRepository<T extends Aggregate | Entity> {
   constructor(
     protected entity: NewableClass<T>,
     protected connection: MongoConnection,
-    protected readonly logger: Logger
+    protected readonly logger: Logger,
   ) {}
   protected get collection(): Collection {
     return this.connection.getConnection()!.collection(this.model);

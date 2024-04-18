@@ -19,3 +19,6 @@ export * from './src/Persistence/Redis/RedisConnection';
 export * from './src/Persistence/Redis/RedisRepository';
 export * from './src/Query/InMemoryQueryBus';
 export * from './src/Query/QueryHandlers';
+export * from './test/Persistence/mongo/MongoArranger';
+export * from './test/Persistence/mongo/MongoConnectionMother';
+

@@ -13,13 +13,11 @@
     "start:test": "cross-env NODE_ENV=test SERVICE=hospital nest start --watch",
     "start:debug": "cross-env NODE_ENV=local SERVICE=hospital nest start --debug --watch",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest --coverage",
-    "test:watch": "jest --watch",
-    "test:e2e": "cypress run"
+    "test": "cypress run"
   },
   "dependencies": {
     "@ducen/core": "^0.0.0",
-    "@ducen/server": "^0.0.0",
+    "@ducen/adapters": "^0.0.0",
     "@helsa/modules": "^0.0.0",
     "@nestjs/apollo": "^12.1.0",
     "@nestjs/common": "^10.0.0",

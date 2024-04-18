@@ -1,6 +1,6 @@
 import { UuidMother } from '@ducen/core';
-import { JWTAuthService } from '../../../../src/modules/user/adapters/service/JWTAuthService';
-import { UserMother } from './mothers/UserMother';
+import { UserMother } from '../../../../../../apps/helsa/principal-api/test/unit/modules/user/mothers/UserMother';
+import { JWTAuthService } from '../../../../src/User/infrastructure/Services/JWTAuthService';
 
 describe('JWTAuthService', () => {
   let service: JWTAuthService;

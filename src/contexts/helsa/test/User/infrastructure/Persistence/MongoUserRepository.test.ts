@@ -1,10 +1,9 @@
-import { IdentifyBy, UserRepository } from '@helsa/modules';
-import { ConsoleLogger, MongoConnection } from '@ducen/server';
+import { ConsoleLogger, MongoArranger, MongoConnection, MongoConnectionMother } from '@ducen/adapters';
 import { UuidMother } from '@ducen/core';
-import { MongoUserRepository } from '../../../../src/modules/user/adapters/persistance/MongoDB/MongoUserRepository';
-import { MongoArranger } from './mothers/MongoArranger';
-import { MongoConnectionMother } from './mothers/MongoConnectionMother';
-import { UserMother } from './mothers/UserMother';
+import { IdentifyBy } from '../../../../src/User/domain/IdentifyBy';
+import { UserRepository } from '../../../../src/User/domain/UserRepository';
+import { MongoUserRepository } from '../../../../src/User/infrastructure/Persistence/MongoDB/MongoUserRepository';
+import { UserMother } from '../../domain/UserMother';
 
 describe('MongoUserRepository', () => {
   let connection: MongoConnection;

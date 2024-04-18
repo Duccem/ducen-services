@@ -1,6 +1,7 @@
-import { MongoConnection } from '@ducen/server';
 import { Arranger } from '@ducen/core';
 import { MongoClient } from 'mongodb';
+import { MongoConnection } from '../../../src/Persistence/Mongo/MongoConnection';
+
 export class MongoArranger extends Arranger {
   constructor(private _client: MongoConnection) {
     super();
