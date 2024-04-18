@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { PermissionsError } from '@shared/core';
+import { PermissionsError } from '@ducen/core';
 import { Observable } from 'rxjs';
 //import { AbilityMaker, Profile } from '@ducen/hospital';
 

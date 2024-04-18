@@ -1,4 +1,4 @@
-import { EmailSender } from "@shared/core";
+import { EmailSender } from '@ducen/core';
 
 export class MockMailSender implements EmailSender {
   sendEmailMock: jest.Mock = jest.fn();

@@ -1,11 +1,10 @@
+import { ConsoleLogger, format } from '@ducen/server';
 import { Provider } from '@nestjs/common';
-import {
-  CloudinaryUploader,
-  ConsoleLogger,
-  FirebaseSender,
-  MailSender,
-  RedisCacheStore,
-} from '@shared/adapters-server';
+import winston from 'winston';
+import LokiTransport from 'winston-loki';
+import { CloudinaryUploader } from '../services/CloudinaryUploader';
+import { FirebaseSender } from '../services/FirebaseSender';
+import { MailSender } from '../services/MailSender';
 
 export const services: Provider[] = [
   {
@@ -25,12 +24,22 @@ export const services: Provider[] = [
   },
   {
     provide: 'LOGGER_SERVICE',
-    inject: [],
-    useFactory: () => new ConsoleLogger({}),
-  },
-  {
-    provide: 'CACHE_STORE',
-    inject: ['CACHE_CONNECTION'],
-    useFactory: (connection: any) => new RedisCacheStore(connection),
+    inject: ['LOGGING_CONFIGURATION'],
+    useFactory: ({ serviceName, environment, host, path }: any) => {
+      const logger = new ConsoleLogger({});
+      if (host) {
+        logger.addTransport(
+          new LokiTransport({
+            host: host,
+            labels: { app: serviceName, env: environment },
+          }),
+        );
+      }
+      if (path) {
+        const filename = `logs/${serviceName}-${environment}-${new Date().toISOString()}.log`;
+        logger.addTransport(new winston.transports.File({ filename, format }));
+      }
+      return logger;
+    },
   },
 ];

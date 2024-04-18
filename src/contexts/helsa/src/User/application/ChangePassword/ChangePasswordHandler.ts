@@ -1,4 +1,4 @@
-import { Command, CommandHandler } from '@shared/core';
+import { Command, CommandHandler } from '@ducen/core';
 import { UserRepository } from '../../domain/UserRepository';
 import { ChangePasswordCommand } from './ChangePasswordCommand';
 import { PasswordChanger } from './PasswordChanger';

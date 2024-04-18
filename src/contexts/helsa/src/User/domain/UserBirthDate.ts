@@ -1,4 +1,4 @@
-import { DateValueObject } from '@shared/core';
+import { DateValueObject } from '@ducen/core';
 
 export class UserBirthDate extends DateValueObject {
   public age(): number {

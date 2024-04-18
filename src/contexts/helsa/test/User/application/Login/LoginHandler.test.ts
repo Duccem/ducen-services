@@ -1,4 +1,4 @@
-import { UuidMother } from '@shared/core';
+import { UuidMother } from '@ducen/core';
 import { LoginHandler } from '../../../../src/User/application/Login/LoginHandler';
 import { LoginQuery } from '../../../../src/User/application/Login/LoginQuery';
 import { IdentifyBy } from '../../../../src/User/domain/IdentifyBy';
@@ -21,7 +21,7 @@ describe('LoginHandler', () => {
 
   it('should login a user', async () => {
     const user = UserMother.create();
-    authService.generateTokenMock(UuidMother.hash())
+    authService.generateTokenMock(UuidMother.hash());
     const query = new LoginQuery(user.email.value, user.password.value);
     user.password.encrypt();
 

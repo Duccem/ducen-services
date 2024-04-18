@@ -3,8 +3,6 @@
   "version": "0.0.0",
   "description": "This mono repository contains all of source code related to Ducen org",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:consulting-room": "npm run build -w @shared/core && npm run build -w @shared/adapters-client && npm run build -w @shared/ui-web && npm run build -w @helsa/modules && npm run build -w @helsa/consulting-room"
   },
   "workspaces": [
     "src/apps/**/*",

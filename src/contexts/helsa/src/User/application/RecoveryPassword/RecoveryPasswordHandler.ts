@@ -1,4 +1,4 @@
-import { Command, CommandHandler, EmailSender } from '@shared/core';
+import { Command, CommandHandler, EmailSender } from '@ducen/core';
 import { UserRepository } from '../../domain/UserRepository';
 import { RecoveryPassword } from './RecoveryPassword';
 import { RecoveryPasswordCommand } from './RecoveryPasswordCommand';

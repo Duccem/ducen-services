@@ -1,5 +1,5 @@
 import { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common';
-import { Entity } from '@shared/core';
+import { Entity } from '@ducen/core';
 import { Observable, map } from 'rxjs';
 
 export class GQLResponseModeler implements NestInterceptor {

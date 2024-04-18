@@ -1,4 +1,4 @@
-import { Query } from '@shared/core';
+import { Query } from '@ducen/core';
 
 export class LoginQuery extends Query {
   readonly identifier: string;

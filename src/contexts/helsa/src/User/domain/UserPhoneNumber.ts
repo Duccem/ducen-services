@@ -1,4 +1,4 @@
-import { StringValueObject } from '@shared/core';
+import { StringValueObject } from '@ducen/core';
 
 export class UserPhoneNumber extends StringValueObject {
   constructor(value: string) {

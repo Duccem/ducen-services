@@ -35,8 +35,8 @@ jobs:
         run: npm run lint -w @helsa/principal-api
       - name: Build 🏗️
         run: |
-            npm run build -w @shared/core
-            npm run build -w @shared/adapters-server
+            npm run build -w @ducen/core
+            npm run build -w @ducen/server
             npm run build -w @helsa/modules
             npm run build -w @helsa/principal-api
       - name: Unit tests 🧪

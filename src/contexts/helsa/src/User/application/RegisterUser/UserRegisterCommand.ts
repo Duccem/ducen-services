@@ -1,4 +1,4 @@
-import { Command, Primitives } from '@shared/core';
+import { Command, Primitives } from '@ducen/core';
 import { User } from '../../domain/User';
 
 export class UserRegisterCommand extends Command {

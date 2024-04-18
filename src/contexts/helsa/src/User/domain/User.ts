@@ -1,4 +1,4 @@
-import { Aggregate, BooleanValueObject, DateValueObject, Email, Image, Primitives, Uuid } from '@shared/core';
+import { Aggregate, BooleanValueObject, DateValueObject, Email, Image, Primitives, Uuid } from '@ducen/core';
 import { IncorrectPassword } from './IncorrectPassword';
 import { UserAddress } from './UserAddress';
 import { UserBirthDate } from './UserBirthDate';
@@ -25,7 +25,7 @@ export class User extends Aggregate {
     public configuration: UserConfiguration,
     public isActive: BooleanValueObject,
     createdAt?: DateValueObject,
-    updatedAt?: DateValueObject,
+    updatedAt?: DateValueObject
   ) {
     super(id, createdAt, updatedAt);
   }
@@ -45,7 +45,7 @@ export class User extends Aggregate {
       UserConfiguration.fromPrimitives(data.configuration),
       new BooleanValueObject(data.isActive),
       new DateValueObject(data.createdAt || new Date()),
-      new DateValueObject(data.updatedAt || new Date()),
+      new DateValueObject(data.updatedAt || new Date())
     );
   }
   public toPrimitives(): Primitives<User> {
@@ -93,7 +93,7 @@ export class User extends Aggregate {
       theme: string;
     },
     createdAt?: Date,
-    updatedAt?: Date,
+    updatedAt?: Date
   ): User {
     const user = new User(
       new Uuid(id),
@@ -109,13 +109,13 @@ export class User extends Aggregate {
       UserConfiguration.fromPrimitives(configuration),
       new BooleanValueObject(false),
       new DateValueObject(createdAt || new Date()),
-      new DateValueObject(updatedAt || new Date()),
+      new DateValueObject(updatedAt || new Date())
     );
     user.record(
       new UserCreated({
         params: user.toPrimitives(),
         aggregateId: user.id.value,
-      }),
+      })
     );
     user.password.encrypt();
     return user;

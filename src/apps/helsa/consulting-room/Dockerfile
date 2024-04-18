@@ -11,9 +11,9 @@ COPY src/packages/eslint-config-ducen/package.json ./src/packages/eslint-config-
 COPY src/packages/tsconfig-ducen/package.json ./src/packages/tsconfig-ducen/package.json
 RUN npm ci
 COPY . .
-RUN npm run build -w @shared/core
-RUN npm run build -w @shared/adapters-client
-RUN npm run build -w @shared/ui-web
+RUN npm run build -w @ducen/core
+RUN npm run build -w @ducen/client
+RUN npm run build -w @ducen/ui-web
 RUN npm run build -w @helsa/modules
 EXPOSE 3002
 CMD ["npm", "run", "build", "-w", "@helsa/consulting-room"]

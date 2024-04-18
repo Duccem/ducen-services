@@ -37,9 +37,9 @@ jobs:
         run: npm run lint -w @helsa/consulting-room
       - name: Build 🏗️
         run: |
-            npm run build -w @shared/core
-            npm run build -w @shared/adapters-client
-            npm run build -w @shared/ui-web
+            npm run build -w @ducen/core
+            npm run build -w @ducen/client
+            npm run build -w @ducen/ui-web
             npm run build -w @helsa/modules
             npm run build -w @helsa/consulting-room
       - name: Unit tests 🧪

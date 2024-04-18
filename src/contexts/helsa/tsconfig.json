@@ -21,12 +21,12 @@
     "strict": false,
     "types": [
       "node",
-      "jest"
     ]
   },
   "exclude": [
     "node_modules",
     "dist",
     "test",
+    "jest.config.ts",
   ]
 }

@@ -1,4 +1,4 @@
-@import '@shared/ui-web/src/utils/theme/theme.css';
+@import '@ducen/ui-web/src/utils/theme/theme.css';
 body, #root {
   font-family: Nunito, Roboto, Arial;
   color: var(--color-typo-primary-black);

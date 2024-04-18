@@ -1,4 +1,4 @@
-import { match, password, required } from '@shared/ui-native';
+import { match, password, required } from '@ducen/ui-native';
 
 export const formRegisterCredentials = {
   password: {

@@ -75,4 +75,9 @@ export const configurations: Provider[] = [
     inject: [ConfigService],
     useFactory: (configService: ConfigService) => ({ ...configService.get('notification') }),
   },
+  {
+    provide: 'LOGGING_CONFIGURATION',
+    inject: [ConfigService],
+    useFactory: (configService: ConfigService) => ({ ...configService.get('logging') }),
+  },
 ];

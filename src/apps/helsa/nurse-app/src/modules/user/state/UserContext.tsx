@@ -1,6 +1,6 @@
+import { ApolloUserRepository } from "@helsa/modules";
 import { PropsWithChildren, createContext, useContext } from "react";
 import { useApolloContext } from "../../shared/ApolloProvider";
-import { ApolloUserRepository } from "../adapters/Apollo/ApolloUserRepository";
 import { UserServices, useUserService } from "./UserService";
 import { UserStoreActions, useUserStore } from "./UserStore";
 

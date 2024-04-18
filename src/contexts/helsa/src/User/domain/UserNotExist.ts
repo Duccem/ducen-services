@@ -1,4 +1,4 @@
-import { NotFoundError } from '@shared/core';
+import { NotFoundError } from '@ducen/core';
 
 export class UserNotExist extends NotFoundError {
   constructor() {

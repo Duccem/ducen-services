@@ -1,11 +1,8 @@
-import { BaseObject, Primitives, StringValueObject } from '@shared/core';
+import { BaseObject, Primitives, StringValueObject } from '@ducen/core';
 import { Section } from './Section';
 
 export class Day extends BaseObject {
-  constructor(
-    public weekDay: StringValueObject,
-    public sections: Section[],
-  ) {
+  constructor(public weekDay: StringValueObject, public sections: Section[]) {
     super();
   }
 
@@ -19,7 +16,7 @@ export class Day extends BaseObject {
   static fromPrimitives(data: Primitives<Day>): Day {
     return new Day(
       new StringValueObject(data.weekDay),
-      data.sections.map((section: Primitives<Section>) => Section.fromPrimitives(section)),
+      data.sections.map((section: Primitives<Section>) => Section.fromPrimitives(section))
     );
   }
 }

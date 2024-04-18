@@ -1,10 +1,7 @@
-import { BaseObject, DateValueObject, Primitives } from '@shared/core';
+import { BaseObject, DateValueObject, Primitives } from '@ducen/core';
 
 export class Section extends BaseObject {
-  constructor(
-    public initHour: DateValueObject,
-    public endHour: DateValueObject,
-  ) {
+  constructor(public initHour: DateValueObject, public endHour: DateValueObject) {
     super();
   }
 

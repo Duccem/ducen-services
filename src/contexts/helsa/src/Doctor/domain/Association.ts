@@ -1,11 +1,7 @@
-import { BaseObject, DateValueObject, Primitives, StringValueObject } from '@shared/core';
+import { BaseObject, DateValueObject, Primitives, StringValueObject } from '@ducen/core';
 
 export class Association extends BaseObject {
-  constructor(
-    public entity: StringValueObject,
-    public startDate: DateValueObject,
-    public endDate: DateValueObject,
-  ) {
+  constructor(public entity: StringValueObject, public startDate: DateValueObject, public endDate: DateValueObject) {
     super();
   }
 
@@ -21,7 +17,7 @@ export class Association extends BaseObject {
     return new Association(
       new StringValueObject(data.entity),
       new DateValueObject(data.startDate),
-      new DateValueObject(data.endDate),
+      new DateValueObject(data.endDate)
     );
   }
 }

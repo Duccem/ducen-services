@@ -1,4 +1,4 @@
-import { required } from '@shared/ui-native';
+import { required } from '@ducen/ui-native';
 
 export const formRegisterContact = {
   phoneNumber: {

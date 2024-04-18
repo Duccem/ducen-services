@@ -1,11 +1,11 @@
-import { BaseObject, NumberValueObject, Primitives } from '@shared/core';
+import { BaseObject, NumberValueObject, Primitives } from '@ducen/core';
 import { Day } from './Day';
 
 export class Schedule extends BaseObject {
   constructor(
     public days: Day[],
     public appointmentDuration: NumberValueObject,
-    public maxAppointments: NumberValueObject,
+    public maxAppointments: NumberValueObject
   ) {
     super();
   }
@@ -22,7 +22,7 @@ export class Schedule extends BaseObject {
     return new Schedule(
       data.days.map((day: Primitives<Day>) => Day.fromPrimitives(day)),
       new NumberValueObject(data.appointmentDuration),
-      new NumberValueObject(data.maxAppointments),
+      new NumberValueObject(data.maxAppointments)
     );
   }
 }

@@ -1,11 +1,7 @@
-import { BaseObject, Primitives, StringValueObject } from '@shared/core';
+import { BaseObject, Primitives, StringValueObject } from '@ducen/core';
 
 export class UserConfiguration extends BaseObject {
-  constructor(
-    public timezone: StringValueObject,
-    public lang: StringValueObject,
-    public theme: StringValueObject,
-  ) {
+  constructor(public timezone: StringValueObject, public lang: StringValueObject, public theme: StringValueObject) {
     super();
   }
 
@@ -13,7 +9,7 @@ export class UserConfiguration extends BaseObject {
     return new UserConfiguration(
       new StringValueObject(data.timezone),
       new StringValueObject(data.lang),
-      new StringValueObject(data.theme),
+      new StringValueObject(data.theme)
     );
   }
 

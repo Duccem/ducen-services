@@ -1,4 +1,4 @@
-import { Enum } from '@shared/core';
+import { Enum } from '@ducen/core';
 export enum UserGenders {
   MALE = 'MALE',
   FEMALE = 'FEMALE',

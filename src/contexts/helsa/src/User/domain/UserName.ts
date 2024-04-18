@@ -1,10 +1,7 @@
-import { BaseObject, Primitives, StringValueObject } from '@shared/core';
+import { BaseObject, Primitives, StringValueObject } from '@ducen/core';
 
 export class UserName extends BaseObject {
-  constructor(
-    public firstName: StringValueObject,
-    public lastName: StringValueObject,
-  ) {
+  constructor(public firstName: StringValueObject, public lastName: StringValueObject) {
     super();
   }
   public static fromPrimitives(data: Primitives<UserName>): UserName {

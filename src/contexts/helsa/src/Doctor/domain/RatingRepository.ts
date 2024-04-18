@@ -1,4 +1,4 @@
-import { Uuid } from '@shared/core';
+import { Uuid } from '@ducen/core';
 import { Rating } from './Rating';
 
 export interface RatingRepository {

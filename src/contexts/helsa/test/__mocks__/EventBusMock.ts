@@ -1,4 +1,4 @@
-import { DomainEvent, DomainEventSubscriber, EventBus } from "@shared/core";
+import { DomainEvent, DomainEventSubscriber, EventBus } from '@ducen/core';
 export class EventBusMock implements EventBus {
   configure(subscribers: DomainEventSubscriber[]): void {
     throw new Error('Method not implemented.');

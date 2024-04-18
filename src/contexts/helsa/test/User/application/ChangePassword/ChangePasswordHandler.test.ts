@@ -1,4 +1,4 @@
-import { WordMother } from '@shared/core';
+import { WordMother } from '@ducen/core';
 
 import { MockUserRepository } from '../../__mocks__/MockUserRepository';
 

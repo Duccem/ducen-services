@@ -1,4 +1,4 @@
-import { Button } from "@shared/ui-web"
+import { Button } from "@ducen/ui-web"
 import { useNavigate } from "react-router-dom"
 import styles from './styles.module.css'
 

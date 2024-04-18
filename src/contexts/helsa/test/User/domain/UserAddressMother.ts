@@ -1,4 +1,4 @@
-import { MotherCreator, Primitives } from '@shared/core';
+import { MotherCreator, Primitives } from '@ducen/core';
 import { UserAddress } from '../../../src/User/domain/UserAddress';
 
 export class UserAddressMother {

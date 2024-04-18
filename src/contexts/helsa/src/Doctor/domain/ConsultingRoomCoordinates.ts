@@ -1,10 +1,7 @@
-import { BaseObject, Latitude, Longitude, Primitives } from '@shared/core';
+import { BaseObject, Latitude, Longitude, Primitives } from '@ducen/core';
 
 export class ConsultingRoomCoordinates extends BaseObject {
-  constructor(
-    public latitude: Latitude,
-    public longitude: Longitude,
-  ) {
+  constructor(public latitude: Latitude, public longitude: Longitude) {
     super();
   }
 

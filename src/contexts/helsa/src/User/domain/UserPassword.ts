@@ -1,4 +1,4 @@
-import { StringValueObject } from '@shared/core';
+import { StringValueObject } from '@ducen/core';
 import * as bcrypt from 'bcryptjs';
 import { PasswordFormatError } from './PasswordFormatError';
 
@@ -7,7 +7,7 @@ export class UserPassword extends StringValueObject {
     super.validation(value);
     if (!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/gm.test(value)) {
       throw new PasswordFormatError(
-        'Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character',
+        'Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character'
       );
     }
   }

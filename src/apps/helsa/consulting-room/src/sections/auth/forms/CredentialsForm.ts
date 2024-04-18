@@ -1,4 +1,4 @@
-import { match, password, required } from '@shared/ui-web';
+import { match, password, required } from '@ducen/ui-web';
 
 export const CredentialsForm = {
   password: {

@@ -1,7 +1,7 @@
 import { useErrorContext } from '@/modules/shared/ErrorContext';
 import { useUserContext } from '@/modules/user/state/UserContext';
 import { LoginForm } from '@/sections/auth/forms/LoginForm';
-import { Button, Facebook, Form, Google, LinkedinIcon, PasswordInput, SocialButton, TextInput, useForm } from '@shared/ui-web';
+import { Button, Facebook, Form, Google, LinkedinIcon, PasswordInput, SocialButton, TextInput, useForm } from '@ducen/ui-web';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './styles.module.css';
 export function Login() {

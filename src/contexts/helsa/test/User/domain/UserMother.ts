@@ -1,4 +1,4 @@
-import { DateValueObject, EmailMother, Primitives, UuidMother, WordMother } from '@shared/core';
+import { DateValueObject, EmailMother, Primitives, UuidMother, WordMother } from '@ducen/core';
 import { User } from '../../../src/User/domain/User';
 import { UserGender } from '../../../src/User/domain/UserGender';
 import { UserRole } from '../../../src/User/domain/UserRole';

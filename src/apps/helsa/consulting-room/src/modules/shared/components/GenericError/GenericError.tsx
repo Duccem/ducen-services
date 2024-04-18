@@ -1,6 +1,6 @@
 import { faBan } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Button, Notification } from "@shared/ui-web"
+import { Button, Notification } from "@ducen/ui-web"
 import styles from './styles.module.css'
 export const GenericError = ({ error, action }) => {
   return (
