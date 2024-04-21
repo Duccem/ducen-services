@@ -12,6 +12,8 @@ export * from './src/Events/RabbitMQ/RabbitMQFormatter';
 export * from './src/Logging/ConsoleLogger';
 export * from './src/Logging/Format';
 export * from './src/Logging/NetTracer';
+export * from './src/Persistence/Apollo/ApolloCriteriaConverter';
+export * from './src/Persistence/Apollo/ApolloRepository';
 export * from './src/Persistence/Mongo/MongoConnection';
 export * from './src/Persistence/Mongo/MongoCriteriaConverter';
 export * from './src/Persistence/Mongo/MongoRepository';
@@ -21,4 +23,3 @@ export * from './src/Query/InMemoryQueryBus';
 export * from './src/Query/QueryHandlers';
 export * from './test/Persistence/mongo/MongoArranger';
 export * from './test/Persistence/mongo/MongoConnectionMother';
-

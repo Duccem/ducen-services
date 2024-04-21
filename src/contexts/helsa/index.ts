@@ -32,3 +32,18 @@ export * from './src/User/domain/UserRole';
 export * from './src/User/infrastructure/Persistence/Apollo/ApolloUserRepository';
 export * from './src/User/infrastructure/Persistence/MongoDB/MongoUserRepository';
 export * from './src/User/infrastructure/Services/JWTAuthService';
+
+export * from './src/Flags/application/CreateFlag/CreateFlag';
+export * from './src/Flags/application/CreateFlag/CreateFlagCommand';
+export * from './src/Flags/application/CreateFlag/CreateFlagHandler';
+export * from './src/Flags/application/GetFlags/GetFlagQuery';
+export * from './src/Flags/application/GetFlags/GetFlagQueryHandler';
+export * from './src/Flags/application/GetFlags/GetFlags';
+export * from './src/Flags/domain/Flag';
+export * from './src/Flags/domain/FlagAttributes';
+export * from './src/Flags/domain/FlagHandlers/DirectHandler';
+export * from './src/Flags/domain/FlagHandlers/PercentHandler';
+export * from './src/Flags/domain/FlagRepository';
+export * from './src/Flags/domain/HandlerFactory';
+export * from './src/Flags/infrastructure/ApolloFlagRepository';
+export * from './src/Flags/infrastructure/MongoFlagRepository';

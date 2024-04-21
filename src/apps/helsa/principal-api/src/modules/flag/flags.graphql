@@ -1,0 +1,24 @@
+type Flag {
+  enabled: Boolean
+  name: String
+}
+
+type Query {
+  flags: [Flag]
+}
+
+input FlagRegister {
+  id: String
+  attributes: String
+  enabled: Boolean
+  name: String
+  handlers: [String]
+  createdAt: String
+  updatedAt: String
+}
+
+type Mutation {
+  createFlag(flag: FlagRegister): Boolean
+  updateFlag(flag: FlagRegister): Boolean
+  deleteFlag(id: String): Boolean
+}

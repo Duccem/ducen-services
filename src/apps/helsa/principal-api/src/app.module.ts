@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { getEnv } from './config/env.config';
+import { FlagModule } from './modules/flag/flag.module';
 import { confFiles } from './modules/shared/providers/confIgurations.provider';
 import { SharedModule } from './modules/shared/shared.module';
 import { UserModule } from './modules/user/user.module';
@@ -23,8 +24,9 @@ import { JWTStrategy } from './utils/Strategies/JWTStrategy';
       useGlobalPrefix: true,
       csrfPrevention: false,
     }),
-    UserModule,
     SharedModule,
+    UserModule,
+    FlagModule,
   ],
   providers: [JWTStrategy],
 })
