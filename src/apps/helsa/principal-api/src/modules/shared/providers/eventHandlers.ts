@@ -1,7 +1,7 @@
+import { DomainEventRegisterObservers } from '@ducen/adapters';
+import { DomainEventSubscriber } from '@ducen/core';
 import { SendWelcomeEmailSubscriber } from '@helsa/modules';
 import { Provider } from '@nestjs/common';
-import { DomainEventRegisterObservers } from '@ducen/server';
-import { DomainEventSubscriber } from '@ducen/core';
 
 export const eventHandlers: Provider[] = [SendWelcomeEmailSubscriber];
 

@@ -1,5 +1,5 @@
+import { MongoConnection, RabbitMQConnection, RedisConnection } from '@ducen/adapters';
 import { Provider } from '@nestjs/common';
-import { MongoConnection, RabbitMQConnection, RedisConnection } from '@ducen/server';
 import { connect } from 'amqplib';
 import { MongoClient } from 'mongodb';
 import { createClient } from 'redis';
