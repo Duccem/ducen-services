@@ -1,5 +1,5 @@
+import { MongoConnection } from '@ducen/adapters';
 import { Command, CommandBus, CommandHandler, Logger, Query, QueryBus, QueryHandler } from '@ducen/core';
-import { MongoConnection } from '@ducen/server';
 import { JWTAuthService, MongoUserRepository } from '@helsa/modules';
 import { Module } from '@nestjs/common';
 import { SharedModule } from '../shared/shared.module';
@@ -42,5 +42,6 @@ import { UserResolver } from './user.resolver';
     UserResolver,
   ],
   controllers: [UserController],
+  exports: ['USER_REPOSITORY', 'AUTH_SERVICE'],
 })
 export class UserModule {}

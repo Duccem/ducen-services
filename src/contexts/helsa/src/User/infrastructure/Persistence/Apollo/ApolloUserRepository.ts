@@ -1,5 +1,5 @@
 import { ApolloClient, NormalizedCacheObject, gql } from '@apollo/client';
-import { ApolloRepository } from '@ducen/client';
+import { ApolloRepository } from '@ducen/adapters';
 import { Nullable } from '@ducen/core';
 import { LOGIN } from './login';
 import { REGISTER } from './register';
