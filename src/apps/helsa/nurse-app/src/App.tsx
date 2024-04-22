@@ -62,7 +62,7 @@ export default function App() {
       <PrincipalContextProvider
         configurations={{
           baseUrl: 'http://localhost:3001',
-          citiesUrl: process.env.REACT_APP_CITIES_API_URL,
+          citiesUrl: 'https://countriesnow.space/api/v0.1/countries/cities',
           countriesUrl: 'https://restcountries.com/v3.1/all',
         }}
       >

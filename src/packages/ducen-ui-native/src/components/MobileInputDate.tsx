@@ -78,24 +78,19 @@ export function MobileInputDate({ placeholder, onChange, onBlur, error, required
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#fff',
+    backgroundColor: '#F0F0F0',
     height: 40,
     width: '100%',
     margin: 'auto',
-    borderColor: '#000',
-    borderStyle: 'solid',
-    borderWidth: 2,
     borderRadius: 5,
     position: 'absolute',
-    top: -3,
-    left: -3,
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'row',
     paddingHorizontal: 15,
   },
   buttonBox: {
-    backgroundColor: '#000',
+    backgroundColor: 'transparent',
     height: 43,
     width: '90%',
     position: 'relative',

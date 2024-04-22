@@ -1,6 +1,6 @@
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Dimensions, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 export interface MobileInputSelectProps {
   placeholder: string;
@@ -15,12 +15,11 @@ export interface MobileInputSelectProps {
 export function MobileInputSelect({ placeholder, options, onChange, onBlur, onSelect, error, search }: MobileInputSelectProps) {
   return (
     <View style={{
-      backgroundColor: '#000',
-      height: 43,
+      backgroundColor: 'transparent',
+      height: 40,
       width: '90%',
       borderRadius: 5,
       marginLeft: '5%',
-      elevation: 1,
       position: 'relative'
     }}
     >
@@ -33,20 +32,14 @@ export function MobileInputSelect({ placeholder, options, onChange, onBlur, onSe
       }}
       defaultButtonText="Gender"
       buttonStyle={[{
-        backgroundColor: '#fff',
+        backgroundColor: '#F0F0F0',
         width: '100%',
         height: 40,
-        borderWidth: 2,
         borderRadius: 5,
-        borderStyle: 'solid',
-        zIndex: 1,
-        elevation: 0,
-        top: -3,
-        left: -3,
       }, error ? {borderColor: '#DE2AC3'} : {},]}
       onBlur={onBlur}
       searchInputStyle={{
-        backgroundColor: '#fff',
+        backgroundColor: '#f0f0f0',
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
         borderWidth: 0,
@@ -55,8 +48,8 @@ export function MobileInputSelect({ placeholder, options, onChange, onBlur, onSe
         height: 40,
         width: '100%',
         elevation: 0,
-        position: 'relative',
       }}
+
       search={search}
       searchPlaceHolder="Search..."
       renderCustomizedButtonChild={(selectedItem: any) => (
@@ -69,16 +62,10 @@ export function MobileInputSelect({ placeholder, options, onChange, onBlur, onSe
       )}
       dropdownStyle={{
         borderRadius: 5,
-        backgroundColor: '#fff',
-        borderWidth: 2,
-        borderColor: '#000',
-        position: 'absolute',
-        alignSelf: 'center',
-        height: Dimensions.get('screen').height / 3,
+        backgroundColor: '#f0f0f0',
       }}
-
       renderCustomizedRowChild={(item: any, _index: any, highlighted: any) => (
-        <View style={{ width: '100%', height: '100%', justifyContent: 'center', paddingHorizontal: 15, backgroundColor: '#fff' }}>
+        <View style={{ width: '100%', height: '100%', justifyContent: 'center', paddingHorizontal: 15, backgroundColor: '#f0f0f0' }}>
           <Text style={{ fontFamily: 'Nunito_700Bold', fontSize: 16, textTransform: 'capitalize', color: highlighted ? '#9747FF' : '#000' }}>{item}</Text>
         </View>
       )}
