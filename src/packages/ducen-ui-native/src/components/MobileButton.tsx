@@ -1,13 +1,14 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-export function MobileButton({ text, onPress, icon }: { text: string, onPress?: (...args: any[]) => void | Promise<void>, icon?: JSX.Element }) {
+export function MobileButton({ text, onPress, icon, style }: { text: string, onPress?: (...args: any[]) => void | Promise<void>, icon?: JSX.Element, style?: any}) {
   return (
     <View style={styles.buttonBox}>
       <Pressable style={({pressed}) => [
         styles.button,
+        style,
         {
-          top: pressed ? -2 : -3,
-          left: pressed ? -2 : -3,
+          backgroundColor: pressed ? '#fff' : '#9747FF',
+          borderColor: pressed ? '#9747FF' : '#fff',
         }
       ]} onPress={onPress}>
         <Text style={styles.buttonText}>
@@ -23,27 +24,26 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#9747FF',
     height: 40,
-    width: '100%',
+    width: '90%',
     margin: 'auto',
-    borderColor: '#000',
-    borderStyle: 'solid',
-    borderWidth: 2,
     borderRadius: 5,
     position: 'absolute',
-    top: -3,
-    left: -3,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    zIndex: 1
+    borderWidth: 2,
   },
   buttonBox: {
-    backgroundColor: '#000',
-    height: 43,
-    width: '90%',
+    backgroundColor: 'transparent',
+    height: 40,
+    width: '100%',
     position: 'relative',
     borderRadius: 5,
-    marginLeft: '5%',
+
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+
   },
   buttonText: {
     color: '#000',

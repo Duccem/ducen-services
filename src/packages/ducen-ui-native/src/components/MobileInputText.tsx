@@ -73,23 +73,18 @@ export function MobileInputText({ placeholder, secureTextEntry, onChange, onBlur
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: '#ffff',
+    backgroundColor: '#F0F0F0',
     height: 40,
     width: '100%',
     margin: 'auto',
-    borderColor: '#000',
-    borderStyle: 'solid',
-    borderWidth: 2,
     borderRadius: 5,
     position: 'absolute',
-    top: -3,
-    left: -3,
     fontFamily: 'Nunito_700Bold',
     paddingLeft: 15,
   },
   inputBox: {
     backgroundColor: '#000',
-    height: 43,
+    height: 40,
     width: '90%',
     position: 'relative',
     borderRadius: 5,
@@ -104,7 +99,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     top: -10,
     left: -10,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
   },
   prefix: {
     position: 'absolute',

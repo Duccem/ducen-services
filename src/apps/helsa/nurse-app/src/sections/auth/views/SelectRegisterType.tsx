@@ -1,17 +1,15 @@
+import { MobileButton } from "@ducen/ui-native";
 import { useNavigation } from "@react-navigation/native";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { Back } from "../../../modules/shared/components/Back";
 import { SelectCard } from "../../../modules/shared/components/SelectCard";
-import { Doctor } from "../../../modules/shared/components/icons/doctor";
-import { Heart } from "../../../modules/shared/components/icons/heart";
 import { useUserContext } from "../../../modules/user/state/UserContext";
 
 export function SelectRegisterType() {
-  const { setRegisterType } = useUserContext();
+  const { setRegisterType, userState: { registerType } } = useUserContext();
   const navigator = useNavigation();
   const selectAndGoToRegister = (type: 'DOCTOR' | 'PATIENT') => {
     setRegisterType(type);
-    navigator.navigate('register' as never);
   }
   return (
     <View style={styles.container}>
@@ -31,8 +29,31 @@ export function SelectRegisterType() {
         <View style={{ width: '100%', alignItems: 'flex-start', paddingLeft: '5%', marginBottom: 40 }}>
           <Text style={styles.subtitle}>Select the type of profile you are.</Text>
         </View>
-        <SelectCard placeholder="Medico" icon={<Doctor size={30}/>} onPress={() => selectAndGoToRegister('DOCTOR')}></SelectCard>
-        <SelectCard placeholder="Paciente" icon={<Heart size={30}/>} onPress={() => selectAndGoToRegister('PATIENT')}></SelectCard>
+        <SelectCard
+          selected={registerType === 'DOCTOR'}
+          placeholder="Medico"
+          icon={
+            <Image
+             height={30}
+             width={30}
+             style= {{width: 50, height: 50}}
+             source={require('../../../../assets/nutritionist.png')}/>
+          }
+          onPress={() => selectAndGoToRegister('DOCTOR')}
+        />
+        <SelectCard
+          selected={registerType === 'PATIENT'}
+          placeholder="Paciente"
+          icon={
+            <Image
+            height={30}
+            width={30}
+            style= {{width: 50, height: 50}}
+            source={require('../../../../assets/ophthalmology.png')}/>
+          }
+          onPress={() => selectAndGoToRegister('PATIENT')}
+        />
+        <MobileButton text="Start" style={{ borderRadius: 100, width: '35%' }} onPress={() => navigator.navigate('register' as never)}/>
       </View>
     </View>
   )

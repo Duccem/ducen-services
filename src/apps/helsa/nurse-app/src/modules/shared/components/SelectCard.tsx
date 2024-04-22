@@ -1,58 +1,78 @@
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { ReactNode } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { ReactNode, useEffect, useRef } from "react";
+import { Animated, Easing, Pressable, StyleSheet, Text } from "react-native";
 
-export function SelectCard({ placeholder, icon, onPress }: { placeholder: string, icon?: ReactNode, onPress?: () => void }) {
+export function SelectCard({ placeholder, icon, onPress, selected }: { placeholder: string, icon?: ReactNode, onPress?: () => void, selected?: boolean}) {
+  const animatedValue = useRef(new Animated.Value(0));
+  useEffect(() => {
+    if(selected) {
+      Animated.timing(animatedValue?.current, {
+        toValue: 1,
+        duration: 600,
+        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
+        useNativeDriver: false,
+      }).start();
+    }else {
+      Animated.timing(animatedValue?.current, {
+        toValue: 0,
+        duration: 600,
+        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [selected])
   return (
-    <View style={styles.inputBox}>
-      <Pressable style={({pressed})=> [
-        styles.input,
-        {
-          top: pressed ? -1 : -3,
-          left: pressed ? -1 : -3,
-        }
-      ]} onPress={onPress}>
-        {icon}
-        <Text style={styles.label}>{placeholder}</Text>
-        <FontAwesomeIcon icon={faAngleRight} color={'#000'} size={30}/>
-      </Pressable>
-    </View>
+    <Animated.View style={[
+      styles.inputBox,
+      {
+        borderColor: selected ? '#9747FF' : '#fff',
+        backgroundColor: animatedValue?.current?.interpolate({
+          inputRange: [0, 1],
+          outputRange: ['#fff', '#9747FF'],
+          extrapolate: 'clamp',
+        }),
+      }
+    ]}>
+      <Pressable style={styles.input} onPress={onPress}>
+      {icon}
+      <Text style={styles.label}>{placeholder}</Text>
+    </Pressable>
+    </Animated.View>
+
   )
 }
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: '#ffff',
-    height: 50,
-    width: '100%',
+    backgroundColor: 'transparent',
+    height: 140,
+    width: 140,
     margin: 'auto',
-    borderColor: '#000',
+    fontFamily: 'Nunito_700Bold',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#9747FF',
     borderStyle: 'solid',
     borderWidth: 2,
-    borderRadius: 5,
-    position: 'absolute',
-    top: -3,
-    left: -3,
-    fontFamily: 'Nunito_700Bold',
-    paddingHorizontal: 15,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
+    borderRadius: 100,
   },
   inputBox: {
-    backgroundColor: '#000',
-    height: 53,
-    width: '90%',
+    backgroundColor: '#fff',
+    height: 140,
+    width: 140,
     position: 'relative',
-    borderRadius: 5,
-    marginLeft: '5%',
+    borderColor: '#9747FF',
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderRadius: 100,
+    marginHorizontal: 10,
+    marginVertical: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   label: {
-
     fontFamily: 'Nunito_700Bold',
     fontSize: 16,
     zIndex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
   },
 });
