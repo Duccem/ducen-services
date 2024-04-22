@@ -1,5 +1,5 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { getEnv } from './config/env.config';
@@ -9,6 +9,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { UserModule } from './modules/user/user.module';
 import { GraphQLErrorHandling } from './utils/ErrorHandlers/GQLErrorHandler';
 import { JWTStrategy } from './utils/Strategies/JWTStrategy';
+import { LoggerMiddleware } from './utils/middlewares/LoggerMiddleware';
 
 @Module({
   imports: [
@@ -30,4 +31,8 @@ import { JWTStrategy } from './utils/Strategies/JWTStrategy';
   ],
   providers: [JWTStrategy],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}

@@ -1,10 +1,10 @@
 import { ApolloClient, NormalizedCacheObject, gql } from '@apollo/client';
-import { ApolloRepository } from '@ducen/adapters';
 import { Nullable } from '@ducen/core';
-import { LOGIN } from './login';
-import { REGISTER } from './register';
+import { ApolloRepository } from '@ducen/ports-client';
 import { User } from '../../../domain/User';
 import { UserClientRepository } from '../../../domain/UserRepository';
+import { LOGIN } from './login';
+import { REGISTER } from './register';
 
 export class ApolloUserRepository extends ApolloRepository<User> implements UserClientRepository {
   constructor(client: ApolloClient<NormalizedCacheObject>) {

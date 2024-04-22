@@ -7,7 +7,7 @@ import { RabbitMQConsumer } from '../../src/Events/RabbitMQ/RabbitMQConsumer';
 import { RabbitMQEventBus } from '../../src/Events/RabbitMQ/RabbitMQEventBus';
 import { RabbitMQFormatter } from '../../src/Events/RabbitMQ/RabbitMQFormatter';
 import { ConsoleLogger } from '../../src/Logging/ConsoleLogger';
-import { MongoArranger } from '../mongo/MongoArranger';
+import { MongoArranger } from '../Persistence/mongo/MongoArranger';
 import { DomainEventSubscriberDummy } from './__mocks__/DomainEventSubscriberDummy';
 import { DomainEventDummyMother } from './__mother__/DomainEventDummyMother';
 import { DomainEventFailoverPublisherMother } from './__mother__/DomainEventFailoverPublisherMother';
@@ -113,7 +113,7 @@ describe('RabbitMQEventBus test', () => {
         deserializer,
         deadLetterQueue,
         exchange,
-        3
+        3,
       );
       await rabbitConnection.consume(deadLetterQueue, consumer.onMessage.bind(consumer));
 

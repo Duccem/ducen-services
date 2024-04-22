@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { MongoConnection } from '../../src/Persistence/Mongo/MongoConnection';
+import { MongoConnection } from '../../../src/Persistence/Mongo/MongoConnection';
 import { MongoConnectionMother } from './MongoConnectionMother';
 
 describe('MongoConnection', () => {

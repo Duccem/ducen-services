@@ -2,9 +2,9 @@ import { useCities } from '@/modules/shared/hooks/useCities';
 import { useConfData } from '@/modules/shared/hooks/useConfData';
 import { useCountries } from '@/modules/shared/hooks/useCountries';
 import { useUserContext } from '@/modules/user/state/UserContext';
-import { User } from '@helsa/modules';
 import { Primitives } from '@ducen/core';
-import { Button, CheckInput, DateInput, Form, PhoneInput, SelectInput, TextInput, useForm } from '@ducen/ui-web';
+import { AnimatedView, Button, CheckInput, DateInput, Form, PhoneInput, SelectInput, TextInput, useForm } from '@ducen/ui-web';
+import { User } from '@helsa/modules';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RegisterForm } from '../../forms/RegisterForm';
@@ -64,7 +64,7 @@ export function UserRegister() {
   }
   return (
     <>
-      <div className={styles.register__page}>
+      <AnimatedView className={styles.register__page}>
         <div className={styles.register__container}>
           <div className={styles.register__header}>
             <p className={styles.register__header__title}>Member information</p>
@@ -108,7 +108,7 @@ export function UserRegister() {
             </Button>
           </Form>
         </div>
-      </div>
+      </AnimatedView>
     </>
   );
 }

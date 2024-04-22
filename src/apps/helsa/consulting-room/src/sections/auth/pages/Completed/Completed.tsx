@@ -1,3 +1,4 @@
+import { AnimatedView } from "@ducen/ui-web";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { OkButton } from "../../components/OkButton/OkButton";
@@ -6,7 +7,7 @@ import styles from './styles.module.css';
 export function Completed() {
   return (
     <>
-      <div className={styles.completed__page}>
+      <AnimatedView className={styles.completed__page}>
         <div className={styles.completed__container}>
           <div className={styles.completed__box}>
             <div className={styles.completed__icon}>
@@ -21,7 +22,7 @@ export function Completed() {
             <OkButton route={'/auth/login'}></OkButton>
           </div>
         </div>
-      </div>
+      </AnimatedView>
     </>
   )
 }

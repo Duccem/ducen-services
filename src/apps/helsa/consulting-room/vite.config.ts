@@ -1,5 +1,6 @@
 /// <reference types="vitest" />
 import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
@@ -19,6 +20,19 @@ export default defineConfig({
   define: {
     process: {
       env: {},
+    },
+  },
+  optimizeDeps: {
+    exclude: ['@napi-rs', 'mongodb'],
+  },
+  resolve: {
+    alias: {
+      jsonwebtoken: resolve(__dirname, './empty.js'),
+    },
+  },
+  build: {
+    rollupOptions: {
+      external: ['@napi-rs', 'mongodb'],
     },
   },
 });

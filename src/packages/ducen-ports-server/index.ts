@@ -12,8 +12,6 @@ export * from './src/Events/RabbitMQ/RabbitMQFormatter';
 export * from './src/Logging/ConsoleLogger';
 export * from './src/Logging/Format';
 export * from './src/Logging/NetTracer';
-export * from './src/Persistence/Apollo/ApolloCriteriaConverter';
-export * from './src/Persistence/Apollo/ApolloRepository';
 export * from './src/Persistence/Mongo/MongoConnection';
 export * from './src/Persistence/Mongo/MongoCriteriaConverter';
 export * from './src/Persistence/Mongo/MongoRepository';

@@ -1,4 +1,4 @@
-import { ConsoleLogger } from '@ducen/adapters';
+import { ConsoleLogger } from '@ducen/ports-server';
 import { config } from 'dotenv';
 import { resolve } from 'path';
 

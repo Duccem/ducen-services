@@ -1,3 +1,4 @@
+import { Logger } from '@ducen/core';
 import {
   CommandHandlers,
   DomainEventFailOverPublisher,
@@ -7,8 +8,7 @@ import {
   QueryHandlers,
   RabbitMQConnection,
   RabbitMQEventBus,
-} from '@ducen/adapters';
-import { Logger } from '@ducen/core';
+} from '@ducen/ports-server';
 import { Provider } from '@nestjs/common';
 
 export const busesProvider: Provider[] = [

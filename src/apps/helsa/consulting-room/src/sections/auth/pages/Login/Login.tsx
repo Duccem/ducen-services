@@ -1,7 +1,7 @@
 import { useErrorContext } from '@/modules/shared/ErrorContext';
 import { useUserContext } from '@/modules/user/state/UserContext';
 import { LoginForm } from '@/sections/auth/forms/LoginForm';
-import { Button, Facebook, Form, Google, LinkedinIcon, PasswordInput, SocialButton, TextInput, useForm } from '@ducen/ui-web';
+import { AnimatedView, Button, Facebook, Form, Google, LinkedinIcon, PasswordInput, SocialButton, TextInput, useForm } from '@ducen/ui-web';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './styles.module.css';
 export function Login() {
@@ -27,7 +27,7 @@ export function Login() {
   }
   return (
     <>
-      <div className={styles.login__page}>
+      <AnimatedView className={styles.login__page}>
         <div className={styles.login__container}>
           <div className={styles.login__header}>
             <p className={styles.login__header__title}>Hey, Hello!</p>
@@ -68,7 +68,7 @@ export function Login() {
             </div>
           </div>
         </div>
-      </div>
+      </AnimatedView>
     </>
   );
 }

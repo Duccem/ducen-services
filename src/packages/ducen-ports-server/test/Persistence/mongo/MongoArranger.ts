@@ -1,5 +1,4 @@
 import { Arranger } from '@ducen/core';
-import { MongoClient } from 'mongodb';
 import { MongoConnection } from '../../../src/Persistence/Mongo/MongoConnection';
 
 export class MongoArranger extends Arranger {
@@ -26,7 +25,7 @@ export class MongoArranger extends Arranger {
     return collections.map((collection) => collection.name);
   }
 
-  protected client(): MongoClient {
+  protected client() {
     return this._client.client;
   }
 

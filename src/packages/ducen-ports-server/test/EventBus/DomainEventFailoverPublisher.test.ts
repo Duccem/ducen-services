@@ -1,7 +1,6 @@
-
 import { DomainEventFailOverPublisher } from '../../src/Events/DomainEventFailOverPublisher';
 import { MongoConnection } from '../../src/Persistence/Mongo/MongoConnection';
-import { MongoArranger } from '../mongo/MongoArranger';
+import { MongoArranger } from '../Persistence/mongo/MongoArranger';
 
 import { DomainEventDeserializerMother } from './__mother__/DomainEventDeserializerMother';
 import { DomainEventDummyMother } from './__mother__/DomainEventDummyMother';

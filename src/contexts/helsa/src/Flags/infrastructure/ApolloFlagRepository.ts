@@ -1,5 +1,5 @@
 import { ApolloClient, NormalizedCacheObject, gql } from '@apollo/client';
-import { ApolloRepository } from '@ducen/adapters';
+import { ApolloRepository } from '@ducen/ports-client';
 import { Flag } from '../domain/Flag';
 import { FlagClientRepository } from '../domain/FlagRepository';
 

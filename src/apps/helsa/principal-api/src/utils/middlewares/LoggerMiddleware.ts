@@ -1,8 +1,9 @@
-import { NetTracer } from '@ducen/adapters';
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Logger } from '@ducen/core';
+import { NetTracer } from '@ducen/ports-server';
 import { Inject, Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
-import onHeaders from 'on-headers';
+const onHeaders = require('on-headers');
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
   constructor(@Inject('LOGGER_SERVICE') private logger: Logger) {}

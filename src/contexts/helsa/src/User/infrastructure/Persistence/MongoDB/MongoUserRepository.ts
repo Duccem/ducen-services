@@ -1,5 +1,5 @@
-import { MongoConnection, MongoRepository } from '@ducen/adapters';
 import { Criteria, Logger, Primitives, Uuid } from '@ducen/core';
+import { MongoConnection, MongoRepository } from '@ducen/ports-server';
 import { User } from '../../../domain/User';
 import { UserRepository } from '../../../domain/UserRepository';
 

@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "npm run build:back -w @ducen/core && npm run build -w @ducen/adapters && npm run build:back -w @helsa/modules && nest build",
+    "build": "npm run build:back -w @ducen/core && npm run build -w @ducen/ports-server && npm run build:back -w @ducen/ports-client && npm run build:back -w @helsa/modules && nest build",
     "start": "cross-env NODE_ENV=dev SERVICE=hospital nest start",
     "start:dev": "cross-env NODE_ENV=dev SERVICE=hospital nest start --watch",
     "start:local": "cross-env NODE_ENV=local SERVICE=hospital nest start --watch",
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@ducen/core": "^0.0.0",
-    "@ducen/adapters": "^0.0.0",
+    "@ducen/ports-server": "^0.0.0",
     "@helsa/modules": "^0.0.0",
     "@nestjs/apollo": "^12.1.0",
     "@nestjs/common": "^10.0.0",

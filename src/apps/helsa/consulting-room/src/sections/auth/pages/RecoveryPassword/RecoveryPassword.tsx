@@ -1,5 +1,5 @@
 import { useUserContext } from '@/modules/user/state/UserContext';
-import { Button, Form, TextInput, useForm } from '@ducen/ui-web';
+import { AnimatedView, Button, Form, TextInput, useForm } from '@ducen/ui-web';
 import { useNavigate } from 'react-router-dom';
 import { EmailForm } from '../../forms/EmailForm';
 import styles from './styles.module.css';
@@ -18,7 +18,7 @@ export function RecoveryPassword() {
   }
   return (
     <>
-      <div className={styles.recovery__page}>
+      <AnimatedView className={styles.recovery__page}>
         <div className={styles.recovery__header}>
           <p className={styles.recovery__header__title}>Introduce your email</p>
         </div>
@@ -26,7 +26,7 @@ export function RecoveryPassword() {
           <TextInput placeholder="Your email" {...register('email')} />
           <Button type="submit" submitting={submitting}>Send email</Button>
         </Form>
-      </div>
+      </AnimatedView>
     </>
   );
 }

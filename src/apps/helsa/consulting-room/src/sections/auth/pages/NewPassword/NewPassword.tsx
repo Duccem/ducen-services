@@ -1,5 +1,5 @@
 import { useUserContext } from '@/modules/user/state/UserContext';
-import { Button, Form, PasswordInput, useForm } from '@ducen/ui-web';
+import { AnimatedView, Button, Form, PasswordInput, useForm } from '@ducen/ui-web';
 import { useSearchParams } from 'react-router-dom';
 import { NewPasswordForm } from '../../forms/NewPassword';
 import styles from './styles.module.css';
@@ -24,7 +24,7 @@ export function NewPassword() {
   }
   return (
     <>
-      <div className={styles.new__page}>
+      <AnimatedView className={styles.new__page}>
         <div className={styles.new__container}>
           <div className={styles.new__header}>
             <p className={styles.new__header__title}>New password access</p>
@@ -39,7 +39,7 @@ export function NewPassword() {
             </Button>
           </Form>
         </div>
-      </div>
+      </AnimatedView>
     </>
   );
 }

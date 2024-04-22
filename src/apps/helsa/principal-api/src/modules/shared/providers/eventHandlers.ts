@@ -1,5 +1,5 @@
-import { DomainEventRegisterObservers } from '@ducen/adapters';
 import { DomainEventSubscriber } from '@ducen/core';
+import { DomainEventRegisterObservers } from '@ducen/ports-server';
 import { SendWelcomeEmailSubscriber } from '@helsa/modules';
 import { Provider } from '@nestjs/common';
 

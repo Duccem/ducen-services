@@ -1,4 +1,4 @@
-import { ConsoleLogger, format } from '@ducen/adapters';
+import { ConsoleLogger, format } from '@ducen/ports-server';
 import { Provider } from '@nestjs/common';
 import winston from 'winston';
 import LokiTransport from 'winston-loki';

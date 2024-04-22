@@ -1,5 +1,5 @@
 import { useUserContext } from '@/modules/user/state/UserContext';
-import { Button, Form, TextInput, useForm } from '@ducen/ui-web';
+import { AnimatedView, Button, Form, TextInput, useForm } from '@ducen/ui-web';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CredentialsForm } from '../../forms/CredentialsForm';
@@ -35,7 +35,7 @@ export function CreateCredentials() {
   }
   return (
     <>
-      <div className={styles.credentials__page}>
+      <AnimatedView className={styles.credentials__page}>
         <div className={styles.credentials__container}>
           <div className={styles.credentials__header}>
             <p className={styles.credentials__header__title}>Access Credentials</p>
@@ -49,7 +49,7 @@ export function CreateCredentials() {
             </Button>
           </Form>
         </div>
-      </div>
+      </AnimatedView>
     </>
   );
 }
