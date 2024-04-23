@@ -170,9 +170,7 @@ export const useMobileForm = (initialForm: InitialFormState = {}) => {
 
   const validate = (name: string, value: Value) => {
     let error: Error = null;
-    console.log(formState.fields);
     const validators = formState.fields[name].validators;
-    console.log(validators);
     for (const validator of Object.keys(validators)) {
       error = validators[validator](value, formState.fields);
       if (error) {

@@ -34,7 +34,7 @@ export function Login() {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-            <Text>¿Olvidaste tu contraseña?</Text>
+            <Text style={styles.signLink} onPress={() => navigation.navigate('recovery-password' as never)}>¿Olvidaste tu contraseña?</Text>
             <Text style={styles.signLink} onPress={() => navigation.navigate('select-type' as never)}>SignUp for Free</Text>
           </View>
         </View>

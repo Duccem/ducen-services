@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   inputBox: {
-    backgroundColor: '#000',
+    backgroundColor: 'transparent',
     height: 40,
     width: '90%',
     position: 'relative',
