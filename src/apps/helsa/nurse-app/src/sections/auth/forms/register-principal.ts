@@ -28,4 +28,10 @@ export const formRegisterPrincipal = {
   gender: {
     value: '',
   },
+  terms: {
+    value: false,
+    validators: {
+      required: (v: boolean) => required(v),
+    },
+  },
 };

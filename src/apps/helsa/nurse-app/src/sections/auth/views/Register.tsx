@@ -1,4 +1,4 @@
-import { MobileButton, MobileInputDate, MobileInputSelect, MobileInputText, useMobileForm } from "@ducen/ui-native"
+import { MobileButton, MobileInputCheck, MobileInputDate, MobileInputSelect, MobileInputText, useMobileForm } from "@ducen/ui-native"
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { useNavigation } from "@react-navigation/native"
@@ -16,6 +16,7 @@ export function Register() {
 
   const send = () => {
     handleSubmit((values) => {
+      console.log(values)
       setPartialUser({
         name: {
           firstName: values.firstName,
@@ -23,7 +24,7 @@ export function Register() {
         },
         email: values.email,
         birthDate: values.birthDate,
-        gender: values.gender
+        gender: values.gender,
       })
       navigation.navigate('register-contact' as never)
     }, errors => console.log(errors))
@@ -52,6 +53,7 @@ export function Register() {
           <MobileInputText placeholder={'Last name'} required {...registerMobile('lastName')}/>
           <MobileInputDate placeholder="Birth Date" required mode="date" {...registerMobile('birthDate')}/>
           <MobileInputSelect placeholder="Gender" options={genders} {...registerMobile('gender')}/>
+          <MobileInputCheck placeholder='Service terms' {...registerMobile('terms')} />
           <MobileButton text='Siguiente' icon={<FontAwesomeIcon icon={faAngleRight} color={'#000'} size={30}/>} onPress={send}></MobileButton>
         </View>
       </View>
