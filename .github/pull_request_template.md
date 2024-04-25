@@ -1,3 +1,7 @@
+## Context
+<!-- **Hospital**
+**Core**
+**Shared** -->
 ## Type of Change ♻️ 
 
 - [ ] Bug Fix 🐛
@@ -16,14 +20,6 @@
 ### How test this? 🟦
 
 ## Related tickets and issues ✅ 
-
-
-## Scope ⬇️ 
-
-- [ ] Shared
-- [ ] Hospital
-- [ ] Habits
-- [ ] BackOffice
 
 ## Added/updated tests? 🧪 
 
