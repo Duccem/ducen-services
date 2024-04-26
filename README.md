@@ -13,7 +13,6 @@ Author: José Véliz [(Duccem)](https://github.com/Duccem)
   - [Installation](#installation)
   - [Commands](#commands)
     - [Example](#example)
-  - [Actions](#actions)
   - [Environments](#environments)
   - [Architecture](#architecture)
   - [Other links](#other-links)
@@ -22,8 +21,9 @@ Author: José Véliz [(Duccem)](https://github.com/Duccem)
 
 ## About
 
-This mono repository contains all of source code related to the project "Ducen", a project oriented to the team management and the career path,
-each module of the repository represents a part of the principal team and the objective of that team.
+Monorepo to all of Backend apps of Ducen projects based on Typescript / NestJS and ExpressJS, built using Domain-Driven Design Architecture. The main objective of this project is to provide a modular and scalable structure for the development of microservices and the communication between them. By adopting a monolithic approach, where multiple applications share common code we aim to facilitate maintenance, reusability and software evolution over time.
+
+The main services are GraphQL APIs that converge in one federated graph with one single entry point, the Principal API Gateway that unify the schemas and has the responsibility of be the backend for frontend service.
 
 ## Installation
 
@@ -40,22 +40,14 @@ the commands are compounds of elements that determinate what are you making  ```
 
 ### Example
 
-```$ npm run start:local -w api```
-
-## Actions
-
-- start
-- build
-- test
-- cov
-- e2e
+```$ npm run start:local -w @ducen-services/principal-api```
 
 ## Environments
 
-- Local
-- Docker
-- Dev
-- Prod
+- Local - Local Machine
+- Test - Docker Containers
+- Dev - Cloud Dev services
+- Prod - Cloud main services
 
 ## Architecture
 
@@ -65,20 +57,14 @@ this architectures allow to some apps share code important to the domain of Duce
 The structure folder follow the DDD and Hexagonal architecture philosophy (Domain, Services/Application, Infrastructure/Adaptors).
 
 - [apps/]() Apps of the different teams
-  - [helsa/]() core team
-    - [consulting-room/]() React app to doctors
+  - [hospital/]() core team
     - [principal-api/]() Principal WEB API, NestJS app
-    - [nurse-app/]() Expo app of mobile to the patients
 - [contexts/]() 
-  - [helsa/]() The hospital base code
+  - [hospital/]() The hospital base code
   - [shared/]() Shared code between teams
-    - [core/]() Core entities and modules code
-    - [ui/]() UI library of all products of the management
-      - [web/]() React web library
-      - [mobile/]() React native components library
-  - [packages/]()
-    - [eslint-config-duccem/]() Common eslint config files
-    - [tsconfig-ducen]() Common ts config files
+  - [ui/]() UI library of all products of the management
+    - [ui-web/]() React web library
+    - [ui-mobile/]() React native components library
 
 ## Other links
 
