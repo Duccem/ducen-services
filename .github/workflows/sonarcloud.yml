@@ -4,12 +4,16 @@ on:
   pull_request:
     branches: [main]
     types: [opened,synchronize,reopened]
+  workflow_dispatch:
 jobs:
   analysis:
     runs-on: ubuntu-22.04
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: SonarCloud Scan 📊
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ github.token }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_CORE }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
