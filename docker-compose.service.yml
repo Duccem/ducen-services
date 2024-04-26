@@ -1,23 +1,6 @@
 version: "3.8"
 
 services:
-  mongodb:
-    image: mongo
-    ports:
-      - "27018:27017"
-  redis:
-    image: redis
-    logging:
-      driver: none
-    ports:
-      - "6378:6379"
-  rabbitmq:
-    image: rabbitmq:management
-    ports:
-      - "5673:5672"
-      - "15673:15672"
-    logging:
-      driver: none
   grafana:
     image: grafana/grafana:latest
     ports:

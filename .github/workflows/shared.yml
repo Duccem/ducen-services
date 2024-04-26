@@ -1,15 +1,15 @@
-name: Helsa core CI
+name: Shared CI
 
 on:
   push:
     branches: [main]
     paths:
-      - "src/contexts/helsa/**"
+      - "src/contexts/shared/shared/**"
   pull_request:
     branches: [main]
     types: [opened,synchronize,reopened]
     paths:
-      - "src/contexts/hospital/**"
+      - "src/contexts/shared/shared/**"
   workflow_dispatch:
 jobs:
   avoid_reduncy:
@@ -28,16 +28,16 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Node.js 📦
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           cache: 'npm'
           node-version: '20.10.0'
       - name: Install dependencies 📦
         run: npm ci --loglevel=error
       - name: Lint 🖌️
-        run: npm run lint -w @ducen-services/hospital
+        run: npm run lint -w @ducen-services/shared
       - name: Build 🏗️
-        run: npm run build -w @ducen-services/hospital
+        run: npm run build -w @ducen-services/shared
       - name: Test 🧪
-        run: docker-compose run --rm test-helsa-modules
+        run: docker-compose run --rm shared
 

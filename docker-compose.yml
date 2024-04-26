@@ -1,12 +1,9 @@
 version: "3.8"
-include:
-  - path: ./docker-compose.service.yml
-
 services:
-  test-ducen-adapters:
+  shared:
     build:
       context: .
-      dockerfile: ./src/contexts/shared/adapters-server/Dockerfile
+      dockerfile: ./src/contexts/shared/Dockerfile
     environment:
       - MONGO_DB_URL=mongodb://mongodb:27017/test
       - RABBIT_MQ_URL=amqp://rabbitmq:5672
@@ -15,20 +12,20 @@ services:
       - mongodb
       - redis
       - rabbitmq
-    command: npm run test -w @ducen/adapters
-  test-helsa-modules:
+    command: npm run test -w @ducen-services/shared
+  hospital:
     build:
       context: .
-      dockerfile: ./src/contexts/helsa/Dockerfile
+      dockerfile: ./src/contexts/hospital/Dockerfile
     command: npm run test -w @ducen-services/hospital
     environment:
       - MONGO_DB_URL=mongodb://mongodb:27017/test
     depends_on:
       - mongodb
-  helsa-principal-api:
+  principal-api:
     build:
       context: .
-      dockerfile: ./src/apps/helsa/principal-api/Dockerfile
+      dockerfile: ./src/apps/hospital/principal-api/Dockerfile
     ports:
       - "3001:3001"
     depends_on:
@@ -36,10 +33,20 @@ services:
       - redis
       - rabbitmq
     command: npm run start:test -w @helsa/principal-api
-  helsa-consulting-room:
-    build:
-      context: .
-      dockerfile: ./src/apps/helsa/consulting-room/Dockerfile
+  mongodb:
+    image: mongo
     ports:
-      - "3002:3002"
-    command: npm run dev -w @helsa/consulting-room
+      - "27018:27017"
+  redis:
+    image: redis
+    logging:
+      driver: none
+    ports:
+      - "6378:6379"
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    logging:
+      driver: none

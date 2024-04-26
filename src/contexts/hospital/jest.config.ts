@@ -17,5 +17,7 @@ const config: Config.InitialOptions = {
   coverageReporters: ['text-summary'],
   testPathIgnorePatterns: ['node_modules', 'dist'],
   coveragePathIgnorePatterns: ['node_modules', 'dist', 'test'],
+  transformIgnorePatterns: ['node_modules', 'dist'],
+  modulePathIgnorePatterns: ['node_modules', 'dist'],
 };
 export default config;
