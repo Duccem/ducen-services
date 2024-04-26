@@ -1,9 +1,7 @@
-[![Core CI](https://github.com/Duccem/ducen/actions/workflows/shared-core.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/shared-core.yml)
-[![Adapters Server CI](https://github.com/Duccem/ducen/actions/workflows/shared-adapters-server.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/shared-adapters-server.yml)
-[![Helsa CI](https://github.com/Duccem/ducen/actions/workflows/helsa-modules.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/helsa-modules.yml)
-[![Helsa - API CI](https://github.com/Duccem/ducen/actions/workflows/helsa-principal-api.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/helsa-principal-api.yml)
-[![Helsa - Consulting room CI](https://github.com/Duccem/ducen/actions/workflows/helsa-consulting-room.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/helsa-consulting-room.yml)
-[![Sonarqube Quality Gate](https://github.com/Duccem/ducen/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/sonarcloud.yml)
+[![Shared CI](https://github.com/Duccem/ducen-services/actions/workflows/shared.yml/badge.svg)](https://github.com/Duccem/ducen-services/actions/workflows/shared.yml)
+[![Hospital CI](https://github.com/Duccem/ducen-services/actions/workflows/hospital.yml/badge.svg)](https://github.com/Duccem/ducen-services/actions/workflows/hospital.yml)
+[![Principal API CI](https://github.com/Duccem/ducen-services/actions/workflows/principal-api.yml/badge.svg)](https://github.com/Duccem/ducen-services/actions/workflows/principal-api.yml)
+[![Sonarqube Quality Gate](https://github.com/Duccem/ducen-services/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/Duccem/ducen/actions/workflows/sonarcloud.yml)
 # Ducen
 
 Version: 1.1.0
