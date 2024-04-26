@@ -20,7 +20,7 @@ services:
     build:
       context: .
       dockerfile: ./src/contexts/helsa/Dockerfile
-    command: npm run test -w @helsa/modules
+    command: npm run test -w @ducen-services/hospital
     environment:
       - MONGO_DB_URL=mongodb://mongodb:27017/test
     depends_on:

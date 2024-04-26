@@ -35,9 +35,9 @@ jobs:
         run: npm run lint -w @helsa/principal-api
       - name: Build 🏗️
         run: |
-            npm run build -w @ducen/core
+            npm run build -w @ducen-services/shared
             npm run build -w @ducen/server
-            npm run build -w @helsa/modules
+            npm run build -w @ducen-services/hospital
             npm run build -w @helsa/principal-api
       - name: Unit tests 🧪
         run: docker-compose run --rm test-helsa-principal-api
