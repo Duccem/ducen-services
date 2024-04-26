@@ -32,7 +32,7 @@ services:
       - mongodb
       - redis
       - rabbitmq
-    command: npm run start:test -w @helsa/principal-api
+    command: npm run start:test -w @ducen-services/principal-api
   mongodb:
     image: mongo
     ports:
