@@ -2,6 +2,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+import { OpenTelemetryModule } from 'nestjs-otel';
 import { getEnv } from './config/env.config';
 import { FlagModule } from './modules/flag/flag.module';
 import { confFiles } from './modules/shared/providers/confIgurations.provider';
@@ -24,6 +25,14 @@ import { LoggerMiddleware } from './utils/middlewares/LoggerMiddleware';
       formatError: GraphQLErrorHandling,
       useGlobalPrefix: true,
       csrfPrevention: false,
+    }),
+    OpenTelemetryModule.forRoot({
+      metrics: {
+        hostMetrics: true,
+        apiMetrics: {
+          enable: true,
+        },
+      },
     }),
     SharedModule,
     UserModule,

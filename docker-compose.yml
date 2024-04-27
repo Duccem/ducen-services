@@ -1,4 +1,7 @@
 version: "3.8"
+include:
+  - path: docker-compose.service.yml
+
 services:
   shared:
     build:
@@ -32,6 +35,7 @@ services:
       - mongodb
       - redis
       - rabbitmq
+      - grafana
     command: npm run start:test -w @ducen-services/principal-api
   mongodb:
     image: mongo

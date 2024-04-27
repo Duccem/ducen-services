@@ -3,8 +3,9 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { graphqlUploadExpress } from 'graphql-upload-ts';
 import { AppModule } from './app.module';
-
+import nodeSdk from './tracing';
 async function bootstrap() {
+  await nodeSdk.start();
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     bufferLogs: true,
   });

@@ -11,6 +11,7 @@ export * from './Events/RabbitMQ/RabbitMQEventBus';
 export * from './Events/RabbitMQ/RabbitMQFormatter';
 export * from './Logging/ConsoleLogger';
 export * from './Logging/Format';
+export * from './Logging/LokiLogger';
 export * from './Logging/NetTracer';
 export * from './Persistence/Mongo/MongoArranger';
 export * from './Persistence/Mongo/MongoConnection';

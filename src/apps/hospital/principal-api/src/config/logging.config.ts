@@ -5,6 +5,6 @@ export default registerAs('logging', () => {
     host: process.env.LOGGING_HOST,
     env: process.env.NODE_ENV,
     path: process.env.LOGGING_PATH,
-    serviceName: process.env.SERVICE_NAME,
+    serviceName: process.env.SERVICE,
   };
 });

@@ -1,5 +1,6 @@
 import { Provider } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import loggingConfig from 'src/config/logging.config';
 import authConfig from '../../../config/auth.config';
 import cacheConfig from '../../../config/cache.config';
 import dbConfig from '../../../config/db.config';
@@ -22,6 +23,7 @@ export const confFiles = [
   paymentConfig,
   queueConfig,
   serverConfig,
+  loggingConfig,
 ];
 
 export const configurations: Provider[] = [
