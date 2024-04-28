@@ -1,0 +1,33 @@
+POST http://localhost:3001/api/graphql
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+mutation UserRegister($uuid: String!) {
+    userRegister(
+        user: {
+            id: $uuid
+            name: { firstName: null, lastName: null }
+            gender: null
+            password: null
+            email: null
+            birthDate: null
+            photo: null
+            phoneNumber: null
+            address: {
+                country: null
+                city: null
+                street: null
+                zipCode: null
+                coordinates: { longitude: null, latitude: null }
+            }
+            role: null
+            createdAt: null
+            updatedAt: null
+            configuration: { timezone: null, lang: null, theme: null }
+        }
+    )
+}
+
+{
+    "uuid": "{{$guid}}"
+}

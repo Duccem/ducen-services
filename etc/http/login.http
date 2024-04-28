@@ -1,0 +1,43 @@
+POST http://localhost:3001/api/graphql
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+query Login($identifier: String!, $password: String!) {
+    login(identifier: $identifier, password: $password) {
+        user {
+            id
+            email
+            name {
+                firstName
+                lastName
+            }
+            phoneNumber
+            birthDate
+            gender
+            photo
+            address {
+                city
+                coordinates {
+                    latitude
+                    longitude
+                }
+                country
+                street
+                zipCode
+            }
+            configuration {
+                lang
+                theme
+                timezone
+            }
+            createdAt
+            updatedAt
+        },
+        token
+    }
+}
+
+{
+  "identifier": "",
+  "password": ""
+}
