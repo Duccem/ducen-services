@@ -21,7 +21,7 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
   }
 
   async listUsersByCriteria(criteria?: Criteria): Promise<User[]> {
-    const users = await this.searchByCriteria(criteria);
-    return users.map((user) => User.fromPrimitives(user));
+    const result = await this.searchByCriteria(criteria);
+    return result.map(User.fromPrimitives);
   }
 }

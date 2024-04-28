@@ -25,13 +25,8 @@ export abstract class MongoRepository<T extends Aggregate | Entity> {
   abstract index(): Promise<void>;
 
   protected async searchByCriteria(criteria: Criteria): Promise<Primitives<T>[]> {
-    try {
-      const { filter, limit, skip, sort } = this.converter.criteria(criteria);
-      return await this.collection.find<Primitives<T>>(filter).sort(sort).skip(skip).limit(limit).toArray();
-    } catch (error) {
-      this.logger.error(`Error searching by criteria: ${error.message}`);
-      throw new InternalError(`Error searching by criteria: ${error.message}`);
-    }
+    const { filter, limit, skip, sort } = this.converter.criteria(criteria);
+    return await this.collection.find<Primitives<T>>(filter).sort(sort).skip(skip).limit(limit).toArray();
   }
 
   protected async searchByText(text: string): Promise<Primitives<T>[]> {

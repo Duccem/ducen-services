@@ -1,40 +1,73 @@
-export type Either<E, R> = Left<E> | Right<R>;
+import { Nullable } from './Types/Nullable';
 
-export class Left<T> {
-  readonly error: T;
-  constructor(error: T) {
-    this.error = error;
+type Left<L> = { kind: 'Left'; value: L };
+type Right<R> = { kind: 'Right'; value: R };
+type EitherValue<L, R> = Left<L> | Right<R>;
+
+export class Either<L, R> {
+  private constructor(private readonly value: EitherValue<L, R>) {}
+
+  isLeft(): boolean {
+    return this.value.kind === 'Left';
   }
 
-  isLeft(): this is Left<T> {
-    return true;
+  isRight(): boolean {
+    return this.value.kind === 'Right';
   }
 
-  isRight(): this is Right<never> {
-    return false;
+  map<T>(leftFn: (value: L) => T, rightFn: (value: R) => T): T {
+    switch (this.value.kind) {
+      case 'Left':
+        return leftFn(this.value.value);
+      case 'Right':
+        return rightFn(this.value.value);
+    }
   }
 
-  static create<U>(error: U): Left<U> {
-    return new Left(error);
-  }
-}
-
-export class Right<T> {
-  readonly value: T;
-
-  constructor(value: T) {
-    this.value = value;
+  mapValue<T>(fn: (value?: R) => T): Nullable<T> {
+    return this.map(
+      () => null,
+      (rightValue) => fn(rightValue),
+    );
   }
 
-  isLeft(): this is Left<never> {
-    return false;
+  mapError<T>(fn: (value: L) => T): Nullable<T> {
+    return this.map(
+      (leftValue) => fn(leftValue),
+      () => null,
+    );
   }
 
-  isRight(): this is Right<T> {
-    return true;
+  getOrThrow(error?: L): R {
+    return this.map(
+      (leftValue) => {
+        if (error) throw error;
+        throw leftValue;
+      },
+      (rightValue) => rightValue,
+    );
   }
 
-  static create<U>(value: U): Right<U> {
-    return new Right(value);
+  getOrElse(defaultValue: R): R {
+    return this.map(
+      () => defaultValue,
+      (someValue) => someValue,
+    );
+  }
+
+  static async tryCatch<L, T>(fn: Promise<T>, error?: L): Promise<Either<L, T>> {
+    try {
+      return Either.right(await fn);
+    } catch (_) {
+      return Either.left(error || _);
+    }
+  }
+
+  static left<L, R>(value: L): Either<L, R> {
+    return new Either<L, R>({ kind: 'Left', value });
+  }
+
+  static right<L, R>(value: R): Either<L, R> {
+    return new Either<L, R>({ kind: 'Right', value });
   }
 }
