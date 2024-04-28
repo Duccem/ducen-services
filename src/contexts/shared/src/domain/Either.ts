@@ -55,19 +55,27 @@ export class Either<L, R> {
     );
   }
 
-  static async tryCatch<L, T>(fn: Promise<T>, error?: L): Promise<Either<L, T>> {
+  static async asyncTryCatch<L, T>(fn: Promise<T>, error?: L): Promise<Either<L, T>> {
     try {
-      return Either.right(await fn);
+      return Either.Right(await fn);
     } catch (_) {
-      return Either.left(error || _);
+      return Either.Left(error || _);
     }
   }
 
-  static left<L, R>(value: L): Either<L, R> {
+  static tryCatch<L, T>(fn: () => T, error?: L): Either<L, T> {
+    try {
+      return Either.Right(fn());
+    } catch (_) {
+      return Either.Left(error || _);
+    }
+  }
+
+  static Left<L, R>(value: L): Either<L, R> {
     return new Either<L, R>({ kind: 'Left', value });
   }
 
-  static right<L, R>(value: R): Either<L, R> {
+  static Right<L, R>(value: R): Either<L, R> {
     return new Either<L, R>({ kind: 'Right', value });
   }
 }
