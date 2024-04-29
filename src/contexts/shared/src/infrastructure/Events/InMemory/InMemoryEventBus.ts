@@ -1,10 +1,10 @@
 import EventEmitter from 'events';
+import { DomainEvent } from '../../../domain/Events/DomainEvent';
+import { EventBus } from '../../../domain/Events/DomainEventBus';
+import { DomainEventSubscriber } from '../../../domain/Events/DomainEventSubscriber';
 import { DomainEventDeserializer } from '../DomainEventDeserializer';
 import { DomainEventFailOverPublisher } from '../DomainEventFailOverPublisher';
 import { DomainEventSerializer } from '../DomainEventSerializer';
-import { DomainEvent } from '../../../domain/DomainEvent';
-import { EventBus } from '../../../domain/DomainEventBus';
-import { DomainEventSubscriber } from '../../../domain/DomainEventSubscriber';
 
 export class InMemoryEventBus implements EventBus {
   private channel: EventEmitter;

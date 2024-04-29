@@ -1,5 +1,5 @@
-import { DomainEvent } from './DomainEvent';
 import { Entity } from './Entity';
+import { DomainEvent } from './Events/DomainEvent';
 import { Uuid } from './ValueObjects/generics/Uuid';
 import { DateValueObject } from './ValueObjects/primitives/DateValueObject';
 

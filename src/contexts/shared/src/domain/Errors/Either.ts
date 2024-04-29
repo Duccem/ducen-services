@@ -2,6 +2,9 @@ type Left<L> = { kind: 'Left'; value: L };
 type Right<R> = { kind: 'Right'; value: R };
 type EitherValue<L, R> = Left<L> | Right<R>;
 
+/**
+ * Either is a data type that represents a value of one of two possible types (a disjoint union). It is used to represent the result of a computation that may fail (error) or succeed (value).
+ */
 export class Either<L, R> {
   private constructor(private readonly value: EitherValue<L, R>) {}
 
@@ -151,6 +154,12 @@ export class Either<L, R> {
     );
   }
 
+  /**
+   * Execute a promise and return an Either with the result or the error
+   * @param fn - Promise that maybe throw an error
+   * @param error - Default error map to throw in that case
+   * @returns - Either with the result of the promise or the error
+   */
   static async asyncTryCatch<L, R>(fn: Promise<R>, error?: L): Promise<Either<L, R>> {
     try {
       return Either.Right(await fn);
@@ -159,6 +168,12 @@ export class Either<L, R> {
     }
   }
 
+  /**
+   * Execute a function and return an Either with the result or the error
+   * @param fn - Function that maybe throw an error
+   * @param error - Default error map to throw in that case
+   * @returns - Either with the result of the function or the error
+   */
   static tryCatch<L, R>(fn: () => R, error?: L): Either<L, R> {
     try {
       return Either.Right(fn());
@@ -167,10 +182,18 @@ export class Either<L, R> {
     }
   }
 
+  /**
+   * Create a new Either with a left value of type A.
+   * @param value - The left value of the new Either.
+   */
   static Left<L, R>(value: L): Either<L, R> {
     return new Either<L, R>({ kind: 'Left', value });
   }
 
+  /**
+   * Create a new Either with a right value of type B.
+   * @param value - The right value of the new Either.
+   */
   static Right<L, R>(value: R): Either<L, R> {
     return new Either<L, R>({ kind: 'Right', value });
   }

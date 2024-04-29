@@ -1,5 +1,5 @@
-import { DomainEvent } from '../../../domain/DomainEvent';
-import { DomainEventSubscriber } from '../../../domain/DomainEventSubscriber';
+import { DomainEvent } from '../../../domain/Events/DomainEvent';
+import { DomainEventSubscriber } from '../../../domain/Events/DomainEventSubscriber';
 import { DomainEventSerializer } from '../DomainEventSerializer';
 
 export class RabbitMQFormatter {

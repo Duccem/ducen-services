@@ -72,11 +72,19 @@ input UserRegister {
   phoneNumber: String
   address: UserAddressRegister
   role: String
-  createdAt: String
-  updatedAt: String
   configuration: UserConfigurationRegister
 }
 
 type Subscription {
   userRegistered: User
+}
+
+type Mutation {
+  userRegister(user: UserRegister): Boolean
+  recoveryPassword(email: String): Boolean
+  changePassword(userId: String, newPassword: String, oldPassword: String): Boolean
+}
+
+type Query {
+  login(identifier: String, password: String): LoginUser
 }

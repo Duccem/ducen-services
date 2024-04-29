@@ -1,3 +1,6 @@
+/**
+ * Representation of a domain error that can be thrown by the domain layer.
+ */
 export class DomainError extends Error {
   protected readonly code: number;
   protected readonly timestamp: string;

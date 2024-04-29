@@ -1,5 +1,5 @@
-import { Command } from '../../domain/Command';
-import { CommandHandler } from '../../domain/CommandHandler';
+import { Command } from '../../domain/Command/Command';
+import { CommandHandler } from '../../domain/Command/CommandHandler';
 import { InternalError } from '../../domain/Errors/InternalError';
 
 export class CommandHandlers extends Map<Command, CommandHandler<Command>> {

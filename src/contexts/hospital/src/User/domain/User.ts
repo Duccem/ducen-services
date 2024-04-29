@@ -1,4 +1,7 @@
 import { Aggregate, BooleanValueObject, DateValueObject, Email, Image, Primitives, Uuid } from '@ducen-services/shared';
+import { Device } from './Device';
+import { DeviceAgent } from './DeviceAgent';
+import { DeviceToken } from './DeviceToken';
 import { IncorrectPassword } from './IncorrectPassword';
 import { UserAddress } from './UserAddress';
 import { UserBirthDate } from './UserBirthDate';
@@ -23,9 +26,10 @@ export class User extends Aggregate {
     public photo: Image,
     public gender: UserGender,
     public configuration: UserConfiguration,
+    public devices: Device[],
     public isActive: BooleanValueObject,
     createdAt?: DateValueObject,
-    updatedAt?: DateValueObject
+    updatedAt?: DateValueObject,
   ) {
     super(id, createdAt, updatedAt);
   }
@@ -43,9 +47,10 @@ export class User extends Aggregate {
       new Image(data.photo),
       new UserGender(data.gender),
       UserConfiguration.fromPrimitives(data.configuration),
+      data.devices.map((device) => Device.fromPrimitives(device)),
       new BooleanValueObject(data.isActive),
       new DateValueObject(data.createdAt || new Date()),
-      new DateValueObject(data.updatedAt || new Date())
+      new DateValueObject(data.updatedAt || new Date()),
     );
   }
   public toPrimitives(): Primitives<User> {
@@ -61,6 +66,7 @@ export class User extends Aggregate {
       photo: this.photo.value,
       gender: this.gender.value,
       configuration: this.configuration.toPrimitives(),
+      devices: this.devices.map((device) => device.toPrimitives()),
       isActive: this.isActive.value,
       createdAt: this.createdAt.value,
       updatedAt: this.updatedAt.value,
@@ -92,8 +98,10 @@ export class User extends Aggregate {
       lang: string;
       theme: string;
     },
-    createdAt?: Date,
-    updatedAt?: Date
+    devices: {
+      agent: string;
+      token: string;
+    }[],
   ): User {
     const user = new User(
       new Uuid(id),
@@ -107,15 +115,18 @@ export class User extends Aggregate {
       new Image(photo),
       new UserGender(gender as UserGenders),
       UserConfiguration.fromPrimitives(configuration),
+      devices.map((device) =>
+        Device.create(Uuid.random(), new DeviceAgent(device.agent), new DeviceToken(device.token)),
+      ),
       new BooleanValueObject(false),
-      new DateValueObject(createdAt || new Date()),
-      new DateValueObject(updatedAt || new Date())
+      new DateValueObject(new Date()),
+      new DateValueObject(new Date()),
     );
     user.record(
       new UserCreated({
         params: user.toPrimitives(),
         aggregateId: user.id.value,
-      })
+      }),
     );
     user.password.encrypt();
     return user;
