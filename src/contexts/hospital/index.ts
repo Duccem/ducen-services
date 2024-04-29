@@ -1,4 +1,3 @@
-export * from './jest.config';
 export * from './src/Doctor/application/Create/DoctorCreator';
 export * from './src/Doctor/domain/Association';
 export * from './src/Doctor/domain/ConsultingRoomAddress';

@@ -1,5 +1,5 @@
+import { InternalError } from '@ducen-services/shared/src/domain/Errors/InternalError';
 import { Stripe } from 'stripe';
-import { InternalError } from '../domain/Errors/InternalError';
 
 export class StripePaymentProvider {
   private client: Stripe;

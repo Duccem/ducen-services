@@ -22,4 +22,3 @@ export * from './Persistence/Redis/RedisConnection';
 export * from './Persistence/Redis/RedisRepository';
 export * from './Query/InMemoryQueryBus';
 export * from './Query/QueryHandlers';
-export * from './StripePaymentProvider';
