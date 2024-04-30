@@ -1,8 +1,8 @@
-import { Uploader, UploaderResponse } from '@ducen-services/shared';
 import { UploadApiResponse, v2 } from 'cloudinary';
 import { Readable } from 'stream';
+import { StoreService, UploaderResponse } from '../../domain/StoreService';
 
-export class CloudinaryUploader implements Uploader {
+export class CloudinaryStoreService implements StoreService {
   constructor({ cloudName, apiKey, apiSecret }: { cloudName: string; apiKey: string; apiSecret: string }) {
     v2.config({
       cloud_name: cloudName,
@@ -22,7 +22,7 @@ export class CloudinaryUploader implements Uploader {
             return reject(error);
           }
           return resolve(result);
-        }
+        },
       );
       Readable.from(buffer).pipe(stream);
     });
