@@ -1,19 +1,15 @@
-import { UserSearcher } from '../../../User/application/UserSearcher/UserSearcher';
-import { UserNotExist } from '../../../User/domain/UserNotExist';
+import { PatientSearcher } from '../../../Patient/application/PatientSearcher/PatientSearcher';
 import { MedicalDocument } from '../../domain/MedicalDocument';
 import { MedicalDocumentRepository } from '../../domain/MedicalDocumentRepository';
 
 export class UserDocumentsGetter {
   constructor(
     private readonly repository: MedicalDocumentRepository,
-    private readonly userSearcher: UserSearcher,
+    private readonly patientSearcher: PatientSearcher,
   ) {}
 
-  async run(userId: string): Promise<MedicalDocument[]> {
-    const user = await this.userSearcher.run('id', userId);
-    if (!user) {
-      throw new UserNotExist();
-    }
-    return this.repository.findByUserId(user.id);
+  async run(patientId: string): Promise<MedicalDocument[]> {
+    const patient = await this.patientSearcher.run(patientId);
+    return this.repository.findByPatientId(patient.id);
   }
 }

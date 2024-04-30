@@ -9,7 +9,7 @@ export class MongoMedicalDocumentRepository
   async index(): Promise<void> {
     await this.collection.createIndex({ id: 1 });
   }
-  async findByUserId(userId: Uuid): Promise<MedicalDocument[]> {
+  async findByPatientId(userId: Uuid): Promise<MedicalDocument[]> {
     const documents = await this.collection.findOne<Primitives<MedicalDocument>[]>({ userId: userId.toString() });
     return documents.map((document) => MedicalDocument.fromPrimitives(document));
   }
