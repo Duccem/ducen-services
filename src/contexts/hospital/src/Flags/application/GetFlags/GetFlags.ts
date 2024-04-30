@@ -1,18 +1,21 @@
-import { IdentifyBy } from '../../../User/domain/IdentifyBy';
+import { UserSearcher } from '../../../User/application/UserSearcher/UserSearcher';
 import { UserNotExist } from '../../../User/domain/UserNotExist';
-import { UserRepository } from '../../../User/domain/UserRepository';
 import { Flag } from '../../domain/Flag';
 import { FlagRepository } from '../../domain/FlagRepository';
 
 export class GetFlags {
   constructor(
     private readonly flagRepository: FlagRepository,
-    protected readonly userRepository: UserRepository,
+    private readonly cacheRepository: FlagRepository,
+    private readonly userSearcher: UserSearcher,
   ) {}
   async run(id: string): Promise<any[]> {
-    const flags = await this.flagRepository.list();
-    const user = await this.userRepository.getUserByCriteria(new IdentifyBy('id', id));
+    const user = await this.userSearcher.run('id', id);
     if (!user) throw new UserNotExist();
+    let flags = await this.cacheRepository.list();
+    if (!flags.length) {
+      flags = await this.flagRepository.list();
+    }
     const response = flags.map((flag: Flag) => {
       const enabled = flag.isEnabled(user);
       return {

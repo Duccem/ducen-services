@@ -5,8 +5,8 @@ import { CreateFlagCommand } from './CreateFlagCommand';
 
 export class CreateFlagHandler implements CommandHandler<CreateFlagCommand> {
   private createFlag: CreateFlag;
-  constructor(private readonly flagRepository: FlagRepository) {
-    this.createFlag = new CreateFlag(flagRepository);
+  constructor(flagRepository: FlagRepository, cacheRepository: FlagRepository) {
+    this.createFlag = new CreateFlag(flagRepository, cacheRepository);
   }
 
   subscribedTo(): Command {

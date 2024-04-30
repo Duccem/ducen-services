@@ -33,7 +33,7 @@ export class RedisRepository<T extends Aggregate | Entity> {
     }
   }
 
-  async create(data: any, key: string, ttl: number) {
+  async persist(data: any, key: string, ttl: number) {
     try {
       const stringifiedData = JSON.stringify(data);
       await this.client.setEx(key, ttl, stringifiedData);

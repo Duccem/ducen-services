@@ -1,4 +1,5 @@
 import { Query, QueryHandler } from '@ducen-services/shared';
+import { UserSearcher } from '../../../User/application/UserSearcher/UserSearcher';
 import { UserRepository } from '../../../User/domain/UserRepository';
 import { FlagRepository } from '../../domain/FlagRepository';
 import { GetFlagQuery } from './GetFlagQuery';
@@ -6,8 +7,8 @@ import { GetFlags } from './GetFlags';
 
 export class GetFlagQueryHandler implements QueryHandler<GetFlagQuery> {
   private getFlags: GetFlags;
-  constructor(flagRepository: FlagRepository, userRepository: UserRepository) {
-    this.getFlags = new GetFlags(flagRepository, userRepository);
+  constructor(flagRepository: FlagRepository, cacheRepository: FlagRepository, userRepository: UserRepository) {
+    this.getFlags = new GetFlags(flagRepository, cacheRepository, new UserSearcher(userRepository));
   }
 
   subscribedTo(): Query {
