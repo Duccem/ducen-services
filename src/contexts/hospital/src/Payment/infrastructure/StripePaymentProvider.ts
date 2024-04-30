@@ -1,4 +1,3 @@
-import { InternalError } from '@ducen-services/shared/src/domain/Errors/InternalError';
 import { Stripe } from 'stripe';
 
 export class StripePaymentProvider {
@@ -13,22 +12,28 @@ export class StripePaymentProvider {
   ) {
     this.client = new Stripe(secretKey, { apiVersion: '2023-10-16' });
   }
-  async createSession(plan: string, period: string): Promise<{ sessionId: string; url: string }> {
-    const prices = await this.client.prices.search({
-      query: `metadata["plan"]: "${plan}" AND metadata["period"]: "${period}"`,
-    });
-    if (prices.data.length === 0) throw new InternalError('Plan not found');
+  async createSession(
+    amount: number,
+    quantity: number,
+    serviceName: string,
+  ): Promise<{ sessionId: string; url: string }> {
     const session = await this.client.checkout.sessions.create({
-      mode: 'subscription',
+      mode: 'payment',
       payment_method_types: ['card'],
       line_items: [
         {
-          price: prices.data[0].id,
-          quantity: 1,
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: serviceName,
+            },
+            unit_amount: amount,
+          },
+          quantity: quantity,
         },
       ],
-      success_url: `${this.baseUrl}/auth/completed`,
-      cancel_url: `${this.baseUrl}/auth/choose-plan`,
+      success_url: `${this.baseUrl}/auth/completed?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${this.baseUrl}/auth/choose-plan?session_id={CHECKOUT_SESSION_ID}`,
     });
 
     return {
