@@ -1,4 +1,4 @@
-import { Aggregate, BooleanValueObject, DateValueObject, Email, Image, Primitives, Uuid } from '@ducen-services/shared';
+import { Aggregate, BooleanValueObject, DateValueObject, Email, File, Primitives, Uuid } from '@ducen-services/shared';
 import { Device } from './Device';
 import { DeviceAgent } from './DeviceAgent';
 import { DeviceToken } from './DeviceToken';
@@ -23,7 +23,7 @@ export class User extends Aggregate {
     public birthDate: UserBirthDate,
     public address: UserAddress,
     public phoneNumber: UserPhoneNumber,
-    public photo: Image,
+    public photo: File,
     public gender: UserGender,
     public configuration: UserConfiguration,
     public devices: Device[],
@@ -44,7 +44,7 @@ export class User extends Aggregate {
       new UserBirthDate(data.birthDate),
       UserAddress.fromPrimitives(data.address),
       new UserPhoneNumber(data.phoneNumber),
-      new Image(data.photo),
+      new File(data.photo),
       new UserGender(data.gender),
       UserConfiguration.fromPrimitives(data.configuration),
       data.devices.map((device) => Device.fromPrimitives(device)),
@@ -112,7 +112,7 @@ export class User extends Aggregate {
       new UserBirthDate(birthDate),
       UserAddress.fromPrimitives(address),
       new UserPhoneNumber(phoneNumber),
-      new Image(photo),
+      new File(photo),
       new UserGender(gender as UserGenders),
       UserConfiguration.fromPrimitives(configuration),
       devices.map((device) =>

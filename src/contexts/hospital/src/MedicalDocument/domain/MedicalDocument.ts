@@ -1,4 +1,4 @@
-import { Aggregate, DateValueObject, Image, Primitives, Uuid } from '@ducen-services/shared';
+import { Aggregate, DateValueObject, File, Primitives, Uuid } from '@ducen-services/shared';
 import { MedicalDocumentDescription } from './MedicalDocumentDescription';
 import { MedicalDocumentName } from './MedicalDocumentName';
 import { MedicalDocumentType } from './MedicalDocumentType';
@@ -10,7 +10,7 @@ export class MedicalDocument extends Aggregate {
     public type: MedicalDocumentType,
     public description: MedicalDocumentDescription,
     public fileName: MedicalDocumentName,
-    public url: Image,
+    public url: File,
     createdAt: DateValueObject,
     updatedAt: DateValueObject,
   ) {
@@ -35,7 +35,7 @@ export class MedicalDocument extends Aggregate {
       new MedicalDocumentType(plain.type),
       new MedicalDocumentDescription(plain.description),
       new MedicalDocumentName(plain.fileName),
-      new Image(plain.url),
+      new File(plain.url),
       new DateValueObject(plain.createdAt),
       new DateValueObject(plain.updatedAt),
     );
