@@ -1,4 +1,4 @@
-import { addDays, isValid, subDays } from 'date-fns';
+import { addDays, intervalToDuration, isValid, isWithinInterval, subDays } from 'date-fns';
 import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 import { FormatError } from '../../Errors/FormatError';
 import { ValueObject } from '../../ValueObject';
@@ -30,7 +30,7 @@ export class DateValueObject extends ValueObject<Date> {
     return new DateValueObject(addDays(this.value, days));
   }
 
-  public restDays(days: number): DateValueObject {
+  public subDays(days: number): DateValueObject {
     return new DateValueObject(subDays(this.value, days));
   }
 
@@ -39,5 +39,19 @@ export class DateValueObject extends ValueObject<Date> {
   }
   public toString(): string {
     return this.value.toString();
+  }
+
+  public static calculateIntervalDuration(startDate: DateValueObject, endDate: DateValueObject): Duration {
+    return intervalToDuration({
+      end: endDate.getValue(),
+      start: startDate.getValue(),
+    });
+  }
+
+  public static isInBetween(startDate: DateValueObject, endDate: DateValueObject): boolean {
+    return isWithinInterval(DateValueObject.today().getValue(), {
+      end: endDate.getValue(),
+      start: startDate.getValue(),
+    });
   }
 }
