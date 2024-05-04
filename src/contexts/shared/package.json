@@ -22,10 +22,12 @@
   },
   "dependencies": {
     "@faker-js/faker": "^8.4.1",
+    "@langchain/community": "^0.0.54",
     "amqplib": "^0.10.3",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.1",
     "express": "^4.19.2",
+    "langchain": "^0.1.36",
     "mongodb": "^6.5.0",
     "redis": "^4.6.13",
     "stripe": "^14.20.0",

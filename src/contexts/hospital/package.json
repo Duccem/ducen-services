@@ -22,7 +22,11 @@
     "@aws-sdk/client-s3": "^3.569.0",
     "@aws-sdk/lib-storage": "^3.569.0",
     "@ducen-services/shared": "^0.0.0",
+    "@langchain/community": "^0.0.54",
+    "@langchain/mongodb": "^0.0.1",
     "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "langchain": "^0.1.36",
+    "mongodb": "^6.6.0"
   }
 }
