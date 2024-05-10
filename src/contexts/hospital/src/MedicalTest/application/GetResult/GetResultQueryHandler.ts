@@ -1,14 +1,15 @@
 import { Query, QueryHandler } from '@ducen-services/shared';
 import { PatientSearcher } from '../../../Patient/application/PatientSearcher/PatientSearcher';
 import { PatientRepository } from '../../../Patient/domain/PatientRepository';
-import { LabResult } from '../../domain/LabResult';
-import { LabResultRepository } from '../../domain/LabResultRepository';
+import { LabResult } from '../../domain/MedicalTest';
+import { MedicalTestRepository } from '../../domain/MedicalTestRepository';
 import { GetResultQuery } from './GetResultQuery';
 import { ResultGetter } from './ResultGetter';
+';
 
 export class GetResultQueryHandler implements QueryHandler<GetResultQuery> {
   private getter: ResultGetter;
-  constructor(repository: LabResultRepository, patientRepository: PatientRepository) {
+  constructor(repository: MedicalTestRepository, patientRepository: PatientRepository) {
     this.getter = new ResultGetter(repository, new PatientSearcher(patientRepository));
   }
 

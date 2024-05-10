@@ -1,9 +1,9 @@
 import { PatientSearcher } from '../../../Patient/application/PatientSearcher/PatientSearcher';
-import { LabResultRepository } from '../../domain/LabResultRepository';
+import { MedicalTestRepository } from '../../domain/MedicalTestRepository';
 
 export class ResultGetter {
   constructor(
-    private repository: LabResultRepository,
+    private repository: MedicalTestRepository,
     private readonly patientSearcher: PatientSearcher,
   ) {}
   async run(patientId: string) {

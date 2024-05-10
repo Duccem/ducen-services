@@ -1,7 +1,6 @@
 import { Logger, MongoConnection, MongoRepository } from '@ducen-services/shared';
 import { Notification } from '../../domain/Notification';
 import { NotificationRepository } from '../../domain/NotificationRepository';
-import { TemplateName } from '../../domain/TemplateName';
 import { TemplateRepository } from '../../domain/TemplateRepository';
 
 export class MongoNotificationRepository extends MongoRepository<Notification> implements NotificationRepository {

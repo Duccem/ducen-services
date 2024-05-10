@@ -1,11 +1,12 @@
 import { Primitives } from '@ducen-services/shared';
 import { PatientSearcher } from '../../../Patient/application/PatientSearcher/PatientSearcher';
-import { LabResult } from '../../domain/LabResult';
-import { LabResultRepository } from '../../domain/LabResultRepository';
+import { LabResult } from '../../domain/MedicalTest';
+import { MedicalTestRepository } from '../../domain/MedicalTestRepository';
+';
 
 export class ResultCreator {
   constructor(
-    private readonly repository: LabResultRepository,
+    private readonly repository: MedicalTestRepository,
     private readonly patientSearcher: PatientSearcher,
   ) {}
 
