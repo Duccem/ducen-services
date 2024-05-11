@@ -1,20 +1,20 @@
 import { Command, CommandHandler } from '@ducen-services/shared';
+import { StoreService } from '../../../File/domain/StoreService';
 import { MedicalDocumentRepository } from '../../domain/MedicalDocumentRepository';
-import { StoreService } from '../../domain/StoreService';
-import { DocumentUploader } from './DocumentUploader';
-import { UploadDocumentCommand } from './UploadDocumentCommand';
+import { DocumentUploader } from './MedicalDocumentUploader';
+import { UploadMedicalDocumentCommand } from './UploadMedicalDocumentCommand';
 
-export class UploadDocumentCommandHandler implements CommandHandler<UploadDocumentCommand> {
+export class UploadMedicalDocumentCommandHandler implements CommandHandler<UploadMedicalDocumentCommand> {
   private uploader: DocumentUploader;
   constructor(repository: MedicalDocumentRepository, storage: StoreService) {
     this.uploader = new DocumentUploader(repository, storage);
   }
 
   subscribedTo(): Command {
-    return UploadDocumentCommand;
+    return UploadMedicalDocumentCommand;
   }
 
-  public async handle(command: UploadDocumentCommand): Promise<void> {
+  public async handle(command: UploadMedicalDocumentCommand): Promise<void> {
     await this.uploader.run(command.metadata, command.buffer);
   }
 }

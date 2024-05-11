@@ -1,4 +1,5 @@
-import { Aggregate, DateValueObject, File, Primitives, Uuid } from '@ducen-services/shared';
+import { Aggregate, DateValueObject, Primitives, Uuid } from '@ducen-services/shared';
+import { File } from '../../File/domain/File';
 import { MedicalDocumentDescription } from './MedicalDocumentDescription';
 import { MedicalDocumentName } from './MedicalDocumentName';
 import { MedicalDocumentType } from './MedicalDocumentType';
