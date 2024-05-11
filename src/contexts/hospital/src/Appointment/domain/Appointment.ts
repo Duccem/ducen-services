@@ -5,6 +5,7 @@ import { AppointmentRecipe } from './AppointmentRecipe';
 import { AppointmentRecipeConsultation } from './AppointmentRecipeConsultation';
 import { AppointmentRecipePrescription } from './AppointmentRecipePrescription';
 import { AppointmentRecipeTest } from './AppointmentRecipeTest';
+import { AppointmentRoom } from './AppointmentRoom';
 import { AppointmentStatus } from './AppointmentStatus';
 import { AppointmentTelemetry } from './AppointmentTelemetry';
 import { AppointmentTest } from './AppointmentTest';
@@ -18,7 +19,7 @@ export class Appointment extends Aggregate {
     public type: StringValueObject,
     public initDate: DateValueObject,
     public endDate: DateValueObject,
-    public link: StringValueObject,
+    public room: AppointmentRoom,
     public status: AppointmentStatus,
     public rating: Rating,
     public telemetry: AppointmentTelemetry,
@@ -41,7 +42,7 @@ export class Appointment extends Aggregate {
       initDate: this.initDate.value,
       endDate: this.endDate.value,
       status: this.status.value,
-      link: this.link.value,
+      room: this.room.toPrimitives(),
       diagnostic: this.diagnostic.toPrimitives(),
       reviewedTests: this.reviewedTests.map((labResult) => labResult.toPrimitives()),
       documents: this.documents.map((document) => document.toPrimitives()),
@@ -59,7 +60,7 @@ export class Appointment extends Aggregate {
       new StringValueObject(data.type),
       new DateValueObject(data.initDate),
       new DateValueObject(data.endDate),
-      new StringValueObject(data.link),
+      AppointmentRoom.fromPrimitives(data.room),
       new AppointmentStatus(data.status),
       Rating.fromPrimitives(data.rating),
       AppointmentTelemetry.fromPrimitives(data.telemetry),
@@ -81,14 +82,18 @@ export class Appointment extends Aggregate {
     );
   }
 
-  static Create(
+  static Schedule(
     id: string,
     patientId: string,
     doctorId: string,
     type: string,
     initDate: Date,
     endDate: Date,
-    link: string,
+    room: {
+      token: string;
+      room: string;
+      url: string;
+    },
   ) {
     return new Appointment(
       new Uuid(id),
@@ -97,7 +102,7 @@ export class Appointment extends Aggregate {
       new StringValueObject(type),
       new DateValueObject(initDate),
       new DateValueObject(endDate),
-      new StringValueObject(link),
+      AppointmentRoom.fromPrimitives(room),
       AppointmentStatus.scheduled(),
       Rating.waitingForReview(),
       AppointmentTelemetry.waitingForMeasurements(),
