@@ -2,7 +2,7 @@ import { OllamaEmbeddings } from '@langchain/community/embeddings/ollama';
 import { MongoDBAtlasVectorSearch } from '@langchain/mongodb';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { MongoConnection } from '../../Persistence/Mongo/MongoConnection';
-export class MongoLlamaVectorStore {
+export class MongoVectorStore {
   private vectorStore: MongoDBAtlasVectorSearch;
   constructor(
     private connection: MongoConnection,
@@ -17,7 +17,7 @@ export class MongoLlamaVectorStore {
   }
   async saveKnowledgeBase(text: string): Promise<void> {
     const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000 });
-    const docs = await textSplitter.createDocuments([text], [{ knowledgeBase: '' }]);
+    const docs = await textSplitter.createDocuments([text]);
     await this.vectorStore.addDocuments(docs);
   }
 

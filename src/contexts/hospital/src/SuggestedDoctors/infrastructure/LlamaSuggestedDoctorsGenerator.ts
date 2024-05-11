@@ -22,9 +22,9 @@ export class OllamaSuggestedDoctorsGenerator extends LlamaGenerator {
       .map((doctor) => JSON.stringify({ id: doctor.id.value, specialty: doctor.specialty.value }))
       .join('\n');
     const query = `
-      user: ${JSON.stringify({ id: user.id.value, age: user.birthDate.age() })}
-      last_three_consults: ${JSON.stringify(lastThreeConsults.map((consult) => consult.toString()))}
+      usuario: ${JSON.stringify({ id: user.id.value, age: user.birthDate.age() })}
+      ultimas tres consultas: ${JSON.stringify(lastThreeConsults.map((consult) => consult.toString()))}
     `;
-    return this.generate(MESSAGES, query, doctorsDataStringified);
+    return this.generateFromPrompt(MESSAGES, query, doctorsDataStringified);
   }
 }

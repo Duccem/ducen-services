@@ -48,6 +48,7 @@ export * from './Responses/CustomResponse';
 export * from './Responses/NullResponse';
 export * from './Responses/PaginatedResponse';
 export * from './Specification/Specification';
+export * from './StoreService';
 export * from './Types/EntityConstructor';
 export * from './Types/NewableClass';
 export * from './Types/Nullable';
