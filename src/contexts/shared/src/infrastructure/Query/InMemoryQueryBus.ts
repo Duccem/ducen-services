@@ -14,4 +14,8 @@ export class InMemoryQueryBus implements QueryBus {
   public addQueryHandlers(queryHandlers: Array<QueryHandler<Query>>): void {
     this.queryHandlersInformation.addQueryHandlers(queryHandlers);
   }
+
+  public addHandler(handler: QueryHandler<Query>): void {
+    this.queryHandlersInformation.addHandler(handler);
+  }
 }

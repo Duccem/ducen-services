@@ -3,15 +3,16 @@ import { MulticastMessage, getMessaging } from 'firebase-admin/messaging';
 import { compile } from 'handlebars';
 import { User } from '../../../User/domain/User';
 import { Notification } from '../../domain/Notification';
-import { Notifier } from '../../domain/Notifier';
+import { PushNotifier } from '../../domain/Notifier';
 
-export class FirebaseNotifier implements Notifier {
+export class FirebaseNotifier extends PushNotifier {
   private firebaseApp: App;
   public type: string = 'push';
   constructor(
     account: ServiceAccount,
     private readonly imageUrl: string,
   ) {
+    super();
     this.firebaseApp = initializeApp(account);
   }
   async notify(notification: Notification, user: User, data: { [key: string]: any }): Promise<void> {

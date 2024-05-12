@@ -1,13 +1,12 @@
 import { Query, QueryHandler } from '@ducen-services/shared';
-import { AuthService } from '../../domain/AuthService';
 import { UserRepository } from '../../domain/UserRepository';
 import { Login } from './Login';
 import { LoginQuery } from './LoginQuery';
 
 export class LoginHandler implements QueryHandler<LoginQuery> {
   private login: Login;
-  constructor(userRepository: UserRepository, authService: AuthService) {
-    this.login = new Login(userRepository, authService);
+  constructor(userRepository: UserRepository) {
+    this.login = new Login(userRepository);
   }
   subscribedTo(): Query {
     return LoginQuery;

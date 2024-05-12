@@ -2,16 +2,17 @@ import { compile } from 'handlebars';
 import { Transporter, createTransport } from 'nodemailer';
 import { User } from '../../../User/domain/User';
 import { Notification } from '../../domain/Notification';
-import { Notifier } from '../../domain/Notifier';
+import { EmailNotifier } from '../../domain/Notifier';
 
-export class EmailNotifier implements Notifier {
-  public type: string = 'email';
+export class NodeMailerNotifier extends EmailNotifier {
+  public type = 'email';
   private transporter: Transporter;
   constructor(
     username: string,
     password: string,
     private readonly fromEmail: string,
   ) {
+    super();
     this.transporter = createTransport({
       service: 'gmail',
       auth: {

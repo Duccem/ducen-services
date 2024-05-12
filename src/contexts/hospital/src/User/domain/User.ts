@@ -1,4 +1,5 @@
 import { Aggregate, BooleanValueObject, DateValueObject, Email, File, Primitives, Uuid } from '@ducen-services/shared';
+import * as jwt from 'jsonwebtoken';
 import { Device } from './Device';
 import { DeviceAgent } from './DeviceAgent';
 import { DeviceToken } from './DeviceToken';
@@ -132,13 +133,19 @@ export class User extends Aggregate {
     return user;
   }
 
-  public generateToken(): any {
+  public generateToken(): string {
     const payload = {
       userId: this.id.value,
       role: this.role.value,
       email: this.email.value,
       configuration: this.configuration.toPrimitives(),
     };
+    const token = jwt.sign(payload, this.password.toString(), { expiresIn: 60 * 60 * 24 });
+    return token;
+  }
+
+  validateToken(token: string): any {
+    const payload = jwt.verify(token, this.password.toString());
     return payload;
   }
 

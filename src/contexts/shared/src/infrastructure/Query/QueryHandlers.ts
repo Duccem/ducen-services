@@ -25,4 +25,8 @@ export class QueryHandlers extends Map<Query, QueryHandler<Query>> {
       this.set(queryHandler.subscribedTo(), queryHandler);
     });
   }
+
+  public addHandler(handler: QueryHandler<Query>): void {
+    this.set(handler.subscribedTo(), handler);
+  }
 }
