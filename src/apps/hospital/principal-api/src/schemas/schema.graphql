@@ -1,6 +1,4 @@
 scalar Upload
-
-
 input QueryFilter {
   value: String
   operator: String

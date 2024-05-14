@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { UserSearcher } from '../../../..';
+import { JWTStrategy, UserSearcher } from '../../../..';
 import { SharedModule } from '../../../Shared/infrastructure/Configuration/SharedModule';
 import { UserController } from '../Presentation/UserController';
 import { UserResolver } from '../Presentation/UserResolver';
@@ -18,15 +18,16 @@ import { userRepositories } from './RepositoryProviders';
       useFactory: (connection, conf) => new LlamaHabitsGenerator(connection, conf.hf.apiKey),
     },
     ...userRepositories,
-    ...queryHandlers,
-    ...commandHandlers,
     {
       provide: UserSearcher,
       inject: ['USER_REPOSITORY'],
       useFactory: (repository) => new UserSearcher(repository),
     },
+    JWTStrategy,
+    ...queryHandlers,
+    ...commandHandlers,
     UserResolver,
   ],
-  exports: ['USER_REPOSITORY', UserSearcher],
+  exports: ['USER_REPOSITORY', UserSearcher, JWTStrategy],
 })
 export class UserModule {}

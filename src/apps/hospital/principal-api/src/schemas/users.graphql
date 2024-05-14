@@ -81,6 +81,7 @@ type Subscription {
 
 type Mutation {
   userRegister(user: UserRegister): Boolean
+  uploadProfileImage(file: Upload, name: String, type: String): String
 }
 
 type Query {

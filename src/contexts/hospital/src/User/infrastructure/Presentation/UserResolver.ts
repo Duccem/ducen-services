@@ -1,10 +1,14 @@
-import { CommandBus, QueryBus } from '@ducen-services/shared';
-import { Inject } from '@nestjs/common';
+import { CommandBus, File, QueryBus } from '@ducen-services/shared';
+import { Inject, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { GraphQLUpload, Upload } from 'graphql-upload-ts';
 import { GenerateUserHabitsQuery } from '../../application/GenerateUserHabits/GenerateUserHabitsQuery';
 import { LoginQuery } from '../../application/Login/LoginQuery';
 import { UserRegisterCommand } from '../../application/RegisterUser/UserRegisterCommand';
-
+import { UploadProfileImageCommand } from '../../application/UploadProfileImage/UploadProfileImageCommand';
+import { User } from '../../domain/User';
+import { CurrentUser } from '../Auth/CurrentUserDecorator';
+import { JwtAuthGuard } from '../Auth/JWTGuard';
 @Resolver('User')
 export class UserResolver {
   constructor(
@@ -53,17 +57,18 @@ export class UserResolver {
   //   return null;
   // }
 
-  // @Mutation('uploadProfileImage')
-  // async uploadImage(
-  //   @Args({ name: 'file', type: () => GraphQLUpload }) image: Upload,
-  //   @Args('name') fileName: string,
-  //   @Args('type') type: string,
-  //   @CurrentUser() user: User,
-  // ) {
-  //   const stream = image.file.createReadStream();
-  //   const buffer = await File.toBuffer(stream);
-  //   const command = new UploadProfileImageCommand(buffer, user, { fileName, type });
-  //   const response = await this.commandBus.dispatch(command);
-  //   return response;
-  // }
+  @Mutation('uploadProfileImage')
+  @UseGuards(JwtAuthGuard)
+  async uploadImage(
+    @Args({ name: 'file', type: () => GraphQLUpload }) image: Upload,
+    @Args('name') fileName: string,
+    @Args('type') type: string,
+    @CurrentUser() user: User,
+  ) {
+    const stream = image.file.createReadStream();
+    const buffer = await File.toBuffer(stream);
+    const command = new UploadProfileImageCommand(buffer, user, { fileName, type });
+    const response = await this.commandBus.dispatch(command);
+    return response;
+  }
 }

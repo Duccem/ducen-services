@@ -8,7 +8,7 @@ import { UserSearcher } from '../../application/SearchUser/UserSearcher';
 export class JWTStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(
     @Inject('SERVER_CONFIGURATION') conf: any,
-    @Inject(UserSearcher) private userSearcher: UserSearcher,
+    private userSearcher: UserSearcher,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -16,7 +16,7 @@ export class JWTStrategy extends PassportStrategy(Strategy, 'jwt') {
       secretOrKey: conf.authKey,
     });
   }
-  async validate(payload: any): Promise<any> {
+  async validate(payload: any) {
     const user = await this.userSearcher.run(payload.userId);
     if (!user) {
       throw new AuthorizationError('User not authenticated');

@@ -1,5 +1,4 @@
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
-import { Readable } from 'stream';
 import { StoreService, UploaderResponse } from '../../domain/StoreService';
 
 export class S3StoreService implements StoreService {
@@ -26,11 +25,10 @@ export class S3StoreService implements StoreService {
     this.bucket = bucket;
   }
   async upload(buffer: Buffer, name: string): Promise<UploaderResponse> {
-    const stream = Readable.from(buffer);
     const command = new PutObjectCommand({
       Bucket: this.bucket,
       Key: name,
-      Body: stream,
+      Body: buffer,
     });
     await this.client.send(command);
     return {

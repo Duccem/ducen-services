@@ -1,4 +1,4 @@
-import { JWTStrategy, SharedModule, UserModule } from '@ducen-services/hospital';
+import { SharedModule, UserModule } from '@ducen-services/hospital';
 import { GraphQLErrorHandling, LoggerMiddleware } from '@ducen-services/shared';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
@@ -49,7 +49,7 @@ import loggingConfig from './config/telemetry.config';
     SharedModule,
     UserModule,
   ],
-  providers: [JWTStrategy],
+  providers: [],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

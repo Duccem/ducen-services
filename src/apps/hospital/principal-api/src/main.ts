@@ -15,6 +15,7 @@ async function bootstrap() {
   const port = configurations.port || 3000;
   const host = configurations.host || 'http://localhost';
   const globalPrefix = configurations.globalPrefix || 'api';
+
   app.setGlobalPrefix(globalPrefix);
   app.useLogger(logger);
   app.enableCors();
