@@ -14,7 +14,7 @@ export class File extends StringValueObject {
     const fileName = this.value.split('/').pop();
     const response = await fetch(this.value);
     const stream = createWriteStream(fileName);
-    await finished(Readable.fromWeb(response.body).pipe(stream));
+    await finished(Readable.fromWeb(response.body as any).pipe(stream));
   }
 
   static toBuffer(readStream: Readable) {

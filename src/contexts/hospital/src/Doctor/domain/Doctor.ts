@@ -9,9 +9,9 @@ import {
 import { Association } from './Association';
 import { ConsultingRoomAddress } from './ConsultingRoomAddress';
 import { DoctorCreated } from './DoctorCreated';
+import { DoctorRating } from './DoctorRating';
 import { Education } from './Education';
 import { Experience } from './Experience';
-import { Rating } from './Rating';
 import { Schedule } from './Schedule';
 
 export class Doctor extends Aggregate {
@@ -27,9 +27,9 @@ export class Doctor extends Aggregate {
     public experiences: Experience[],
     public associations: Association[],
     public schedule: Schedule,
-    public ratings: Rating[],
+    public ratings: DoctorRating[],
     createdAt?: DateValueObject,
-    updatedAt?: DateValueObject
+    updatedAt?: DateValueObject,
   ) {
     super(id, createdAt, updatedAt);
   }
@@ -65,9 +65,9 @@ export class Doctor extends Aggregate {
       data.experiences.map((experience: Primitives<Experience>) => Experience.fromPrimitives(experience)),
       data.associations.map((association: Primitives<Association>) => Association.fromPrimitives(association)),
       Schedule.fromPrimitives(data.schedule),
-      data.ratings.map((rating: Primitives<Rating>) => Rating.fromPrimitives(rating)),
+      data.ratings.map((rating: Primitives<DoctorRating>) => DoctorRating.fromPrimitives(rating)),
       new DateValueObject(data.createdAt),
-      new DateValueObject(data.updatedAt)
+      new DateValueObject(data.updatedAt),
     );
   }
 
@@ -83,9 +83,9 @@ export class Doctor extends Aggregate {
     experiences: Primitives<Experience>[],
     associations: Primitives<Association>[],
     schedule: Primitives<Schedule>,
-    ratings: Primitives<Rating>[],
+    ratings: Primitives<DoctorRating>[],
     createdAt?: Date,
-    updatedAt?: Date
+    updatedAt?: Date,
   ): Doctor {
     const doctor = new Doctor(
       new Uuid(id),
@@ -99,20 +99,20 @@ export class Doctor extends Aggregate {
       experiences.map((experience) => Experience.fromPrimitives(experience)),
       associations.map((association) => Association.fromPrimitives(association)),
       Schedule.fromPrimitives(schedule),
-      ratings.map((rating) => Rating.fromPrimitives(rating)),
+      ratings.map((rating) => DoctorRating.fromPrimitives(rating)),
       new DateValueObject(createdAt || new Date()),
-      new DateValueObject(updatedAt || new Date())
+      new DateValueObject(updatedAt || new Date()),
     );
     doctor.record(
       new DoctorCreated({
         aggregateId: doctor.id.value,
         params: doctor.toPrimitives(),
-      })
+      }),
     );
     return doctor;
   }
 
   createRating(id: string, rate: number, comment: string): void {
-    this.ratings.push(Rating.create(id, this.id.value, rate, comment, new Date(), undefined));
+    this.ratings.push(DoctorRating.create(id, this.id.value, rate, comment, new Date(), undefined));
   }
 }

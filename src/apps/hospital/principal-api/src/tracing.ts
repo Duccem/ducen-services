@@ -1,3 +1,4 @@
+import { Logger } from '@ducen-services/shared';
 import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
 import { AsyncLocalStorageContextManager } from '@opentelemetry/context-async-hooks';
 import { CompositePropagator, W3CBaggagePropagator, W3CTraceContextPropagator } from '@opentelemetry/core';
@@ -10,36 +11,38 @@ import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base';
 import { SEMRESATTRS_SERVICE_NAME } from '@opentelemetry/semantic-conventions';
 import * as process from 'process';
 
-const otelSDK = new NodeSDK({
-  resource: new Resource({
-    [SEMRESATTRS_SERVICE_NAME]: 'hospital-principal-api',
-  }),
-  metricReader: new PrometheusExporter({ port: 8081 }),
-  spanProcessor: new SimpleSpanProcessor(new OTLPTraceExporter({ url: 'http://localhost:4316/v1/traces' })),
-  contextManager: new AsyncLocalStorageContextManager(),
-  instrumentations: [getNodeAutoInstrumentations()],
-  textMapPropagator: new CompositePropagator({
-    propagators: [
-      new W3CTraceContextPropagator(),
-      new W3CBaggagePropagator(),
-      new B3Propagator(),
-      new B3Propagator({
-        injectEncoding: B3InjectEncoding.MULTI_HEADER,
-      }),
-    ],
-  }),
-});
-
-export default otelSDK;
+export default function startTracing(serviceName: string, exporterUrl: string, logger: Logger) {
+  const openTelemetrySDK = new NodeSDK({
+    resource: new Resource({
+      [SEMRESATTRS_SERVICE_NAME]: serviceName,
+    }),
+    metricReader: new PrometheusExporter({ port: 8081 }),
+    spanProcessor: new SimpleSpanProcessor(new OTLPTraceExporter({ url: exporterUrl })),
+    contextManager: new AsyncLocalStorageContextManager(),
+    instrumentations: [getNodeAutoInstrumentations()],
+    textMapPropagator: new CompositePropagator({
+      propagators: [
+        new W3CTraceContextPropagator(),
+        new W3CBaggagePropagator(),
+        new B3Propagator(),
+        new B3Propagator({
+          injectEncoding: B3InjectEncoding.MULTI_HEADER,
+        }),
+      ],
+    }),
+  });
+  openTelemetrySDK.start();
+  logger.log('OpenTelemetry SDK started');
+  process.on('SIGTERM', () => {
+    openTelemetrySDK
+      .shutdown()
+      .then(
+        () => logger.log('OpenTelemetry SDK shut down successfully'),
+        (err) => logger.error('OpenTelemetry SDK shutdown failed', err),
+      )
+      .finally(() => process.exit(0));
+  });
+}
 
 // You can also use the shutdown method to gracefully shut down the SDK before process shutdown
 // or on some operating system signal.
-process.on('SIGTERM', () => {
-  otelSDK
-    .shutdown()
-    .then(
-      () => console.log('SDK shut down successfully'),
-      (err) => console.log('Error shutting down SDK', err),
-    )
-    .finally(() => process.exit(0));
-});

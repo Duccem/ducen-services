@@ -30,6 +30,7 @@ export class UserMother {
         theme: WordMother.random({ maxLength: 10 }),
       },
       address: UserAddressMother.random(),
+      devices: [],
       ...data,
     });
   }

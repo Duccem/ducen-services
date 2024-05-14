@@ -1,5 +1,5 @@
 import { Query, QueryHandler } from '@ducen-services/shared';
-import { UserSearcher } from '../../../User/application/UserSearcher/UserSearcher';
+import { UserSearcher } from '../../../User/application/SearchUser/UserSearcher';
 import { UserRepository } from '../../../User/domain/UserRepository';
 import { FlagRepository } from '../../domain/FlagRepository';
 import { GetFlagQuery } from './GetFlagQuery';

@@ -1,7 +1,7 @@
 import { Uuid } from '@ducen-services/shared';
-import { Rating } from './Rating';
+import { DoctorRating } from './DoctorRating';
 
-export interface RatingRepository {
-  save(rating: Rating): Promise<void>;
-  findDoctorRatings(doctorId: Uuid): Promise<Rating[]>;
+export interface DoctorRatingRepository {
+  save(rating: DoctorRating): Promise<void>;
+  findDoctorRatings(doctorId: Uuid): Promise<DoctorRating[]>;
 }

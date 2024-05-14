@@ -3,7 +3,7 @@ import { DoctorSearcher } from '../../../Doctor/application/SearchDoctor/DoctorS
 import { DoctorRepository } from '../../../Doctor/domain/DoctorRepository';
 import { PatientSearcher } from '../../../Patient/application/PatientSearcher/PatientSearcher';
 import { PatientRepository } from '../../../Patient/domain/PatientRepository';
-import { UserSearcher } from '../../../User/application/UserSearcher/UserSearcher';
+import { UserSearcher } from '../../../User/application/SearchUser/UserSearcher';
 import { UserRepository } from '../../../User/domain/UserRepository';
 import { NoteRepository } from '../../domain/NoteRepository';
 import { CreateNoteCommand } from './CreateNoteCommand';

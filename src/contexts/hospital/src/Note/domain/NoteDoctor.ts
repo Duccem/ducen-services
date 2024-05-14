@@ -1,10 +1,10 @@
-import { Image, StringValueObject, Uuid } from '@ducen-services/shared';
+import { File, StringValueObject, Uuid } from '@ducen-services/shared';
 
 export class NoteDoctor {
   constructor(
     public id: Uuid,
     public fullName: StringValueObject,
-    public photo: Image,
+    public photo: File,
     public specialty: StringValueObject,
   ) {}
 
@@ -21,7 +21,7 @@ export class NoteDoctor {
     return new NoteDoctor(
       new Uuid(data.id),
       new StringValueObject(data.fullName),
-      new Image(data.photo),
+      new File(data.photo),
       new StringValueObject(data.specialty),
     );
   }

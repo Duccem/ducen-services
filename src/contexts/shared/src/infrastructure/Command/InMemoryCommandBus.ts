@@ -15,4 +15,8 @@ export class InMemoryCommandBus implements CommandBus {
   addHandlers(commandHandlers: Array<CommandHandler<Command>>): void {
     this.commandHandlers.addCommands(commandHandlers);
   }
+
+  addHandler(commandHandler: CommandHandler<Command>): void {
+    this.commandHandlers.addCommand(commandHandler);
+  }
 }

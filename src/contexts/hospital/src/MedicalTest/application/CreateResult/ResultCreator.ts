@@ -1,8 +1,7 @@
 import { Primitives } from '@ducen-services/shared';
 import { PatientSearcher } from '../../../Patient/application/PatientSearcher/PatientSearcher';
-import { LabResult } from '../../domain/MedicalTest';
+import { MedicalTest } from '../../domain/MedicalTest';
 import { MedicalTestRepository } from '../../domain/MedicalTestRepository';
-';
 
 export class ResultCreator {
   constructor(
@@ -10,9 +9,9 @@ export class ResultCreator {
     private readonly patientSearcher: PatientSearcher,
   ) {}
 
-  async run(data: Primitives<LabResult>) {
+  async run(data: Primitives<MedicalTest>) {
     await this.patientSearcher.run(data.patientId);
-    const result = LabResult.Create(data.id, data.patientId, data.type, data.laboratory, data.date, data.attributes);
+    const result = MedicalTest.Create(data.id, data.patientId, data.type, data.laboratory, data.date, data.attributes);
     await this.repository.save(result);
   }
 }

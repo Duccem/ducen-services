@@ -1,6 +1,7 @@
 import { Aggregate, DateValueObject, Primitives, StringValueObject, Uuid } from '@ducen-services/shared';
 import { AppointmentDiagnostic } from './AppointmentDiagnostic';
 import { AppointmentDocument } from './AppointmentDocument';
+import { AppointmentRating } from './AppointmentRating';
 import { AppointmentRecipe } from './AppointmentRecipe';
 import { AppointmentRecipeConsultation } from './AppointmentRecipeConsultation';
 import { AppointmentRecipePrescription } from './AppointmentRecipePrescription';
@@ -9,7 +10,6 @@ import { AppointmentRoom } from './AppointmentRoom';
 import { AppointmentStatus } from './AppointmentStatus';
 import { AppointmentTelemetry } from './AppointmentTelemetry';
 import { AppointmentTest } from './AppointmentTest';
-import { Rating } from './Rating';
 
 export class Appointment extends Aggregate {
   constructor(
@@ -21,7 +21,7 @@ export class Appointment extends Aggregate {
     public endDate: DateValueObject,
     public room: AppointmentRoom,
     public status: AppointmentStatus,
-    public rating: Rating,
+    public rating: AppointmentRating,
     public telemetry: AppointmentTelemetry,
     public diagnostic: AppointmentDiagnostic,
     public reviewedTests: AppointmentTest[],
@@ -62,7 +62,7 @@ export class Appointment extends Aggregate {
       new DateValueObject(data.endDate),
       AppointmentRoom.fromPrimitives(data.room),
       new AppointmentStatus(data.status),
-      Rating.fromPrimitives(data.rating),
+      AppointmentRating.fromPrimitives(data.rating),
       AppointmentTelemetry.fromPrimitives(data.telemetry),
       AppointmentDiagnostic.fromPrimitives(data.diagnostic),
       data.reviewedTests.map((labResult) => AppointmentTest.fromPrimitives(labResult)),
@@ -104,7 +104,7 @@ export class Appointment extends Aggregate {
       new DateValueObject(endDate),
       AppointmentRoom.fromPrimitives(room),
       AppointmentStatus.scheduled(),
-      Rating.waitingForReview(),
+      AppointmentRating.waitingForReview(),
       AppointmentTelemetry.waitingForMeasurements(),
       AppointmentDiagnostic.waitingForDiagnostic(),
       AppointmentTest.waitingForTests(),

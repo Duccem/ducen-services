@@ -1,5 +1,4 @@
-import { Command, CommandHandler } from '@ducen-services/shared';
-import { StoreService } from '../../../File/domain/StoreService';
+import { Command, CommandHandler, StoreService } from '@ducen-services/shared';
 import { MedicalDocumentRepository } from '../../domain/MedicalDocumentRepository';
 import { DocumentUploader } from './MedicalDocumentUploader';
 import { UploadMedicalDocumentCommand } from './UploadMedicalDocumentCommand';

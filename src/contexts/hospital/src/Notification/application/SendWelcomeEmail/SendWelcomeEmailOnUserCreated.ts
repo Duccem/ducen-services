@@ -1,5 +1,5 @@
 import { DomainEventClass, DomainEventSubscriber } from '@ducen-services/shared';
-import { UserSearcher } from '../../../User/application/UserSearcher/UserSearcher';
+import { UserSearcher } from '../../../User/application/SearchUser/UserSearcher';
 import { UserCreated } from '../../../User/domain/UserCreated';
 import { UserRepository } from '../../../User/domain/UserRepository';
 import { NotificationRepository } from '../../domain/NotificationRepository';

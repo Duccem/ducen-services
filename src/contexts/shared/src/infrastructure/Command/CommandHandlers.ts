@@ -26,4 +26,8 @@ export class CommandHandlers extends Map<Command, CommandHandler<Command>> {
       this.set(commandHandler.subscribedTo(), commandHandler);
     });
   }
+
+  public addCommand(commandHandler: CommandHandler<Command>): void {
+    this.set(commandHandler.subscribedTo(), commandHandler);
+  }
 }

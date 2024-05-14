@@ -1,4 +1,4 @@
-import { UserSearcher } from '../../../User/application/UserSearcher/UserSearcher';
+import { UserSearcher } from '../../../User/application/SearchUser/UserSearcher';
 import { UserNotExist } from '../../../User/domain/UserNotExist';
 import { Flag } from '../../domain/Flag';
 import { FlagRepository } from '../../domain/FlagRepository';
@@ -10,7 +10,7 @@ export class GetFlags {
     private readonly userSearcher: UserSearcher,
   ) {}
   async run(id: string): Promise<any[]> {
-    const user = await this.userSearcher.run('id', id);
+    const user = await this.userSearcher.run(id);
     if (!user) throw new UserNotExist();
     let flags = await this.cacheRepository.list();
     if (!flags.length) {

@@ -5,12 +5,13 @@ import { graphqlUploadExpress } from 'graphql-upload-ts';
 import { AppModule } from './app.module';
 import nodeSdk from './tracing';
 async function bootstrap() {
-  await nodeSdk.start();
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     bufferLogs: true,
   });
   const logger = app.get('LOGGER_SERVICE') as Logger;
   const configurations = app.get('SERVER_CONFIGURATION');
+  const telemetryConf = app.get('TELEMETRY_CONFIGURATION');
+  nodeSdk(telemetryConf.traces.serviceName, telemetryConf.traces.host, logger);
   const port = configurations.port || 3000;
   const host = configurations.host || 'http://localhost';
   const globalPrefix = configurations.globalPrefix || 'api';

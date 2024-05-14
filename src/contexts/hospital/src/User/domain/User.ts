@@ -133,20 +133,15 @@ export class User extends Aggregate {
     return user;
   }
 
-  public generateToken(): string {
+  public generateToken(signature: string): string {
     const payload = {
       userId: this.id.value,
       role: this.role.value,
       email: this.email.value,
       configuration: this.configuration.toPrimitives(),
     };
-    const token = jwt.sign(payload, this.password.toString(), { expiresIn: 60 * 60 * 24 });
+    const token = jwt.sign(payload, signature, { expiresIn: 60 * 60 * 24 });
     return token;
-  }
-
-  validateToken(token: string): any {
-    const payload = jwt.verify(token, this.password.toString());
-    return payload;
   }
 
   public validatePassword(password: string): void {
@@ -157,5 +152,9 @@ export class User extends Aggregate {
     if (!this.password.compare(oldPassword)) throw new IncorrectPassword();
     this.password = new UserPassword(newPassword);
     this.password.encrypt();
+  }
+
+  public updateProfileImage(photo: string): void {
+    this.photo = new File(photo);
   }
 }

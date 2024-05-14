@@ -1,5 +1,7 @@
 export * from './Command/CommandHandlers';
 export * from './Command/InMemoryCommandBus';
+export * from './Error/GQLErrorHandler';
+export * from './Error/RESTErrorHandler';
 export * from './Events/DomainEventDeserializer';
 export * from './Events/DomainEventFailOverPublisher';
 export * from './Events/DomainEventRegisterObservers';
@@ -17,6 +19,7 @@ export * from './IA/VectorStores/MongoVectorStore';
 export * from './Logging/ConsoleLogger';
 export * from './Logging/FileLogger';
 export * from './Logging/Format';
+export * from './Logging/LoggerMiddleware';
 export * from './Logging/LokiLogger';
 export * from './Logging/NetTracer';
 export * from './Persistence/Mongo/MongoArranger';

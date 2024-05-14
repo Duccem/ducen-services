@@ -1,4 +1,4 @@
-import { UserSearcher } from '../../../User/application/UserSearcher/UserSearcher';
+import { UserSearcher } from '../../../User/application/SearchUser/UserSearcher';
 import { UserNotExist } from '../../../User/domain/UserNotExist';
 import { Patient } from '../../domain/Patient';
 import { PatientRepository } from '../../domain/PatientRepository';
@@ -10,7 +10,7 @@ export class PatientCreator {
   ) {}
 
   async run(id: string, userId: string): Promise<void> {
-    const user = await this.userSearcher.run('id', userId);
+    const user = await this.userSearcher.run(userId);
     if (!user) {
       throw new UserNotExist();
     }

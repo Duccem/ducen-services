@@ -1,11 +1,10 @@
 import { Query, QueryHandler } from '@ducen-services/shared';
 import { PatientSearcher } from '../../../Patient/application/PatientSearcher/PatientSearcher';
 import { PatientRepository } from '../../../Patient/domain/PatientRepository';
-import { LabResult } from '../../domain/MedicalTest';
+import { MedicalTest } from '../../domain/MedicalTest';
 import { MedicalTestRepository } from '../../domain/MedicalTestRepository';
 import { GetResultQuery } from './GetResultQuery';
 import { ResultGetter } from './ResultGetter';
-';
 
 export class GetResultQueryHandler implements QueryHandler<GetResultQuery> {
   private getter: ResultGetter;
@@ -17,7 +16,7 @@ export class GetResultQueryHandler implements QueryHandler<GetResultQuery> {
     return GetResultQuery;
   }
 
-  public async handle(query: GetResultQuery): Promise<LabResult[]> {
+  public async handle(query: GetResultQuery): Promise<MedicalTest[]> {
     return await this.getter.run(query.patientId);
   }
 }

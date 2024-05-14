@@ -1,11 +1,15 @@
 import { Primitives } from '@ducen-services/shared';
+import { AuthConfig } from '../../domain/AuthConfig';
 import { IdentifyBy } from '../../domain/IdentifyBy';
+import { User } from '../../domain/User';
 import { UserNotExist } from '../../domain/UserNotExist';
 import { UserRepository } from '../../domain/UserRepository';
-import { User } from '../../domain/User';
 
 export class Login {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    private userRepository: UserRepository,
+    private authConfig: AuthConfig,
+  ) {}
   async run(
     username: string,
     password: string,
@@ -19,7 +23,7 @@ export class Login {
     user.validatePassword(password);
 
     return {
-      token: user.generateToken(),
+      token: user.generateToken(this.authConfig.authKey),
       user: user.toPrimitives(),
     };
   }

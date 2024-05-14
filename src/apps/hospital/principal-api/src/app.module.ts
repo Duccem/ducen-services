@@ -1,23 +1,33 @@
+import { JWTStrategy, SharedModule, UserModule } from '@ducen-services/hospital';
+import { GraphQLErrorHandling, LoggerMiddleware } from '@ducen-services/shared';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { OpenTelemetryModule } from 'nestjs-otel';
+import connectionsConfig from './config/connections.config';
 import { getEnv } from './config/env.config';
-import { FlagModule } from './modules/flag/flag.module';
-import { confFiles } from './modules/shared/providers/confIgurations.provider';
-import { SharedModule } from './modules/shared/shared.module';
-import { UserModule } from './modules/user/user.module';
-import { GraphQLErrorHandling } from './utils/ErrorHandlers/GQLErrorHandler';
-import { JWTStrategy } from './utils/Strategies/JWTStrategy';
-import { LoggerMiddleware } from './utils/middlewares/LoggerMiddleware';
+import notificationConfig from './config/notification.config';
+import oauthConfig from './config/oauth.config';
+import paymentConfig from './config/payment.config';
+import serverConfig from './config/server.config';
+import storageConfig from './config/storage.config';
+import loggingConfig from './config/telemetry.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: getEnv(),
-      load: [...confFiles],
+      load: [
+        notificationConfig,
+        oauthConfig,
+        paymentConfig,
+        serverConfig,
+        loggingConfig,
+        connectionsConfig,
+        storageConfig,
+      ],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -36,7 +46,6 @@ import { LoggerMiddleware } from './utils/middlewares/LoggerMiddleware';
     }),
     SharedModule,
     UserModule,
-    FlagModule,
   ],
   providers: [JWTStrategy],
 })

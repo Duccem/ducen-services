@@ -1,0 +1,88 @@
+type AddressPoint {
+  longitude: Float
+  latitude: Float
+}
+type UserAddress {
+  country: String
+  city: String
+  street: String
+  zipCode: String
+  coordinates: AddressPoint
+}
+
+type UserConfiguration {
+  timezone: String
+  lang: String
+  theme: String
+}
+
+type UserName {
+  firstName: String
+  lastName: String
+}
+
+type User {
+  id: String
+  createdAt: String
+  updatedAt: String
+  name: UserName
+  gender: String
+  email: String
+  phoneNumber: String
+  birthDate: String
+  photo: String
+  address: UserAddress
+  configuration: UserConfiguration
+}
+
+type LoginUser {
+  user: User!
+  token: String!
+}
+
+input AddressPointRegister {
+  longitude: Float
+  latitude: Float
+}
+input UserAddressRegister {
+  country: String
+  city: String
+  street: String
+  zipCode: String
+  coordinates: AddressPointRegister
+}
+
+input UserConfigurationRegister {
+  timezone: String
+  lang: String
+  theme: String
+}
+input UserNameRegister {
+  firstName: String
+  lastName: String
+}
+input UserRegister {
+  id: String
+  name: UserNameRegister
+  gender: String
+  password: String
+  email: String
+  birthDate: String
+  photo: String
+  phoneNumber: String
+  address: UserAddressRegister
+  role: String
+  configuration: UserConfigurationRegister
+}
+
+type Subscription {
+  userRegistered: User
+}
+
+type Mutation {
+  userRegister(user: UserRegister): Boolean
+}
+
+type Query {
+  login(identifier: String, password: String): LoginUser
+}

@@ -1,7 +1,5 @@
 import { CommandBus, EventBus } from '@ducen-services/shared';
 import { Provider } from '@nestjs/common';
-import { ChangePasswordHandler } from '../../application/ChangePassword/ChangePasswordHandler';
-import { RecoveryPasswordHandler } from '../../application/RecoveryPassword/RecoveryPasswordHandler';
 import { UserRegisterHandler } from '../../application/RegisterUser/UserRegisterHandler';
 import { UserRepository } from '../../domain/UserRepository';
 
@@ -12,16 +10,16 @@ export const commandHandlers: Provider[] = [
     useFactory: (repository: UserRepository, eventBus: EventBus, commandBus: CommandBus) =>
       commandBus.addHandler(new UserRegisterHandler(repository, eventBus)),
   },
-  {
-    provide: RecoveryPasswordHandler,
-    inject: ['USER_REPOSITORY', 'COMMAND_BUS'],
-    useFactory: (repository: UserRepository, commandBus: CommandBus) =>
-      commandBus.addHandler(new RecoveryPasswordHandler(repository)),
-  },
-  {
-    provide: ChangePasswordHandler,
-    inject: ['USER_REPOSITORY', 'COMMAND_BUS'],
-    useFactory: (repository: UserRepository, commandBus: CommandBus) =>
-      commandBus.addHandler(new ChangePasswordHandler(repository)),
-  },
+  // {
+  //   provide: RecoveryPasswordHandler,
+  //   inject: ['USER_REPOSITORY', 'COMMAND_BUS'],
+  //   useFactory: (repository: UserRepository, commandBus: CommandBus) =>
+  //     commandBus.addHandler(new RecoveryPasswordHandler(repository)),
+  // },
+  // {
+  //   provide: ChangePasswordHandler,
+  //   inject: ['USER_REPOSITORY', 'COMMAND_BUS'],
+  //   useFactory: (repository: UserRepository, commandBus: CommandBus) =>
+  //     commandBus.addHandler(new ChangePasswordHandler(repository)),
+  // },
 ];

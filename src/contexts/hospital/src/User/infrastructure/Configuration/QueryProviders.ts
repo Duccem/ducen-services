@@ -6,7 +6,8 @@ import { UserRepository } from '../../domain/UserRepository';
 export const queryHandlers: Provider[] = [
   {
     provide: LoginHandler,
-    inject: ['USER_REPOSITORY', 'QUERY_BUS'],
-    useFactory: (repository: UserRepository, queryBus: QueryBus) => queryBus.addHandler(new LoginHandler(repository)),
+    inject: ['USER_REPOSITORY', 'QUERY_BUS', 'SERVER_CONFIGURATION'],
+    useFactory: (repository: UserRepository, queryBus: QueryBus, serverConf: any) =>
+      queryBus.addHandler(new LoginHandler(repository, { authKey: serverConf.authKey })),
   },
 ];

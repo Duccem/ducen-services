@@ -6,21 +6,21 @@ export class S3StoreService implements StoreService {
   private client: S3Client;
   private bucket: string;
   constructor({
-    access_key,
+    accessKeyId,
     region,
-    secret_key,
+    secretAccessKey,
     bucket,
   }: {
     region: string;
-    access_key: string;
-    secret_key: string;
+    accessKeyId: string;
+    secretAccessKey: string;
     bucket: string;
   }) {
     this.client = new S3Client({
       region,
       credentials: {
-        accessKeyId: access_key,
-        secretAccessKey: secret_key,
+        accessKeyId,
+        secretAccessKey,
       },
     });
     this.bucket = bucket;

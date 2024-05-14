@@ -1,0 +1,20 @@
+scalar Upload
+
+
+input QueryFilter {
+  value: String
+  operator: String
+  field: String
+}
+
+input QueryParameters {
+  orderBy: String
+  order: String
+  limit: String
+  offset: String
+  filters: [QueryFilter]
+}
+
+input CountParameters {
+  filters: [QueryFilter]
+}

@@ -12,9 +12,11 @@
     "target": "ES2021",
     "sourceMap": true,
     "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "paths": {
-      "domain": ["./src/domain/index.ts"],
-      "infrastructure": ["./src/infrastructure/index.ts"],
+      "@domain": ["./src/domain/index.ts"],
+      "@infrastructure": ["./src/infrastructure/index.ts"],
     }
   },
 }

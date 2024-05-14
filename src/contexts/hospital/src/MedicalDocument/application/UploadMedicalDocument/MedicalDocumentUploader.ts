@@ -1,17 +1,16 @@
-import { Primitives } from '@ducen-services/shared';
-import { FileUploader } from '../../../File/application/UploadFile/FileUploader';
+import { Primitives, StoreService } from '@ducen-services/shared';
 import { MedicalDocument } from '../../domain/MedicalDocument';
 import { MedicalDocumentRepository } from '../../domain/MedicalDocumentRepository';
 
 export class DocumentUploader {
   constructor(
     public readonly repository: MedicalDocumentRepository,
-    public readonly fileUploader: FileUploader,
+    private readonly storeService: StoreService,
   ) {}
 
-  async run(metadata: Primitives<MedicalDocument>, buffer: Buffer): Promise<void> {
+  async run(metadata: Primitives<MedicalDocument>, image: Buffer): Promise<void> {
     const fileName = `${metadata.userId}/${metadata.type}/${metadata.fileName}`;
-    const { url } = await this.fileUploader.run(buffer, fileName);
+    const { url } = await this.storeService.upload(image, fileName);
     const document = MedicalDocument.fromPrimitives({ ...metadata, url });
     await this.repository.save(document);
   }

@@ -1,12 +1,14 @@
-import { EmailSender } from '@ducen-services/shared';
+import { Notification, User } from '../..';
+import { EmailNotifier } from '../../src/Notification/domain/Notifier';
 
-export class MockMailSender implements EmailSender {
+export class MockMailSender implements EmailNotifier {
   sendEmailMock: jest.Mock = jest.fn();
-  async SendEmail(email: string, title: string, templateName: string, data?: {}): Promise<void> {
-    this.sendEmailMock(email, title, templateName, data);
+  type: string = 'email';
+  async notify(notification: Notification, user: User, data: { [key: string]: any }): Promise<void> {
+    this.sendEmailMock(notification, user, data);
   }
 
-  assertSendEmailHaveBeenCalledWith(email: string, title: string, templateName: string, data?: {}) {
-    expect(this.sendEmailMock).toHaveBeenCalledWith(email, title, templateName, data);
+  assertSendEmailHaveBeenCalledWith(notification: Notification, user: User, data: { [key: string]: any }) {
+    expect(this.sendEmailMock).toHaveBeenCalledWith(notification, user, data);
   }
 }

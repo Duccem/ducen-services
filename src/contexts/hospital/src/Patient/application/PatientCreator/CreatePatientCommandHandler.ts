@@ -1,5 +1,5 @@
 import { Command, CommandHandler } from '@ducen-services/shared';
-import { UserSearcher } from '../../../User/application/UserSearcher/UserSearcher';
+import { UserSearcher } from '../../../User/application/SearchUser/UserSearcher';
 import { UserRepository } from '../../../User/domain/UserRepository';
 import { PatientRepository } from '../../domain/PatientRepository';
 import { CreatePatientCommand } from './CreatePatientCommand';

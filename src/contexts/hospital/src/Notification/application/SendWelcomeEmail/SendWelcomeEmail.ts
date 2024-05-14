@@ -1,4 +1,4 @@
-import { UserSearcher } from '../../../User/application/UserSearcher/UserSearcher';
+import { UserSearcher } from '../../../User/application/SearchUser/UserSearcher';
 import { Notification } from '../../domain/Notification';
 import { NotificationRepository } from '../../domain/NotificationRepository';
 import { EmailNotifier } from '../../domain/Notifier';

@@ -2,15 +2,25 @@ import { registerAs } from '@nestjs/config';
 
 export default registerAs('oauth', () => {
   return {
-    facebookClientID: process.env.FACEBOOK_CLIENT_ID || '',
-    facebookClientSecret: process.env.FACEBOOK_CLIENT_SECRET || '',
-    googleClientID: process.env.GOOGLE_CLIENT_ID || '',
-    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-    twitterClientID: process.env.TWITTER_KEY || '',
-    twitterClientSecret: process.env.TWITTER_SECRET || '',
-    linkedinClientID: process.env.LINKEDIN_CLIENT_ID || '',
-    linkedinClientSecret: process.env.LINKEDIN_CLIENT_SECRET || '',
-    githubClientID: process.env.GIT_CLIENT_ID || '',
-    githubClientSecret: process.env.GIT_CLIENT_SECRET || '',
+    facebook: {
+      clientId: process.env.FACEBOOK_CLIENT_ID || '',
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET || '',
+    },
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID || '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+    },
+    twitter: {
+      clientId: process.env.TWITTER_KEY || '',
+      clientSecret: process.env.TWITTER_SECRET || '',
+    },
+    linkedin: {
+      clientId: process.env.LINKEDIN_CLIENT_ID || '',
+      clientSecret: process.env.LINKEDIN_CLIENT_SECRET || '',
+    },
+    github: {
+      clientId: process.env.GITHUB_CLIENT_ID || '',
+      clientSecret: process.env.GITHUB_CLIENT_SECRET || '',
+    },
   };
 });
