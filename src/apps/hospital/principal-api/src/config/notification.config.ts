@@ -8,7 +8,6 @@ export default registerAs('notification', () => {
       host: process.env.EMAIL_HOST || 'smtp.gmail.com',
       port: process.env.EMAIL_PORT || 465,
       fromEmail: process.env.EMAIL_FROM || '',
-      templatePath: process.env.EMAIL_TEMPLATE_PATH || '',
     },
     firebase: {
       type: process.env.FIREBASE_TYPE,
