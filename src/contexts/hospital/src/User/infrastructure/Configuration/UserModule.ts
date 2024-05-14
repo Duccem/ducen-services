@@ -3,6 +3,7 @@ import { UserSearcher } from '../../../..';
 import { SharedModule } from '../../../Shared/infrastructure/Configuration/SharedModule';
 import { UserController } from '../Presentation/UserController';
 import { UserResolver } from '../Presentation/UserResolver';
+import { LlamaHabitsGenerator } from '../Services/LlamaHabitsGenerator';
 import { commandHandlers } from './CommandProviders';
 import { queryHandlers } from './QueryProviders';
 import { userRepositories } from './RepositoryProviders';
@@ -11,6 +12,11 @@ import { userRepositories } from './RepositoryProviders';
   imports: [SharedModule],
   controllers: [UserController],
   providers: [
+    {
+      provide: 'HABITS_GENERATOR',
+      inject: ['DATABASE_CONNECTION', 'LLM_CONFIGURATION'],
+      useFactory: (connection, conf) => new LlamaHabitsGenerator(connection, conf.hf.apiKey),
+    },
     ...userRepositories,
     ...queryHandlers,
     ...commandHandlers,

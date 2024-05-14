@@ -48,8 +48,8 @@ export class User extends Aggregate {
       new File(data.photo),
       new UserGender(data.gender),
       UserConfiguration.fromPrimitives(data.configuration),
-      data.devices.map((device) => Device.fromPrimitives(device)),
-      new BooleanValueObject(data.isActive),
+      data.devices ? data.devices.map((device) => Device.fromPrimitives(device)) : [],
+      new BooleanValueObject(data.isActive || true),
       new DateValueObject(data.createdAt || new Date()),
       new DateValueObject(data.updatedAt || new Date()),
     );

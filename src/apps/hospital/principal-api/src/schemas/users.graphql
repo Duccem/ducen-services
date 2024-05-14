@@ -85,4 +85,5 @@ type Mutation {
 
 type Query {
   login(identifier: String, password: String): LoginUser
+  habits(userId: String): [String]
 }

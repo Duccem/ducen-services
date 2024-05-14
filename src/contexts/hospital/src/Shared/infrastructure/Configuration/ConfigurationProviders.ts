@@ -37,4 +37,9 @@ export const configurations: Provider[] = [
     inject: [ConfigService],
     useFactory: (configService: ConfigService) => ({ ...configService.get('storage') }),
   },
+  {
+    provide: 'LLM_CONFIGURATION',
+    inject: [ConfigService],
+    useFactory: (configService: ConfigService) => ({ ...configService.get('llm') }),
+  },
 ];

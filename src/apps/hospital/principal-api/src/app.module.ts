@@ -7,6 +7,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { OpenTelemetryModule } from 'nestjs-otel';
 import connectionsConfig from './config/connections.config';
 import { getEnv } from './config/env.config';
+import llmConfig from './config/llm.config';
 import notificationConfig from './config/notification.config';
 import oauthConfig from './config/oauth.config';
 import paymentConfig from './config/payment.config';
@@ -27,6 +28,7 @@ import loggingConfig from './config/telemetry.config';
         loggingConfig,
         connectionsConfig,
         storageConfig,
+        llmConfig,
       ],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({

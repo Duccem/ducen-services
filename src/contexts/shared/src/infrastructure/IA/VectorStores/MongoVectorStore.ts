@@ -1,4 +1,3 @@
-import { OllamaEmbeddings } from '@langchain/community/embeddings/ollama';
 import { MongoDBAtlasVectorSearch } from '@langchain/mongodb';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { MongoConnection } from '../../Persistence/Mongo/MongoConnection';
@@ -6,9 +5,10 @@ export class MongoVectorStore {
   private vectorStore: MongoDBAtlasVectorSearch;
   constructor(
     private connection: MongoConnection,
+    embeddings: any,
     collectionName: string = 'llama_vector_store',
   ) {
-    this.vectorStore = new MongoDBAtlasVectorSearch(new OllamaEmbeddings(), {
+    this.vectorStore = new MongoDBAtlasVectorSearch(embeddings, {
       collection: this.connection.getCollection(collectionName),
       indexName: `${collectionName}_index`,
       textKey: 'text',

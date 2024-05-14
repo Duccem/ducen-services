@@ -1,8 +1,10 @@
+import { OllamaEmbeddings } from '@langchain/community/embeddings/ollama';
 import { Ollama } from '@langchain/community/llms/ollama';
-import { JsonOutputParser } from '@langchain/core/output_parsers';
+import { JsonOutputParser, StructuredOutputParser } from '@langchain/core/output_parsers';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { RunnablePassthrough, RunnableSequence } from '@langchain/core/runnables';
 import { formatDocumentsAsString } from 'langchain/util/document';
+import { ZodSchema } from 'zod';
 import { MongoConnection } from '../../Persistence/Mongo/MongoConnection';
 import { MongoVectorStore } from '../VectorStores/MongoVectorStore';
 
@@ -10,7 +12,7 @@ export abstract class LlamaGenerator {
   private model: Ollama;
   private vectorStore: MongoVectorStore;
   constructor(connection: MongoConnection, url: string, model?: string, collectionName?: string) {
-    this.vectorStore = new MongoVectorStore(connection, collectionName);
+    this.vectorStore = new MongoVectorStore(connection, new OllamaEmbeddings(), collectionName);
     this.model = new Ollama({
       model: model ? model : 'llama3',
       temperature: 0,
@@ -33,10 +35,21 @@ export abstract class LlamaGenerator {
     return answer;
   }
 
-  async generateFromPrompt(messages: any[], query: string, context?: string): Promise<string> {
+  async generateFromPrompt<T>({
+    messages,
+    query,
+    context,
+    structure,
+  }: {
+    messages: any[];
+    query: string;
+    context?: string;
+    structure: ZodSchema<T>;
+  }): Promise<T> {
     const prompt = ChatPromptTemplate.fromMessages(messages);
-    const chain = RunnableSequence.from([prompt, this.model, new JsonOutputParser()]);
-    const answer = await chain.invoke({ query, context });
+    const outputParser = StructuredOutputParser.fromZodSchema(structure);
+    const chain = RunnableSequence.from([prompt, this.model, outputParser]);
+    const answer = await chain.invoke({ query, context, format_instructions: outputParser.getFormatInstructions() });
     return answer;
   }
 

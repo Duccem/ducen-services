@@ -1,6 +1,7 @@
 import { CommandBus, QueryBus } from '@ducen-services/shared';
 import { Inject } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { GenerateUserHabitsQuery } from '../../application/GenerateUserHabits/GenerateUserHabitsQuery';
 import { LoginQuery } from '../../application/Login/LoginQuery';
 import { UserRegisterCommand } from '../../application/RegisterUser/UserRegisterCommand';
 
@@ -14,6 +15,16 @@ export class UserResolver {
   @Query('login')
   async login(@Args('identifier') identifier: string, @Args('password') password: string) {
     const query = new LoginQuery(identifier, password);
+    return await this.queryBus.ask(query);
+  }
+
+  @Query('habits')
+  async habits(@Args('userId') userId: string) {
+    const query = new GenerateUserHabitsQuery(userId, {
+      height: 1.7,
+      weight: 70,
+      age: 25,
+    });
     return await this.queryBus.ask(query);
   }
 

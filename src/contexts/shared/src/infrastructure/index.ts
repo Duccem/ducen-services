@@ -14,6 +14,7 @@ export * from './Events/RabbitMQ/RabbitMQEventBus';
 export * from './Events/RabbitMQ/RabbitMQFormatter';
 export * from './Files/CloudinaryStoreService';
 export * from './Files/S3StoreService';
+export * from './IA/Models/HuggingFaceGenerator';
 export * from './IA/Models/LlamaGenerator';
 export * from './IA/VectorStores/MongoVectorStore';
 export * from './Logging/ConsoleLogger';
