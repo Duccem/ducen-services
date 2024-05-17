@@ -87,6 +87,7 @@ type Subscription {
 type Mutation {
   userRegister(user: UserRegister): Boolean
   uploadProfileImage(file: Upload, name: String, type: String): String
+  saveKnowledgeBase(knowledgeBase: String): Boolean
 }
 
 type Query {

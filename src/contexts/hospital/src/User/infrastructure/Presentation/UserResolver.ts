@@ -3,6 +3,7 @@ import { Inject, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GraphQLUpload, Upload } from 'graphql-upload-ts';
 import { GenerateUserHabitsQuery } from '../../application/GenerateUserHabits/GenerateUserHabitsQuery';
+import { IngestKnowledgeBaseCommand } from '../../application/IngestKnowlodgeBase/IngestKnowledgeBaseCommand';
 import { LoginQuery } from '../../application/Login/LoginQuery';
 import { UserRegisterCommand } from '../../application/RegisterUser/UserRegisterCommand';
 import { UploadProfileImageCommand } from '../../application/UploadProfileImage/UploadProfileImageCommand';
@@ -36,6 +37,12 @@ export class UserResolver {
   @Mutation('userRegister')
   async userRegister(@Args('user') user: any) {
     const command = new UserRegisterCommand(user);
+    await this.commandBus.dispatch(command);
+    return null;
+  }
+  @Mutation('saveKnowledgeBase')
+  async saveKnowledgeBase(@Args('knowledgeBase') knowledgeBase: any) {
+    const command = new IngestKnowledgeBaseCommand(knowledgeBase);
     await this.commandBus.dispatch(command);
     return null;
   }

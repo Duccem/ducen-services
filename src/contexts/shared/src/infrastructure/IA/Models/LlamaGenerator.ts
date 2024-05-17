@@ -1,7 +1,9 @@
 import { OllamaEmbeddings } from '@langchain/community/embeddings/ollama';
 import { Ollama } from '@langchain/community/llms/ollama';
 import { LengthBasedExampleSelector } from '@langchain/core/example_selectors';
+import { Serialized } from '@langchain/core/load/serializable';
 import { StructuredOutputParser } from '@langchain/core/output_parsers';
+import { LLMResult } from '@langchain/core/outputs';
 import { FewShotPromptTemplate, PromptTemplate } from '@langchain/core/prompts';
 import { RunnableSequence } from '@langchain/core/runnables';
 import { ZodSchema } from 'zod';
@@ -12,11 +14,30 @@ export abstract class LlamaGenerator {
   private model: Ollama;
   private vectorStore: MongoVectorStore;
   constructor(connection: MongoConnection, url: string, collectionName?: string) {
-    this.vectorStore = new MongoVectorStore(connection, new OllamaEmbeddings(), collectionName);
+    this.vectorStore = new MongoVectorStore(
+      connection,
+      new OllamaEmbeddings({
+        baseUrl: url,
+        model: 'llama3',
+      }),
+      collectionName,
+    );
     this.model = new Ollama({
       model: 'llama3',
       temperature: 0,
       baseUrl: url,
+      callbacks: [
+        {
+          handleLLMStart: (_llm: Serialized, prompts: string[]) => {
+            console.log('-- PROMPT --\n');
+            console.log(prompts[0]);
+          },
+          handleLLMEnd: (output: LLMResult) => {
+            console.log('\n\n-- RESULT --\n');
+            console.log(output.generations[0][0].text);
+          },
+        },
+      ],
     });
   }
 

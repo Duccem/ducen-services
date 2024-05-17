@@ -11,6 +11,7 @@ export class LlamaHabitsGenerator extends LlamaGenerator implements HabitsGenera
     * Ejemplo de respuesta de la razón de la sugerencia: "Porque tiene un peso superior a 102kg necesita hacer cardio".
     * Utiliza el formato JSON para devolver la respuesta
     * Basa tu respuesta en los datos físicos del paciente
+    * Usa como referencia la siguiente informacion: {context}
     * Si no puedes recomendar ningún hábito, responde con una lista vacía
       {format_instructions}
     * Los datos físicos del paciente son: {query}`;
@@ -33,6 +34,14 @@ export class LlamaHabitsGenerator extends LlamaGenerator implements HabitsGenera
     const query = `
       usuario: ${JSON.stringify({ id: user.id.value, age: user.birthDate.age(), datos_físicos: physicInformation })}
     `;
-    return await this.generate(LlamaHabitsGenerator.RESPONSE_STRUCTURE, LlamaHabitsGenerator.SYSTEM_TEMPLATE, query);
+    return await this.generateFromEmbeddings(
+      LlamaHabitsGenerator.RESPONSE_STRUCTURE,
+      LlamaHabitsGenerator.SYSTEM_TEMPLATE,
+      query,
+    );
+  }
+
+  async saveHabitsKnowledgeBase(knowledgeBase: string): Promise<void> {
+    await this.saveKnowledgeBase(knowledgeBase);
   }
 }

@@ -1,8 +1,6 @@
 import { Aggregate, BooleanValueObject, DateValueObject, Email, File, Primitives, Uuid } from '@ducen-services/shared';
 import * as jwt from 'jsonwebtoken';
 import { Device } from './Device';
-import { DeviceAgent } from './DeviceAgent';
-import { DeviceToken } from './DeviceToken';
 import { IncorrectPassword } from './IncorrectPassword';
 import { UserAddress } from './UserAddress';
 import { UserBirthDate } from './UserBirthDate';
@@ -116,9 +114,7 @@ export class User extends Aggregate {
       new File(photo),
       new UserGender(gender as UserGenders),
       UserConfiguration.fromPrimitives(configuration),
-      devices.map((device) =>
-        Device.create(Uuid.random(), new DeviceAgent(device.agent), new DeviceToken(device.token)),
-      ),
+      [],
       new BooleanValueObject(false),
       new DateValueObject(new Date()),
       new DateValueObject(new Date()),
