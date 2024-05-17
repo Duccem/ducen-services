@@ -1,16 +1,11 @@
+import { User } from '../../../..';
 import { HabitsGenerator } from '../../domain/HabitsGenerator';
-import { UserSearcher } from '../SearchUser/UserSearcher';
 
 export class UserHabitsGenerator {
-  constructor(
-    private habitsGenerator: HabitsGenerator,
-    private userSearcher: UserSearcher,
-  ) {}
+  constructor(private habitsGenerator: HabitsGenerator) {}
 
-  async run(userId: string, physicInformation: any): Promise<string[]> {
-    const user = await this.userSearcher.run(userId);
+  async run(user: User, physicInformation: any): Promise<{ habit?: string; reason?: string }[]> {
     const habits = await this.habitsGenerator.generateHabits(user, physicInformation);
-    console.log(habits);
-    return habits.habits.map((habit) => habit.habit + ' - ' + habit.reason);
+    return habits.habits;
   }
 }

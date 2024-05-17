@@ -1,8 +1,9 @@
 import { Query } from '@ducen-services/shared';
+import { User } from '../../../..';
 
 export class GenerateUserHabitsQuery extends Query {
   constructor(
-    public userId: string,
+    public user: User,
     public physicInformation: any,
   ) {
     super();

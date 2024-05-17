@@ -1,8 +1,9 @@
 import { MongoDBAtlasVectorSearch } from '@langchain/mongodb';
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { MongoConnection } from '../../Persistence/Mongo/MongoConnection';
+import { DocumentCreator } from '../DocumentCreators/DocumentCreator';
 export class MongoVectorStore {
   private vectorStore: MongoDBAtlasVectorSearch;
+  private documentSplitter = new DocumentCreator();
   constructor(
     private connection: MongoConnection,
     embeddings: any,
@@ -15,13 +16,16 @@ export class MongoVectorStore {
       embeddingKey: 'embedding',
     });
   }
-  async saveKnowledgeBase(text: string): Promise<void> {
-    const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000 });
-    const docs = await textSplitter.createDocuments([text]);
+  async saveKnowledgeBase(document: string): Promise<void> {
+    const docs = await this.documentSplitter.createFromText(document);
     await this.vectorStore.addDocuments(docs);
   }
 
   getAsRetriever() {
     return this.vectorStore.asRetriever();
+  }
+
+  async queryDocuments(query: string) {
+    return await this.vectorStore.similaritySearch(query);
   }
 }

@@ -14,8 +14,8 @@ export const queryHandlers: Provider[] = [
   },
   {
     provide: GenerateUserHabitsQueryHandler,
-    inject: ['HABITS_GENERATOR', 'USER_REPOSITORY', 'QUERY_BUS'],
-    useFactory: (habitsGenerator: HabitsGenerator, userRepository: UserRepository, queryBus: QueryBus) =>
-      queryBus.addHandler(new GenerateUserHabitsQueryHandler(habitsGenerator, userRepository)),
+    inject: ['HABITS_GENERATOR', 'QUERY_BUS'],
+    useFactory: (habitsGenerator: HabitsGenerator, queryBus: QueryBus) =>
+      queryBus.addHandler(new GenerateUserHabitsQueryHandler(habitsGenerator)),
   },
 ];

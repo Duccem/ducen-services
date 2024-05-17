@@ -1,5 +1,4 @@
 import { LlamaGenerator, MongoConnection } from '@ducen-services/shared';
-import { PromptTemplate } from '@langchain/core/prompts';
 import { z } from 'zod';
 import { Appointment } from '../../Appointment/domain/Appointment';
 import { Doctor } from '../../Doctor/domain/Doctor';
@@ -15,14 +14,13 @@ export class OllamaSuggestedDoctorsGenerator extends LlamaGenerator {
     * Si no puedes recomendar ningún doctor, responde con una lista vacía
     * Los datos del usuario y sus consultas previas son: {query}`;
   constructor(connection: MongoConnection) {
-    super(connection, 'http://localhost:11434', 'llama3', 'suggested_doctors');
+    super(connection, 'http://localhost:11434', 'suggested_doctors');
   }
   async getSuggestedDoctors(
     user: User,
     lastThreeConsults: Appointment[],
     doctors: Doctor[],
   ): Promise<{ doctors?: string[] }> {
-    const messages = [PromptTemplate.fromTemplate(OllamaSuggestedDoctorsGenerator.SYSTEM_TEMPLATE)];
     const context = doctors
       .map((doctor) => JSON.stringify({ id: doctor.id.value, specialty: doctor.specialty.value }))
       .join('\n');
@@ -30,11 +28,13 @@ export class OllamaSuggestedDoctorsGenerator extends LlamaGenerator {
       usuario: ${JSON.stringify({ id: user.id.value, age: user.birthDate.age() })}
       ultimas tres consultas: ${JSON.stringify(lastThreeConsults.map((consult) => consult.toString()))}
     `;
-    return this.generateFromPrompt({
-      messages,
+    return this.generate(
+      z.object({
+        doctors: z.array(z.string()),
+      }),
+      OllamaSuggestedDoctorsGenerator.SYSTEM_TEMPLATE,
       query,
       context,
-      structure: z.object({ doctors: z.string().array() }),
-    });
+    );
   }
 }

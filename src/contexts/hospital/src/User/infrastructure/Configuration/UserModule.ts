@@ -14,8 +14,8 @@ import { userRepositories } from './RepositoryProviders';
   providers: [
     {
       provide: 'HABITS_GENERATOR',
-      inject: ['DATABASE_CONNECTION', 'LLM_CONFIGURATION'],
-      useFactory: (connection, conf) => new LlamaHabitsGenerator(connection, conf.hf.apiKey),
+      inject: ['DATABASE_CONNECTION'],
+      useFactory: (connection) => new LlamaHabitsGenerator(connection),
     },
     ...userRepositories,
     {

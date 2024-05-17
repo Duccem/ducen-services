@@ -23,11 +23,12 @@ export class UserResolver {
   }
 
   @Query('habits')
-  async habits(@Args('userId') userId: string) {
-    const query = new GenerateUserHabitsQuery(userId, {
-      height: 1.7,
-      weight: 70,
-      age: 25,
+  @UseGuards(JwtAuthGuard)
+  async habits(@CurrentUser() user: User) {
+    const query = new GenerateUserHabitsQuery(user, {
+      height: 1.67,
+      weight: 108,
+      age: 32,
     });
     return await this.queryBus.ask(query);
   }

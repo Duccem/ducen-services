@@ -12,32 +12,27 @@ export class LlamaHabitsGenerator extends LlamaGenerator implements HabitsGenera
     * Utiliza el formato JSON para devolver la respuesta
     * Basa tu respuesta en los datos físicos del paciente
     * Si no puedes recomendar ningún hábito, responde con una lista vacía
-    * Siempre respondes utilizando el siguiente JSON Schema:
       {format_instructions}
     * Los datos físicos del paciente son: {query}`;
-  constructor(connection: MongoConnection, apiKey: string) {
-    super(connection, 'http://localhost:11434', 'llama3', 'suggested_habits');
+  static RESPONSE_STRUCTURE = z.object({
+    habits: z.array(
+      z.object({
+        habit: z.string(),
+        reason: z.string(),
+      }),
+    ),
+  });
+  constructor(connection: MongoConnection) {
+    super(connection, 'http://localhost:11434', 'suggested_habits');
   }
 
   async generateHabits(
     user: User,
     physicInformation: any,
-  ): Promise<{ habits?: { habit?: string; reason?: string }[] }> {
-    const messages = [LlamaHabitsGenerator.SYSTEM_TEMPLATE];
+  ): Promise<z.infer<typeof LlamaHabitsGenerator.RESPONSE_STRUCTURE>> {
     const query = `
       usuario: ${JSON.stringify({ id: user.id.value, age: user.birthDate.age(), datos_físicos: physicInformation })}
     `;
-    return await this.generateFromPrompt({
-      messages,
-      query,
-      structure: z.object({
-        habits: z.array(
-          z.object({
-            habit: z.string(),
-            reason: z.string(),
-          }),
-        ),
-      }),
-    });
+    return await this.generate(LlamaHabitsGenerator.RESPONSE_STRUCTURE, LlamaHabitsGenerator.SYSTEM_TEMPLATE, query);
   }
 }

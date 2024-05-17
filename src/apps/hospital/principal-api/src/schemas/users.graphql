@@ -40,6 +40,11 @@ type LoginUser {
   token: String!
 }
 
+type RecommendedHabit {
+  habit: String
+  reason: String
+}
+
 input AddressPointRegister {
   longitude: Float
   latitude: Float
@@ -85,6 +90,12 @@ type Mutation {
 }
 
 type Query {
+  """
+  Login user return the user and the authorization token
+  """
   login(identifier: String, password: String): LoginUser
-  habits(userId: String): [String]
+  """
+  Generate habits for the user based on the user's profile using Llama3 API
+  """
+  habits: [RecommendedHabit]
 }
