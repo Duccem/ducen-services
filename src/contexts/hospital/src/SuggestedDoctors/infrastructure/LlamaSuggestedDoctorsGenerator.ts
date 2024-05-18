@@ -1,4 +1,4 @@
-import { LlamaGenerator, MongoConnection } from '@ducen-services/shared';
+import { LlamaGenerator, MongoConnection, OllamaConfig } from '@ducen-services/shared';
 import { z } from 'zod';
 import { Appointment } from '../../Appointment/domain/Appointment';
 import { Doctor } from '../../Doctor/domain/Doctor';
@@ -13,8 +13,8 @@ export class OllamaSuggestedDoctorsGenerator extends LlamaGenerator {
     * Basa tu respuesta en los datos del usuario y las consultas previas
     * Si no puedes recomendar ningún doctor, responde con una lista vacía
     * Los datos del usuario y sus consultas previas son: {query}`;
-  constructor(connection: MongoConnection) {
-    super(connection, 'http://localhost:11434', 'suggested_doctors');
+  constructor(connection: MongoConnection, conf: OllamaConfig) {
+    super(connection, conf, 'suggested_doctors');
   }
   async getSuggestedDoctors(
     user: User,

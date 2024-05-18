@@ -1,23 +1,24 @@
 import { OllamaEmbeddings } from '@langchain/community/embeddings/ollama';
 import { Ollama } from '@langchain/community/llms/ollama';
 import { LengthBasedExampleSelector } from '@langchain/core/example_selectors';
-import { Serialized } from '@langchain/core/load/serializable';
 import { StructuredOutputParser } from '@langchain/core/output_parsers';
-import { LLMResult } from '@langchain/core/outputs';
 import { FewShotPromptTemplate, PromptTemplate } from '@langchain/core/prompts';
 import { RunnableSequence } from '@langchain/core/runnables';
 import { ZodSchema } from 'zod';
 import { MongoConnection } from '../../Persistence/Mongo/MongoConnection';
 import { MongoVectorStore } from '../VectorStores/MongoVectorStore';
 
+export interface OllamaConfig {
+  llmHost: string;
+}
 export abstract class LlamaGenerator {
   private model: Ollama;
   private vectorStore: MongoVectorStore;
-  constructor(connection: MongoConnection, url: string, collectionName?: string) {
+  constructor(connection: MongoConnection, config: OllamaConfig, collectionName?: string) {
     this.vectorStore = new MongoVectorStore(
       connection,
       new OllamaEmbeddings({
-        baseUrl: url,
+        baseUrl: config.llmHost,
         model: 'llama3',
       }),
       collectionName,
@@ -25,24 +26,13 @@ export abstract class LlamaGenerator {
     this.model = new Ollama({
       model: 'llama3',
       temperature: 0,
-      baseUrl: url,
-      callbacks: [
-        {
-          handleLLMStart: (_llm: Serialized, prompts: string[]) => {
-            console.log('-- PROMPT --\n');
-            console.log(prompts[0]);
-          },
-          handleLLMEnd: (output: LLMResult) => {
-            console.log('\n\n-- RESULT --\n');
-            console.log(output.generations[0][0].text);
-          },
-        },
-      ],
+      baseUrl: config.llmHost,
     });
   }
 
-  async generateFromEmbeddings<T>(structure: ZodSchema<T>, template: string, query: string) {
-    const docs = await this.vectorStore.queryDocuments(query);
+  async generateFromEmbeddings<T>(structure: ZodSchema<T>, template: string, query: string, filter: any = {}) {
+    const docs = await this.vectorStore.queryDocuments(query, filter);
+    console.log(docs);
     const context = docs.map((doc) => doc.pageContent).join('\n\n');
     return await this.generate(structure, template, query, context);
   }

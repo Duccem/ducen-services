@@ -25,7 +25,7 @@ export class MongoVectorStore {
     return this.vectorStore.asRetriever();
   }
 
-  async queryDocuments(query: string) {
-    return await this.vectorStore.similaritySearch(query);
+  async queryDocuments(query: string, filter: any = {}): Promise<any> {
+    return await this.vectorStore.similaritySearch(query, 10, { preFilter: filter });
   }
 }

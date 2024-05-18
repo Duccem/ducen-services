@@ -14,6 +14,14 @@ export const connections: Provider[] = [
     },
   },
   {
+    provide: 'VECTOR_STORE_CONNECTION',
+    inject: ['LLM_CONFIGURATION'],
+    useFactory: async (llmConf: any) => {
+      const client = await MongoClient.connect(llmConf.vectorStore);
+      return new MongoConnection(client);
+    },
+  },
+  {
     provide: 'QUEUE_CONNECTION',
     inject: ['CONNECTION_CONFIGURATION'],
     useFactory: async (queueConf: any) => {

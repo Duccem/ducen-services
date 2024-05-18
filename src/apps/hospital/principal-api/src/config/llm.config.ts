@@ -5,5 +5,9 @@ export default registerAs('llm', () => {
     hf: {
       apiKey: process.env.HUGGINGFACE_API_KEY || '',
     },
+    ollama: {
+      llmHost: process.env.OLLAMA_LLM_HOST || '',
+    },
+    vectorStore: process.env.VECTOR_STORE_URL || '',
   };
 });
