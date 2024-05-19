@@ -18,6 +18,7 @@ import { AppointmentScheduled } from './Events/AppointmentScheduled';
 import { AppointmentStarted } from './Events/AppointmentStarted';
 import { AppointmentWaitingDoctor } from './Events/AppointmentWaitingDoctor';
 import { AppointmentWaitingPatient } from './Events/AppointmentWaitingPatient';
+import { AppointmentMissed } from './Events/AppointmetMissed';
 
 export class Appointment extends Aggregate {
   constructor(
@@ -182,6 +183,19 @@ export class Appointment extends Aggregate {
       this.record(new AppointmentWaitingPatient(payload, this.id.toString()));
     }
     this.updatedAt = DateValueObject.today();
+  }
+
+  miss() {
+    if (
+      [AppointmentStatuses.WAITING_PATIENT, AppointmentStatuses.LATE].includes(this.status.value) &&
+      this.endDate.value.getTime() < Date.now()
+    ) {
+      this.status = new AppointmentStatus(AppointmentStatuses.MISSED);
+      this.updatedAt = DateValueObject.today();
+      this.record(
+        new AppointmentMissed({ appointmentId: this.id.toString(), endDate: this.endDate.value }, this.id.toString()),
+      );
+    }
   }
 
   start() {

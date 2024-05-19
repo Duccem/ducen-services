@@ -24,4 +24,8 @@ export class Filter {
 
     return new Filter(new FilterField(field), FilterOperator.fromValue(operator), new FilterValue(value));
   }
+
+  static fromPrimitives(field: string, operator: string, value: string): Filter {
+    return new Filter(new FilterField(field), FilterOperator.fromValue(operator), new FilterValue(value));
+  }
 }
