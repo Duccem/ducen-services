@@ -16,6 +16,7 @@ export class DoctorCreated extends DomainEvent {
     ocurredOn?: Date;
   }) {
     super(DoctorCreated.EVENT_NAME, aggregateId, eventId, ocurredOn);
+    this.doctor = params;
   }
 
   toPrimitive(): Primitives<Doctor> {

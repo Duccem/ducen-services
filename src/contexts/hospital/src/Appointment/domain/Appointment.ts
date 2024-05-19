@@ -7,9 +7,17 @@ import { AppointmentRecipeConsultation } from './AppointmentRecipeConsultation';
 import { AppointmentRecipePrescription } from './AppointmentRecipePrescription';
 import { AppointmentRecipeTest } from './AppointmentRecipeTest';
 import { AppointmentRoom } from './AppointmentRoom';
-import { AppointmentStatus } from './AppointmentStatus';
+import { AppointmentStatus, AppointmentStatuses } from './AppointmentStatus';
 import { AppointmentTelemetry } from './AppointmentTelemetry';
 import { AppointmentTest } from './AppointmentTest';
+import { AppointmentCancelled } from './Events/AppointmentCancelled';
+import { AppointmentFinished } from './Events/AppointmentFinished';
+import { AppointmentIsLate } from './Events/AppointmentIsLate';
+import { AppointmentReScheduled } from './Events/AppointmentRescheduled';
+import { AppointmentScheduled } from './Events/AppointmentScheduled';
+import { AppointmentStarted } from './Events/AppointmentStarted';
+import { AppointmentWaitingDoctor } from './Events/AppointmentWaitingDoctor';
+import { AppointmentWaitingPatient } from './Events/AppointmentWaitingPatient';
 
 export class Appointment extends Aggregate {
   constructor(
@@ -95,7 +103,7 @@ export class Appointment extends Aggregate {
       url: string;
     },
   ) {
-    return new Appointment(
+    const appointment = new Appointment(
       new Uuid(id),
       new Uuid(patientId),
       new Uuid(doctorId),
@@ -113,5 +121,78 @@ export class Appointment extends Aggregate {
       DateValueObject.today(),
       DateValueObject.today(),
     );
+    appointment.record(
+      new AppointmentScheduled({ appointmentId: id, patientId, doctorId, initDate, endDate, link: room.url }, id),
+    );
+    return appointment;
+  }
+
+  reschedule(initDate: Date, endDate: Date) {
+    this.initDate = new DateValueObject(initDate);
+    this.endDate = new DateValueObject(endDate);
+    this.status = new AppointmentStatus(AppointmentStatuses.RESCHEDULED);
+    this.updatedAt = DateValueObject.today();
+    this.record(
+      new AppointmentReScheduled(
+        { appointmentId: this.id.toString(), initDate, endDate, link: this.room.url.toString() },
+        this.id.toString(),
+      ),
+    );
+  }
+
+  isLate(): boolean {
+    return (
+      this.initDate.value.getTime() < Date.now() &&
+      [AppointmentStatuses.SCHEDULED, AppointmentStatuses.RESCHEDULED].includes(this.status.value)
+    );
+  }
+
+  setIsLate() {
+    this.status = new AppointmentStatus(AppointmentStatuses.LATE);
+    this.record(
+      new AppointmentIsLate(
+        { appointmentId: this.id.toString(), initDate: this.initDate.value, link: '' },
+        this.id.toString(),
+      ),
+    );
+  }
+
+  cancel(reason: string) {
+    this.status = new AppointmentStatus(AppointmentStatuses.CANCELLED);
+    this.updatedAt = DateValueObject.today();
+    this.record(
+      new AppointmentCancelled(
+        { appointmentId: this.id.toString(), initDate: this.initDate.value, cancelReason: reason },
+        this.id.toString(),
+      ),
+    );
+  }
+
+  userWaiting(whoIsWaiting: 'DOCTOR' | 'PATIENT') {
+    const payload = {
+      appointmentId: this.id.toString(),
+      initDate: this.initDate.value,
+      link: this.room.url.toString(),
+    };
+    if (whoIsWaiting === 'PATIENT') {
+      this.status = new AppointmentStatus(AppointmentStatuses.WAITING_DOCTOR);
+      this.record(new AppointmentWaitingDoctor(payload, this.id.toString()));
+    } else {
+      this.status = new AppointmentStatus(AppointmentStatuses.WAITING_PATIENT);
+      this.record(new AppointmentWaitingPatient(payload, this.id.toString()));
+    }
+    this.updatedAt = DateValueObject.today();
+  }
+
+  start() {
+    this.status = new AppointmentStatus(AppointmentStatuses.STARTED);
+    this.updatedAt = DateValueObject.today();
+    this.record(new AppointmentStarted({ appointmentId: this.id.toString() }, this.id.toString()));
+  }
+
+  finish() {
+    this.status = new AppointmentStatus(AppointmentStatuses.FINISHED);
+    this.updatedAt = DateValueObject.today();
+    this.record(new AppointmentFinished({ appointmentId: this.id.toString() }, this.id.toString()));
   }
 }
