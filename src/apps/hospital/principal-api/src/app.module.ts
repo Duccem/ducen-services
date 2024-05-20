@@ -5,7 +5,9 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ScheduleModule } from '@nestjs/schedule';
+import { PrismaClient } from '@prisma/client';
 import { OpenTelemetryModule } from 'nestjs-otel';
+import { AppController } from './app.controller';
 import connectionsConfig from './config/connections.config';
 import { getEnv } from './config/env.config';
 import llmConfig from './config/llm.config';
@@ -51,7 +53,15 @@ import loggingConfig from './config/telemetry.config';
     SharedModule,
     UserModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: PrismaClient,
+      useFactory: () => {
+        return new PrismaClient();
+      },
+    },
+  ],
+  controllers: [AppController],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

@@ -1,6 +1,6 @@
-import { MissAppointmentEachTenMinutes } from '@/Appointment/application/MissAppointment/MissAppointmentEachTenMinutes';
 import { EventBus, TaskBus } from '@ducen-services/shared';
 import { Provider } from '@nestjs/common';
+import { MissAppointmentEachTenMinutes } from '../../application/MissAppointment/MissAppointmentEachTenMinutes';
 import { AppointmentRepository } from '../../domain/AppointmentRepository';
 
 export const taskHandlers: Provider[] = [

@@ -1,6 +1,6 @@
 import { EventBus } from '@ducen-services/shared';
 import { AppointmentRepository } from '../../../..';
-import { AppointmentByIdCriteria } from '@/Appointment/domain/Criteria/AppointmentByIdCriteria';
+import { AppointmentByIdCriteria } from '../../domain/Criteria/AppointmentByIdCriteria';
 
 export class FinishAppointment {
   constructor(

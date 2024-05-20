@@ -1,6 +1,6 @@
-import { AppointmentByIdCriteria } from '@/Appointment/domain/Criteria/AppointmentByIdCriteria';
 import { EventBus, NotFoundError } from '@ducen-services/shared';
 import { AppointmentRepository } from '../../domain/AppointmentRepository';
+import { AppointmentByIdCriteria } from '../../domain/Criteria/AppointmentByIdCriteria';
 
 export class AppointmentCancellator {
   constructor(

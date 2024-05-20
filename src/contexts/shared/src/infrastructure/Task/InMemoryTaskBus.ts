@@ -7,7 +7,7 @@ export class InMemoryTaskBus implements TaskBus {
 
   async run(task: string): Promise<void> {
     const handler = this.taskHandlersInformation.get(task);
-    await handler.handle(task);
+    await handler.handle();
   }
   public addTaskHandlers(taskHandlers: Array<TaskHandler>): void {
     this.taskHandlersInformation.addTaskHandlers(taskHandlers);
