@@ -3,7 +3,7 @@ import { Cron } from '@nestjs/schedule';
 import { MissAppointmentEachTenMinutes } from '../../application/MissAppointment/MissAppointmentEachTenMinutes';
 
 @Injectable()
-export class AppointmentScheduler {
+export class AppointmentCron {
   constructor(@Inject('TASK_BUS') private taskBus: any) {}
 
   @Cron(MissAppointmentEachTenMinutes.TIME)
