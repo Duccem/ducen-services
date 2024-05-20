@@ -4,6 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+import { ScheduleModule } from '@nestjs/schedule';
 import { OpenTelemetryModule } from 'nestjs-otel';
 import connectionsConfig from './config/connections.config';
 import { getEnv } from './config/env.config';
@@ -46,6 +47,7 @@ import loggingConfig from './config/telemetry.config';
         },
       },
     }),
+    ScheduleModule.forRoot(),
     SharedModule,
     UserModule,
   ],

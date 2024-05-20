@@ -1,12 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
+import { MissAppointmentEachTenMinutes } from '../../application/MissAppointment/MissAppointmentEachTenMinutes';
 
 @Injectable()
 export class AppointmentScheduler {
   constructor(@Inject('TASK_BUS') private taskBus: any) {}
 
-  @Cron('0 0 0 * * *')
-  async laterVerifier(): Promise<void> {
-    await this.taskBus.run('LaterVerifier');
+  @Cron(MissAppointmentEachTenMinutes.TIME)
+  async missAppointment(): Promise<void> {
+    await this.taskBus.run(MissAppointmentEachTenMinutes.NAME);
   }
 }

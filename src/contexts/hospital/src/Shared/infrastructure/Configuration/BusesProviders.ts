@@ -3,11 +3,13 @@ import {
   DomainEventFailOverPublisher,
   InMemoryCommandBus,
   InMemoryQueryBus,
+  InMemoryTaskBus,
   Logger,
   MongoConnection,
   QueryHandlers,
   RabbitMQConnection,
   RabbitMQEventBus,
+  TaskHandlers,
 } from '@ducen-services/shared';
 import { Provider } from '@nestjs/common';
 
@@ -30,6 +32,12 @@ export const busesProvider: Provider[] = [
     provide: 'QUERY_BUS',
     useFactory: () => {
       return new InMemoryQueryBus(new QueryHandlers([]));
+    },
+  },
+  {
+    provide: 'TASK_BUS',
+    useFactory: () => {
+      return new InMemoryTaskBus(new TaskHandlers([]));
     },
   },
 ];
