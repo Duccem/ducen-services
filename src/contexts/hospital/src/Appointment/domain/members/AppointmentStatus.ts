@@ -19,4 +19,28 @@ export class AppointmentStatus extends Enum<AppointmentStatuses> {
   public static scheduled(): AppointmentStatus {
     return new AppointmentStatus(AppointmentStatuses.SCHEDULED);
   }
+  public static rescheduled(): AppointmentStatus {
+    return new AppointmentStatus(AppointmentStatuses.RESCHEDULED);
+  }
+  public static late(): AppointmentStatus {
+    return new AppointmentStatus(AppointmentStatuses.LATE);
+  }
+  public static cancelled(): AppointmentStatus {
+    return new AppointmentStatus(AppointmentStatuses.CANCELLED);
+  }
+  public static waitingDoctor(): AppointmentStatus {
+    return new AppointmentStatus(AppointmentStatuses.WAITING_DOCTOR);
+  }
+  public static waitingPatient(): AppointmentStatus {
+    return new AppointmentStatus(AppointmentStatuses.WAITING_PATIENT);
+  }
+  public static started(): AppointmentStatus {
+    return new AppointmentStatus(AppointmentStatuses.STARTED);
+  }
+  public static missed(): AppointmentStatus {
+    return new AppointmentStatus(AppointmentStatuses.MISSED);
+  }
+  public static finished(): AppointmentStatus {
+    return new AppointmentStatus(AppointmentStatuses.FINISHED);
+  }
 }

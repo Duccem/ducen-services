@@ -131,7 +131,7 @@ export class Appointment extends Aggregate {
   reschedule(initDate: Date, endDate: Date) {
     this.initDate = new DateValueObject(initDate);
     this.endDate = new DateValueObject(endDate);
-    this.status = new AppointmentStatus(AppointmentStatuses.RESCHEDULED);
+    this.status = AppointmentStatus.rescheduled();
     this.updatedAt = DateValueObject.today();
     this.record(
       new AppointmentReScheduled(
@@ -149,7 +149,7 @@ export class Appointment extends Aggregate {
   }
 
   setIsLate() {
-    this.status = new AppointmentStatus(AppointmentStatuses.LATE);
+    this.status = AppointmentStatus.late();
     this.record(
       new AppointmentIsLate(
         { appointmentId: this.id.toString(), initDate: this.initDate.value, link: '' },
@@ -159,7 +159,7 @@ export class Appointment extends Aggregate {
   }
 
   cancel(reason: string) {
-    this.status = new AppointmentStatus(AppointmentStatuses.CANCELLED);
+    this.status = AppointmentStatus.cancelled();
     this.updatedAt = DateValueObject.today();
     this.record(
       new AppointmentCancelled(
@@ -176,10 +176,10 @@ export class Appointment extends Aggregate {
       link: this.room.url.toString(),
     };
     if (whoIsWaiting === 'PATIENT') {
-      this.status = new AppointmentStatus(AppointmentStatuses.WAITING_DOCTOR);
+      this.status = AppointmentStatus.waitingDoctor();
       this.record(new AppointmentWaitingDoctor(payload, this.id.toString()));
     } else {
-      this.status = new AppointmentStatus(AppointmentStatuses.WAITING_PATIENT);
+      this.status = AppointmentStatus.waitingPatient();
       this.record(new AppointmentWaitingPatient(payload, this.id.toString()));
     }
     this.updatedAt = DateValueObject.today();
@@ -191,7 +191,7 @@ export class Appointment extends Aggregate {
     );
   }
   miss() {
-    this.status = new AppointmentStatus(AppointmentStatuses.MISSED);
+    this.status = AppointmentStatus.missed();
     this.updatedAt = DateValueObject.today();
     this.record(
       new AppointmentMissed({ appointmentId: this.id.toString(), endDate: this.endDate.value }, this.id.toString()),
@@ -199,13 +199,13 @@ export class Appointment extends Aggregate {
   }
 
   start() {
-    this.status = new AppointmentStatus(AppointmentStatuses.STARTED);
+    this.status = AppointmentStatus.started();
     this.updatedAt = DateValueObject.today();
     this.record(new AppointmentStarted({ appointmentId: this.id.toString() }, this.id.toString()));
   }
 
   finish() {
-    this.status = new AppointmentStatus(AppointmentStatuses.FINISHED);
+    this.status = AppointmentStatus.finished();
     this.updatedAt = DateValueObject.today();
     this.record(new AppointmentFinished({ appointmentId: this.id.toString() }, this.id.toString()));
   }
