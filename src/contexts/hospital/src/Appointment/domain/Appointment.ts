@@ -1,24 +1,24 @@
 import { Aggregate, DateValueObject, Primitives, StringValueObject, Uuid } from '@ducen-services/shared';
-import { AppointmentDiagnostic } from './AppointmentDiagnostic';
-import { AppointmentDocument } from './AppointmentDocument';
-import { AppointmentRating } from './AppointmentRating';
-import { AppointmentRecipe } from './AppointmentRecipe';
-import { AppointmentRecipeConsultation } from './AppointmentRecipeConsultation';
-import { AppointmentRecipePrescription } from './AppointmentRecipePrescription';
-import { AppointmentRecipeTest } from './AppointmentRecipeTest';
-import { AppointmentRoom } from './AppointmentRoom';
-import { AppointmentStatus, AppointmentStatuses } from './AppointmentStatus';
-import { AppointmentTelemetry } from './AppointmentTelemetry';
-import { AppointmentTest } from './AppointmentTest';
 import { AppointmentCancelled } from './Events/AppointmentCancelled';
 import { AppointmentFinished } from './Events/AppointmentFinished';
 import { AppointmentIsLate } from './Events/AppointmentIsLate';
+import { AppointmentMissed } from './Events/AppointmentMissed';
 import { AppointmentReScheduled } from './Events/AppointmentRescheduled';
 import { AppointmentScheduled } from './Events/AppointmentScheduled';
 import { AppointmentStarted } from './Events/AppointmentStarted';
 import { AppointmentWaitingDoctor } from './Events/AppointmentWaitingDoctor';
 import { AppointmentWaitingPatient } from './Events/AppointmentWaitingPatient';
-import { AppointmentMissed } from './Events/AppointmetMissed';
+import { AppointmentDiagnostic } from './members/AppointmentDiagnostic';
+import { AppointmentDocument } from './members/AppointmentDocument';
+import { AppointmentRating } from './members/AppointmentRating';
+import { AppointmentRecipe } from './members/AppointmentRecipe';
+import { AppointmentRecipeConsultation } from './members/AppointmentRecipeConsultation';
+import { AppointmentRecipePrescription } from './members/AppointmentRecipePrescription';
+import { AppointmentRecipeTest } from './members/AppointmentRecipeTest';
+import { AppointmentRoom } from './members/AppointmentRoom';
+import { AppointmentStatus, AppointmentStatuses } from './members/AppointmentStatus';
+import { AppointmentTelemetry } from './members/AppointmentTelemetry';
+import { AppointmentTest } from './members/AppointmentTest';
 
 export class Appointment extends Aggregate {
   constructor(
@@ -184,18 +184,18 @@ export class Appointment extends Aggregate {
     }
     this.updatedAt = DateValueObject.today();
   }
-
-  miss() {
-    if (
+  isMissed() {
+    return (
       [AppointmentStatuses.WAITING_PATIENT, AppointmentStatuses.LATE].includes(this.status.value) &&
       this.endDate.value.getTime() < Date.now()
-    ) {
-      this.status = new AppointmentStatus(AppointmentStatuses.MISSED);
-      this.updatedAt = DateValueObject.today();
-      this.record(
-        new AppointmentMissed({ appointmentId: this.id.toString(), endDate: this.endDate.value }, this.id.toString()),
-      );
-    }
+    );
+  }
+  miss() {
+    this.status = new AppointmentStatus(AppointmentStatuses.MISSED);
+    this.updatedAt = DateValueObject.today();
+    this.record(
+      new AppointmentMissed({ appointmentId: this.id.toString(), endDate: this.endDate.value }, this.id.toString()),
+    );
   }
 
   start() {

@@ -1,5 +1,5 @@
 import { Criteria, Filter, Operator, OrFilters } from '@ducen-services/shared';
-import { AppointmentStatuses } from './AppointmentStatus';
+import { AppointmentStatuses } from '../members/AppointmentStatus';
 
 export class CreatedAppointmentCriteria extends Criteria {
   constructor() {

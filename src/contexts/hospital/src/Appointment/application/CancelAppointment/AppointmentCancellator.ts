@@ -1,4 +1,4 @@
-import { AppointmentByIdCriteria } from '@/Appointment/domain/AppointmentByIdCriteria';
+import { AppointmentByIdCriteria } from '@/Appointment/domain/Criteria/AppointmentByIdCriteria';
 import { EventBus, NotFoundError } from '@ducen-services/shared';
 import { AppointmentRepository } from '../../domain/AppointmentRepository';
 
