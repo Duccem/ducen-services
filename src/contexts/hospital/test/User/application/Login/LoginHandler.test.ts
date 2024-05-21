@@ -13,10 +13,11 @@ describe('LoginHandler', () => {
   beforeEach(() => {
     userRepository = new MockUserRepository();
     handler = new LoginHandler(userRepository, { authKey: 'auth-key' });
+    jest.useFakeTimers().setSystemTime(new Date('2021-01-01'));
   });
 
   it('should login a user', async () => {
-    const user = UserMother.create();
+    const user = UserMother.create({ isActive: true });
     const query = new LoginQuery(user.email.value, user.password.value);
     user.password.encrypt();
 

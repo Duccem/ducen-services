@@ -17,6 +17,7 @@ describe('UserRegisterHandler', () => {
     userRepository = new MockUserRepository();
     eventBus = new EventBusMock();
     handler = new UserRegisterHandler(userRepository, eventBus);
+    jest.useFakeTimers().setSystemTime(new Date('2021-01-01'));
   });
 
   it('should register an user', async () => {
@@ -25,7 +26,6 @@ describe('UserRegisterHandler', () => {
     const event = UserCreatedDomainEventMother.fromUser(user);
 
     await handler.handle(command);
-
     expect(userRepository.saveMock).toHaveBeenCalled();
     eventBus.assertLastPublishedEventIs(event);
   });

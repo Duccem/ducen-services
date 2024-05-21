@@ -22,7 +22,7 @@ export class EventBusMock implements EventBus {
     const expected = expectedEvent.toPrimitive();
     const published = lastPublishedEvent.toPrimitive();
 
-    expect(expected).toMatchObject(published);
+    expect(published).toEqual(expected);
   }
 
   private getDataFromDomainEvent(event: DomainEvent) {

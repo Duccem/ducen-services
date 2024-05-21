@@ -47,9 +47,9 @@ export class User extends Aggregate {
       new UserGender(data.gender),
       UserConfiguration.fromPrimitives(data.configuration),
       data.devices ? data.devices.map((device) => Device.fromPrimitives(device)) : [],
-      new BooleanValueObject(data.isActive || true),
-      new DateValueObject(data.createdAt || new Date()),
-      new DateValueObject(data.updatedAt || new Date()),
+      new BooleanValueObject(data.isActive),
+      new DateValueObject(data.createdAt),
+      new DateValueObject(data.updatedAt),
     );
   }
   public toPrimitives(): Primitives<User> {
@@ -66,7 +66,7 @@ export class User extends Aggregate {
       gender: this.gender.value,
       configuration: this.configuration.toPrimitives(),
       devices: this.devices.map((device) => device.toPrimitives()),
-      isActive: this.isActive.value,
+      isActive: this.isActive.getValue(),
       createdAt: this.createdAt.value,
       updatedAt: this.updatedAt.value,
     };
