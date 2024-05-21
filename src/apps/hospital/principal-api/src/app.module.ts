@@ -1,4 +1,4 @@
-import { SharedModule, UserModule } from '@ducen-services/hospital';
+import { AppointmentModule, SharedModule, UserModule } from '@ducen-services/hospital';
 import { GraphQLErrorHandling, LoggerMiddleware } from '@ducen-services/shared';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
@@ -50,6 +50,7 @@ import loggingConfig from './config/telemetry.config';
     ScheduleModule.forRoot(),
     SharedModule,
     UserModule,
+    AppointmentModule,
   ],
   providers: [],
 })
