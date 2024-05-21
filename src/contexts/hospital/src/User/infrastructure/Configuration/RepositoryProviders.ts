@@ -5,6 +5,10 @@ export const userRepositories = [
   {
     provide: 'USER_REPOSITORY',
     inject: ['DATABASE_CONNECTION', 'LOGGER_SERVICE'],
-    useFactory: (connection: MongoConnection, logger: Logger) => new MongoUserRepository(connection, logger),
+    useFactory: async (connection: MongoConnection, logger: Logger) => {
+      const repository = new MongoUserRepository(connection, logger);
+      await repository.index();
+      return repository;
+    },
   },
 ];
