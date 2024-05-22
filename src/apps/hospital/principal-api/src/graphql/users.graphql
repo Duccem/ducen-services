@@ -23,13 +23,13 @@ type UserName {
 
 type User {
   id: String
-  createdAt: String
-  updatedAt: String
+  createdAt: DateTime
+  updatedAt: DateTime
   name: UserName
   gender: String
   email: String
   phoneNumber: String
-  birthDate: String
+  birthDate: DateTime
   photo: String
   address: UserAddress
   configuration: UserConfiguration
@@ -66,13 +66,16 @@ input UserNameRegister {
   firstName: String
   lastName: String
 }
+"""
+UserRegister is the input to register a new user
+"""
 input UserRegister {
   id: String
-  name: UserNameRegister
+  name: UserNameRegister # Name of the user divided in first and last name
   gender: String
   password: String
   email: String
-  birthDate: String
+  birthDate: DateTime
   photo: String
   phoneNumber: String
   address: UserAddressRegister
@@ -85,9 +88,9 @@ type Subscription {
 }
 
 type Mutation {
-  userRegister(user: UserRegister): Boolean
-  uploadProfileImage(file: Upload, name: String, type: String): String
-  saveKnowledgeBase(knowledgeBase: String): Boolean
+  userRegister(user: UserRegister): Void
+  uploadProfileImage(file: Upload, name: String, type: String): Void
+  saveKnowledgeBase(knowledgeBase: String): Void
 }
 
 type Query {

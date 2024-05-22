@@ -1,18 +1,24 @@
 scalar Upload
-input QueryFilter {
+scalar DateTime
+scalar Void
+input Filter {
   value: String
   operator: String
   field: String
 }
 
-input QueryParameters {
+input Order {
   orderBy: String
   order: String
-  limit: String
-  offset: String
-  filters: [QueryFilter]
 }
 
-input CountParameters {
-  filters: [QueryFilter]
+input Pagination {
+  limit: Int
+  offset: Int
+}
+
+input QueryParameters {
+  order: Order
+  pagination: Pagination
+  filters: [Filter]
 }

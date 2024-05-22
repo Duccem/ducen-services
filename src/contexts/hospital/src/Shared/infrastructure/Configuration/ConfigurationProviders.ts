@@ -42,4 +42,9 @@ export const configurations: Provider[] = [
     inject: [ConfigService],
     useFactory: (configService: ConfigService) => ({ ...configService.get('llm') }),
   },
+  {
+    provide: 'VIDEO_CONFIGURATION',
+    inject: [ConfigService],
+    useFactory: (configService: ConfigService) => ({ ...configService.get('video') }),
+  },
 ];

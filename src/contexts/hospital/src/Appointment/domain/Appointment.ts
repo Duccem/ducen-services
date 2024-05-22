@@ -1,5 +1,6 @@
 import { Aggregate, DateValueObject, Primitives, StringValueObject, Uuid } from '@ducen-services/shared';
 import { AppointmentCancelled } from './Events/AppointmentCancelled';
+import { AppointmentConfirmed } from './Events/AppointmentConfirmed';
 import { AppointmentFinished } from './Events/AppointmentFinished';
 import { AppointmentIsLate } from './Events/AppointmentIsLate';
 import { AppointmentMissed } from './Events/AppointmentMissed';
@@ -141,11 +142,19 @@ export class Appointment extends Aggregate {
     );
   }
 
-  isLate(): boolean {
-    return (
-      this.initDate.value.getTime() < Date.now() &&
-      [AppointmentStatuses.SCHEDULED, AppointmentStatuses.RESCHEDULED].includes(this.status.value)
+  confirm() {
+    this.status = AppointmentStatus.confirmed();
+    this.updatedAt = DateValueObject.today();
+    this.record(
+      new AppointmentConfirmed(
+        { appointmentId: this.id.toString(), initDate: this.initDate.value },
+        this.id.toString(),
+      ),
     );
+  }
+
+  isLate(): boolean {
+    return this.initDate.value.getTime() < Date.now() && this.status.value === AppointmentStatuses.CONFIRMED;
   }
 
   setIsLate() {

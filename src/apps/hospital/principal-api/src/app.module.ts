@@ -5,6 +5,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ScheduleModule } from '@nestjs/schedule';
+import { DateTimeResolver, VoidResolver } from 'graphql-scalars';
 import { OpenTelemetryModule } from 'nestjs-otel';
 import connectionsConfig from './config/connections.config';
 import { getEnv } from './config/env.config';
@@ -15,6 +16,7 @@ import paymentConfig from './config/payment.config';
 import serverConfig from './config/server.config';
 import storageConfig from './config/storage.config';
 import loggingConfig from './config/telemetry.config';
+import videoConfig from './config/video.config';
 
 @Module({
   imports: [
@@ -30,11 +32,16 @@ import loggingConfig from './config/telemetry.config';
         connectionsConfig,
         storageConfig,
         llmConfig,
+        videoConfig,
       ],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ['./**/*.graphql'],
+      resolvers: {
+        DateTime: DateTimeResolver,
+        Void: VoidResolver,
+      },
       formatError: GraphQLErrorHandling,
       useGlobalPrefix: true,
       csrfPrevention: false,

@@ -3,6 +3,7 @@ import { Enum } from '@ducen-services/shared';
 export enum AppointmentStatuses {
   SCHEDULED = 'SCHEDULED',
   RESCHEDULED = 'RESCHEDULED',
+  CONFIRMED = 'CONFIRMED',
   LATE = 'LATE',
   CANCELLED = 'CANCELLED',
   WAITING_DOCTOR = 'WAITING_DOCTOR',
@@ -42,5 +43,9 @@ export class AppointmentStatus extends Enum<AppointmentStatuses> {
   }
   public static finished(): AppointmentStatus {
     return new AppointmentStatus(AppointmentStatuses.FINISHED);
+  }
+
+  public static confirmed(): AppointmentStatus {
+    return new AppointmentStatus(AppointmentStatuses.CONFIRMED);
   }
 }
