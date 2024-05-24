@@ -54,6 +54,7 @@ export const MongoUserSchema = {
         },
       },
       isActive: { bsonType: 'bool' },
+      verificationCode: { bsonType: 'string' },
       createdAt: { bsonType: 'date' },
       updatedAt: { bsonType: 'date' },
     },

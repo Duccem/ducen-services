@@ -1,4 +1,16 @@
-import { Aggregate, BooleanValueObject, DateValueObject, Email, File, Primitives, Uuid } from '@ducen-services/shared';
+import {
+  Aggregate,
+  BooleanValueObject,
+  DateValueObject,
+  DomainError,
+  Email,
+  File,
+  Primitives,
+  StringValueObject,
+  Uuid,
+} from '@ducen-services/shared';
+import crypto from 'crypto';
+import { differenceInHours } from 'date-fns';
 import * as jwt from 'jsonwebtoken';
 import { Device } from './Device';
 import { IncorrectPassword } from './IncorrectPassword';
@@ -27,6 +39,7 @@ export class User extends Aggregate {
     public configuration: UserConfiguration,
     public devices: Device[],
     public isActive: BooleanValueObject,
+    public verificationCode?: StringValueObject,
     createdAt?: DateValueObject,
     updatedAt?: DateValueObject,
   ) {
@@ -48,6 +61,7 @@ export class User extends Aggregate {
       UserConfiguration.fromPrimitives(data.configuration),
       data.devices ? data.devices.map((device) => Device.fromPrimitives(device)) : [],
       new BooleanValueObject(data.isActive),
+      data.verificationCode ? new StringValueObject(data.verificationCode) : null,
       new DateValueObject(data.createdAt),
       new DateValueObject(data.updatedAt),
     );
@@ -67,6 +81,7 @@ export class User extends Aggregate {
       configuration: this.configuration.toPrimitives(),
       devices: this.devices.map((device) => device.toPrimitives()),
       isActive: this.isActive.getValue(),
+      verificationCode: this.verificationCode?.toString(),
       createdAt: this.createdAt.value,
       updatedAt: this.updatedAt.value,
     };
@@ -116,6 +131,7 @@ export class User extends Aggregate {
       UserConfiguration.fromPrimitives(configuration),
       [],
       new BooleanValueObject(false),
+      null,
       new DateValueObject(new Date()),
       new DateValueObject(new Date()),
     );
@@ -152,5 +168,22 @@ export class User extends Aggregate {
 
   public updateProfileImage(photo: string): void {
     this.photo = new File(photo);
+  }
+
+  public generateVerificationCode(): void {
+    if (this.verificationCode && differenceInHours(this.updatedAt.getValue(), new Date()) < 1) return;
+    const code = crypto.randomInt(0, 9999).toString().padStart(4, '0');
+    console.log(code);
+    this.verificationCode = new StringValueObject(code);
+  }
+
+  public verifyCode(code: string): void {
+    if (
+      !this.verificationCode ||
+      this.verificationCode?.value !== code ||
+      differenceInHours(this.updatedAt.getValue(), new Date()) > 1
+    )
+      throw new DomainError('Invalid code', 400);
+    this.verificationCode = null;
   }
 }

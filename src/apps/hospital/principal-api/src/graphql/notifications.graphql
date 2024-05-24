@@ -1,0 +1,3 @@
+type Mutation {
+  sendEmailRecoveryCode(email: String!): Void
+}

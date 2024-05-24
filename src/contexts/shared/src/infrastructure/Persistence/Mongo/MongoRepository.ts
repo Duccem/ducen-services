@@ -41,7 +41,11 @@ export abstract class MongoRepository<T extends Aggregate | Entity> {
 
   protected async persist(id: string, aggregate: T): Promise<void> {
     try {
-      await this.collection.updateOne({ id }, { $set: aggregate.toPrimitives() }, { upsert: true });
+      await this.collection.updateOne(
+        { id },
+        { $set: { ...aggregate.toPrimitives(), updatedAt: new Date() } },
+        { upsert: true },
+      );
     } catch (error) {
       this.logger.error(`Error persisting aggregate: ${error.message}`);
       throw new InternalError(`Error persisting aggregate: ${error.message}`);

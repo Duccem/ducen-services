@@ -1,7 +1,6 @@
 import { Criteria, Logger, MongoConnection, MongoRepository, Primitives, Uuid } from '@ducen-services/shared';
 import { User } from '../../../domain/User';
 import { UserRepository } from '../../../domain/UserRepository';
-import { MongoUserSchema } from './MongoUserSchema';
 
 export class MongoUserRepository extends MongoRepository<User> implements UserRepository {
   constructor(connection: MongoConnection, logger: Logger) {
@@ -10,10 +9,6 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
 
   async index(): Promise<void> {
     await this.collection.createIndex({ id: 1 }, { unique: true });
-    this.connection.client.db().command({
-      collMod: this.model,
-      validator: MongoUserSchema,
-    });
   }
 
   async save(id: Uuid, aggregate: User): Promise<void> {

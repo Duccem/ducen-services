@@ -1,4 +1,4 @@
-import { AppointmentModule, SharedModule, UserModule } from '@ducen-services/hospital';
+import { AppointmentModule, NotificationModule, SharedModule, UserModule } from '@ducen-services/hospital';
 import { GraphQLErrorHandling, LoggerMiddleware } from '@ducen-services/shared';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
@@ -58,6 +58,7 @@ import videoConfig from './config/video.config';
     SharedModule,
     UserModule,
     AppointmentModule,
+    NotificationModule,
   ],
   providers: [],
 })

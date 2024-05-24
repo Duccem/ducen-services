@@ -2,8 +2,7 @@
   "name": "ducen",
   "version": "0.0.0",
   "description": "This mono repository contains all of source code related to Ducen org",
-  "scripts": {
-  },
+  "scripts": {},
   "workspaces": [
     "src/apps/**/*",
     "src/contexts/**/*",
@@ -25,6 +24,8 @@
   },
   "homepage": "https://github.com/Duccem/ducen#readme",
   "dependencies": {
+    "@ducen-services/hospital": "^0.0.0",
+    "resend": "^3.2.0",
     "rimraf": "^5.0.5"
   }
 }

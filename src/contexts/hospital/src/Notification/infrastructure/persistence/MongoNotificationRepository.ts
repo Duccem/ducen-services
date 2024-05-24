@@ -16,6 +16,6 @@ export class MongoNotificationRepository extends MongoRepository<Notification> i
     await this.persist(notification.id.toString(), notification);
   }
   public async getTemplate(name: string): Promise<any> {
-    return this.templateRepository.getTemplate(name);
+    return null;
   }
 }

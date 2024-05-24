@@ -9,6 +9,9 @@ export default registerAs('notification', () => {
       port: process.env.EMAIL_PORT || 465,
       fromEmail: process.env.EMAIL_FROM || '',
     },
+    resend: {
+      apiKey: process.env.RESEND_API_KEY || '',
+    },
     firebase: {
       type: process.env.FIREBASE_TYPE,
       project_id: process.env.FIREBASE_PROJECT_ID,
