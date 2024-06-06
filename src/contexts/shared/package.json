@@ -30,6 +30,7 @@
     "express": "^4.19.2",
     "langchain": "^0.1.36",
     "mongodb": "^6.5.0",
+    "mongoose": "^8.4.0",
     "redis": "^4.6.13",
     "stripe": "^14.20.0",
     "uuid": "^9.0.1",

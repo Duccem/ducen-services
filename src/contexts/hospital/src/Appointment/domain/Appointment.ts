@@ -36,7 +36,9 @@ export class Appointment extends Aggregate {
     public diagnostic: AppointmentDiagnostic,
     public reviewedTests: AppointmentTest[],
     public documents: AppointmentDocument[],
-    public recipes: Array<AppointmentRecipeConsultation | AppointmentRecipeTest | AppointmentRecipePrescription>,
+    public recipesConsult: AppointmentRecipeConsultation[],
+    public recipesPrescription: AppointmentRecipePrescription[],
+    public recipesTest: AppointmentRecipeTest[],
     createdAt: DateValueObject,
     updatedAt: DateValueObject,
   ) {
@@ -58,7 +60,11 @@ export class Appointment extends Aggregate {
       documents: this.documents.map((document) => document.toPrimitives()),
       telemetry: this.telemetry.toPrimitives(),
       rating: this.rating.toPrimitives(),
-      recipes: this.recipes.map((recipe) => recipe.toPrimitives()),
+      recipesConsult: this.recipesConsult.map((recipe) => recipe.toPrimitives()),
+      recipesPrescription: this.recipesPrescription.map((recipe) => recipe.toPrimitives()),
+      recipesTest: this.recipesTest.map((recipe) => recipe.toPrimitives()),
+      createdAt: this.createdAt.getValue(),
+      updatedAt: this.updatedAt.getValue(),
     };
   }
 
@@ -77,16 +83,9 @@ export class Appointment extends Aggregate {
       AppointmentDiagnostic.fromPrimitives(data.diagnostic),
       data.reviewedTests.map((labResult) => AppointmentTest.fromPrimitives(labResult)),
       data.documents.map((document) => AppointmentDocument.fromPrimitives(document)),
-      data.recipes.map((recipe: any) => {
-        switch (recipe.type) {
-          case 'TEST':
-            return AppointmentRecipeTest.fromPrimitives(recipe);
-          case 'CONSULTATION':
-            return AppointmentRecipeConsultation.fromPrimitives(recipe);
-          case 'PRESCRIPTION':
-            return AppointmentRecipePrescription.fromPrimitives(recipe);
-        }
-      }),
+      data.recipesConsult.map((recipe: any) => AppointmentRecipeConsultation.fromPrimitives(recipe)),
+      data.recipesPrescription.map((recipe: any) => AppointmentRecipePrescription.fromPrimitives(recipe)),
+      data.recipesTest.map((recipe: any) => AppointmentRecipeTest.fromPrimitives(recipe)),
       new DateValueObject(data.createdAt),
       new DateValueObject(data.updatedAt),
     );
@@ -119,6 +118,8 @@ export class Appointment extends Aggregate {
       AppointmentDiagnostic.waitingForDiagnostic(),
       AppointmentTest.waitingForTests(),
       AppointmentDocument.waitingForDocuments(),
+      AppointmentRecipe.waitingForRecipe(),
+      AppointmentRecipe.waitingForRecipe(),
       AppointmentRecipe.waitingForRecipe(),
       DateValueObject.today(),
       DateValueObject.today(),

@@ -2,6 +2,7 @@ import { Logger, MongoConnection, MongoRepository } from '@ducen-services/shared
 import { Notification } from '../../domain/Notification';
 import { NotificationRepository } from '../../domain/NotificationRepository';
 import { TemplateRepository } from '../../domain/TemplateRepository';
+import { MongoNotificationSchema } from './MongoNotificationSchema';
 
 export class MongoNotificationRepository extends MongoRepository<Notification> implements NotificationRepository {
   private templateRepository: TemplateRepository;
@@ -9,8 +10,8 @@ export class MongoNotificationRepository extends MongoRepository<Notification> i
     super(Notification, connection, logger);
   }
 
-  async index(): Promise<void> {
-    await this.collection.createIndex({ id: 1 }, { unique: true });
+  get schema() {
+    return MongoNotificationSchema;
   }
   public async save(notification: Notification): Promise<void> {
     await this.persist(notification.id.toString(), notification);

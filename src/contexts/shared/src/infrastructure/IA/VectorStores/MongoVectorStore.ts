@@ -10,7 +10,7 @@ export class MongoVectorStore {
     collectionName: string = 'llama_vector_store',
   ) {
     this.vectorStore = new MongoDBAtlasVectorSearch(embeddings, {
-      collection: this.connection.getCollection(collectionName),
+      collection: this.connection.getConnection().collection(collectionName),
       indexName: `${collectionName}_index`,
       textKey: 'text',
       embeddingKey: 'embedding',

@@ -1,13 +1,14 @@
 import { Criteria, Logger, MongoConnection, MongoRepository, Primitives } from '@ducen-services/shared';
 import { Appointment } from '../../domain/Appointment';
 import { AppointmentRepository } from '../../domain/AppointmentRepository';
+import { MongoAppointmentSchema } from './MongoAppointmentSchema';
 
 export class MongoAppointmentRepository extends MongoRepository<Appointment> implements AppointmentRepository {
   constructor(connection: MongoConnection, logger: Logger) {
     super(Appointment, connection, logger);
   }
-  async index(): Promise<void> {
-    await this.collection.createIndex({ id: 1 });
+  get schema() {
+    return MongoAppointmentSchema;
   }
   async save(appointment: Appointment): Promise<void> {
     await this.persist(appointment.id.toString(), appointment);

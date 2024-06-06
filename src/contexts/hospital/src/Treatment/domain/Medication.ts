@@ -1,11 +1,11 @@
-import { Primitives, StringValueObject } from '@ducen-services/shared';
+import { NumberValueObject, Primitives, StringValueObject } from '@ducen-services/shared';
 
 export class Medication {
   constructor(
     public name: StringValueObject,
     public dose: StringValueObject,
     public frequency: StringValueObject,
-    public compounds: StringValueObject[],
+    public duration: NumberValueObject,
   ) {}
 
   public toPrimitives(): Primitives<Medication> {
@@ -13,7 +13,7 @@ export class Medication {
       name: this.name.toString(),
       dose: this.dose.toString(),
       frequency: this.frequency.toString(),
-      compounds: this.compounds.map((compound) => compound.toString()),
+      duration: this.duration.getValue(),
     };
   }
 
@@ -22,7 +22,7 @@ export class Medication {
       new StringValueObject(primitive.name),
       new StringValueObject(primitive.dose),
       new StringValueObject(primitive.frequency),
-      primitive.compounds.map((compound) => new StringValueObject(compound)),
+      new NumberValueObject(primitive.duration),
     );
   }
 }

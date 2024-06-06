@@ -5,7 +5,7 @@ export class Schedule extends BaseObject {
   constructor(
     public days: Day[],
     public appointmentDuration: NumberValueObject,
-    public maxAppointments: NumberValueObject
+    public maxAppointmentsPerDay: NumberValueObject,
   ) {
     super();
   }
@@ -14,7 +14,7 @@ export class Schedule extends BaseObject {
     return {
       days: this.days.map((day) => day.toPrimitives()),
       appointmentDuration: this.appointmentDuration.value,
-      maxAppointments: this.maxAppointments.value,
+      maxAppointmentsPerDay: this.maxAppointmentsPerDay.value,
     };
   }
 
@@ -22,7 +22,7 @@ export class Schedule extends BaseObject {
     return new Schedule(
       data.days.map((day: Primitives<Day>) => Day.fromPrimitives(day)),
       new NumberValueObject(data.appointmentDuration),
-      new NumberValueObject(data.maxAppointments)
+      new NumberValueObject(data.maxAppointmentsPerDay),
     );
   }
 }

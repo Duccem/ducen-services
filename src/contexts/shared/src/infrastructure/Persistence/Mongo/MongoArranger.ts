@@ -15,18 +15,18 @@ export class MongoArranger extends Arranger {
     const client = this.client();
 
     for (const collection of collections) {
-      await client.db().collection(collection).deleteMany({});
+      await client.db.collection(collection).deleteMany({});
     }
   }
 
   private async collections(): Promise<string[]> {
-    const collections = await this.client().db().listCollections(undefined, { nameOnly: true }).toArray();
+    const collections = await this.client().db.listCollections(undefined, { nameOnly: true }).toArray();
 
     return collections.map((collection) => collection.name);
   }
 
   protected client() {
-    return this._client.client;
+    return this._client.getConnection();
   }
 
   public async close(): Promise<void> {

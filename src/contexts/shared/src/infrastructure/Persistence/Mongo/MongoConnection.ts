@@ -1,25 +1,21 @@
-import { Db, MongoClient, WithTransactionCallback } from 'mongodb';
+import { WithTransactionCallback } from 'mongodb';
+import { Connection, Schema } from 'mongoose';
 import { InternalError } from '../../../domain/Errors/InternalError';
-import { Nullable } from '../../../domain/Types/Nullable';
 
 export class MongoConnection {
-  constructor(
-    private connection: MongoClient,
-    private dbName?: string,
-  ) {}
-  getConnection(): Nullable<Db> {
-    return this.connection.db(this.dbName ? this.dbName : undefined);
+  private connection: Connection;
+  constructor(connection: Connection) {
+    this.connection = connection;
   }
-
-  getCollection(collectionName: string) {
-    return this.getConnection().collection(collectionName);
-  }
-
-  get client(): MongoClient {
+  getConnection(): Connection {
     return this.connection;
   }
-  async transaction(fn: WithTransactionCallback<void>) {
-    const session = this.connection.startSession();
+
+  getCollection(collectionName: string, schema: Schema<any>) {
+    return this.getConnection().model(collectionName, schema);
+  }
+  async transaction(modelName: string, schema: Schema<any>, fn: WithTransactionCallback<void>) {
+    const session = await this.getCollection(modelName, schema).startSession();
     try {
       await session.withTransaction(fn);
     } catch (error) {
@@ -28,5 +24,9 @@ export class MongoConnection {
     } finally {
       await session.endSession();
     }
+  }
+
+  async close() {
+    await this.connection.close();
   }
 }

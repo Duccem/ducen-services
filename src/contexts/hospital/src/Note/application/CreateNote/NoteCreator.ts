@@ -26,7 +26,7 @@ export class NoteCreator {
 
   async getDoctorData(doctorId: string) {
     const doctor = await this.doctorSearcher.run(doctorId);
-    const user = await this.userSearcher.run(doctor.user.toString());
+    const user = await this.userSearcher.run(doctor.userId.toString());
 
     return {
       id: doctor.id.toString(),

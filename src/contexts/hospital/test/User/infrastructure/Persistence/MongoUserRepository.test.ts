@@ -26,7 +26,7 @@ describe('MongoUserRepository', () => {
 
   afterAll(async () => {
     await arranger.arrange();
-    await connection.client.close();
+    await connection.close();
   });
 
   beforeEach(async () => {

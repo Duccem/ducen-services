@@ -1,13 +1,14 @@
 import { Criteria, Logger, MongoConnection, MongoRepository } from '@ducen-services/shared';
-import { Vaccine } from '../domain/Vaccine';
-import { VaccineRepository } from '../domain/VaccineRepository';
+import { Vaccine } from '../../domain/Vaccine';
+import { VaccineRepository } from '../../domain/VaccineRepository';
+import { MongoVaccineSchema } from './MongoVaccineSchema';
 
 export class MongoVaccineRepository extends MongoRepository<Vaccine> implements VaccineRepository {
   constructor(connection: MongoConnection, logger: Logger) {
     super(Vaccine, connection, logger);
   }
-  async index(): Promise<void> {
-    await this.collection.createIndex({ id: 1 });
+  get schema() {
+    return MongoVaccineSchema;
   }
   async save(vaccine: Vaccine): Promise<void> {
     await this.persist(vaccine.id.toString(), vaccine);

@@ -1,13 +1,14 @@
 import { Criteria, Logger, MongoConnection, MongoRepository, Primitives, Uuid } from '@ducen-services/shared';
-import { Treatment } from '../domain/Treatment';
-import { TreatmentRepository } from '../domain/TreatmentRepository';
+import { Treatment } from '../../domain/Treatment';
+import { TreatmentRepository } from '../../domain/TreatmentRepository';
+import { MongoTreatmentSchema } from './MongoTreatmentSchema';
 
 export class MongoTreatmentRepository extends MongoRepository<Treatment> implements TreatmentRepository {
   constructor(connection: MongoConnection, logger: Logger) {
     super(Treatment, connection, logger);
   }
-  async index(): Promise<void> {
-    await this.collection.createIndex({ id: 1 });
+  get schema() {
+    return MongoTreatmentSchema;
   }
   async save(treatment: Treatment): Promise<void> {
     await this.persist(treatment.id.toString(), treatment);

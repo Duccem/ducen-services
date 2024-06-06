@@ -1,9 +1,9 @@
-import { MongoClient } from 'mongodb';
+import { createConnection } from 'mongoose';
 import { MongoConnection } from './MongoConnection';
 
 export class MongoConnectionFactory {
-  static async create(host: string, db?: string) {
-    const client = await MongoClient.connect(host || `mongodb://localhost:27017/${db || 'test-ducen'}`);
-    return new MongoConnection(client, db);
+  static async create(host: string) {
+    const client = await createConnection(host).asPromise();
+    return new MongoConnection(client);
   }
 }

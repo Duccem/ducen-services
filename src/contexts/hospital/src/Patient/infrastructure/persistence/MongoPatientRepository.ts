@@ -1,14 +1,17 @@
 import { Criteria, Logger, MongoConnection, MongoRepository, Primitives } from '@ducen-services/shared';
 import { Patient } from '../../domain/Patient';
 import { PatientRepository } from '../../domain/PatientRepository';
+import { MongoPatientSchema } from './MongoPatientSchema';
 
 export class MongoPatientRepository extends MongoRepository<Patient> implements PatientRepository {
   constructor(connection: MongoConnection, logger: Logger) {
     super(Patient, connection, logger);
   }
-  async index(): Promise<void> {
-    await this.collection.createIndex({ id: 1 });
+
+  get schema() {
+    return MongoPatientSchema;
   }
+
   async searchPatientsByCriteria(criteria: Criteria): Promise<Patient[]> {
     const patients = await this.searchByCriteria(criteria);
     return patients.map(Patient.fromPrimitives);

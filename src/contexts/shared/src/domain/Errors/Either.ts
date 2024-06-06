@@ -62,7 +62,7 @@ export class Either<L, R> {
    * Map, or transform, the left value A of this Either to a new value B.
    * @param fn - A function that takes the left value of this Either and returns a new value of type B.
    */
-  mapLeft<T>(fn: (value: L) => T): Either<T, R> {
+  error<T>(fn: (value: L) => T): Either<T, R> {
     return this.fold(
       (leftValue) => Either.Left(fn(leftValue)),
       (rightValue) => Either.Right(rightValue),
@@ -74,7 +74,7 @@ export class Either<L, R> {
    * @param fn - A function that takes the left value of this Either and returns a new Either with a left value of type B.
    * @returns
    */
-  mapLeftFlat<T>(fn: (value: L) => Either<T, R>): Either<T, R> {
+  errorFlat<T>(fn: (value: L) => Either<T, R>): Either<T, R> {
     return this.fold(
       (leftValue) => fn(leftValue),
       (rightValue) => Either.Right(rightValue),
@@ -117,10 +117,17 @@ export class Either<L, R> {
   /**
    * @returns the left value of this Either if it exists, otherwise returns null.
    */
-  getLeftOrNull(): L {
+  errorOrNull(): L {
     return this.fold(
       (leftValue) => leftValue,
       () => null,
+    );
+  }
+
+  errorOrElse(defaultValue: L): L {
+    return this.fold(
+      (leftValue) => leftValue,
+      () => defaultValue,
     );
   }
 
@@ -139,7 +146,7 @@ export class Either<L, R> {
    */
   onLeft(fn: (value: L) => void): Either<L, R> {
     if (this.isLeft()) {
-      fn(this.getLeftOrNull());
+      fn(this.errorOrNull());
     }
     return this;
   }
@@ -160,11 +167,11 @@ export class Either<L, R> {
    * @param error - Default error map to throw in that case
    * @returns - Either with the result of the promise or the error
    */
-  static async asyncTryCatch<L, R>(fn: Promise<R>, error?: L): Promise<Either<L, R>> {
+  static async asyncTryCatch<L, R>(fn: () => Promise<R>, error?: (e: Error) => L): Promise<Either<L, R>> {
     try {
-      return Either.Right(await fn);
+      return Either.Right(await fn());
     } catch (_) {
-      return Either.Left(error || _);
+      return Either.Left(error(_));
     }
   }
 
@@ -172,13 +179,13 @@ export class Either<L, R> {
    * Execute a function and return an Either with the result or the error
    * @param fn - Function that maybe throw an error
    * @param error - Default error map to throw in that case
-   * @returns - Either with the result of the function or the error
+   * @returns Either with the result of the function or the error
    */
-  static tryCatch<L, R>(fn: () => R, error?: L): Either<L, R> {
+  static tryCatch<L, R>(fn: () => R, error?: (e: Error) => L): Either<L, R> {
     try {
       return Either.Right(fn());
     } catch (_) {
-      return Either.Left(error || _);
+      return Either.Left(error(_));
     }
   }
 

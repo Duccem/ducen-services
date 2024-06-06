@@ -1,7 +1,7 @@
 import { MongoConnection, RabbitMQConnection, RedisConnection } from '@ducen-services/shared';
 import { Provider } from '@nestjs/common';
 import { connect } from 'amqplib';
-import { MongoClient } from 'mongodb';
+import { createConnection } from 'mongoose';
 import { createClient } from 'redis';
 
 export const connections: Provider[] = [
@@ -9,16 +9,16 @@ export const connections: Provider[] = [
     provide: 'DATABASE_CONNECTION',
     inject: ['CONNECTION_CONFIGURATION'],
     useFactory: async (databaseConf: any) => {
-      const client = await MongoClient.connect(databaseConf.database_uri);
-      return new MongoConnection(client);
+      const conn = await createConnection(databaseConf.database_uri).asPromise();
+      return new MongoConnection(conn);
     },
   },
   {
     provide: 'VECTOR_STORE_CONNECTION',
     inject: ['LLM_CONFIGURATION'],
     useFactory: async (llmConf: any) => {
-      const client = await MongoClient.connect(llmConf.vectorStore);
-      return new MongoConnection(client);
+      const conn = await createConnection(llmConf.vectorStore).asPromise();
+      return new MongoConnection(conn);
     },
   },
   {

@@ -5,6 +5,7 @@ export abstract class AppointmentRecipe {
   constructor(
     public type: AppointmentRecipeType,
     public date: DateValueObject,
+    public endDate: DateValueObject,
   ) {}
 
   abstract toPrimitives(): any;

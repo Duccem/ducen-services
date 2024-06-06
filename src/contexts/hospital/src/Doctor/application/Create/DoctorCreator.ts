@@ -4,7 +4,10 @@ import { DoctorExistError } from '../../domain/DoctorExistError';
 import { DoctorRepository } from '../../domain/DoctorRepository';
 
 export class DoctorCreator {
-  constructor(private repository: DoctorRepository, private eventBus: EventBus) {}
+  constructor(
+    private repository: DoctorRepository,
+    private eventBus: EventBus,
+  ) {}
 
   async run(doctorBase: Primitives<Doctor>): Promise<void> {
     const verify = await this.repository.findDoctorByCriteria(
@@ -14,13 +17,13 @@ export class DoctorCreator {
           operator: Operator.EQUAL,
           value: doctorBase.id,
         },
-      ])
+      ]),
     );
     if (verify) throw new DoctorExistError();
 
     const doctor = Doctor.create(
       doctorBase.id,
-      doctorBase.user,
+      doctorBase.userId,
       doctorBase.specialty,
       doctorBase.medicalIdentificationNumber,
       doctorBase.licenseMedicalNumber,
@@ -30,7 +33,7 @@ export class DoctorCreator {
       doctorBase.experiences,
       doctorBase.associations,
       doctorBase.schedule,
-      doctorBase.ratings
+      doctorBase.ratings,
     );
     await this.repository.save(doctor);
     await this.eventBus.publish(doctor.pullDomainEvents());

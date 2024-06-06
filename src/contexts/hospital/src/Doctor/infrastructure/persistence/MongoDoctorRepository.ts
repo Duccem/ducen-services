@@ -1,13 +1,14 @@
 import { Criteria, Logger, MongoConnection, MongoRepository, Primitives } from '@ducen-services/shared';
 import { Doctor } from '../../domain/Doctor';
 import { DoctorRepository } from '../../domain/DoctorRepository';
+import { MongoDoctorSchema } from './MongoDoctorSchema';
 
 export class MongoDoctorRepository extends MongoRepository<Doctor> implements DoctorRepository {
   constructor(connection: MongoConnection, logger: Logger) {
     super(Doctor, connection, logger);
   }
-  async index(): Promise<void> {
-    await this.collection.createIndex({ id: 1 });
+  get schema() {
+    return MongoDoctorSchema;
   }
   async save(doctor: Doctor): Promise<void> {
     await this.persist(doctor.id.value, doctor);

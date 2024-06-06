@@ -1,22 +1,21 @@
-import { Criteria, Logger, MongoConnection, MongoRepository, Primitives, Uuid } from '@ducen-services/shared';
+import { Criteria, Logger, MongoConnection, MongoRepository, Uuid } from '@ducen-services/shared';
 import { User } from '../../../domain/User';
 import { UserRepository } from '../../../domain/UserRepository';
+import { MongoUserSchema } from './MongoUserSchema';
 
 export class MongoUserRepository extends MongoRepository<User> implements UserRepository {
   constructor(connection: MongoConnection, logger: Logger) {
     super(User, connection, logger);
   }
-
-  async index(): Promise<void> {
-    await this.collection.createIndex({ id: 1 }, { unique: true });
+  get schema() {
+    return MongoUserSchema;
   }
 
   async save(id: Uuid, aggregate: User): Promise<void> {
     await this.persist(id.value, aggregate);
   }
   async getUserByCriteria(criteria: Criteria): Promise<User> {
-    const { filter } = this.converter.criteria(criteria);
-    const user = await this.collection.findOne<Primitives<User>>(filter);
+    const user = await this.getOneByCriteria(criteria);
     return user ? User.fromPrimitives(user) : null;
   }
 

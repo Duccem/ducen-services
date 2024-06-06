@@ -17,7 +17,7 @@ import { Schedule } from './Schedule';
 export class Doctor extends Aggregate {
   constructor(
     id: Uuid,
-    public user: Uuid,
+    public userId: Uuid,
     public specialty: StringValueObject,
     public medicalIdentificationNumber: StringValueObject,
     public licenseMedicalNumber: StringValueObject,
@@ -36,7 +36,7 @@ export class Doctor extends Aggregate {
   public toPrimitives(): Primitives<Doctor> {
     return {
       id: this.id.value,
-      user: this.user.value,
+      userId: this.userId.value,
       specialty: this.specialty.value,
       medicalIdentificationNumber: this.medicalIdentificationNumber.value,
       licenseMedicalNumber: this.licenseMedicalNumber.value,
@@ -55,7 +55,7 @@ export class Doctor extends Aggregate {
   static fromPrimitives(data: Primitives<Doctor>): Doctor {
     return new Doctor(
       new Uuid(data.id),
-      new Uuid(data.user),
+      new Uuid(data.userId),
       new StringValueObject(data.specialty),
       new StringValueObject(data.medicalIdentificationNumber),
       new StringValueObject(data.licenseMedicalNumber),
