@@ -1,4 +1,4 @@
-import { DomainEvent } from '@ducen-services/shared';
+import { DomainEvent } from '../../domain/core/DomainEvent';
 import { MongoConnection } from '../Persistence/Mongo/MongoConnection';
 import { DomainEventDeserializer } from './DomainEventDeserializer';
 import { DomainEventSerializer } from './DomainEventSerializer';

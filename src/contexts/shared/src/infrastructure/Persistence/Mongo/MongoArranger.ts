@@ -1,4 +1,4 @@
-import { Arranger } from '../../../domain/Arranger';
+import { Arranger } from '../../../domain/core/Arranger';
 import { MongoConnection } from './MongoConnection';
 
 export class MongoArranger extends Arranger {

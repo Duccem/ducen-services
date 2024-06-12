@@ -1,6 +1,5 @@
-import { InternalError } from '../../domain/Errors/InternalError';
-import { Query } from '../../domain/Query/Query';
-import { QueryHandler } from '../../domain/Query/QueryHandler';
+import { InternalError } from '../../domain/common/errors/InternalError';
+import { Query, QueryHandler } from '../../domain/core/Query';
 
 export class QueryHandlers extends Map<Query, QueryHandler<Query>> {
   constructor(queryHandlers: Array<QueryHandler<Query>>) {

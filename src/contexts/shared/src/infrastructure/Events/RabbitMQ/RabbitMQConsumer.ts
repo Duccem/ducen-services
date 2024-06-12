@@ -1,5 +1,5 @@
 import { ConsumeMessage } from 'amqplib';
-import { DomainEventSubscriber } from '../../../domain/Events/DomainEventSubscriber';
+import { DomainEventSubscriber } from '../../../domain/core/DomainEvent';
 import { DomainEventDeserializer } from '../DomainEventDeserializer';
 import { RabbitMQConnection } from './RabbitMQConnection';
 

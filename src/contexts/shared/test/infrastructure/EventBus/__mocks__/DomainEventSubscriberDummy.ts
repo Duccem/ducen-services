@@ -1,4 +1,4 @@
-import { DomainEvent, DomainEventClass } from '../../../../src/domain/Events/DomainEvent';
+import { DomainEvent, DomainEventClass } from '../../../../src/domain/core/DomainEvent';
 import { DomainEventSubscriber } from '../../../../src/domain/Events/DomainEventSubscriber';
 import { DomainEventDummy } from './DomainEventDummy';
 

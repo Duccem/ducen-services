@@ -1,4 +1,4 @@
-import { DomainEvent } from '../../../src/domain/Events/DomainEvent';
+import { DomainEvent } from '../../../src/domain/core/DomainEvent';
 import { DomainEventDeserializer } from '../../../src/infrastructure/Events/DomainEventDeserializer';
 import { DomainEventFailOverPublisher } from '../../../src/infrastructure/Events/DomainEventFailOverPublisher';
 import { DomainEventRegisterObservers } from '../../../src/infrastructure/Events/DomainEventRegisterObservers';

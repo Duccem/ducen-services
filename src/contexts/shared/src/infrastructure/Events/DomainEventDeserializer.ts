@@ -1,4 +1,4 @@
-import { DomainEventClass, DomainEventSubscriber } from '@ducen-services/shared';
+import { DomainEventClass, DomainEventSubscriber } from '../../domain/core/DomainEvent';
 
 type DomainEventJSON = {
   type: string;

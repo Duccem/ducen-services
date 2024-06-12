@@ -1,7 +1,7 @@
 import { LoginHandler } from '../../../../src/User/application/Login/LoginHandler';
 import { LoginQuery } from '../../../../src/User/application/Login/LoginQuery';
-import { IdentifyBy } from '../../../../src/User/domain/IdentifyBy';
 import { IncorrectPassword } from '../../../../src/User/domain/IncorrectPassword';
+import { SearchUserByIdCriteria } from '../../../../src/User/domain/SearchUserByIdCriteria';
 import { UserNotExist } from '../../../../src/User/domain/UserNotExist';
 import { MockUserRepository } from '../../__mocks__/MockUserRepository';
 import { UserMother } from '../../domain/UserMother';
@@ -24,7 +24,9 @@ describe('LoginHandler', () => {
     userRepository.returnOnGetUserByCriteria(user);
     const response = await handler.handle(query);
 
-    userRepository.assertGetUserByCriteriaHaveBeenCalledWith(new IdentifyBy('email', user.email.value));
+    userRepository.assertGetUserByCriteriaHaveBeenCalledWith(
+      new SearchUserByIdCriteria('email', user.email.value),
+    );
     expect(response).toEqual({
       token: user.generateToken('auth-key'),
       user: user.toPrimitives(),

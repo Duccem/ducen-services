@@ -1,5 +1,5 @@
-import { DomainError } from '../../domain/Errors/DomainError';
-import { InternalError } from '../../domain/Errors/InternalError';
+import { InternalError } from '../../domain/common/errors/InternalError';
+import { DomainError } from '../../domain/core/DomainError';
 
 export function GraphQLErrorHandling(gqlError: any, e: any) {
   let error: DomainError;
@@ -10,7 +10,6 @@ export function GraphQLErrorHandling(gqlError: any, e: any) {
   }
   return {
     message: error.getMessage(),
-    code: error.getCode(),
     timestamp: error.getTimestamp(),
   };
 }

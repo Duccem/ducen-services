@@ -1,13 +1,13 @@
-import { Criteria } from "../../../domain/Criteria/Criteria";
-import { Filter } from "../../../domain/Criteria/Filter/Filter";
-import { Operator } from "../../../domain/Criteria/Filter/FilterOperator";
-import { AndFilters, Filters, NotFilters, OrFilters } from "../../../domain/Criteria/Filter/Filters";
-import { Join } from "../../../domain/Criteria/Join/Join";
-import { Joins } from "../../../domain/Criteria/Join/Joins";
-import { Relationships } from "../../../domain/Criteria/Join/Relationship";
-import { Order } from "../../../domain/Criteria/Order/Order";
-import { Projection } from "../../../domain/Criteria/Projection/Projection";
-
+import {
+  Criteria,
+  Filter,
+  FilterType,
+  Filters,
+  Operator,
+  Order,
+  isAsc,
+  isFilter,
+} from '../../../domain/core/Criteria';
 
 interface TransformerFunction<T, K> {
   (value: T): K;
@@ -43,20 +43,6 @@ export class MongoCriteriaConverter {
     ]);
   }
 
-  public convert(criteria?: Criteria, joins?: Joins, projection?: Projection) {
-    const { filter, limit, skip, sort } = this.criteria(criteria);
-    const join = this.join(joins);
-    const project = this.project(projection);
-    return [
-      { $match: filter },
-      ...join,
-      { $sort: sort },
-      { $skip: skip },
-      { $limit: limit },
-      project ? { $project: project } : {},
-    ];
-  }
-
   public criteria(criteria: Criteria): MongoQuery {
     if (!criteria)
       return {
@@ -66,100 +52,57 @@ export class MongoCriteriaConverter {
         limit: 50,
       };
     return {
-      filter: criteria.hasFilter() ? this.filter(criteria.filters) : {},
-      sort: criteria.hasOrder() ? this.sort(criteria.order) : { _id: -1 },
-      skip: criteria.hasPaginator() ? criteria.paginator.offset.getValue() : 0,
-      limit: criteria.hasPaginator() ? criteria.paginator.limit.getValue() : 50,
+      filter: criteria.hasFilter() ? this.filter(criteria.getFilters()) : {},
+      sort: criteria.hasOrder() ? this.sort(criteria.getOrder()) : { _id: -1 },
+      skip: criteria.hasPagination() ? criteria.getPagination().offset : 0,
+      limit: criteria.hasPagination() ? criteria.getPagination().limit : 50,
     };
-  }
-
-  public join(joins?: Joins) {
-    if (!joins) return [];
-    const lookups = joins.joins.map((join) => this.lookup(join));
-    const unwinds = joins.joins.map((join) => this.unwind(join));
-    return [...lookups, ...unwinds];
-  }
-
-  public project(projection: Projection) {
-    if (projection.isEmpty()) return null;
-    return projection.fields.reduce((acc, field) => ({ ...acc, [field.value]: 1 }), {});
-  }
-
-  public search(text: string) {
-    return [
-      { $match: { $text: { $search: text } } },
-      { $addFields: { score: { $meta: 'textScore' } } },
-      { $sort: { score: { $meta: 'textScore' } } },
-    ];
   }
 
   private filter(filters: Filters): MongoFilter {
     const filter = filters.filters.map((filter) => {
-      const transformer = this.filterTransformers.get(filter.operator.value);
+      if (!isFilter(filter)) return this.filter(filter);
+      const transformer = this.filterTransformers.get(filter.operator);
 
       if (!transformer) {
-        throw Error(`Unexpected operator value ${filter.operator.value}`);
+        throw Error(`Unexpected operator value ${filter.operator}`);
       }
 
       return transformer(filter);
     });
-    //const embeddings = filters.embeds.reduce((acc, filters) => ({ ...acc, ...this.filter(filters) }), {});
-    if (filters instanceof AndFilters) return { $and: [...filter] };
-    if (filters instanceof OrFilters) return { $or: [...filter] };
-    if (filters instanceof NotFilters) return { $not: Object.assign({}, ...filter) };
+    if (filters.type === FilterType.AND) return { $and: [...filter] };
+    if (filters.type === FilterType.OR) return { $or: [...filter] };
+    if (filters.type === FilterType.NOT) return { $not: Object.assign({}, ...filter) };
     return Object.assign({}, ...filter);
   }
 
   private sort(order: Order): MongoSort {
     return {
-      [order.orderBy.value === 'id' ? '_id' : order.orderBy.value]: order.orderType.isAsc() ? 1 : -1,
-    };
-  }
-
-  private lookup(join: Join) {
-    const relationship = join.relationship.value;
-    return {
-      $lookup: {
-        from: join.right.value,
-        localField: relationship === Relationships.MANY_TO_ONE ? join.left.value : '_id',
-        foreignField: relationship === Relationships.MANY_TO_ONE ? '_id' : join.right.value,
-        as: join.right.value,
-      },
-    };
-  }
-
-  private unwind(join: Join) {
-    if (join.relationship.value !== Relationships.MANY_TO_ONE) return;
-    return {
-      $unwind: {
-        path: `$${join.right.value}`,
-        includeArrayIndex: 'string',
-        preserveNullAndEmptyArrays: true,
-      },
+      [order.field === 'id' ? '_id' : order.field]: isAsc(order.order) ? 1 : -1,
     };
   }
 
   private equal(filter: Filter): MongoFilter {
-    return { [filter.field.value]: { $eq: filter.value.value } };
+    return { [filter.field]: { $eq: filter.value } };
   }
 
   private notEqual(filter: Filter): MongoFilter {
-    return { [filter.field.value]: { $ne: filter.value.value } };
+    return { [filter.field]: { $ne: filter.value } };
   }
 
   private greaterThan(filter: Filter): MongoFilter {
-    return { [filter.field.value]: { $gt: filter.value.value } };
+    return { [filter.field]: { $gt: filter.value } };
   }
 
   private lowerThan(filter: Filter): MongoFilter {
-    return { [filter.field.value]: { $lt: filter.value.value } };
+    return { [filter.field]: { $lt: filter.value } };
   }
 
   private contains(filter: Filter): MongoFilter {
-    return { [filter.field.value]: { $regex: filter.value.value } };
+    return { [filter.field]: { $regex: filter.value } };
   }
 
   private notContains(filter: Filter): MongoFilter {
-    return { [filter.field.value]: { $not: { $regex: filter.value.value } } };
+    return { [filter.field]: { $not: { $regex: filter.value } } };
   }
 }

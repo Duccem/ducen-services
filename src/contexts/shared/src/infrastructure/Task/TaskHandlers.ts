@@ -1,15 +1,15 @@
-import { InternalError } from '../../domain/Errors/InternalError';
-import { TaskHandler } from '../../domain/Task/TaskHandler';
+import { InternalError } from '../../domain/common/errors/InternalError';
+import { Task, TaskHandler } from '../../domain/core/Task';
 
-export class TaskHandlers extends Map<string, TaskHandler> {
-  constructor(taskHandlers: Array<TaskHandler>) {
+export class TaskHandlers extends Map<Task, TaskHandler<Task>> {
+  constructor(taskHandlers: Array<TaskHandler<Task>>) {
     super();
     taskHandlers.forEach((taskHandler) => {
       this.set(taskHandler.subscribedTo(), taskHandler);
     });
   }
 
-  public get(task: string): TaskHandler {
+  public get(task: Task): TaskHandler<Task> {
     const taskHandler = super.get(task);
 
     if (!taskHandler) {
@@ -19,13 +19,13 @@ export class TaskHandlers extends Map<string, TaskHandler> {
     return taskHandler;
   }
 
-  public addTaskHandlers(taskHandlers: Array<TaskHandler>): void {
+  public addTaskHandlers(taskHandlers: Array<TaskHandler<Task>>): void {
     taskHandlers.forEach((taskHandler) => {
       this.set(taskHandler.subscribedTo(), taskHandler);
     });
   }
 
-  public addHandler(handler: TaskHandler): void {
+  public addHandler(handler: TaskHandler<Task>): void {
     this.set(handler.subscribedTo(), handler);
   }
 }

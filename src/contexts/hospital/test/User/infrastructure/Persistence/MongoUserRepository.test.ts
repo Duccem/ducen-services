@@ -5,7 +5,7 @@ import {
   MongoConnectionFactory,
   UuidMother,
 } from '@ducen-services/shared';
-import { IdentifyBy } from '../../../../src/User/domain/IdentifyBy';
+import { SearchUserByIdCriteria } from '../../../../src/User/domain/SearchUserByIdCriteria';
 import { UserRepository } from '../../../../src/User/domain/UserRepository';
 import { MongoUserRepository } from '../../../../src/User/infrastructure/Persistence/MongoDB/MongoUserRepository';
 import { UserMother } from '../../domain/UserMother';
@@ -36,19 +36,23 @@ describe('MongoUserRepository', () => {
   it('should save a member and find it by id', async () => {
     const user = UserMother.create();
     await userRepository.save(user.id, user);
-    const savedUser = await userRepository.getUserByCriteria(new IdentifyBy('id', user.id.value));
+    const savedUser = await userRepository.getUserByCriteria(new SearchUserByIdCriteria('id', user.id.value));
     expect(savedUser).toEqual(user);
   });
 
   it('should get null on search by id', async () => {
-    const savedUser = await userRepository.getUserByCriteria(new IdentifyBy('id', UuidMother.random()));
+    const savedUser = await userRepository.getUserByCriteria(
+      new SearchUserByIdCriteria('id', UuidMother.random()),
+    );
     expect(savedUser).toEqual(null);
   });
 
   it('should save a member and find it by email', async () => {
     const user = UserMother.create();
     await userRepository.save(user.id, user);
-    const savedUsers = await userRepository.listUsersByCriteria(new IdentifyBy('email', user.email.value));
+    const savedUsers = await userRepository.listUsersByCriteria(
+      new SearchUserByIdCriteria('email', user.email.value),
+    );
     expect(savedUsers).toEqual([user]);
   });
 

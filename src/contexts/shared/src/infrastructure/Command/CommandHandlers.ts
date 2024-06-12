@@ -1,6 +1,5 @@
-import { Command } from '../../domain/Command/Command';
-import { CommandHandler } from '../../domain/Command/CommandHandler';
-import { InternalError } from '../../domain/Errors/InternalError';
+import { InternalError } from '../../domain/common/errors/InternalError';
+import { Command, CommandHandler } from '../../domain/core/Command';
 
 export class CommandHandlers extends Map<Command, CommandHandler<Command>> {
   constructor(commandHandlers: Array<CommandHandler<Command>>) {
@@ -15,7 +14,9 @@ export class CommandHandlers extends Map<Command, CommandHandler<Command>> {
     const commandHandler = super.get(command.constructor);
 
     if (!commandHandler) {
-      throw new InternalError(`The command <${command.constructor.name}> hasn't a command handler associated`);
+      throw new InternalError(
+        `The command <${command.constructor.name}> hasn't a command handler associated`,
+      );
     }
 
     return commandHandler;

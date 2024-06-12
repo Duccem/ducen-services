@@ -1,4 +1,4 @@
-import { IdentifyBy } from '../../../User/domain/IdentifyBy';
+import { SearchUserByIdCriteria } from '../../../User/domain/SearchUserByIdCriteria';
 import { UserRepository } from '../../../User/domain/UserRepository';
 import { Notification } from '../../domain/Notification';
 import { NotificationRepository } from '../../domain/NotificationRepository';
@@ -14,7 +14,7 @@ export class SendEmailRecoveryCode {
   ) {}
 
   async run(email: string): Promise<void> {
-    const user = await this.userRepository.getUserByCriteria(new IdentifyBy('email', email));
+    const user = await this.userRepository.getUserByCriteria(new SearchUserByIdCriteria('email', email));
     if (!user) throw new Error('User not found');
     user.generateVerificationCode();
     const data = {

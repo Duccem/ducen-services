@@ -1,17 +1,18 @@
 import { Schema } from 'mongoose';
-import { Aggregate } from '../../../domain/Aggregate';
-import { Criteria } from '../../../domain/Criteria/Criteria';
-import { Entity } from '../../../domain/Entity';
-import { InternalError } from '../../../domain/Errors/InternalError';
-import { Logger } from '../../../domain/Logger';
-import { NewableClass } from '../../../domain/Types/NewableClass';
-import { Primitives } from '../../../domain/Types/Primitives';
+import { InternalError } from '../../../domain/common/errors/InternalError';
+import { Aggregate } from '../../../domain/core/Aggregate';
+import { Criteria } from '../../../domain/core/Criteria';
+import { Entity } from '../../../domain/core/Entity';
+import { Logger } from '../../../domain/core/Logger';
+import { Constructor } from '../../../domain/types/Constructor';
+import { Primitives } from '../../../domain/types/Primitives';
 import { MongoConnection } from './MongoConnection';
 import { MongoCriteriaConverter } from './MongoCriteriaConverter';
+
 export abstract class MongoRepository<T extends Aggregate | Entity> {
   protected converter: MongoCriteriaConverter = new MongoCriteriaConverter();
   constructor(
-    protected entity: NewableClass<T>,
+    protected entity: Constructor<T>,
     protected connection: MongoConnection,
     protected readonly logger: Logger,
   ) {}
@@ -29,7 +30,12 @@ export abstract class MongoRepository<T extends Aggregate | Entity> {
   protected async searchByCriteria(criteria: Criteria): Promise<Primitives<T>[]> {
     try {
       const { filter, limit, skip, sort } = this.converter.criteria(criteria);
-      const documents = await this.collection.find<Primitives<T>>(filter).sort(sort).skip(skip).limit(limit).exec();
+      const documents = await this.collection
+        .find<Primitives<T>>(filter)
+        .sort(sort)
+        .skip(skip)
+        .limit(limit)
+        .exec();
       return documents;
     } catch (error) {
       this.handleError(`Error searching by criteria ${this.model}: ${error.message}`);
@@ -47,12 +53,16 @@ export abstract class MongoRepository<T extends Aggregate | Entity> {
 
   protected async searchByText(text: string): Promise<Primitives<T>[]> {
     try {
-      const filter = this.converter.search(text);
-      return await this.collection.aggregate<Primitives<T>>(filter as any).exec();
+      return await this.collection
+        .aggregate<
+          Primitives<T>
+        >([{ $match: { $text: { $search: text } } }, { $limit: 50 }, { $addFields: { score: { $meta: 'textScore' } } }, { $sort: { score: { $meta: 'textScore' } } }])
+        .exec();
     } catch (error) {
       this.handleError(`Error searching by text ${this.model}: ${error.message}`);
     }
   }
+  w;
 
   protected async persist(id: string, aggregate: T): Promise<void> {
     try {

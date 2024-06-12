@@ -1,6 +1,6 @@
 import { WithTransactionCallback } from 'mongodb';
 import { Connection, Schema } from 'mongoose';
-import { InternalError } from '../../../domain/Errors/InternalError';
+import { InternalError } from '../../../domain/common/errors/InternalError';
 
 export class MongoConnection {
   private connection: Connection;

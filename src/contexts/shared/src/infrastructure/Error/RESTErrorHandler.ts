@@ -1,15 +1,14 @@
-import { DomainError } from '@ducen-services/shared';
 import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 import { Response } from 'express';
+import { DomainError } from '../../domain/core/DomainError';
 
 @Catch(Error)
 export class RESTCatchErrors implements ExceptionFilter {
   catch(exception: DomainError, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    response.status(exception.getCode()).json({
+    response.json({
       message: exception.getMessage(),
-      code: exception.getCode(),
       timestamp: exception.getTimestamp(),
     });
   }

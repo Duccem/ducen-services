@@ -1,13 +1,13 @@
-import { Aggregate } from '../../../domain/Aggregate';
-import { Entity } from '../../../domain/Entity';
 import { InternalError } from '../../../domain/Errors/InternalError';
-import { Logger } from '../../../domain/Logger';
-import { NewableClass } from '../../../domain/Types/NewableClass';
+import { Aggregate } from '../../../domain/core/Aggregate';
+import { Entity } from '../../../domain/core/Entity';
+import { Logger } from '../../../domain/core/Logger';
+import { Constructor } from '../../../domain/types/Constructor';
 import { RedisConnection } from './RedisConnection';
 
 export class RedisRepository<T extends Aggregate | Entity> {
   constructor(
-    protected entity: NewableClass<T>,
+    protected entity: Constructor<T>,
     protected connection: RedisConnection,
     protected logger: Logger,
   ) {}

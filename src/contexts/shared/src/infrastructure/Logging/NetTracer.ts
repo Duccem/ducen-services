@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Color, Decorator, Logger } from '../../domain/Logger';
+import { Color, Decorator, Logger } from '../../domain/core/Logger';
 export class NetTracer {
   private static method(request: Request): string {
     let methodString = request.method;

@@ -1,6 +1,6 @@
 import { Inject, Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
-import { Logger } from '../../domain/Logger';
+import { Logger } from '../../domain/core/Logger';
 import { NetTracer } from './NetTracer';
 const onHeaders = require('on-headers');
 @Injectable()

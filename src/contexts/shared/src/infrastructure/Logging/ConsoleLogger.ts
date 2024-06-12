@@ -1,5 +1,5 @@
 import * as winston from 'winston';
-import { Logger } from '../../domain/Logger';
+import { Logger } from '../../domain/core/Logger';
 import { format } from './Format';
 export interface ConsoleLoggerOptions {
   serviceName: string;

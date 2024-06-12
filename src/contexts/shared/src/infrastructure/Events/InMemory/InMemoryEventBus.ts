@@ -1,7 +1,5 @@
 import EventEmitter from 'events';
-import { DomainEvent } from '../../../domain/Events/DomainEvent';
-import { EventBus } from '../../../domain/Events/DomainEventBus';
-import { DomainEventSubscriber } from '../../../domain/Events/DomainEventSubscriber';
+import { DomainEvent, DomainEventSubscriber, EventBus } from '../../../domain/core/DomainEvent';
 import { DomainEventDeserializer } from '../DomainEventDeserializer';
 import { DomainEventFailOverPublisher } from '../DomainEventFailOverPublisher';
 import { DomainEventSerializer } from '../DomainEventSerializer';

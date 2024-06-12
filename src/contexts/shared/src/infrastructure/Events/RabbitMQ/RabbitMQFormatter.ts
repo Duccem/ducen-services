@@ -1,9 +1,12 @@
-import { DomainEvent } from '../../../domain/Events/DomainEvent';
-import { DomainEventSubscriber } from '../../../domain/Events/DomainEventSubscriber';
+import { DomainEvent, DomainEventSubscriber } from '../../../domain/core/DomainEvent';
 import { DomainEventSerializer } from '../DomainEventSerializer';
 
 export class RabbitMQFormatter {
-  static formatQueueArguments(params: { deadLetterExchange?: string; deadLetterQueue?: string; messageTtl?: number }) {
+  static formatQueueArguments(params: {
+    deadLetterExchange?: string;
+    deadLetterQueue?: string;
+    messageTtl?: number;
+  }) {
     let args: any = {};
     if (params.deadLetterExchange) {
       args = { ...args, 'x-dead-letter-exchange': params.deadLetterExchange };

@@ -3,8 +3,8 @@ import { WordMother } from '@ducen-services/shared';
 import { MockUserRepository } from '../../__mocks__/MockUserRepository';
 
 import { ChangePasswordHandler } from '../../../../src/User/application/ChangePassword/ChangePasswordHandler';
-import { IdentifyBy } from '../../../../src/User/domain/IdentifyBy';
 import { IncorrectPassword } from '../../../../src/User/domain/IncorrectPassword';
+import { SearchUserByIdCriteria } from '../../../../src/User/domain/SearchUserByIdCriteria';
 import { UserNotExist } from '../../../../src/User/domain/UserNotExist';
 import { UserMother } from '../../domain/UserMother';
 import { ChangePasswordCommandMother } from './ChangePasswordCommandMother';
@@ -24,7 +24,7 @@ describe('ChangePasswordHandler', () => {
     user.password.encrypt();
     repository.returnOnGetUserByCriteria(user);
     await handler.handle(command);
-    repository.assertGetUserByCriteriaHaveBeenCalledWith(new IdentifyBy('id', user.id.value));
+    repository.assertGetUserByCriteriaHaveBeenCalledWith(new SearchUserByIdCriteria('id', user.id.value));
     repository.assertSaveHaveBeenCalledWith(user.id, user);
   });
 

@@ -1,7 +1,5 @@
-import { DomainEvent } from '../../../domain/Events/DomainEvent';
-import { EventBus } from '../../../domain/Events/DomainEventBus';
-import { DomainEventSubscriber } from '../../../domain/Events/DomainEventSubscriber';
-import { Logger } from '../../../domain/Logger';
+import { DomainEvent, DomainEventSubscriber, EventBus } from '../../../domain/core/DomainEvent';
+import { Logger } from '../../../domain/core/Logger';
 import { DomainEventDeserializer } from '../DomainEventDeserializer';
 import { DomainEventFailOverPublisher } from '../DomainEventFailOverPublisher';
 import { DomainEventRegisterObservers } from '../DomainEventRegisterObservers';
