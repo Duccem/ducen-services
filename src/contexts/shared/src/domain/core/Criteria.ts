@@ -27,6 +27,10 @@ export function isAsc(direction: Direction): boolean {
 export function isFilter(filter: any): filter is Filter {
   return filter.field && filter.value && filter.operator;
 }
+
+export interface CriteriaConverter {
+  criteria(criteria: Criteria): any;
+}
 export class Criteria {
   protected filters: Filters;
   protected order: Order;

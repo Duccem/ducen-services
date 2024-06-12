@@ -61,7 +61,7 @@ export class Maybe<Value> {
 
   static Some<T>(value: Nullable<T>): Maybe<T> {
     if (value === null || value === undefined) {
-      throw new DomainError('Value cannot be null or undefined', 500);
+      throw new DomainError('Value cannot be null or undefined');
     }
     return new Maybe({ kind: 'Some', value });
   }

@@ -1,5 +1,6 @@
 import {
   Criteria,
+  CriteriaConverter,
   Filter,
   FilterType,
   Filters,
@@ -29,7 +30,7 @@ interface MongoQuery {
   limit: number;
 }
 
-export class MongoCriteriaConverter {
+export class MongoCriteriaConverter implements CriteriaConverter {
   private filterTransformers: Map<Operator, TransformerFunction<Filter, MongoFilter>>;
 
   constructor() {
