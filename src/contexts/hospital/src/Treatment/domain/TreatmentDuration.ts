@@ -1,4 +1,5 @@
 import { NumberValueObject, Primitives } from '@ducen-services/shared';
+import { intervalToDuration } from 'date-fns';
 
 export class TreatmentDuration {
   constructor(
@@ -23,6 +24,18 @@ export class TreatmentDuration {
       new NumberValueObject(primitive.months),
       new NumberValueObject(primitive.weeks),
       new NumberValueObject(primitive.days),
+    );
+  }
+  public static fromDates(start: Date, end: Date): TreatmentDuration {
+    const duration = intervalToDuration({
+      end,
+      start,
+    });
+    return new TreatmentDuration(
+      new NumberValueObject(duration.years),
+      new NumberValueObject(duration.months),
+      new NumberValueObject(duration.weeks),
+      new NumberValueObject(duration.days),
     );
   }
 }

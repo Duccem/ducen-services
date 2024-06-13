@@ -78,10 +78,6 @@ export class Treatment extends Aggregate {
     startDate: Date,
     endDate: Date,
   ): Treatment {
-    const start = new DateValueObject(startDate);
-    const end = new DateValueObject(endDate);
-    const duration: any = DateValueObject.calculateIntervalDuration(start, end);
-
     return new Treatment(
       new Uuid(id),
       new Uuid(patientId),
@@ -92,10 +88,10 @@ export class Treatment extends Aggregate {
       new StringValueObject(description),
       new StringValueObject(instructions),
       new TreatmentStatus(status),
-      TreatmentDuration.fromPrimitives(duration),
+      TreatmentDuration.fromDates(startDate, endDate),
       medicaments.map((medicament) => Medication.fromPrimitive(medicament)),
-      start,
-      end,
+      new DateValueObject(startDate),
+      new DateValueObject(endDate),
       DateValueObject.today(),
       DateValueObject.today(),
     );

@@ -26,9 +26,9 @@ export class Notification extends Aggregate {
       title: this.title.toString(),
       body: this.body.toString(),
       types: this.types.map((type) => type.toString()),
-      data: this.data.toString(),
-      createdAt: this.createdAt.toUTC(),
-      updatedAt: this.updatedAt.toUTC(),
+      data: this.data,
+      createdAt: this.createdAt.getValue(),
+      updatedAt: this.updatedAt.getValue(),
     };
   }
 
