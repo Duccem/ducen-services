@@ -12,8 +12,6 @@ export * from './Events/RabbitMQ/RabbitMQConnectionFactory';
 export * from './Events/RabbitMQ/RabbitMQConsumer';
 export * from './Events/RabbitMQ/RabbitMQEventBus';
 export * from './Events/RabbitMQ/RabbitMQFormatter';
-export * from './Files/CloudinaryStoreService';
-export * from './Files/S3StoreService';
 export * from './IA/DocumentCreators/DocumentCreator';
 export * from './IA/DocumentCreators/TextDocumentCreator';
 export * from './IA/Models/HuggingFaceGenerator';

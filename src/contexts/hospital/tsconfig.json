@@ -17,10 +17,6 @@
     "noImplicitAny": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "baseUrl": "."
   },
   "exclude": [
     "node_modules",

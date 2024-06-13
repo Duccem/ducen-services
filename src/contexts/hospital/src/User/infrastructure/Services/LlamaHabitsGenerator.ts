@@ -1,4 +1,4 @@
-import { Criteria, LlamaGenerator, MongoConnection, OllamaConfig } from '@ducen-services/shared';
+import { LlamaGenerator, MongoConnection, OllamaConfig } from '@ducen-services/shared';
 import { z } from 'zod';
 import { User } from '../../../..';
 import { HabitsGenerator } from '../../domain/HabitsGenerator';
@@ -30,7 +30,6 @@ export class LlamaHabitsGenerator extends LlamaGenerator implements HabitsGenera
   async generateHabits(
     user: User,
     physicInformation: any,
-    criteria: Criteria,
   ): Promise<z.infer<typeof LlamaHabitsGenerator.RESPONSE_STRUCTURE>> {
     const query = `
       usuario: ${JSON.stringify({ id: user.id.value, age: user.birthDate.age(), datos_físicos: physicInformation })}

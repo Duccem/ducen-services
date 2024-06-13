@@ -1,6 +1,7 @@
-import { Primitives, StoreService } from '@ducen-services/shared';
+import { Primitives } from '@ducen-services/shared';
 import { MedicalDocument } from '../../domain/MedicalDocument';
 import { MedicalDocumentRepository } from '../../domain/MedicalDocumentRepository';
+import { StoreService } from '../../domain/StoreService';
 
 export class DocumentUploader {
   constructor(

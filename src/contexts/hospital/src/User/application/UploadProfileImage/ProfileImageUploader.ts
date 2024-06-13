@@ -1,4 +1,4 @@
-import { StoreService } from '@ducen-services/shared';
+import { StoreService } from '../../../MedicalDocument/domain/StoreService';
 import { User } from '../../domain/User';
 import { UserRepository } from '../../domain/UserRepository';
 

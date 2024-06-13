@@ -1,12 +1,13 @@
+import { Uuid } from '../common/value-objects/Uuid';
 import { BaseObject } from './BaseObject';
-import { DateValueObject, StringValueObject } from './ValueObject';
+import { DateValueObject } from './ValueObject';
 
 export abstract class Entity extends BaseObject {
-  public id: StringValueObject;
+  public id: Uuid;
   public createdAt?: DateValueObject;
   public updatedAt?: DateValueObject;
 
-  constructor(id: StringValueObject, createdAt?: DateValueObject, updatedAt?: DateValueObject) {
+  constructor(id: Uuid, createdAt?: DateValueObject, updatedAt?: DateValueObject) {
     super();
     this.id = id;
     this.createdAt = createdAt;

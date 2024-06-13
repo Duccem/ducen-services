@@ -1,10 +1,11 @@
+import { Uuid } from '../common/value-objects/Uuid';
 import { DomainEvent } from './DomainEvent';
 import { Entity } from './Entity';
-import { DateValueObject, StringValueObject } from './ValueObject';
+import { DateValueObject } from './ValueObject';
 
 export abstract class Aggregate extends Entity {
   private domainEvents: Array<DomainEvent>;
-  constructor(id: StringValueObject, createdAt?: DateValueObject, updatedAt?: DateValueObject) {
+  constructor(id: Uuid, createdAt?: DateValueObject, updatedAt?: DateValueObject) {
     super(id, createdAt, updatedAt);
     this.domainEvents = [];
   }

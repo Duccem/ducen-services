@@ -1,4 +1,3 @@
-export * from './StoreService';
 export * from './common/errors/AuthorizationError';
 export * from './common/errors/FormatError';
 export * from './common/errors/InternalError';
