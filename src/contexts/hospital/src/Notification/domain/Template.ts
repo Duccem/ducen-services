@@ -21,8 +21,8 @@ export class Template extends Entity {
       name: this.name.toString(),
       source: this.source.toString(),
       type: this.type.toString(),
-      createdAt: this.createdAt.toUTC(),
-      updatedAt: this.updatedAt.toUTC(),
+      createdAt: this.createdAt.getValue(),
+      updatedAt: this.updatedAt.getValue(),
     };
   }
 

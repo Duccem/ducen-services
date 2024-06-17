@@ -1,7 +1,10 @@
-import { Criteria, Filter, FilterField, FilterOperator, FilterValue, Filters } from '@ducen-services/shared';
+import { Criteria, FilterType, Operator } from '@ducen-services/shared';
 
 export class GetByPatientCriteria extends Criteria {
   constructor(patientId: string) {
-    super(new Filters([new Filter(new FilterField('patientId'), FilterOperator.equal(), new FilterValue(patientId))]));
+    super({
+      filters: [{ field: 'patientId', operator: Operator.EQUAL, value: patientId }],
+      type: FilterType.AND,
+    });
   }
 }

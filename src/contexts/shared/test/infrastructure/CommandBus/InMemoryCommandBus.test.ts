@@ -1,4 +1,4 @@
-import { InternalError } from '../../../src/domain/Errors/InternalError';
+import { InternalError } from '../../../src/domain/common/errors/InternalError';
 import { CommandHandlers } from '../../../src/infrastructure/Command/CommandHandlers';
 import { InMemoryCommandBus } from '../../../src/infrastructure/Command/InMemoryCommandBus';
 import { CommandHandlerDummy } from './__mocks__/CommandHandlerDummy';

@@ -1,4 +1,4 @@
-import { InternalError } from '../../../src/domain/Errors/InternalError';
+import { InternalError } from '../../../src/domain/common/errors/InternalError';
 import { InMemoryQueryBus } from '../../../src/infrastructure/Query/InMemoryQueryBus';
 import { QueryHandlers } from '../../../src/infrastructure/Query/QueryHandlers';
 import { DummyQuery } from './__mocks__/DummyQuery';

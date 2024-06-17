@@ -1,4 +1,4 @@
-import { QueryHandler } from '../../../../src/domain/Query/QueryHandler';
+import { QueryHandler } from '../../../../src/domain/core/Query';
 import { DummyQuery } from './DummyQuery';
 
 export class DummyQueryHandler implements QueryHandler<DummyQuery> {

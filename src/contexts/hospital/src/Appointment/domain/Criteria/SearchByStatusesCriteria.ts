@@ -1,8 +1,11 @@
-import { Criteria, Filter, Operator, OrFilters } from '@ducen-services/shared';
+import { Criteria, FilterType, Operator } from '@ducen-services/shared';
 import { AppointmentStatuses } from '../members/AppointmentStatus';
 
 export class SearchByStatusesCriteria extends Criteria {
   constructor(statuses: AppointmentStatuses[]) {
-    super(new OrFilters(statuses.map((status) => Filter.fromPrimitives('status', Operator.EQUAL, status))));
+    super({
+      filters: statuses.map((status) => ({ field: 'status', operator: Operator.EQUAL, value: status })),
+      type: FilterType.OR,
+    });
   }
 }

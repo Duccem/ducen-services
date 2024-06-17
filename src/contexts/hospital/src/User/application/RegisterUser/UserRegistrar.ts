@@ -1,6 +1,6 @@
 import { EventBus, Primitives } from '@ducen-services/shared';
-import { SearchUserByIdCriteria } from '../../domain/SearchUserByIdCriteria';
 
+import { SearchUserByEmailCriteria } from '../../domain/SearchUserByEmailCriteria';
 import { User } from '../../domain/User';
 import { UserAlreadyExistError } from '../../domain/UserAlreadyExist';
 import { UserRepository } from '../../domain/UserRepository';
@@ -12,9 +12,7 @@ export class UserRegistrar {
   ) {}
 
   async register(user: Primitives<User>) {
-    const existUser = await this.repository.getUserByCriteria(
-      new SearchUserByIdCriteria('email', user.email),
-    );
+    const existUser = await this.repository.getUserByCriteria(new SearchUserByEmailCriteria(user.email));
     if (existUser) throw new UserAlreadyExistError(user.email);
 
     const newUser = User.create(

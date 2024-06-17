@@ -1,8 +1,8 @@
 import {
   Aggregate,
+  AuthorizationError,
   BooleanValueObject,
   DateValueObject,
-  DomainError,
   Email,
   File,
   Primitives,
@@ -183,7 +183,7 @@ export class User extends Aggregate {
       this.verificationCode?.value !== code ||
       differenceInHours(this.updatedAt.getValue(), new Date()) > 1
     )
-      throw new DomainError('Invalid code', 400);
+      throw new AuthorizationError('Invalid code');
     this.verificationCode = null;
   }
 }

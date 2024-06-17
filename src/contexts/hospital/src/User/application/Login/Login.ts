@@ -1,6 +1,6 @@
 import { Primitives } from '@ducen-services/shared';
 import { AuthConfig } from '../../domain/AuthConfig';
-import { SearchUserByIdCriteria } from '../../domain/SearchUserByIdCriteria';
+import { SearchUserByEmailCriteria } from '../../domain/SearchUserByEmailCriteria';
 import { User } from '../../domain/User';
 import { UserNotExist } from '../../domain/UserNotExist';
 import { UserRepository } from '../../domain/UserRepository';
@@ -17,7 +17,7 @@ export class Login {
     token: string;
     user: Primitives<User>;
   }> {
-    const user = await this.userRepository.getUserByCriteria(new SearchUserByIdCriteria('email', username));
+    const user = await this.userRepository.getUserByCriteria(new SearchUserByEmailCriteria(username));
     if (!user) throw new UserNotExist();
 
     user.validatePassword(password);

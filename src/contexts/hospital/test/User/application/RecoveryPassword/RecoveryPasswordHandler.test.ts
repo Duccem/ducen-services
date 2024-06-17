@@ -1,5 +1,5 @@
 import { RecoveryPasswordHandler } from '../../../../src/User/application/RecoveryPassword/RecoveryPasswordHandler';
-import { SearchUserByIdCriteria } from '../../../../src/User/domain/SearchUserByIdCriteria';
+import { SearchUserByEmailCriteria } from '../../../../src/User/domain/SearchUserByEmailCriteria';
 import { UserNotExist } from '../../../../src/User/domain/UserNotExist';
 import { MockUserRepository } from '../../__mocks__/MockUserRepository';
 import { UserMother } from '../../domain/UserMother';
@@ -20,9 +20,7 @@ describe('RecoveryPasswordHandler', () => {
     userRepository.returnOnGetUserByCriteria(user);
 
     await handler.handle(command);
-    userRepository.assertGetUserByCriteriaHaveBeenCalledWith(
-      new SearchUserByIdCriteria('email', command.email),
-    );
+    userRepository.assertGetUserByCriteriaHaveBeenCalledWith(new SearchUserByEmailCriteria(command.email));
   });
 
   it('should throw error when user not exist', async () => {
@@ -30,8 +28,6 @@ describe('RecoveryPasswordHandler', () => {
     userRepository.returnOnGetUserByCriteria(undefined);
 
     await expect(handler.handle(command)).rejects.toBeInstanceOf(UserNotExist);
-    userRepository.assertGetUserByCriteriaHaveBeenCalledWith(
-      new SearchUserByIdCriteria('email', command.email),
-    );
+    userRepository.assertGetUserByCriteriaHaveBeenCalledWith(new SearchUserByEmailCriteria(command.email));
   });
 });

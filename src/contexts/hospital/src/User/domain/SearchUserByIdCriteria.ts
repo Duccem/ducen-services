@@ -1,15 +1,7 @@
-import { Criteria, Filters, Operator } from '@ducen-services/shared';
+import { Criteria, FilterType, Operator } from '@ducen-services/shared';
 
 export class SearchUserByIdCriteria extends Criteria {
   constructor(value: string) {
-    super(
-      Filters.fromValues([
-        {
-          field: 'id',
-          operator: Operator.EQUAL,
-          value,
-        },
-      ]),
-    );
+    super({ filters: [{ field: 'id', operator: Operator.EQUAL, value }], type: FilterType.AND });
   }
 }

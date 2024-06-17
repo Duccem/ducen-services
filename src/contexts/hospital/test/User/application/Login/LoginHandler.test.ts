@@ -24,9 +24,7 @@ describe('LoginHandler', () => {
     userRepository.returnOnGetUserByCriteria(user);
     const response = await handler.handle(query);
 
-    userRepository.assertGetUserByCriteriaHaveBeenCalledWith(
-      new SearchUserByIdCriteria('email', user.email.value),
-    );
+    userRepository.assertGetUserByCriteriaHaveBeenCalledWith(new SearchUserByIdCriteria(user.email.value));
     expect(response).toEqual({
       token: user.generateToken('auth-key'),
       user: user.toPrimitives(),

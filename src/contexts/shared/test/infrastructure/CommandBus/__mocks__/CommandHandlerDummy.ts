@@ -1,4 +1,4 @@
-import { CommandHandler } from '../../../../src/domain/Command/CommandHandler';
+import { CommandHandler } from '../../../../src/domain/core/Command';
 import { DummyCommand } from './DummyCommand';
 
 export class CommandHandlerDummy implements CommandHandler<DummyCommand> {

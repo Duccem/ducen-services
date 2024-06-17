@@ -100,7 +100,7 @@ export class Criteria {
     return this;
   }
 
-  static fromValues(filters: Filter[], order: Order, pagination: Pagination): Criteria {
+  static fromValues(filters: Filter[], order?: Order, pagination?: Pagination): Criteria {
     return new Criteria({ filters, type: FilterType.AND }, order, pagination);
   }
 }

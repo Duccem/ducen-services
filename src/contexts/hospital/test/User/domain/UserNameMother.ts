@@ -1,11 +1,11 @@
-import { MotherCreator } from '@ducen-services/shared';
+import { Mother } from '@ducen-services/shared';
 
 export class UserNameMother {
   static firstName(): string {
-    return MotherCreator.random().person.firstName();
+    return Mother.random().person.firstName();
   }
 
   static lastName(): string {
-    return MotherCreator.random().person.lastName();
+    return Mother.random().person.lastName();
   }
 }

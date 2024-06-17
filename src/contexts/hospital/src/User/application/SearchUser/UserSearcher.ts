@@ -7,7 +7,7 @@ export class UserSearcher {
   constructor(private repository: UserRepository) {}
 
   async run(id: string): Promise<User> {
-    const user = await this.repository.getUserByCriteria(new SearchUserByIdCriteria('id', id));
+    const user = await this.repository.getUserByCriteria(new SearchUserByIdCriteria(id));
     if (!user) {
       throw new UserNotExist();
     }

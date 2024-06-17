@@ -1,10 +1,11 @@
-import { CommandBus, EventBus, StoreService } from '@ducen-services/shared';
+import { CommandBus, EventBus } from '@ducen-services/shared';
 import { Provider } from '@nestjs/common';
 import { UploadProfileImageCommandHandler } from '../../../..';
 import { IngestKnowledgeBaseCommandHandler } from '../../application/IngestKnowlodgeBase/IngestKnowledgeBaseCommandHandler';
 import { UserRegisterHandler } from '../../application/RegisterUser/UserRegisterHandler';
 import { HabitsGenerator } from '../../domain/HabitsGenerator';
 import { UserRepository } from '../../domain/UserRepository';
+import { StoreService } from '../../../MedicalDocument/domain/StoreService';
 
 export const commandHandlers: Provider[] = [
   {

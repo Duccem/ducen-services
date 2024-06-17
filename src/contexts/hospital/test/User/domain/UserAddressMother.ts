@@ -1,16 +1,16 @@
-import { MotherCreator, Primitives } from '@ducen-services/shared';
+import { Mother, Primitives } from '@ducen-services/shared';
 import { UserAddress } from '../../../src/User/domain/UserAddress';
 
 export class UserAddressMother {
   static random(): Primitives<UserAddress> {
     return {
-      city: MotherCreator.random().location.city(),
-      country: MotherCreator.random().location.country(),
-      zipCode: MotherCreator.random().location.zipCode(),
-      street: MotherCreator.random().location.streetAddress(),
+      city: Mother.random().location.city(),
+      country: Mother.random().location.country(),
+      zipCode: Mother.random().location.zipCode(),
+      street: Mother.random().location.streetAddress(),
       coordinates: {
-        latitude: MotherCreator.random().location.latitude(),
-        longitude: MotherCreator.random().location.longitude(),
+        latitude: Mother.random().location.latitude(),
+        longitude: Mother.random().location.longitude(),
       },
     };
   }

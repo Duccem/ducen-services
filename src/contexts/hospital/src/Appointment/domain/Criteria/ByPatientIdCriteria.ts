@@ -1,11 +1,14 @@
-import { Criteria, Filter, Filters, Operator, Order, Paginator } from '@ducen-services/shared';
+import { Criteria, Direction, FilterType, Operator } from '@ducen-services/shared';
 
 export class ByPatientIdCriteria extends Criteria {
   constructor(patientId: string, limit: number, offset: number) {
     super(
-      new Filters([Filter.fromPrimitives('patientId', Operator.EQUAL, patientId)]),
-      Order.fromValues('initDate', 'ASC'),
-      Paginator.fromValues(limit, offset),
+      {
+        filters: [{ field: 'patientId', value: patientId, operator: Operator.EQUAL }],
+        type: FilterType.AND,
+      },
+      { order: Direction.ASC, field: 'initDate' },
+      { limit, offset },
     );
   }
 }

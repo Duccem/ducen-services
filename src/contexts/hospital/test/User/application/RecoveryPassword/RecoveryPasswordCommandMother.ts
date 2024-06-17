@@ -3,6 +3,6 @@ import { RecoveryPasswordCommand } from '../../../../src/User/application/Recove
 
 export class RecoveryPasswordCommandMother {
   static create(): RecoveryPasswordCommand {
-    return new RecoveryPasswordCommand(EmailMother.random({}));
+    return new RecoveryPasswordCommand(new EmailMother().generate());
   }
 }

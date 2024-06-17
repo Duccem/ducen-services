@@ -1,4 +1,4 @@
-import { Criteria, EventBus, NotFoundError } from '@ducen-services/shared';
+import { Criteria, EventBus, NotFoundError, Operator } from '@ducen-services/shared';
 import { AppointmentRepository } from '../../../..';
 
 export class AppointmentRescheduler {
@@ -9,7 +9,7 @@ export class AppointmentRescheduler {
 
   async run(appointmentId: string, initDate: Date, endDate: Date): Promise<void> {
     const appointment = await this.repository.findOne(
-      Criteria.fromValues([{ field: 'id', value: appointmentId, operator: '=' }]),
+      Criteria.fromValues([{ field: 'id', value: appointmentId, operator: Operator.EQUAL }]),
     );
     if (!appointment) {
       throw new NotFoundError('Appointment not found');

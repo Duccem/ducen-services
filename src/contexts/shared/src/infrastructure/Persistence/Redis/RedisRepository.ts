@@ -1,4 +1,4 @@
-import { InternalError } from '../../../domain/Errors/InternalError';
+import { InternalError } from '../../../domain/common/errors/InternalError';
 import { Aggregate } from '../../../domain/core/Aggregate';
 import { Entity } from '../../../domain/core/Entity';
 import { Logger } from '../../../domain/core/Logger';

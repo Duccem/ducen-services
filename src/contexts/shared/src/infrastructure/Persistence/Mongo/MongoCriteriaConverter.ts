@@ -74,7 +74,6 @@ export class MongoCriteriaConverter implements CriteriaConverter {
     if (filters.type === FilterType.AND) return { $and: [...filter] };
     if (filters.type === FilterType.OR) return { $or: [...filter] };
     if (filters.type === FilterType.NOT) return { $not: Object.assign({}, ...filter) };
-    return Object.assign({}, ...filter);
   }
 
   private sort(order: Order): MongoSort {

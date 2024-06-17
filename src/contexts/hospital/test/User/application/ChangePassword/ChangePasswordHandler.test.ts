@@ -24,7 +24,7 @@ describe('ChangePasswordHandler', () => {
     user.password.encrypt();
     repository.returnOnGetUserByCriteria(user);
     await handler.handle(command);
-    repository.assertGetUserByCriteriaHaveBeenCalledWith(new SearchUserByIdCriteria('id', user.id.value));
+    repository.assertGetUserByCriteriaHaveBeenCalledWith(new SearchUserByIdCriteria(user.id.value));
     repository.assertSaveHaveBeenCalledWith(user.id, user);
   });
 
@@ -37,7 +37,10 @@ describe('ChangePasswordHandler', () => {
 
   it('should throw IncorrectPassword Error', async () => {
     const member = UserMother.create();
-    const command = ChangePasswordCommandMother.create(member.id.value, WordMother.random({ maxLength: 13 }));
+    const command = ChangePasswordCommandMother.create(
+      member.id.value,
+      new WordMother().generate({ maxLength: 13 }),
+    );
     member.password.encrypt();
     repository.returnOnGetUserByCriteria(member);
     await expect(handler.handle(command)).rejects.toBeInstanceOf(IncorrectPassword);

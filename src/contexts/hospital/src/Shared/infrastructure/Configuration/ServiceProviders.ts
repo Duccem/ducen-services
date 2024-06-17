@@ -1,5 +1,6 @@
-import { LokiLogger, S3StoreService } from '@ducen-services/shared';
+import { LokiLogger } from '@ducen-services/shared';
 import { Provider } from '@nestjs/common';
+import { S3StoreService } from '../../../MedicalDocument/infrastructure/services/S3StoreService';
 
 export const services: Provider[] = [
   {

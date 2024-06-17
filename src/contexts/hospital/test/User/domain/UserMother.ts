@@ -9,25 +9,25 @@ import { UserNameMother } from './UserNameMother';
 export class UserMother {
   static create(data?: Partial<Primitives<User>>): User {
     return User.fromPrimitives({
-      id: UuidMother.random(),
+      id: new UuidMother().generate(),
       name: {
         firstName: UserNameMother.firstName(),
         lastName: UserNameMother.lastName(),
       },
-      email: EmailMother.random({}),
+      email: new EmailMother().generate(),
       password: UserDataMother.password(),
       birthDate: DateValueObject.today().value,
       gender: UserGender.male().value,
-      photo: WordMother.image(),
+      photo: new WordMother().image(),
       createdAt: DateValueObject.today().value,
       updatedAt: DateValueObject.today().value,
       role: UserRole.doctor().value,
       phoneNumber: UserDataMother.phoneNumber(),
       isActive: false,
       configuration: {
-        lang: WordMother.random({ maxLength: 2 }),
-        timezone: WordMother.timezone(),
-        theme: WordMother.random({ maxLength: 10 }),
+        lang: new WordMother().generate({ maxLength: 2 }),
+        timezone: new WordMother().timezone(),
+        theme: new WordMother().generate({ maxLength: 10 }),
       },
       address: UserAddressMother.random(),
       devices: [],
