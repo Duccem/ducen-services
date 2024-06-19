@@ -4,9 +4,7 @@
   "description": "This mono repository contains all of source code related to Ducen org",
   "scripts": {},
   "workspaces": [
-    "src/apps/**/*",
-    "src/contexts/**/*",
-    "src/packages/**/*"
+    "src/**/*"
   ],
   "repository": {
     "type": "git",
@@ -24,7 +22,7 @@
   },
   "homepage": "https://github.com/Duccem/ducen#readme",
   "dependencies": {
-    "@ducen-services/hospital": "^0.0.0",
+    "@ducen/hospital": "^0.0.0",
     "resend": "^3.2.0",
     "rimraf": "^5.0.5"
   }

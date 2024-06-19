@@ -13,12 +13,12 @@ services:
       - mongodb
       - redis
       - rabbitmq
-    command: npm run test -w @ducen-services/shared
+    command: npm run test -w @ducen/shared
   hospital:
     build:
       context: .
       dockerfile: ./src/contexts/hospital/Dockerfile
-    command: npm run test -w @ducen-services/hospital
+    command: npm run test -w @ducen/hospital
     environment:
       - MONGO_DB_URL=mongodb://mongodb:27017/test
     depends_on:
@@ -33,7 +33,7 @@ services:
       - mongodb
       - redis
       - rabbitmq
-    command: npm run start:test -w @ducen-services/principal-api
+    command: npm run start:test -w @ducen/hospital-principal-api
   mongodb:
     image: mongo
     ports:

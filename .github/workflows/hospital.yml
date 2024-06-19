@@ -35,9 +35,9 @@ jobs:
       - name: Install dependencies 📦
         run: npm ci --loglevel=error
       - name: Lint 🖌️
-        run: npm run lint -w @ducen-services/hospital
+        run: npm run lint -w @ducen/hospital
       - name: Build 🏗️
-        run: npm run build -w @ducen-services/hospital
+        run: npm run build -w @ducen/hospital
       - name: Test 🧪
         run: docker-compose run --rm hospital
 

@@ -40,7 +40,7 @@ the commands are compounds of elements that determinate what are you making  ```
 
 ### Example
 
-```$ npm run start:local -w @ducen-services/principal-api```
+```$ npm run start:local -w @ducen/hospital-principal-api```
 
 ## Environments
 

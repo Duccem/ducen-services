@@ -32,9 +32,9 @@ jobs:
       - name: Install dependencies 📦
         run: npm ci --loglevel=error
       - name: Lint 🔍
-        run: npm run lint -w @ducen-services/principal-api
+        run: npm run lint -w @ducen/hospital-principal-api
       - name: Build 🏗️
-        run: npm run build -w @ducen-services/principal-api
+        run: npm run build -w @ducen/hospital-principal-api
       - name: Create env file for E2E tests 🧪
         run: |
             cd ./src/apps/hospital/principal-api/src/environments
@@ -45,7 +45,7 @@ jobs:
       - name: Wait for API to start
         run: sleep 10
       - name: E2E tests 🧪
-        run: npm run test -w @ducen-services/principal-api
+        run: npm run test -w @ducen/hospital-principal-api
   deploy:
     needs: [build]
     runs-on: ubuntu-latest
