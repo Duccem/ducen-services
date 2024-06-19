@@ -9,7 +9,6 @@ export const connections: Provider[] = [
     provide: 'DATABASE_CONNECTION',
     inject: ['CONNECTION_CONFIGURATION'],
     useFactory: async (databaseConf: any) => {
-      console.log(__dirname);
       const conn = await createConnection(databaseConf.database_uri).asPromise();
       return new MongoConnection(conn);
     },

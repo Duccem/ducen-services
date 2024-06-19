@@ -2,7 +2,7 @@ import { LlamaGenerator, MongoConnection, OllamaConfig } from '@ducen-services/s
 import { z } from 'zod';
 import { User } from '../../../..';
 import { HabitsGenerator } from '../../domain/HabitsGenerator';
-export class LlamaHabitsGenerator extends LlamaGenerator implements HabitsGenerator {
+export class LlamaHabitsGenerator extends LlamaGenerator<User> implements HabitsGenerator {
   static SYSTEM_TEMPLATE = `
     * Actúa como un profesional de la salud con años de experiencia en el campo de la salud mental y física, tratando con pacientes de todas las edades y condiciones, y con un enfoque en la prevención y el bienestar general
     * Solo debes recomendar hábitos saludables en formato JSON
@@ -24,7 +24,7 @@ export class LlamaHabitsGenerator extends LlamaGenerator implements HabitsGenera
     ),
   });
   constructor(connection: MongoConnection, conf: OllamaConfig) {
-    super(connection, conf, 'suggested_habits');
+    super(connection, User, conf);
   }
 
   async generateHabits(

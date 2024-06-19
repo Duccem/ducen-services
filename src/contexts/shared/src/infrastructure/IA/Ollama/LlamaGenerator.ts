@@ -1,28 +1,21 @@
-import { OllamaEmbeddings } from '@langchain/community/embeddings/ollama';
 import { Ollama } from '@langchain/community/llms/ollama';
 import { LengthBasedExampleSelector } from '@langchain/core/example_selectors';
 import { StructuredOutputParser } from '@langchain/core/output_parsers';
 import { FewShotPromptTemplate, PromptTemplate } from '@langchain/core/prompts';
 import { RunnableSequence } from '@langchain/core/runnables';
 import { ZodSchema } from 'zod';
+import { Constructor } from '../../../domain/types/Constructor';
 import { MongoConnection } from '../../Persistence/Mongo/MongoConnection';
-import { MongoVectorStore } from '../VectorStores/MongoVectorStore';
+import { MongoLlamaVectorStore } from './MongoLlamaVectorStore';
 
 export interface OllamaConfig {
   llmHost: string;
 }
-export abstract class LlamaGenerator {
+export abstract class LlamaGenerator<T> {
   private model: Ollama;
-  private vectorStore: MongoVectorStore;
-  constructor(connection: MongoConnection, config: OllamaConfig, collectionName?: string) {
-    this.vectorStore = new MongoVectorStore(
-      connection,
-      new OllamaEmbeddings({
-        baseUrl: config.llmHost,
-        model: 'llama3',
-      }),
-      collectionName,
-    );
+  private vectorStore: MongoLlamaVectorStore<T>;
+  constructor(connection: MongoConnection, model: Constructor<T>, config: OllamaConfig) {
+    this.vectorStore = new MongoLlamaVectorStore(connection, model, config);
     this.model = new Ollama({
       model: 'llama3',
       temperature: 0,
@@ -30,7 +23,12 @@ export abstract class LlamaGenerator {
     });
   }
 
-  async generateFromEmbeddings<T>(structure: ZodSchema<T>, template: string, query: string, filter: any = {}) {
+  async generateFromEmbeddings<T>(
+    structure: ZodSchema<T>,
+    template: string,
+    query: string,
+    filter: any = {},
+  ) {
     const docs = await this.vectorStore.queryDocuments(query, filter);
     console.log(docs);
     const context = docs.map((doc) => doc.pageContent).join('\n\n');
@@ -47,7 +45,10 @@ export abstract class LlamaGenerator {
       inputVariables: ['input', 'output'],
       template: '{input}\n{output}',
     });
-    const exampleSelector = await LengthBasedExampleSelector.fromExamples(examples, { examplePrompt, maxLength: 500 });
+    const exampleSelector = await LengthBasedExampleSelector.fromExamples(examples, {
+      examplePrompt,
+      maxLength: 500,
+    });
     const dynamicPrompt = new FewShotPromptTemplate({
       prefix: template,
       examplePrompt,
