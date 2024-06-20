@@ -1,8 +1,8 @@
 import { LoginHandler } from '../../../../src/User/application/Login/LoginHandler';
 import { LoginQuery } from '../../../../src/User/application/Login/LoginQuery';
-import { IncorrectPassword } from '../../../../src/User/domain/IncorrectPassword';
-import { SearchUserByIdCriteria } from '../../../../src/User/domain/SearchUserByIdCriteria';
-import { UserNotExist } from '../../../../src/User/domain/UserNotExist';
+import { SearchUserByIdCriteria } from '../../../../src/User/domain/criteria/SearchUserByIdCriteria';
+import { IncorrectPassword } from '../../../../src/User/domain/errors/IncorrectPassword';
+import { UserNotExist } from '../../../../src/User/domain/errors/UserNotExist';
 import { MockUserRepository } from '../../__mocks__/MockUserRepository';
 import { UserMother } from '../../domain/UserMother';
 

@@ -1,5 +1,5 @@
 import { UserSearcher } from '../../../User/application/SearchUser/UserSearcher';
-import { UserNotExist } from '../../../User/domain/UserNotExist';
+import { UserNotExist } from '../../../User/domain/errors/UserNotExist';
 import { Flag } from '../../domain/Flag';
 import { FlagRepository } from '../../domain/FlagRepository';
 

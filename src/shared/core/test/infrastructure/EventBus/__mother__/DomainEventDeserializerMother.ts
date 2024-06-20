@@ -1,4 +1,4 @@
-import { DomainEventDeserializer } from '../../../../src/infrastructure/Events/DomainEventDeserializer';
+import { DomainEventDeserializer } from '../../../../src/infrastructure/EventBus/DomainEventDeserializer';
 import { DomainEventSubscriberDummy } from '../__mocks__/DomainEventSubscriberDummy';
 
 export class DomainEventDeserializerMother {

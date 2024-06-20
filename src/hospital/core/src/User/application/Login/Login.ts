@@ -1,15 +1,18 @@
 import { Primitives } from '@ducen/shared';
 import { AuthConfig } from '../../domain/AuthConfig';
-import { SearchUserByEmailCriteria } from '../../domain/SearchUserByEmailCriteria';
 import { User } from '../../domain/User';
-import { UserNotExist } from '../../domain/UserNotExist';
 import { UserRepository } from '../../domain/UserRepository';
+import { SearchUserByEmailCriteria } from '../../domain/criteria/SearchUserByEmailCriteria';
+import { UserNotExist } from '../../domain/errors/UserNotExist';
 
 export class Login {
-  constructor(private userRepository: UserRepository, private authConfig: AuthConfig) {}
+  constructor(
+    private userRepository: UserRepository,
+    private authConfig: AuthConfig,
+  ) {}
   async run(
     username: string,
-    password: string
+    password: string,
   ): Promise<{
     token: string;
     user: Primitives<User>;

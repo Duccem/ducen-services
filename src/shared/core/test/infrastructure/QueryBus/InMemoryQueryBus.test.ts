@@ -1,6 +1,6 @@
-import { InternalError } from '../../../src/domain/common/errors/InternalError';
-import { InMemoryQueryBus } from '../../../src/infrastructure/Query/InMemoryQueryBus';
-import { QueryHandlers } from '../../../src/infrastructure/Query/QueryHandlers';
+import { InternalError } from '../../../src/domain/implementations/errors/InternalError';
+import { InMemoryQueryBus } from '../../../src/infrastructure/QueryBus/InMemoryQueryBus';
+import { QueryHandlers } from '../../../src/infrastructure/QueryBus/QueryHandlers';
 import { DummyQuery } from './__mocks__/DummyQuery';
 import { DummyQueryHandler } from './__mocks__/DummyQueryHandler';
 import { UnhandledQuery } from './__mocks__/UnhandledQuery';

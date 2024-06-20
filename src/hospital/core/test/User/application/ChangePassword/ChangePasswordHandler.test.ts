@@ -3,9 +3,9 @@ import { WordMother } from '@ducen/shared';
 import { MockUserRepository } from '../../__mocks__/MockUserRepository';
 
 import { ChangePasswordHandler } from '../../../../src/User/application/ChangePassword/ChangePasswordHandler';
-import { IncorrectPassword } from '../../../../src/User/domain/IncorrectPassword';
-import { SearchUserByIdCriteria } from '../../../../src/User/domain/SearchUserByIdCriteria';
-import { UserNotExist } from '../../../../src/User/domain/UserNotExist';
+import { SearchUserByIdCriteria } from '../../../../src/User/domain/criteria/SearchUserByIdCriteria';
+import { IncorrectPassword } from '../../../../src/User/domain/errors/IncorrectPassword';
+import { UserNotExist } from '../../../../src/User/domain/errors/UserNotExist';
 import { UserMother } from '../../domain/UserMother';
 import { ChangePasswordCommandMother } from './ChangePasswordCommandMother';
 
@@ -39,7 +39,7 @@ describe('ChangePasswordHandler', () => {
     const member = UserMother.create();
     const command = ChangePasswordCommandMother.create(
       member.id.value,
-      new WordMother().generate({ maxLength: 13 })
+      new WordMother().generate({ maxLength: 13 }),
     );
     member.password.encrypt();
     repository.returnOnGetUserByCriteria(member);

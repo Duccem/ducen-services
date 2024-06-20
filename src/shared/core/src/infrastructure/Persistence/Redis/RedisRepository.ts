@@ -1,7 +1,7 @@
-import { InternalError } from '../../../domain/common/errors/InternalError';
 import { Aggregate } from '../../../domain/core/Aggregate';
 import { Entity } from '../../../domain/core/Entity';
-import { Logger } from '../../../domain/core/Logger';
+import { InternalError } from '../../../domain/implementations/errors/InternalError';
+import { Logger } from '../../../domain/ports/LoggerService';
 import { Constructor } from '../../../domain/types/Constructor';
 import { RedisConnection } from './RedisConnection';
 

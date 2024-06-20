@@ -12,17 +12,17 @@ import {
 import crypto from 'crypto';
 import { differenceInHours } from 'date-fns';
 import * as jwt from 'jsonwebtoken';
-import { Device } from './Device';
-import { IncorrectPassword } from './IncorrectPassword';
-import { UserAddress } from './UserAddress';
-import { UserBirthDate } from './UserBirthDate';
-import { UserConfiguration } from './UserConfiguration';
-import { UserCreated } from './UserCreated';
-import { UserGender, UserGenders } from './UserGender';
-import { UserName } from './UserName';
-import { UserPassword } from './UserPassword';
-import { UserPhoneNumber } from './UserPhoneNumber';
-import { UserRole, UserRoles } from './UserRole';
+import { IncorrectPassword } from './errors/IncorrectPassword';
+import { UserCreated } from './events/UserCreated';
+import { Device } from './model/Device';
+import { UserAddress } from './model/UserAddress';
+import { UserBirthDate } from './model/UserBirthDate';
+import { UserConfiguration } from './model/UserConfiguration';
+import { UserGender, UserGenders } from './model/UserGender';
+import { UserName } from './model/UserName';
+import { UserPassword } from './model/UserPassword';
+import { UserPhoneNumber } from './model/UserPhoneNumber';
+import { UserRole, UserRoles } from './model/UserRole';
 
 export class User extends Aggregate {
   constructor(
@@ -41,7 +41,7 @@ export class User extends Aggregate {
     public isActive: BooleanValueObject,
     public verificationCode?: StringValueObject,
     createdAt?: DateValueObject,
-    updatedAt?: DateValueObject
+    updatedAt?: DateValueObject,
   ) {
     super(id, createdAt, updatedAt);
   }
@@ -63,7 +63,7 @@ export class User extends Aggregate {
       new BooleanValueObject(data.isActive),
       data.verificationCode ? new StringValueObject(data.verificationCode) : null,
       new DateValueObject(data.createdAt),
-      new DateValueObject(data.updatedAt)
+      new DateValueObject(data.updatedAt),
     );
   }
   public toPrimitives(): Primitives<User> {
@@ -115,7 +115,7 @@ export class User extends Aggregate {
     devices: {
       agent: string;
       token: string;
-    }[]
+    }[],
   ): User {
     const user = new User(
       new Uuid(id),
@@ -133,13 +133,13 @@ export class User extends Aggregate {
       new BooleanValueObject(false),
       null,
       new DateValueObject(new Date()),
-      new DateValueObject(new Date())
+      new DateValueObject(new Date()),
     );
     user.record(
       new UserCreated({
         params: user.toPrimitives(),
         aggregateId: user.id.value,
-      })
+      }),
     );
     user.password.encrypt();
     return user;

@@ -1,7 +1,7 @@
 import { DateValueObject, EmailMother, Primitives, UuidMother, WordMother } from '@ducen/shared';
 import { User } from '../../../src/User/domain/User';
-import { UserGender } from '../../../src/User/domain/UserGender';
-import { UserRole } from '../../../src/User/domain/UserRole';
+import { UserGender } from '../../../src/User/domain/model/UserGender';
+import { UserRole } from '../../../src/User/domain/model/UserRole';
 import { UserAddressMother } from './UserAddressMother';
 import { UserDataMother } from './UserDataMother';
 import { UserNameMother } from './UserNameMother';

@@ -1,5 +1,5 @@
 import { Provider } from '@nestjs/common';
-import { MongoUserRepository } from '../../../User/infrastructure/Persistence/MongoDB/MongoUserRepository';
+import { MongoUserRepository } from '../../../User/infrastructure/persistence/mongodb/MongoUserRepository';
 import { MongoNotificationRepository } from '../persistence/MongoNotificationRepository';
 
 export const notificationRepositories: Provider[] = [

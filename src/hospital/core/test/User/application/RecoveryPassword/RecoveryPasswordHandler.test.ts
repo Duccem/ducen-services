@@ -1,6 +1,6 @@
 import { RecoveryPasswordHandler } from '../../../../src/User/application/RecoveryPassword/RecoveryPasswordHandler';
-import { SearchUserByEmailCriteria } from '../../../../src/User/domain/SearchUserByEmailCriteria';
-import { UserNotExist } from '../../../../src/User/domain/UserNotExist';
+import { SearchUserByEmailCriteria } from '../../../../src/User/domain/criteria/SearchUserByEmailCriteria';
+import { UserNotExist } from '../../../../src/User/domain/errors/UserNotExist';
 import { MockUserRepository } from '../../__mocks__/MockUserRepository';
 import { UserMother } from '../../domain/UserMother';
 import { RecoveryPasswordCommandMother } from './RecoveryPasswordCommandMother';

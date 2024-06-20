@@ -1,4 +1,4 @@
-import { FormatError } from '../common/errors/FormatError';
+import { FormatError } from '../implementations/errors/FormatError';
 export abstract class ValueObject<T> {
   public value: T;
   constructor(value: T) {

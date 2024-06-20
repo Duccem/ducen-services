@@ -1,13 +1,13 @@
 import { DomainEvent } from '../../../src/domain/core/DomainEvent';
-import { DomainEventDeserializer } from '../../../src/infrastructure/Events/DomainEventDeserializer';
-import { DomainEventFailOverPublisher } from '../../../src/infrastructure/Events/DomainEventFailOverPublisher';
-import { DomainEventRegisterObservers } from '../../../src/infrastructure/Events/DomainEventRegisterObservers';
-import { RabbitMQConnection } from '../../../src/infrastructure/Events/RabbitMQ/RabbitMQConnection';
-import { RabbitMQConsumer } from '../../../src/infrastructure/Events/RabbitMQ/RabbitMQConsumer';
-import { RabbitMQEventBus } from '../../../src/infrastructure/Events/RabbitMQ/RabbitMQEventBus';
-import { RabbitMQFormatter } from '../../../src/infrastructure/Events/RabbitMQ/RabbitMQFormatter';
-import { ConsoleLogger } from '../../../src/infrastructure/Logging/ConsoleLogger';
+import { DomainEventDeserializer } from '../../../src/infrastructure/EventBus/DomainEventDeserializer';
+import { DomainEventFailOverPublisher } from '../../../src/infrastructure/EventBus/DomainEventFailOverPublisher';
+import { DomainEventRegisterObservers } from '../../../src/infrastructure/EventBus/DomainEventRegisterObservers';
+import { RabbitMQConnection } from '../../../src/infrastructure/EventBus/RabbitMQ/RabbitMQConnection';
+import { RabbitMQConsumer } from '../../../src/infrastructure/EventBus/RabbitMQ/RabbitMQConsumer';
+import { RabbitMQEventBus } from '../../../src/infrastructure/EventBus/RabbitMQ/RabbitMQEventBus';
+import { RabbitMQFormatter } from '../../../src/infrastructure/EventBus/RabbitMQ/RabbitMQFormatter';
 import { MongoArranger } from '../../../src/infrastructure/Persistence/Mongo/MongoArranger';
+import { ConsoleWinstonLogger } from '../../../src/infrastructure/Services/WinstonLoggerService';
 import { DomainEventDummyMother } from '../../domain/Events/DomainEventDummyMother';
 import { MockMongoConnectionFactory } from '../Persistence/mongo/__mocks__/MockMongoConnectionFactory';
 import { DomainEventSubscriberDummy } from './__mocks__/DomainEventSubscriberDummy';
@@ -40,7 +40,7 @@ describe('RabbitMQEventBus test', () => {
         failoverPublisher,
         connection,
         'test',
-        new ConsoleLogger({ serviceName: 'test-ducen', environment: 'test' }),
+        new ConsoleWinstonLogger({ serviceName: 'test-ducen', environment: 'test' }),
       );
       const event = DomainEventDummyMother.random();
 
@@ -76,7 +76,7 @@ describe('RabbitMQEventBus test', () => {
         failoverPublisher,
         rabbitConnection,
         'test',
-        new ConsoleLogger({ serviceName: 'test-ducen', environment: 'test' }),
+        new ConsoleWinstonLogger({ serviceName: 'test-ducen', environment: 'test' }),
       );
       await eventBus.addSubscribers(new DomainEventRegisterObservers([dummySubscriber]));
       const event = DomainEventDummyMother.random();
@@ -92,7 +92,7 @@ describe('RabbitMQEventBus test', () => {
         failoverPublisher,
         rabbitConnection,
         'test',
-        new ConsoleLogger({ serviceName: 'test-ducen', environment: 'test' }),
+        new ConsoleWinstonLogger({ serviceName: 'test-ducen', environment: 'test' }),
       );
       await eventBus.addSubscribers(new DomainEventRegisterObservers([dummySubscriber]));
       const event = DomainEventDummyMother.random();
@@ -107,7 +107,7 @@ describe('RabbitMQEventBus test', () => {
         failoverPublisher,
         rabbitConnection,
         'test',
-        new ConsoleLogger({ serviceName: 'test-ducen', environment: 'test' }),
+        new ConsoleWinstonLogger({ serviceName: 'test-ducen', environment: 'test' }),
       );
       await eventBus.addSubscribers(new DomainEventRegisterObservers([dummySubscriber]));
       const event = DomainEventDummyMother.random();

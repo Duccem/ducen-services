@@ -1,5 +1,5 @@
-import { SearchUserByEmailCriteria } from '../../domain/SearchUserByEmailCriteria';
-import { UserNotExist } from '../../domain/UserNotExist';
+import { SearchUserByEmailCriteria } from '../../domain/criteria/SearchUserByEmailCriteria';
+import { UserNotExist } from '../../domain/errors/UserNotExist';
 import { UserRepository } from '../../domain/UserRepository';
 
 export class RecoveryPassword {

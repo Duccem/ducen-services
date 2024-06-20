@@ -1,5 +1,5 @@
 import { DomainEvent } from '../../../../src/domain/core/DomainEvent';
-import { DomainEventFailOverPublisher } from '../../../../src/infrastructure/Events/DomainEventFailOverPublisher';
+import { DomainEventFailOverPublisher } from '../../../../src/infrastructure/EventBus/DomainEventFailOverPublisher';
 import { MongoConnection } from '../../../../src/infrastructure/Persistence/Mongo/MongoConnection';
 
 export class DomainEventFailoverPublisherDouble extends DomainEventFailOverPublisher {

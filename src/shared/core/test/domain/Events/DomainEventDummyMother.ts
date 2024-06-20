@@ -1,4 +1,4 @@
-import { UuidMother } from '../../../src/domain/common/mothers/UuidMother';
+import { UuidMother } from '../../../src/domain/implementations/mothers/UuidMother';
 import { DomainEventDummy } from '../../infrastructure/EventBus/__mocks__/DomainEventDummy';
 
 export class DomainEventDummyMother {

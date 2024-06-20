@@ -1,4 +1,4 @@
-import { DomainEventFailOverPublisher } from '../../../src/infrastructure/Events/DomainEventFailOverPublisher';
+import { DomainEventFailOverPublisher } from '../../../src/infrastructure/EventBus/DomainEventFailOverPublisher';
 import { MongoArranger } from '../../../src/infrastructure/Persistence/Mongo/MongoArranger';
 import { MongoConnection } from '../../../src/infrastructure/Persistence/Mongo/MongoConnection';
 import { MongoConnectionFactory } from '../../../src/infrastructure/Persistence/Mongo/MongoConnectionFactory';

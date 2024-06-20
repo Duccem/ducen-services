@@ -1,4 +1,4 @@
-import { SearchUserByEmailCriteria } from '../../../User/domain/SearchUserByEmailCriteria';
+import { SearchUserByEmailCriteria } from '../../../User/domain/criteria/SearchUserByEmailCriteria';
 import { UserRepository } from '../../../User/domain/UserRepository';
 import { Notification } from '../../domain/Notification';
 import { NotificationRepository } from '../../domain/NotificationRepository';

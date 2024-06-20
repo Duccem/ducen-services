@@ -1,10 +1,7 @@
-import { Arranger } from '../../../domain/core/Arranger';
 import { MongoConnection } from './MongoConnection';
 
-export class MongoArranger extends Arranger {
-  constructor(private _client: MongoConnection) {
-    super();
-  }
+export class MongoArranger {
+  constructor(private _client: MongoConnection) {}
 
   public async arrange(): Promise<void> {
     await this.cleanDatabase();

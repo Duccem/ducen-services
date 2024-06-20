@@ -1,4 +1,4 @@
-import { Uuid } from '../common/value-objects/Uuid';
+import { Uuid } from '../implementations/value-objects/Uuid';
 import { DomainEvent } from './DomainEvent';
 import { Entity } from './Entity';
 import { DateValueObject } from './ValueObject';

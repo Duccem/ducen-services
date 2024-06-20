@@ -1,6 +1,6 @@
-import { InternalError } from '../../../src/domain/common/errors/InternalError';
-import { CommandHandlers } from '../../../src/infrastructure/Command/CommandHandlers';
-import { InMemoryCommandBus } from '../../../src/infrastructure/Command/InMemoryCommandBus';
+import { InternalError } from '../../../src/domain/implementations/errors/InternalError';
+import { CommandHandlers } from '../../../src/infrastructure/CommandBus/CommandHandlers';
+import { InMemoryCommandBus } from '../../../src/infrastructure/CommandBus/InMemoryCommandBus';
 import { CommandHandlerDummy } from './__mocks__/CommandHandlerDummy';
 import { DummyCommand } from './__mocks__/DummyCommand';
 import { UnhandledCommand } from './__mocks__/UnhandledCommand';

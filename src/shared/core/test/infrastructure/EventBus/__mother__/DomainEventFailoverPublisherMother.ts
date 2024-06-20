@@ -1,4 +1,4 @@
-import { DomainEventFailOverPublisher } from '../../../../src/infrastructure/Events/DomainEventFailOverPublisher';
+import { DomainEventFailOverPublisher } from '../../../../src/infrastructure/EventBus/DomainEventFailOverPublisher';
 import { MockMongoConnectionFactory } from '../../Persistence/mongo/__mocks__/MockMongoConnectionFactory';
 import { DomainEventFailoverPublisherDouble } from '../__mocks__/DomainEventFailoverPublisherDouble';
 import { DomainEventDeserializerMother } from './DomainEventDeserializerMother';

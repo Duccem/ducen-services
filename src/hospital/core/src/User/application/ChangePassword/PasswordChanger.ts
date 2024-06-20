@@ -1,5 +1,5 @@
-import { SearchUserByIdCriteria } from '../../domain/SearchUserByIdCriteria';
-import { UserNotExist } from '../../domain/UserNotExist';
+import { SearchUserByIdCriteria } from '../../domain/criteria/SearchUserByIdCriteria';
+import { UserNotExist } from '../../domain/errors/UserNotExist';
 import { UserRepository } from '../../domain/UserRepository';
 
 export class PasswordChanger {

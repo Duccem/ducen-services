@@ -1,5 +1,5 @@
 import { Mother, Primitives } from '@ducen/shared';
-import { UserAddress } from '../../../src/User/domain/UserAddress';
+import { UserAddress } from '../../../src/User/domain/model/UserAddress';
 
 export class UserAddressMother {
   static random(): Primitives<UserAddress> {

@@ -1,4 +1,4 @@
-import { Uuid } from '../common/value-objects/Uuid';
+import { Uuid } from '../implementations/value-objects/Uuid';
 import { BaseObject } from './BaseObject';
 import { DateValueObject } from './ValueObject';
 

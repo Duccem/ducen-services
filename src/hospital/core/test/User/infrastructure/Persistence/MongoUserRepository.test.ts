@@ -1,14 +1,14 @@
 import {
-  ConsoleLogger,
+  ConsoleWinstonLogger,
   MongoConnection,
   MongoConnectionFactory,
   TypeORMArranger,
   UuidMother,
 } from '@ducen/shared';
-import { SearchUserByEmailCriteria } from '../../../../src/User/domain/SearchUserByEmailCriteria';
-import { SearchUserByIdCriteria } from '../../../../src/User/domain/SearchUserByIdCriteria';
 import { UserRepository } from '../../../../src/User/domain/UserRepository';
-import { MongoUserRepository } from '../../../../src/User/infrastructure/Persistence/MongoDB/MongoUserRepository';
+import { SearchUserByEmailCriteria } from '../../../../src/User/domain/criteria/SearchUserByEmailCriteria';
+import { SearchUserByIdCriteria } from '../../../../src/User/domain/criteria/SearchUserByIdCriteria';
+import { MongoUserRepository } from '../../../../src/User/infrastructure/persistence/mongodb/MongoUserRepository';
 import { UserMother } from '../../domain/UserMother';
 
 describe('MongoUserRepository', () => {
@@ -21,7 +21,7 @@ describe('MongoUserRepository', () => {
     arranger = new TypeORMArranger(connection);
     userRepository = new MongoUserRepository(
       connection,
-      new ConsoleLogger({ environment: 'test', serviceName: 'test' })
+      new ConsoleWinstonLogger({ environment: 'test', serviceName: 'test' }),
     );
   });
 
@@ -43,7 +43,7 @@ describe('MongoUserRepository', () => {
 
   it('should get null on search by id', async () => {
     const savedUser = await userRepository.getUserByCriteria(
-      new SearchUserByIdCriteria(new UuidMother().generate())
+      new SearchUserByIdCriteria(new UuidMother().generate()),
     );
     expect(savedUser).toEqual(null);
   });
@@ -52,7 +52,7 @@ describe('MongoUserRepository', () => {
     const user = UserMother.create();
     await userRepository.save(user.id, user);
     const savedUsers = await userRepository.listUsersByCriteria(
-      new SearchUserByEmailCriteria(user.email.value)
+      new SearchUserByEmailCriteria(user.email.value),
     );
     expect(savedUsers).toEqual([user]);
   });

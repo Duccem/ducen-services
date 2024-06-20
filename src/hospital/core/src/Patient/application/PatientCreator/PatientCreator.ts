@@ -1,5 +1,5 @@
 import { UserSearcher } from '../../../User/application/SearchUser/UserSearcher';
-import { UserNotExist } from '../../../User/domain/UserNotExist';
+import { UserNotExist } from '../../../User/domain/errors/UserNotExist';
 import { Patient } from '../../domain/Patient';
 import { PatientRepository } from '../../domain/PatientRepository';
 

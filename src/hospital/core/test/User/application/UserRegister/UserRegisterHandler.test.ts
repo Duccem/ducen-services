@@ -1,6 +1,6 @@
 import { UserRegisterHandler } from '../../../../src/User/application/RegisterUser/UserRegisterHandler';
-import { PasswordFormatError } from '../../../../src/User/domain/PasswordFormatError';
-import { UserAlreadyExistError } from '../../../../src/User/domain/UserAlreadyExist';
+import { PasswordFormatError } from '../../../../src/User/domain/errors/PasswordFormatError';
+import { UserAlreadyExistError } from '../../../../src/User/domain/errors/UserAlreadyExist';
 import { EventBusMock } from '../../../__mocks__/EventBusMock';
 import { MockUserRepository } from '../../__mocks__/MockUserRepository';
 import { UserCreatedDomainEventMother } from '../../domain/UserCreatedMother';

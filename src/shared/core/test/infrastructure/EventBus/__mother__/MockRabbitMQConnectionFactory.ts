@@ -1,6 +1,6 @@
 import { ConfirmChannel, Connection } from 'amqplib';
+import { RabbitMQConnectionFactory } from '../../../../src/infrastructure/EventBus/RabbitMQ/RabbitMQConnectionFactory';
 import { RabbitMQConnectionDouble } from '../__mocks__/RabbitMQConnectionDouble';
-import { RabbitMQConnectionFactory } from '../../../../src/infrastructure/Events/RabbitMQ/RabbitMQConnectionFactory';
 
 export class MockRabbitMQConnectionFactory extends RabbitMQConnectionFactory {
   static failOnPublish() {

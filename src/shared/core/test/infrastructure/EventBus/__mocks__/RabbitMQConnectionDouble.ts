@@ -1,4 +1,4 @@
-import { RabbitMQConnection } from '../../../../src/infrastructure/Events/RabbitMQ/RabbitMQConnection';
+import { RabbitMQConnection } from '../../../../src/infrastructure/EventBus/RabbitMQ/RabbitMQConnection';
 
 export class RabbitMQConnectionDouble extends RabbitMQConnection {
   async publish(params: any): Promise<void> {
