@@ -1,5 +1,5 @@
 import { DomainEvent, Primitives } from '@ducen/shared';
-import { User } from './User';
+import { User } from '../User';
 
 export class UserCreated extends DomainEvent {
   static readonly EVENT_NAME: string = 'user.created';

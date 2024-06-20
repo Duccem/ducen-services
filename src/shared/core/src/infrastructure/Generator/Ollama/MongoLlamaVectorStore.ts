@@ -18,7 +18,7 @@ export class MongoLlamaVectorStore<T> {
         model: 'llama3',
       }),
       {
-        collection: this.connection.getConnection().collection(`${collectionName}_vectors`),
+        collection: this.connection.getConnection().collection(`${collectionName}_vectors`) as any,
         indexName: `${collectionName}_index`,
         textKey: 'text',
         embeddingKey: 'embedding',

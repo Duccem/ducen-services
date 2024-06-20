@@ -31,13 +31,13 @@ export class UserAddressType {
 @ObjectType('UserConfiguration')
 export class UserConfigurationType {
   @Field()
-  public language: string;
+  public lang: string;
 
   @Field()
-  public timeZone: string;
+  public timezone: string;
 
   @Field()
-  public currency: string;
+  public theme: string;
 }
 
 @ObjectType('UserName')
@@ -65,6 +65,9 @@ export class UserType {
 
   @Field()
   public email: string;
+
+  @Field()
+  public gender: string;
 
   @Field()
   public phoneNumber: string;

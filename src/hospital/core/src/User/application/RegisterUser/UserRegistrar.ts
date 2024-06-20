@@ -1,9 +1,9 @@
 import { EventBus, Primitives } from '@ducen/shared';
 
-import { SearchUserByEmailCriteria } from '../../domain/criteria/SearchUserByEmailCriteria';
 import { User } from '../../domain/User';
-import { UserAlreadyExistError } from '../../domain/UserAlreadyExist';
 import { UserRepository } from '../../domain/UserRepository';
+import { SearchUserByEmailCriteria } from '../../domain/criteria/SearchUserByEmailCriteria';
+import { UserAlreadyExistError } from '../../domain/errors/UserAlreadyExist';
 
 export class UserRegistrar {
   constructor(

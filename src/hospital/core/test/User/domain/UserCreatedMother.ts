@@ -1,5 +1,5 @@
 import { User } from '../../../src/User/domain/User';
-import { UserCreated } from '../../../src/User/domain/UserCreated';
+import { UserCreated } from '../../../src/User/domain/events/UserCreated';
 
 export class UserCreatedDomainEventMother {
   static fromUser(user: User): UserCreated {

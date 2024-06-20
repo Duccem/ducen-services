@@ -9,8 +9,9 @@ import { RecoveryPasswordCommand } from '../../application/RecoveryPassword/Reco
 import { UserRegisterCommand } from '../../application/RegisterUser/UserRegisterCommand';
 import { UploadProfileImageCommand } from '../../application/UploadProfileImage/UploadProfileImageCommand';
 import { User } from '../../domain/User';
-import { CurrentUser } from '../../infrastructure/Auth/CurrentUserDecorator';
 import { JwtAuthGuard } from '../helpers/guards/JWTGuard';
+import { CurrentUser } from '../helpers/mappers/AuthDecorators';
+import { UserInput } from './UserInput';
 import { LoginUserType, UserType } from './UserType';
 
 @Resolver((of) => UserType)
@@ -21,20 +22,23 @@ export class UserResolver {
   ) {}
 
   @Query((returns) => LoginUserType, { name: 'login' })
-  async login(@Args('identifier') identifier: string, @Args('password') password: string) {
+  async login(
+    @Args('identifier') identifier: string,
+    @Args('password') password: string,
+  ): Promise<LoginUserType> {
     const query = new LoginQuery(identifier, password);
     return await this.queryBus.ask(query);
   }
 
   @Mutation((returns) => VoidResolver, { name: 'userRegister' })
-  async userRegister(@Args('user') user: any) {
-    const command = new UserRegisterCommand(user);
+  async userRegister(@Args('user') user: UserInput): Promise<void> {
+    const command = new UserRegisterCommand(user as any);
     await this.commandBus.dispatch(command);
     return null;
   }
 
   @Mutation((returns) => VoidResolver, { name: 'recoveryPassword' })
-  async recoveryPassword(@Args('email') email: string) {
+  async recoveryPassword(@Args('email') email: string): Promise<void> {
     const command = new RecoveryPasswordCommand(email);
     await this.commandBus.dispatch(command);
     return null;
@@ -45,20 +49,20 @@ export class UserResolver {
     @Args('memberId') memberId: string,
     @Args('newPassword') newPassword: string,
     @Args('oldPassword') oldPassword: string,
-  ) {
+  ): Promise<void> {
     const command = new ChangePasswordCommand(memberId, newPassword, oldPassword);
     await this.commandBus.dispatch(command);
     return null;
   }
 
-  @Mutation((returns) => VoidResolver, { name: 'uploadImage' })
+  @Mutation((returns) => VoidResolver, { name: 'uploadProfilePicture' })
   @UseGuards(JwtAuthGuard)
   async uploadImage(
     @Args({ name: 'file', type: () => GraphQLUpload }) image: Upload,
     @Args('name') fileName: string,
     @Args('type') type: string,
     @CurrentUser() user: User,
-  ) {
+  ): Promise<void> {
     const stream = image.file.createReadStream();
     const buffer = await File.toBuffer(stream);
     const command = new UploadProfileImageCommand(buffer, user, { fileName, type });

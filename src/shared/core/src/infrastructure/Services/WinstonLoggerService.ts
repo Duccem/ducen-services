@@ -1,6 +1,6 @@
 import * as winston from 'winston';
 import LokiTransport from 'winston-loki';
-import { Decorator, FormatDates, Levels, Logger } from '../../domain/ports/LoggerService';
+import { FormatDates, Levels, Logger, RESET } from '../../domain/ports/LoggerService';
 /**
  * @name WinstonLogFormat
  * @description This const is the format of the log in this project
@@ -8,7 +8,7 @@ import { Decorator, FormatDates, Levels, Logger } from '../../domain/ports/Logge
 export const WinstonLogFormat = winston.format.combine(
   winston.format.timestamp({ format: FormatDates.ISO }),
   winston.format.printf(
-    ({ level, message, timestamp }) => `${Levels[level]}[${level}] ${timestamp}${Decorator.RESET} ${message}`,
+    ({ level, message, timestamp }) => `${Levels[level]}[${level}] ${timestamp}${RESET} ${message}`,
   ),
 );
 /**

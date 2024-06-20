@@ -1,7 +1,7 @@
 import { DomainEventClass, DomainEventSubscriber } from '@ducen/shared';
 import { UserSearcher } from '../../../User/application/SearchUser/UserSearcher';
-import { UserCreated } from '../../../User/domain/UserCreated';
 import { UserRepository } from '../../../User/domain/UserRepository';
+import { UserCreated } from '../../../User/domain/events/UserCreated';
 import { NotificationRepository } from '../../domain/NotificationRepository';
 import { EmailNotifier } from '../../domain/Notifier';
 import { SendWelcomeEmail } from './SendWelcomeEmail';
@@ -11,12 +11,12 @@ export class SendWelcomeEmailOnUserCreated implements DomainEventSubscriber {
   constructor(
     notificationRepository: NotificationRepository,
     emailNotifier: EmailNotifier,
-    userRepository: UserRepository
+    userRepository: UserRepository,
   ) {
     this.welcomeEmailSender = new SendWelcomeEmail(
       notificationRepository,
       new UserSearcher(userRepository),
-      emailNotifier
+      emailNotifier,
     );
   }
   subscribedTo(): DomainEventClass[] {

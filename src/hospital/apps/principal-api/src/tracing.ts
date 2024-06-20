@@ -7,7 +7,7 @@ import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 import { B3InjectEncoding, B3Propagator } from '@opentelemetry/propagator-b3';
 import { Resource } from '@opentelemetry/resources';
 import { NodeSDK } from '@opentelemetry/sdk-node';
-import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base';
+import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base';
 import { SEMRESATTRS_SERVICE_NAME } from '@opentelemetry/semantic-conventions';
 import * as process from 'process';
 
@@ -17,7 +17,7 @@ export default function startTracing(serviceName: string, exporterUrl: string, l
       [SEMRESATTRS_SERVICE_NAME]: serviceName,
     }),
     metricReader: new PrometheusExporter({ port: 8081 }),
-    spanProcessor: new SimpleSpanProcessor(new OTLPTraceExporter({ url: exporterUrl })),
+    spanProcessor: new BatchSpanProcessor(new OTLPTraceExporter({ url: exporterUrl })) as any,
     contextManager: new AsyncLocalStorageContextManager(),
     instrumentations: [getNodeAutoInstrumentations()],
     textMapPropagator: new CompositePropagator({

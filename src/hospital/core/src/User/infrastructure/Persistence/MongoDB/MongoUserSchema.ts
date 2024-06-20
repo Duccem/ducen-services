@@ -38,5 +38,5 @@ export const MongoUserSchema = new Schema(
     isActive: { type: Boolean, default: false },
     verificationCode: { type: String },
   },
-  { timestamps: true, _id: false },
+  { timestamps: true, _id: false, collection: 'user' },
 );

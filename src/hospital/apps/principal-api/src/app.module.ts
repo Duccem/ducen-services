@@ -1,4 +1,4 @@
-import { AppointmentModule, NotificationModule, SharedModule, UserModule } from '@ducen/hospital';
+import { SharedModule, UserModule } from '@ducen/hospital';
 import { GraphQLErrorHandling, LoggerMiddleware } from '@ducen/shared';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
@@ -37,7 +37,7 @@ import videoConfig from './config/video.config';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      typePaths: ['./**/*.graphql'],
+      autoSchemaFile: true,
       resolvers: {
         DateTime: DateTimeResolver,
         Void: VoidResolver,
@@ -57,8 +57,8 @@ import videoConfig from './config/video.config';
     ScheduleModule.forRoot(),
     SharedModule,
     UserModule,
-    AppointmentModule,
-    NotificationModule,
+    // AppointmentModule,
+    // NotificationModule,
   ],
   providers: [],
 })

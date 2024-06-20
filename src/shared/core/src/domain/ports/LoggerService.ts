@@ -8,16 +8,7 @@ export interface Logger {
   response(message: any): void;
 }
 
-export enum Color {
-  NULL = '\x1b[30m',
-  ERROR = '\x1b[31m',
-  SUCCESS = '\x1b[32m',
-  WARNING = '\x1b[33m',
-  INFO = '\x1b[34m',
-  SYSTEM = '\x1b[35m',
-  IMPORTANT = '\x1b[36m',
-  MESSAGE = '\x1b[37m',
-}
+export const RESET = '\x1b[0m';
 
 export enum Levels {
   info = '\x1b[32m',
@@ -26,16 +17,6 @@ export enum Levels {
   debug = '\x1b[34m',
   verbose = '\x1b[36m',
   http = '\x1b[35m',
-}
-
-export enum Decorator {
-  RESET = '\x1b[0m',
-  BRIGHT = '\x1b[1m',
-  DIM = '\x1b[2m',
-  UNDERSCORE = '\x1b[4m',
-  BLINK = '\x1b[5m',
-  REVERSE = '\x1b[7m',
-  HIDDEN = '\x1b[8m',
 }
 
 export enum FormatDates {

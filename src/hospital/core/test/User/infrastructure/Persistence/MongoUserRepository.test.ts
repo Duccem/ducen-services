@@ -1,8 +1,8 @@
 import {
   ConsoleWinstonLogger,
+  MongoArranger,
   MongoConnection,
   MongoConnectionFactory,
-  TypeORMArranger,
   UuidMother,
 } from '@ducen/shared';
 import { UserRepository } from '../../../../src/User/domain/UserRepository';
@@ -13,12 +13,12 @@ import { UserMother } from '../../domain/UserMother';
 
 describe('MongoUserRepository', () => {
   let connection: MongoConnection;
-  let arranger: TypeORMArranger;
+  let arranger: MongoArranger;
   let userRepository: UserRepository;
 
   beforeAll(async () => {
     connection = await MongoConnectionFactory.create(process.env['MONGO_DB_URL']);
-    arranger = new TypeORMArranger(connection);
+    arranger = new MongoArranger(connection);
     userRepository = new MongoUserRepository(
       connection,
       new ConsoleWinstonLogger({ environment: 'test', serviceName: 'test' }),

@@ -1,10 +1,10 @@
-import { ConsoleLogger } from '@ducen/shared';
+import { ConsoleWinstonLogger } from '@ducen/shared';
 import { config } from 'dotenv';
 import { resolve } from 'path';
 
 config();
 
-const logger = new ConsoleLogger({
+const logger = new ConsoleWinstonLogger({
   environment: process.env['NODE_ENV'],
   serviceName: process.env['SERVICE'],
 });

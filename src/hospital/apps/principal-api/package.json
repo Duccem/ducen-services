@@ -7,7 +7,6 @@
   "license": "MIT",
   "scripts": {
     "build": "npm run build -w @ducen/shared -w @ducen/hospital  && nest build",
-    "db:generate": "dotenv -e ./src/environments/local.env -- npx prisma generate --schema ./src/prisma/schema.prisma",
     "start": "cross-env NODE_ENV=dev SERVICE=hospital nest start",
     "start:dev": "cross-env NODE_ENV=dev SERVICE=hospital nest start --watch",
     "start:local": "cross-env NODE_ENV=local SERVICE=hospital nest start --watch",
@@ -29,6 +28,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/schedule": "^4.0.2",
     "@opentelemetry/auto-instrumentations-node": "^0.45.0",
+    "@opentelemetry/context-async-hooks": "^1.25.1",
     "@opentelemetry/exporter-jaeger": "^1.24.0",
     "@opentelemetry/exporter-prometheus": "^0.51.0",
     "@opentelemetry/exporter-trace-otlp-http": "^0.51.0",
@@ -37,6 +37,7 @@
     "@opentelemetry/instrumentation-graphql": "^0.40.0",
     "@opentelemetry/instrumentation-nestjs-core": "^0.37.0",
     "@opentelemetry/instrumentation-winston": "^0.37.0",
+    "@opentelemetry/propagator-b3": "^1.25.1",
     "@opentelemetry/resources": "^1.24.0",
     "@opentelemetry/sdk-node": "^0.51.0",
     "@opentelemetry/semantic-conventions": "^1.24.0",

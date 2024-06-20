@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     bufferLogs: true,
   });
-  const logger = app.get('LOGGER_SERVICE') as Logger;
+  const logger = app.get<Logger>('LOGGER_SERVICE');
   const configurations = app.get('SERVER_CONFIGURATION');
   const telemetryConf = app.get('TELEMETRY_CONFIGURATION');
   nodeSdk(telemetryConf.traces.serviceName, telemetryConf.traces.host, logger);
