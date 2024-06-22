@@ -7,8 +7,7 @@ export class DomainEventSerializer {
         id: event.eventId,
         type: event.eventName,
         occurred_on: event.occurredOn.toISOString(),
-        aggregateId: event.aggregateId,
-        attributes: event.toPrimitive(),
+        aggregate: event.aggregate,
       },
     });
   }

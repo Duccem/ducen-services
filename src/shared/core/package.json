@@ -28,6 +28,7 @@
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.1",
     "express": "^4.19.2",
+    "graphql-subscriptions": "^2.0.0",
     "langchain": "^0.1.36",
     "mongodb": "^6.5.0",
     "mongoose": "^8.4.0",

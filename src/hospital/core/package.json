@@ -29,6 +29,7 @@
     "@nestjs/passport": "^10.0.3",
     "@nestjs/schedule": "^4.0.2",
     "bcryptjs": "^2.4.3",
+    "graphql-subscriptions": "^2.0.0",
     "jsonwebtoken": "^9.0.2",
     "langchain": "^0.1.36",
     "mongodb": "^6.6.0",

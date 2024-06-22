@@ -1,25 +1,26 @@
 import {
   CommandHandlers,
-  DomainEventFailOverPublisher,
+  GraphQLEventBus,
   InMemoryCommandBus,
+  InMemoryEventBus,
   InMemoryQueryBus,
   InMemoryTaskBus,
-  Logger,
-  MongoConnection,
   QueryHandlers,
-  RabbitMQConnection,
-  RabbitMQEventBus,
   TaskHandlers,
 } from '@ducen/shared';
 import { Provider } from '@nestjs/common';
 
 export const busesProvider: Provider[] = [
   {
-    provide: 'EVENT_BUS',
-    inject: ['QUEUE_CONNECTION', 'DATABASE_CONNECTION', 'LOGGER_SERVICE'],
-    useFactory: (qConnection: RabbitMQConnection, dbConnection: MongoConnection, logger: Logger) => {
-      const failoverPublisher = new DomainEventFailOverPublisher(dbConnection);
-      return new RabbitMQEventBus(failoverPublisher, qConnection, 'ducen', logger);
+    provide: 'EXTERNAL_EVENT_BUS',
+    useFactory: () => {
+      return new GraphQLEventBus();
+    },
+  },
+  {
+    provide: 'INTERNAL_EVENT_BUS',
+    useFactory: () => {
+      return new InMemoryEventBus();
     },
   },
   {

@@ -1,6 +1,6 @@
-import { CommandBus, File, QueryBus } from '@ducen/shared';
+import { CommandBus, File, GraphQLEventBus, QueryBus } from '@ducen/shared';
 import { Inject, UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { VoidResolver } from 'graphql-scalars';
 import { GraphQLUpload, Upload } from 'graphql-upload-ts';
 import { ChangePasswordCommand } from '../../application/ChangePassword/ChangePasswordCommand';
@@ -13,12 +13,12 @@ import { JwtAuthGuard } from '../helpers/guards/JWTGuard';
 import { CurrentUser } from '../helpers/mappers/AuthDecorators';
 import { UserInput } from './UserInput';
 import { LoginUserType, UserType } from './UserType';
-
 @Resolver((of) => UserType)
 export class UserResolver {
   constructor(
     @Inject('QUERY_BUS') private queryBus: QueryBus,
     @Inject('COMMAND_BUS') private commandBus: CommandBus,
+    @Inject('EXTERNAL_EVENT_BUS') private externalEventBus: GraphQLEventBus,
   ) {}
 
   @Query((returns) => LoginUserType, { name: 'login' })
@@ -68,5 +68,10 @@ export class UserResolver {
     const command = new UploadProfileImageCommand(buffer, user, { fileName, type });
     const response = await this.commandBus.dispatch(command);
     return response;
+  }
+
+  @Subscription((returns) => String, { name: 'userPasswordChanged' })
+  userPasswordChanged() {
+    return this.externalEventBus.addSubscribers('user.password_changed');
   }
 }

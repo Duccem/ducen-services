@@ -3,39 +3,43 @@ import { User } from '../User';
 
 export class UserCreated extends DomainEvent {
   static readonly EVENT_NAME: string = 'user.created';
-  readonly user: Primitives<User>;
 
   constructor({
-    params,
     eventId,
     ocurredOn,
-    aggregateId,
+    aggregate,
+    extraData,
   }: {
-    params: Primitives<User>;
-    aggregateId: string;
+    aggregate: Primitives<User>;
+    extraData?: Record<string, unknown>;
     eventId?: string;
     ocurredOn?: Date;
   }) {
-    super(UserCreated.EVENT_NAME, aggregateId, eventId, ocurredOn);
-    this.user = params;
+    super(UserCreated.EVENT_NAME, aggregate, eventId, ocurredOn, extraData);
   }
 
-  public toPrimitive(): Primitives<User> {
-    return this.user;
+  public toPrimitive() {
+    return {
+      aggregate: this.aggregate,
+      id: this.eventId,
+      occurred_on: this.occurredOn.toISOString(),
+      type: this.eventName,
+      extra_data: this.extraData,
+    };
   }
 
   public static fromPrimitives(params: {
-    aggregateId?: string;
-    attributes: Primitives<User>;
+    aggregate?: Primitives<User>;
+    extraData?: Record<string, unknown>;
     eventId?: string;
-    occurredOn?: Date;
+    ocurredOn?: Date;
   }): UserCreated {
-    const { aggregateId, attributes, occurredOn, eventId } = params;
+    const { aggregate, extraData, ocurredOn, eventId } = params;
     return new UserCreated({
-      aggregateId,
-      ocurredOn: occurredOn,
+      aggregate,
+      ocurredOn,
       eventId,
-      params: attributes,
+      extraData,
     });
   }
 }

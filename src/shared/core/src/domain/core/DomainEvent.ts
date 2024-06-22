@@ -1,3 +1,11 @@
+export type DomainEventPrimitives = {
+  aggregate: Record<string, unknown>;
+  id: string;
+  occurred_on: string;
+  type: string;
+  extra_data: Record<string, unknown>;
+};
+
 /**
  * @name DomainEvent
  * @description DomainEvent is an abstract class that represents a domain event. this DTO is used to represent an event that has happened in the domain.
@@ -9,19 +17,27 @@
 export abstract class DomainEvent {
   static EVENT_NAME: string;
   static fromPrimitives: (params: any) => DomainEvent;
-  readonly aggregateId: string;
+  readonly aggregate: Record<string, unknown>;
   readonly eventId: string;
   readonly occurredOn: Date;
   readonly eventName: string;
+  readonly extraData: Record<string, unknown>;
 
-  constructor(eventName: string, aggregateId: string, eventId?: string, occurredOn?: Date) {
-    this.aggregateId = aggregateId;
+  constructor(
+    eventName: string,
+    aggregate: Record<string, unknown>,
+    eventId?: string,
+    occurredOn?: Date,
+    extraData?: Record<string, unknown>,
+  ) {
+    this.aggregate = aggregate;
     this.eventId = eventId;
     this.occurredOn = occurredOn || new Date();
     this.eventName = eventName;
+    this.extraData = extraData || {};
   }
 
-  public abstract toPrimitive(): any;
+  public abstract toPrimitive(): DomainEventPrimitives;
 }
 
 /**

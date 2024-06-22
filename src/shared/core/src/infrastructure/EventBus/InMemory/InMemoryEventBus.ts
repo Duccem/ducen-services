@@ -1,13 +1,12 @@
 import EventEmitter from 'events';
 import { DomainEvent, DomainEventSubscriber, EventBus } from '../../../domain/core/DomainEvent';
 import { DomainEventDeserializer } from '../DomainEventDeserializer';
-import { DomainEventFailOverPublisher } from '../DomainEventFailOverPublisher';
 import { DomainEventSerializer } from '../DomainEventSerializer';
 
 export class InMemoryEventBus implements EventBus {
   private channel: EventEmitter;
   private deserializer?: DomainEventDeserializer;
-  constructor(private failOverPublisher: DomainEventFailOverPublisher) {
+  constructor() {
     this.channel = new EventEmitter();
   }
 
@@ -19,9 +18,8 @@ export class InMemoryEventBus implements EventBus {
     for (const event of events) {
       try {
         this.channel.emit(event.eventName, DomainEventSerializer.serialize(event));
-        await this.failOverPublisher.publish(event, true);
       } catch (error) {
-        await this.failOverPublisher.publish(event, false);
+        console.log(error);
       }
     }
   }
@@ -29,7 +27,6 @@ export class InMemoryEventBus implements EventBus {
   addSubscribers(subscribers: DomainEventSubscriber[]): void {
     if (!subscribers) return;
     this.deserializer = DomainEventDeserializer.configure(subscribers);
-    this.failOverPublisher.setDeserializer(this.deserializer);
     subscribers.map((subscriber) => this.registerSubscriber(subscriber));
   }
 

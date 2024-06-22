@@ -2,8 +2,8 @@ import { DomainEventClass, DomainEventSubscriber } from '../../domain/core/Domai
 
 type DomainEventJSON = {
   type: string;
-  aggregateId: string;
-  attributes: string;
+  aggregate: Record<string, unknown>;
+  extra_data: Record<string, unknown>;
   id: string;
   occurred_on: string;
 };
@@ -25,7 +25,7 @@ export class DomainEventDeserializer extends Map<string, DomainEventClass> {
 
   deserialize(event: string) {
     const eventData = JSON.parse(event).data as DomainEventJSON;
-    const { type, aggregateId, attributes, id, occurred_on } = eventData;
+    const { type, aggregate, extra_data, id, occurred_on } = eventData;
     const eventClass = super.get(type);
 
     if (!eventClass) {
@@ -33,8 +33,8 @@ export class DomainEventDeserializer extends Map<string, DomainEventClass> {
     }
 
     return eventClass.fromPrimitives({
-      aggregateId,
-      attributes,
+      aggregate,
+      extra_data,
       occurredOn: new Date(occurred_on),
       eventId: id,
     });

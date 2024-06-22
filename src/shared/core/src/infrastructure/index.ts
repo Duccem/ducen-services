@@ -4,6 +4,7 @@ export * from './EventBus/DomainEventDeserializer';
 export * from './EventBus/DomainEventFailOverPublisher';
 export * from './EventBus/DomainEventRegisterObservers';
 export * from './EventBus/DomainEventSerializer';
+export * from './EventBus/GraphQLSubscribe/GraphQLEventBus';
 export * from './EventBus/InMemory/InMemoryEventBus';
 export * from './EventBus/RabbitMQ/RabbitMQConnection';
 export * from './EventBus/RabbitMQ/RabbitMQConnectionFactory';

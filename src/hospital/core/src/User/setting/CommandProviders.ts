@@ -1,10 +1,10 @@
 import { CommandBus, EventBus } from '@ducen/shared';
 import { Provider } from '@nestjs/common';
 
-import { ChangePasswordHandler } from '../application/ChangePassword/ChangePasswordHandler';
-import { RecoveryPasswordHandler } from '../application/RecoveryPassword/RecoveryPasswordHandler';
 import { StoreService } from '../../MedicalDocument/domain/StoreService';
+import { ChangePasswordHandler } from '../application/ChangePassword/ChangePasswordHandler';
 import { IngestKnowledgeBaseCommandHandler } from '../application/IngestKnowlodgeBase/IngestKnowledgeBaseCommandHandler';
+import { RecoveryPasswordHandler } from '../application/RecoveryPassword/RecoveryPasswordHandler';
 import { UserRegisterHandler } from '../application/RegisterUser/UserRegisterHandler';
 import { UploadProfileImageCommandHandler } from '../application/UploadProfileImage/UploadProfileImageCommandHandler';
 import { HabitsGenerator } from '../domain/HabitsGenerator';
@@ -13,7 +13,7 @@ import { UserRepository } from '../domain/UserRepository';
 export const commandHandlers: Provider[] = [
   {
     provide: UserRegisterHandler,
-    inject: ['USER_REPOSITORY', 'EVENT_BUS', 'COMMAND_BUS'],
+    inject: ['USER_REPOSITORY', 'INTERNAL_EVENT_BUS', 'COMMAND_BUS'],
     useFactory: (repository: UserRepository, eventBus: EventBus, commandBus: CommandBus) =>
       commandBus.addHandler(new UserRegisterHandler(repository, eventBus)),
   },

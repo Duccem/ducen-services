@@ -37,7 +37,6 @@ import videoConfig from './config/video.config';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true,
       resolvers: {
         DateTime: DateTimeResolver,
         Void: VoidResolver,
@@ -45,6 +44,7 @@ import videoConfig from './config/video.config';
       formatError: GraphQLErrorHandling,
       useGlobalPrefix: true,
       csrfPrevention: false,
+      installSubscriptionHandlers: true,
     }),
     OpenTelemetryModule.forRoot({
       metrics: {
