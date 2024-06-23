@@ -13,13 +13,12 @@ export class MongoConnection {
   getCollection(collectionName: string, schema: Schema<any>) {
     return this.getConnection().model(collectionName, schema);
   }
-  async transaction(modelName: string, schema: Schema<any>, fn: (session: ClientSession) => Promise<void>) {
-    const session = await this.getCollection(modelName, schema).startSession();
+  async transaction(fn: (session: ClientSession) => Promise<void>) {
+    const session = await this.getConnection().startSession();
     try {
       await session.withTransaction(fn);
     } catch (error) {
-      console.log(error);
-      throw new InternalError('Error with the source of true');
+      throw new InternalError('Error executing transaction');
     } finally {
       await session.endSession();
     }
