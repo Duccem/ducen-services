@@ -1,4 +1,4 @@
-import { DomainEvent } from '../../domain/core/DomainEvent';
+import { DomainEvent } from '../../../domain/core/DomainEvent';
 
 export class DomainEventSerializer {
   static serialize(event: DomainEvent): string {

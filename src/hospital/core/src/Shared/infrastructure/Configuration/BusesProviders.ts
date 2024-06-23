@@ -1,5 +1,6 @@
 import {
   CommandHandlers,
+  GeneralEventBus,
   GraphQLEventBus,
   InMemoryCommandBus,
   InMemoryEventBus,
@@ -21,6 +22,13 @@ export const busesProvider: Provider[] = [
     provide: 'INTERNAL_EVENT_BUS',
     useFactory: () => {
       return new InMemoryEventBus();
+    },
+  },
+  {
+    provide: 'EVENT_BUS',
+    inject: ['INTERNAL_EVENT_BUS', 'EXTERNAL_EVENT_BUS'],
+    useFactory: (internalEventBus, externalEventBus) => {
+      return new GeneralEventBus(internalEventBus, externalEventBus);
     },
   },
   {

@@ -17,7 +17,11 @@ export class GraphQLEventBus implements EventBus {
     }
   }
 
-  addSubscribers(name: string): AsyncIterator<any> {
+  addSubscribers(names: string[]): AsyncIterator<any> {
+    return this.pubsub.asyncIterator(names);
+  }
+
+  addSubscriber(name: string): AsyncIterator<any> {
     return this.pubsub.asyncIterator(name);
   }
 }

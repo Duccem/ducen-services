@@ -10,25 +10,25 @@ import { UserEnterAppointmentCommandHandler } from '../../application/UserEnterA
 export const commandHandlers: Provider[] = [
   {
     provide: CancelAppointmentCommandHandler,
-    inject: ['APPOINTMENT_REPOSITORY', 'INTERNAL_EVENT_BUS', 'COMMAND_BUS'],
+    inject: ['APPOINTMENT_REPOSITORY', 'EVENT_BUS', 'COMMAND_BUS'],
     useFactory: (repository, eventBus, commandBus) =>
       commandBus.addHandler(new CancelAppointmentCommandHandler(repository, eventBus)),
   },
   {
     provide: ConfirmAppointmentCommandHandler,
-    inject: ['APPOINTMENT_REPOSITORY', 'INTERNAL_EVENT_BUS', 'COMMAND_BUS'],
+    inject: ['APPOINTMENT_REPOSITORY', 'EVENT_BUS', 'COMMAND_BUS'],
     useFactory: (repository, eventBus, commandBus) =>
       commandBus.addHandler(new ConfirmAppointmentCommandHandler(repository, eventBus)),
   },
   {
     provide: FinishAppointmentCommandHandler,
-    inject: ['APPOINTMENT_REPOSITORY', 'INTERNAL_EVENT_BUS', 'COMMAND_BUS'],
+    inject: ['APPOINTMENT_REPOSITORY', 'EVENT_BUS', 'COMMAND_BUS'],
     useFactory: (repository, eventBus, commandBus) =>
       commandBus.addHandler(new FinishAppointmentCommandHandler(repository, eventBus)),
   },
   {
     provide: RescheduleAppointmentCommandHandler,
-    inject: ['APPOINTMENT_REPOSITORY', 'INTERNAL_EVENT_BUS', 'COMMAND_BUS'],
+    inject: ['APPOINTMENT_REPOSITORY', 'EVENT_BUS', 'COMMAND_BUS'],
     useFactory: (repository, eventBus, commandBus) =>
       commandBus.addHandler(new RescheduleAppointmentCommandHandler(repository, eventBus)),
   },
@@ -36,7 +36,7 @@ export const commandHandlers: Provider[] = [
     provide: ScheduleAppointmentCommandHandler,
     inject: [
       'APPOINTMENT_REPOSITORY',
-      'INTERNAL_EVENT_BUS',
+      'EVENT_BUS',
       'ROOM_CALL_SERVICE',
       'APPOINTMENT_PATIENT_REPOSITORY',
       'APPOINTMENT_DOCTOR_REPOSITORY',
@@ -65,13 +65,13 @@ export const commandHandlers: Provider[] = [
   },
   {
     provide: StartAppointmentCommandHandler,
-    inject: ['APPOINTMENT_REPOSITORY', 'INTERNAL_EVENT_BUS', 'COMMAND_BUS'],
+    inject: ['APPOINTMENT_REPOSITORY', 'EVENT_BUS', 'COMMAND_BUS'],
     useFactory: (repository, eventBus, commandBus) =>
       commandBus.addHandler(new StartAppointmentCommandHandler(repository, eventBus)),
   },
   {
     provide: UserEnterAppointmentCommandHandler,
-    inject: ['APPOINTMENT_REPOSITORY', 'INTERNAL_EVENT_BUS', 'COMMAND_BUS'],
+    inject: ['APPOINTMENT_REPOSITORY', 'EVENT_BUS', 'COMMAND_BUS'],
     useFactory: (repository, eventBus, commandBus) =>
       commandBus.addHandler(new UserEnterAppointmentCommandHandler(repository, eventBus)),
   },

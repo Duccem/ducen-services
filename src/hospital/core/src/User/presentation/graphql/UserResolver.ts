@@ -9,6 +9,7 @@ import { RecoveryPasswordCommand } from '../../application/RecoveryPassword/Reco
 import { UserRegisterCommand } from '../../application/RegisterUser/UserRegisterCommand';
 import { UploadProfileImageCommand } from '../../application/UploadProfileImage/UploadProfileImageCommand';
 import { User } from '../../domain/User';
+import { UserCreated } from '../../domain/events/UserCreated';
 import { JwtAuthGuard } from '../helpers/guards/JWTGuard';
 import { CurrentUser } from '../helpers/mappers/AuthDecorators';
 import { UserInput } from './UserInput';
@@ -66,12 +67,11 @@ export class UserResolver {
     const stream = image.file.createReadStream();
     const buffer = await File.toBuffer(stream);
     const command = new UploadProfileImageCommand(buffer, user, { fileName, type });
-    const response = await this.commandBus.dispatch(command);
-    return response;
+    await this.commandBus.dispatch(command);
   }
 
   @Subscription((returns) => String, { name: 'userPasswordChanged' })
   userPasswordChanged() {
-    return this.externalEventBus.addSubscribers('user.password_changed');
+    return this.externalEventBus.addSubscriber(UserCreated.EVENT_NAME);
   }
 }

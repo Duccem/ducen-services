@@ -13,7 +13,7 @@ import { UserRepository } from '../domain/UserRepository';
 export const commandHandlers: Provider[] = [
   {
     provide: UserRegisterHandler,
-    inject: ['USER_REPOSITORY', 'INTERNAL_EVENT_BUS', 'COMMAND_BUS'],
+    inject: ['USER_REPOSITORY', 'EVENT_BUS', 'COMMAND_BUS'],
     useFactory: (repository: UserRepository, eventBus: EventBus, commandBus: CommandBus) =>
       commandBus.addHandler(new UserRegisterHandler(repository, eventBus)),
   },

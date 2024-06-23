@@ -38,6 +38,7 @@ export abstract class DomainEvent {
   }
 
   public abstract toPrimitive(): DomainEventPrimitives;
+  public abstract isPublic(): boolean;
 }
 
 /**

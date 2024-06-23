@@ -1,40 +1,41 @@
-import EventEmitter from 'events';
 import { DomainEvent, DomainEventSubscriber, EventBus } from '../../../domain/core/DomainEvent';
-import { DomainEventDeserializer } from '../DomainEventDeserializer';
-import { DomainEventSerializer } from '../DomainEventSerializer';
 
 export class InMemoryEventBus implements EventBus {
-  private channel: EventEmitter;
-  private deserializer?: DomainEventDeserializer;
-  constructor() {
-    this.channel = new EventEmitter();
-  }
-
-  async configure(subscribers: DomainEventSubscriber[]): Promise<void> {
-    subscribers.map((sub) => console.log(sub.constructor.name));
-  }
+  private readonly subscriptions: Map<string, Function[]> = new Map();
 
   async publish(events: DomainEvent[]): Promise<void> {
+    const executions: unknown[] = [];
     for (const event of events) {
-      try {
-        this.channel.emit(event.eventName, DomainEventSerializer.serialize(event));
-      } catch (error) {
-        console.log(error);
+      const subscribers = this.subscriptions.get(event.eventName);
+      if (subscribers) {
+        subscribers.forEach((subscriber) => {
+          executions.push(subscriber(event));
+        });
       }
     }
-  }
-
-  addSubscribers(subscribers: DomainEventSubscriber[]): void {
-    if (!subscribers) return;
-    this.deserializer = DomainEventDeserializer.configure(subscribers);
-    subscribers.map((subscriber) => this.registerSubscriber(subscriber));
-  }
-
-  public registerSubscriber(subscriber: DomainEventSubscriber) {
-    subscriber.subscribedTo().map((event) => {
-      this.channel.on(event.EVENT_NAME, (msg: string) => {
-        subscriber.on(this.deserializer!.deserialize(msg));
-      });
+    await Promise.all(executions).catch((error) => {
+      console.error('Executing subscriptions:', error);
     });
+  }
+
+  registerSubscribers(subscribers: DomainEventSubscriber[]): void {
+    subscribers.map((subscriber) => {
+      subscriber.subscribedTo().map((event) => this.subscribe(event.EVENT_NAME, subscriber));
+    });
+  }
+
+  registerSubscriber(subscriber: DomainEventSubscriber): void {
+    subscriber.subscribedTo().map((event) => this.subscribe(event.EVENT_NAME, subscriber));
+  }
+
+  private subscribe(eventName: string, subscriber: DomainEventSubscriber) {
+    const currentSubscriptions = this.subscriptions.get(eventName);
+    const subscription = subscriber.on.bind(subscriber);
+
+    if (currentSubscriptions) {
+      currentSubscriptions.push(subscription);
+    } else {
+      this.subscriptions.set(eventName, [subscription]);
+    }
   }
 }
