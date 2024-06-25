@@ -1,4 +1,3 @@
-import { SharedModule, UserModule } from '@ducen/hospital';
 import { GraphQLErrorHandling, LoggerMiddleware } from '@ducen/shared';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
@@ -17,6 +16,8 @@ import serverConfig from './config/server.config';
 import storageConfig from './config/storage.config';
 import loggingConfig from './config/telemetry.config';
 import videoConfig from './config/video.config';
+import { SharedModule } from './modules/shared/shared.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [

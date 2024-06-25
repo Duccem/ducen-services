@@ -1,10 +1,12 @@
+import {
+  JWTStrategy,
+  LlamaHabitsGenerator,
+  UserController,
+  UserResolver,
+  UserSearcher,
+} from '@ducen/hospital';
 import { Module } from '@nestjs/common';
-import { SharedModule } from '../../Shared/infrastructure/Configuration/SharedModule';
-import { UserSearcher } from '../application/SearchUser/UserSearcher';
-import { LlamaHabitsGenerator } from '../infrastructure/generators/LlamaHabitsGenerator';
-import { UserResolver } from '../presentation/graphql/UserResolver';
-import { JWTStrategy } from '../presentation/helpers/middlewares/JWTStrategy';
-import { UserController } from '../presentation/rest/UserController';
+import { SharedModule } from '../shared/shared.module';
 import { commandHandlers } from './CommandProviders';
 import { queryHandlers } from './QueryProviders';
 import { userRepositories } from './RepositoryProviders';

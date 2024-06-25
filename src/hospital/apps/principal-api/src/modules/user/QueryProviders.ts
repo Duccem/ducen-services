@@ -1,9 +1,11 @@
+import {
+  LoginHandler,
+  UserRepository,
+  GenerateUserHabitsQueryHandler,
+  HabitsGenerator,
+} from '@ducen/hospital';
 import { QueryBus } from '@ducen/shared';
 import { Provider } from '@nestjs/common';
-import { GenerateUserHabitsQueryHandler } from '../application/GenerateUserHabits/GenerateUserHabitsQueryHandler';
-import { LoginHandler } from '../application/Login/LoginHandler';
-import { HabitsGenerator } from '../domain/HabitsGenerator';
-import { UserRepository } from '../domain/UserRepository';
 
 export const queryHandlers: Provider[] = [
   {

@@ -1,5 +1,5 @@
+import { MongoUserRepository } from '@ducen/hospital';
 import { Logger, MongoConnection } from '@ducen/shared';
-import { MongoUserRepository } from '../infrastructure/persistence/mongodb/MongoUserRepository';
 
 export const userRepositories = [
   {

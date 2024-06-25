@@ -1,14 +1,15 @@
+import {
+  UserRegisterHandler,
+  UserRepository,
+  UploadProfileImageCommandHandler,
+  StoreService,
+  IngestKnowledgeBaseCommandHandler,
+  HabitsGenerator,
+  RecoveryPasswordHandler,
+  ChangePasswordHandler,
+} from '@ducen/hospital';
 import { CommandBus, EventBus } from '@ducen/shared';
 import { Provider } from '@nestjs/common';
-
-import { StoreService } from '../../MedicalDocument/domain/StoreService';
-import { ChangePasswordHandler } from '../application/ChangePassword/ChangePasswordHandler';
-import { IngestKnowledgeBaseCommandHandler } from '../application/IngestKnowlodgeBase/IngestKnowledgeBaseCommandHandler';
-import { RecoveryPasswordHandler } from '../application/RecoveryPassword/RecoveryPasswordHandler';
-import { UserRegisterHandler } from '../application/RegisterUser/UserRegisterHandler';
-import { UploadProfileImageCommandHandler } from '../application/UploadProfileImage/UploadProfileImageCommandHandler';
-import { HabitsGenerator } from '../domain/HabitsGenerator';
-import { UserRepository } from '../domain/UserRepository';
 
 export const commandHandlers: Provider[] = [
   {
