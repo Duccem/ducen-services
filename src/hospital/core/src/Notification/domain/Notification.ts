@@ -3,7 +3,6 @@ import { NotificationBody } from './NotificationBody';
 import { NotificationData } from './NotificationData';
 import { NotificationTitle } from './NotificationTitle';
 import { NotificationType } from './NotificationType';
-import { Template } from './Template';
 
 export class Notification extends Aggregate {
   constructor(
@@ -14,7 +13,7 @@ export class Notification extends Aggregate {
     public types: NotificationType[],
     public data: NotificationData,
     createdAt: DateValueObject,
-    updatedAt: DateValueObject
+    updatedAt: DateValueObject,
   ) {
     super(id, createdAt, updatedAt);
   }
@@ -37,7 +36,7 @@ export class Notification extends Aggregate {
     title: string,
     body: string,
     types: string[],
-    data: { [key: string]: any }
+    data: { [key: string]: any },
   ): Notification {
     return new Notification(
       Uuid.random(),
@@ -47,11 +46,20 @@ export class Notification extends Aggregate {
       types.map((type) => new NotificationType(type)),
       new NotificationData(data),
       DateValueObject.today(),
-      DateValueObject.today()
+      DateValueObject.today(),
     );
   }
 
-  setTemplate(template: Template): void {
-    this.body = new NotificationBody(template.source.toString());
+  static fromPrimitives(data: Primitives<Notification>): Notification {
+    return new Notification(
+      new Uuid(data.id),
+      new Uuid(data.userId),
+      new NotificationTitle(data.title),
+      new NotificationBody(data.body),
+      data.types.map((type) => new NotificationType(type)),
+      new NotificationData(data.data),
+      new DateValueObject(data.createdAt),
+      new DateValueObject(data.updatedAt),
+    );
   }
 }

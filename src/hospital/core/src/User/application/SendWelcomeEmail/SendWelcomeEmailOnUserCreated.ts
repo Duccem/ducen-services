@@ -1,23 +1,13 @@
-import { DomainEventClass, DomainEventSubscriber } from '@ducen/shared';
+import { DomainEventClass, DomainEventSubscriber, EmailService } from '@ducen/shared';
 import { UserSearcher } from '../../../User/application/SearchUser/UserSearcher';
 import { UserRepository } from '../../../User/domain/UserRepository';
 import { UserCreated } from '../../../User/domain/events/UserCreated';
-import { NotificationRepository } from '../../domain/NotificationRepository';
-import { EmailNotifier } from '../../domain/Notifier';
 import { SendWelcomeEmail } from './SendWelcomeEmail';
 
 export class SendWelcomeEmailOnUserCreated implements DomainEventSubscriber {
   private welcomeEmailSender: SendWelcomeEmail;
-  constructor(
-    notificationRepository: NotificationRepository,
-    emailNotifier: EmailNotifier,
-    userRepository: UserRepository,
-  ) {
-    this.welcomeEmailSender = new SendWelcomeEmail(
-      notificationRepository,
-      new UserSearcher(userRepository),
-      emailNotifier,
-    );
+  constructor(emailNotifier: EmailService, userRepository: UserRepository) {
+    this.welcomeEmailSender = new SendWelcomeEmail(new UserSearcher(userRepository), emailNotifier);
   }
   subscribedTo(): DomainEventClass[] {
     return [UserCreated];

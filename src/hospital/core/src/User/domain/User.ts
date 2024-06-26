@@ -3,7 +3,6 @@ import {
   AuthorizationError,
   BooleanValueObject,
   DateValueObject,
-  Email,
   File,
   Primitives,
   StringValueObject,
@@ -12,12 +11,14 @@ import {
 import crypto from 'crypto';
 import { differenceInHours } from 'date-fns';
 import * as jwt from 'jsonwebtoken';
+import { NotificationSent } from '../../Notification/domain/NotificationSent';
 import { IncorrectPassword } from './errors/IncorrectPassword';
 import { UserCreated } from './events/UserCreated';
 import { Device } from './model/Device';
 import { UserAddress } from './model/UserAddress';
 import { UserBirthDate } from './model/UserBirthDate';
 import { UserConfiguration } from './model/UserConfiguration';
+import { UserEmail } from './model/UserEmail';
 import { UserGender, UserGenders } from './model/UserGender';
 import { UserName } from './model/UserName';
 import { UserPassword } from './model/UserPassword';
@@ -28,7 +29,7 @@ export class User extends Aggregate {
   constructor(
     id: Uuid,
     public name: UserName,
-    public email: Email,
+    public email: UserEmail,
     public password: UserPassword,
     public role: UserRole,
     public birthDate: UserBirthDate,
@@ -50,7 +51,7 @@ export class User extends Aggregate {
     return new User(
       new Uuid(data.id),
       UserName.fromPrimitives(data.name),
-      new Email(data.email),
+      new UserEmail(data.email),
       new UserPassword(data.password),
       new UserRole(data.role),
       new UserBirthDate(data.birthDate),
@@ -120,7 +121,7 @@ export class User extends Aggregate {
     const user = new User(
       new Uuid(id),
       UserName.fromPrimitives(name),
-      new Email(email),
+      new UserEmail(email),
       new UserPassword(password),
       new UserRole(role as UserRoles),
       new UserBirthDate(birthDate),
@@ -137,8 +138,7 @@ export class User extends Aggregate {
     );
     user.record(
       new UserCreated({
-        params: user.toPrimitives(),
-        aggregateId: user.id.value,
+        aggregate: user.toPrimitives(),
       }),
     );
     user.password.encrypt();
@@ -185,5 +185,24 @@ export class User extends Aggregate {
     )
       throw new AuthorizationError('Invalid code');
     this.verificationCode = null;
+  }
+
+  sendWelcomeEmail(): {
+    title: string;
+    body: string;
+    to: string;
+    data: { name: string };
+  } {
+    const emailData = this.email.sendWelcomeEmail(this.name.fullName());
+    this.record(
+      new NotificationSent({
+        aggregate: {
+          ...(emailData as any),
+          types: ['email'],
+          userId: this.id.value,
+        },
+      }),
+    );
+    return emailData;
   }
 }

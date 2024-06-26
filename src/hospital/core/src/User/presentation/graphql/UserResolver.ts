@@ -7,6 +7,7 @@ import { ChangePasswordCommand } from '../../application/ChangePassword/ChangePa
 import { LoginQuery } from '../../application/Login/LoginQuery';
 import { RecoveryPasswordCommand } from '../../application/RecoveryPassword/RecoveryPasswordCommand';
 import { UserRegisterCommand } from '../../application/RegisterUser/UserRegisterCommand';
+import { SendEmailRecoveryCodeCommand } from '../../application/SendEmailRecoveryCode/SendEmailRecoveryCodeCommand';
 import { UploadProfileImageCommand } from '../../application/UploadProfileImage/UploadProfileImageCommand';
 import { User } from '../../domain/User';
 import { UserCreated } from '../../domain/events/UserCreated';
@@ -67,6 +68,12 @@ export class UserResolver {
     const stream = image.file.createReadStream();
     const buffer = await File.toBuffer(stream);
     const command = new UploadProfileImageCommand(buffer, user, { fileName, type });
+    await this.commandBus.dispatch(command);
+  }
+
+  @Mutation((returns) => VoidResolver, { name: 'sendEmailRecoveryCode' })
+  async sendEmailRecoveryCode(@Args('email') email: string) {
+    const command = new SendEmailRecoveryCodeCommand(email);
     await this.commandBus.dispatch(command);
   }
 

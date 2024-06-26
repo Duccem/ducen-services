@@ -42,4 +42,7 @@ export class UserCreated extends DomainEvent {
       extraData,
     });
   }
+  public isPublic(): boolean {
+    return false;
+  }
 }
