@@ -18,7 +18,7 @@ import { Device } from './model/Device';
 import { UserAddress } from './model/UserAddress';
 import { UserBirthDate } from './model/UserBirthDate';
 import { UserConfiguration } from './model/UserConfiguration';
-import { UserEmail } from './model/UserEmail';
+import { EmailData, UserEmail } from './model/UserEmail';
 import { UserGender, UserGenders } from './model/UserGender';
 import { UserName } from './model/UserName';
 import { UserPassword } from './model/UserPassword';
@@ -66,26 +66,6 @@ export class User extends Aggregate {
       new DateValueObject(data.createdAt),
       new DateValueObject(data.updatedAt),
     );
-  }
-  public toPrimitives(): Primitives<User> {
-    return {
-      id: this.id.value,
-      name: this.name.toPrimitives(),
-      email: this.email.value,
-      password: this.password.value,
-      role: this.role.value,
-      birthDate: this.birthDate.value,
-      address: this.address.toPrimitives(),
-      phoneNumber: this.phoneNumber.value,
-      photo: this.photo.value,
-      gender: this.gender.value,
-      configuration: this.configuration.toPrimitives(),
-      devices: this.devices.map((device) => device.toPrimitives()),
-      isActive: this.isActive.getValue(),
-      verificationCode: this.verificationCode?.toString(),
-      createdAt: this.createdAt.value,
-      updatedAt: this.updatedAt.value,
-    };
   }
 
   public static create(
@@ -145,6 +125,27 @@ export class User extends Aggregate {
     return user;
   }
 
+  public toPrimitives(): Primitives<User> {
+    return {
+      id: this.id.value,
+      name: this.name.toPrimitives(),
+      email: this.email.value,
+      password: this.password.value,
+      role: this.role.value,
+      birthDate: this.birthDate.value,
+      address: this.address.toPrimitives(),
+      phoneNumber: this.phoneNumber.value,
+      photo: this.photo.value,
+      gender: this.gender.value,
+      configuration: this.configuration.toPrimitives(),
+      devices: this.devices.map((device) => device.toPrimitives()),
+      isActive: this.isActive.getValue(),
+      verificationCode: this.verificationCode?.toString(),
+      createdAt: this.createdAt.value,
+      updatedAt: this.updatedAt.value,
+    };
+  }
+
   public generateToken(signature: string): string {
     const payload = {
       userId: this.id.value,
@@ -187,22 +188,15 @@ export class User extends Aggregate {
     this.verificationCode = null;
   }
 
-  sendWelcomeEmail(): {
-    title: string;
-    body: string;
-    to: string;
-    data: { name: string };
-  } {
+  sendWelcomeEmail(): EmailData {
     const emailData = this.email.sendWelcomeEmail(this.name.fullName());
-    this.record(
-      new NotificationSent({
-        aggregate: {
-          ...(emailData as any),
-          types: ['email'],
-          userId: this.id.value,
-        },
-      }),
-    );
+    this.record(NotificationSent.Email(this.id.value, emailData.title, emailData.body, emailData.data));
+    return emailData;
+  }
+
+  sendVerificationCodeEmail(): EmailData {
+    const emailData = this.email.sendVerificationCodeEmail(this.verificationCode.value, this.name.fullName());
+    this.record(NotificationSent.Email(this.id.value, emailData.title, emailData.body, emailData.data));
     return emailData;
   }
 }

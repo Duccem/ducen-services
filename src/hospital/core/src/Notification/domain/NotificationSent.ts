@@ -27,6 +27,19 @@ export class NotificationSent extends DomainEvent {
       extraData: data.extra_data,
     });
   }
+
+  static Email(userId: string, title: string, body: string, data: Record<string, unknown>): NotificationSent {
+    const event = {
+      title,
+      body,
+      data,
+      types: ['email'],
+      userId,
+    } as Primitives<Notification>;
+    return new NotificationSent({
+      aggregate: event,
+    });
+  }
   isPublic(): boolean {
     return false;
   }
